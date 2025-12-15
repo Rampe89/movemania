@@ -474,6 +474,182 @@
   <!-- NEW: VORTEILE / VALUE PROPS -->
   <section id="vorteile" class="usp">
     <div class="wrap">
-      <div clas
+      <div class="uspHead">
+        <div class="uspGhost" id="uspGhost">WERTE</div>
+        <p class="uspKicker" id="uspKicker">Gemeinsam zum Erfolg</p>
+        <h2 class="uspTitle" id="uspTitle">Movemania Vorteile</h2>
+      </div>
+
+      <div class="uspGrid">
+        <div class="uspItem">
+          <div class="uspIcon" aria-hidden="true">
+            <!-- boot + ball -->
+            <svg width="86" height="86" viewBox="0 0 86 86">
+              <path class="iconStroke" d="M28 18c7 3 13 10 13 18v8c0 6-4 11-10 13l-12 4c-3 1-6-1-6-4V42c0-8 6-17 15-24z"/>
+              <path class="iconStroke" d="M20 58l26-8"/>
+              <path class="iconStroke" d="M18 46l20-6"/>
+              <circle class="iconAccent" cx="60" cy="52" r="12"/>
+              <path class="iconAccent" d="M60 40l6 4-2 7h-8l-2-7 6-4z"/>
+              <path class="iconAccent" d="M54 51l-5 4M66 51l5 4M56 58l4 6M64 58l-4 6"/>
+            </svg>
+          </div>
+          <h3 id="usp1Title">Training mit System</h3>
+          <p id="usp1Text">Abwechslungsreiche Einheiten mit klarer Struktur, Spielintelligenz und echter Weiterentwicklung.</p>
+        </div>
+
+        <div class="uspItem">
+          <div class="uspIcon" aria-hidden="true">
+            <!-- diploma -->
+            <svg width="86" height="86" viewBox="0 0 86 86">
+              <path class="iconStroke" d="M18 26h34v26H18z"/>
+              <path class="iconStroke" d="M24 34h22M24 40h18M24 46h12"/>
+              <path class="iconStroke" d="M54 34l10 6v30l-10-6z"/>
+              <path class="iconAccent" d="M40 58c4 0 7-3 7-7s-3-7-7-7-7 3-7 7 3 7 7 7z"/>
+              <path class="iconAccent" d="M40 44l3 2-1 4h-4l-1-4 3-2z"/>
+            </svg>
+          </div>
+          <h3 id="usp2Title">Haltung &amp; Herz</h3>
+          <p id="usp2Text">Respekt, Teamgeist und Freude an Bewegung stehen bei uns immer im Mittelpunkt.</p>
+        </div>
+
+        <div class="uspItem">
+          <div class="uspIcon" aria-hidden="true">
+            <!-- shield -->
+            <svg width="86" height="86" viewBox="0 0 86 86">
+              <path class="iconStroke" d="M43 18l22 8v18c0 16-10 26-22 30C31 70 21 60 21 44V26l22-8z"/>
+              <path class="iconStroke" d="M28 38h30"/>
+              <path class="iconStroke" d="M33 46h20"/>
+              <circle class="iconAccent" cx="43" cy="40" r="9"/>
+              <path class="iconAccent" d="M43 31l4 3-1 5h-6l-1-5 4-3z"/>
+            </svg>
+          </div>
+          <h3 id="usp3Title">Schnell &amp; unkompliziert</h3>
+          <p id="usp3Text">Anmeldung online, klare Infos, gute Organisation – damit Eltern und Kids entspannt bleiben.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIE -->
+  <section id="galerie" class="section">
+    <div class="wrap">
+      <h2 class="sectionTitle">Galerie</h2>
+
+      <div class="galleryGrid">
+        <div class="frame">
+          <img src="assets/img/placeholder-1.jpg" alt="Galerie 1"
+               onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;mediaPlaceholder&quot;>Platzhalter: <b>assets/img/placeholder-1.jpg</b></div>';">
+        </div>
+
+        <div class="gCol">
+          <div class="frame">
+            <img src="assets/img/placeholder-2.jpg" alt="Galerie 2"
+                 onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;mediaPlaceholder&quot;>Platzhalter: <b>assets/img/placeholder-2.jpg</b></div>';">
+          </div>
+          <div class="frame">
+            <img src="assets/img/placeholder-3.jpg" alt="Galerie 3"
+                 onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;mediaPlaceholder&quot;>Platzhalter: <b>assets/img/placeholder-3.jpg</b></div>';">
+          </div>
+          <div class="frame">
+            <img src="assets/img/placeholder-4.jpg" alt="Galerie 4"
+                 onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;mediaPlaceholder&quot;>Platzhalter: <b>assets/img/placeholder-4.jpg</b></div>';">
+          </div>
+          <div class="frame">
+            <img src="assets/img/placeholder-5.jpg" alt="Galerie 5"
+                 onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;mediaPlaceholder&quot;>Platzhalter: <b>assets/img/placeholder-5.jpg</b></div>';">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKT -->
+  <section id="kontakt" class="section">
+    <div class="wrap">
+      <h2 class="sectionTitle">Kontakt</h2>
+
+      <div class="kontaktRow">
+        <a class="btn btnRed" id="btnBooking" href="#" target="_blank" rel="noreferrer">Jetzt anmelden</a>
+        <a class="btn btnBlue" id="btnIG" href="#" target="_blank" rel="noreferrer">Instagram</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <b style="color:var(--ink)">Movemania FS</b><br>
+    Fußballschule mit Haltung &amp; Herz
+  </div>
+</footer>
+
+<script>
+  async function loadJSON(path){
+    const res = await fetch(path, { cache: "no-store" });
+    if (!res.ok) throw new Error("Failed to load " + path + " (" + res.status + ")");
+    return await res.json();
+  }
+
+  (async () => {
+    const logo = document.getElementById("logoImg");
+    if (logo) logo.style.display = "block";
+
+    // LINKS
+    let links = {};
+    try { links = await loadJSON("/assets/content/links.json"); }
+    catch (e) { console.warn("links.json fehlt oder nicht erreichbar:", e); }
+
+    const setHref = (id, url) => {
+      const el = document.getElementById(id);
+      if (el && url) el.href = url;
+    };
+
+    setHref("ctaBooking", links.booking);
+    setHref("ctaCamps", links.camps);
+    setHref("ctaWA", links.whatsapp);
+
+    setHref("btnBooking", links.booking);
+    setHref("btnCamps", links.camps);
+    setHref("btnPower1819", links.power1819);
+    setHref("btnPower1617", links.power1617);
+    setHref("btnIG", links.instagram);
+
+    const heroVideoLink = document.getElementById("heroVideoLink");
+    if (heroVideoLink) {
+      heroVideoLink.href = links.hero_video || links.camps || links.booking || "#";
+    }
+
+    // TEXTE
+    let texts = {};
+    try { texts = await loadJSON("/assets/content/texts.json"); }
+    catch (e) { console.warn("texts.json fehlt oder nicht erreichbar:", e); }
+
+    const setText = (id, value) => {
+      const el = document.getElementById(id);
+      if (!el || !value) return;
+      el.textContent = value;
+    };
+
+    setText("heroTitle", (texts.hero_title || "FERIENCAMPS & KURSE").toUpperCase());
+    setText("heroText", texts.hero_text || "In unseren Feriencamps kommen bewegungsfreudige Kinder voll auf ihre Kosten.");
+    setText("aboutText", texts.about_text || "Wir stehen für modernes Fußballtraining mit Haltung, Herz und Verantwortung.");
+
+    // USP block (optional, falls Felder fehlen, bleiben Defaults)
+    setText("uspKicker", (texts.usp_kicker || "Gemeinsam zum Erfolg"));
+    setText("uspTitle", (texts.usp_title || "Movemania Vorteile").toUpperCase());
+    setText("uspGhost", (texts.usp_ghost || "WERTE").toUpperCase());
+
+    setText("usp1Title", (texts.usp1_title || "Training mit System").toUpperCase());
+    setText("usp1Text", (texts.usp1_text || "Abwechslungsreiche Einheiten mit klarer Struktur, Spielintelligenz und echter Weiterentwicklung."));
+    setText("usp2Title", (texts.usp2_title || "Haltung & Herz").toUpperCase());
+    setText("usp2Text", (texts.usp2_text || "Respekt, Teamgeist und Freude an Bewegung stehen bei uns immer im Mittelpunkt."));
+    setText("usp3Title", (texts.usp3_title || "Schnell & unkompliziert").toUpperCase());
+    setText("usp3Text", (texts.usp3_text || "Anmeldung online, klare Infos, gute Organisation – damit Eltern und Kids entspannt bleiben."));
+  })();
+</script>
+
+</body>
+</html>
 
 
