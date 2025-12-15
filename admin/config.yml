@@ -20,6 +20,17 @@ collections:
           - { label: "Powerkurse 16/17", name: "power1617", widget: "string" }
           - { label: "WhatsApp Community", name: "whatsapp", widget: "string" }
           - { label: "Instagram", name: "instagram", widget: "string" }
+          - { label: "USP Titel (klein)", name: "usp_kicker", widget: "string", required: false }
+          - { label: "USP Überschrift", name: "usp_title", widget: "string", required: false }
+          - { label: "USP Ghost-Word (hinterlegt)", name: "usp_ghost", widget: "string", required: false }
+
+          - { label: "USP 1 Titel", name: "usp1_title", widget: "string", required: false }
+          - { label: "USP 1 Text", name: "usp1_text", widget: "text", required: false }
+          - { label: "USP 2 Titel", name: "usp2_title", widget: "string", required: false }
+          - { label: "USP 2 Text", name: "usp2_text", widget: "text", required: false }
+          - { label: "USP 3 Titel", name: "usp3_title", widget: "string", required: false }
+          - { label: "USP 3 Text", name: "usp3_text", widget: "text", required: false }
+
 
   - name: "texts"
     label: "Texte"
@@ -40,3 +51,5 @@ collections:
     fields:
       - { label: "Titel", name: "title", widget: "string" }
       - { label: "Bild", name: "image", widget: "image" }
+
+      
