@@ -35,11 +35,34 @@
     a{color:inherit; text-decoration:none}
     .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
 
-    /* dotted background like reference */
-    .gridBg{
-      background-image: radial-gradient(rgba(11,16,32,.06) 1px, transparent 1px);
+    /* Stylischer Punktmuster-Layer (wie Vorlage: nicht platt überall, sondern mit Fade) */
+    .pattern{
+      position:relative;
+      isolation:isolate;
+    }
+    .pattern::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      background-image: radial-gradient(rgba(11,16,32,.075) 1px, transparent 1px);
       background-size: 22px 22px;
       background-position: 0 0;
+      opacity:.9;
+      pointer-events:none;
+      /* Fade oben/unten für "edler" */
+      -webkit-mask-image: linear-gradient(to bottom,
+        transparent 0%,
+        rgba(0,0,0,.9) 12%,
+        rgba(0,0,0,1) 50%,
+        rgba(0,0,0,.9) 88%,
+        transparent 100%);
+      mask-image: linear-gradient(to bottom,
+        transparent 0%,
+        rgba(0,0,0,.9) 12%,
+        rgba(0,0,0,1) 50%,
+        rgba(0,0,0,.9) 88%,
+        transparent 100%);
     }
 
     .topbar{
@@ -227,32 +250,6 @@
       display:flex; gap:10px; flex-wrap:wrap;
     }
 
-    /* Gallery */
-    .galleryGrid{
-      display:grid;
-      grid-template-columns: 2fr 1fr;
-      gap:18px;
-      align-items:stretch;
-    }
-    @media (max-width: 980px){
-      .galleryGrid{grid-template-columns:1fr}
-    }
-    .gCol{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap:18px;
-    }
-    @media (max-width: 980px){
-      .gCol{grid-template-columns:1fr}
-    }
-    .frame{
-      border:1px solid var(--line);
-      background:#fff;
-      overflow:hidden;
-      min-height:190px;
-    }
-    .frame img{width:100%; height:100%; object-fit:cover; display:block;}
-
     /* USP block */
     .usp{
       padding:62px 0 58px;
@@ -265,17 +262,16 @@
       position:relative;
       padding:8px 0 28px;
     }
-    /* Ghost sits behind title like template */
     .uspGhost{
       position:absolute;
       left:50%;
-      top:34px;                /* a bit below the title like the reference */
+      top:28px;
       transform:translateX(-50%);
       font-weight:900;
       text-transform:uppercase;
       letter-spacing:.12em;
-      font-size: clamp(80px, 10.5vw, 150px);
-      color:rgba(11,16,32,.045);
+      font-size: clamp(92px, 11vw, 168px);
+      color:rgba(11,16,32,.04);
       user-select:none;
       pointer-events:none;
       white-space:nowrap;
@@ -302,7 +298,6 @@
       position:relative;
       z-index:2;
     }
-
     .uspGrid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -312,34 +307,32 @@
     }
     @media (max-width: 980px){
       .uspGrid{grid-template-columns:1fr; gap:22px}
-      .uspGhost{top:22px}
+      .uspGhost{top:18px}
     }
 
-    /* Icon placeholders: clean frames */
+    /* ICONS from CMS */
     .uspIcon{
-      width:118px; height:118px;
+      width:120px; height:120px;
       margin:0 auto 14px;
-      border:1px solid var(--line);
-      background:#fff;
       display:grid;
       place-items:center;
       position:relative;
+      border:1px solid var(--line);
+      background:#fff;
     }
-    .uspIcon small{
+    .uspIcon img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      padding:18px;
+      display:block;
+    }
+    .uspIcon .ph{
       font-size:11px;
       font-weight:900;
       letter-spacing:.18em;
       text-transform:uppercase;
       color:rgba(11,16,32,.45);
-    }
-    /* Optional: a tiny accent stroke to feel more "designed" */
-    .uspIcon::after{
-      content:"";
-      position:absolute;
-      width:54px; height:2px;
-      background:rgba(30,51,102,.18);
-      bottom:18px; left:50%;
-      transform:translateX(-50%);
     }
 
     .uspItem h3{
@@ -358,6 +351,32 @@
       margin-left:auto;
       margin-right:auto;
     }
+
+    /* Gallery */
+    .galleryGrid{
+      display:grid;
+      grid-template-columns: 2fr 1fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){
+      .galleryGrid{grid-template-columns:1fr}
+    }
+    .gCol{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:18px;
+    }
+    @media (max-width: 980px){
+      .gCol{grid-template-columns:1fr}
+    }
+    .frame{
+      border:1px solid var(--line);
+      background:#fff;
+      overflow:hidden;
+      min-height:190px;
+    }
+    .frame img{width:100%; height:100%; object-fit:cover; display:block;}
 
     .kontaktRow{
       display:flex; gap:14px; flex-wrap:wrap;
@@ -410,7 +429,7 @@
   </div>
 </header>
 
-<main id="home" class="gridBg">
+<main id="home" class="pattern">
 
   <!-- HERO -->
   <section class="hero">
@@ -485,19 +504,28 @@
 
       <div class="uspGrid">
         <div class="uspItem">
-          <div class="uspIcon"><small>ICON</small></div>
+          <div class="uspIcon">
+            <img id="usp1Icon" alt="Vorteil 1 Icon" style="display:none" />
+            <span class="ph" id="usp1IconPh">ICON</span>
+          </div>
           <h3 id="usp1Title">Training mit System</h3>
           <p id="usp1Text">Abwechslungsreiche Einheiten mit klarer Struktur, Spielintelligenz und echter Weiterentwicklung.</p>
         </div>
 
         <div class="uspItem">
-          <div class="uspIcon"><small>ICON</small></div>
+          <div class="uspIcon">
+            <img id="usp2Icon" alt="Vorteil 2 Icon" style="display:none" />
+            <span class="ph" id="usp2IconPh">ICON</span>
+          </div>
           <h3 id="usp2Title">Haltung &amp; Herz</h3>
           <p id="usp2Text">Respekt, Teamgeist und Freude an Bewegung stehen bei uns immer im Mittelpunkt.</p>
         </div>
 
         <div class="uspItem">
-          <div class="uspIcon"><small>ICON</small></div>
+          <div class="uspIcon">
+            <img id="usp3Icon" alt="Vorteil 3 Icon" style="display:none" />
+            <span class="ph" id="usp3IconPh">ICON</span>
+          </div>
           <h3 id="usp3Title">Schnell &amp; unkompliziert</h3>
           <p id="usp3Text">Anmeldung online, klare Infos, gute Organisation – damit Eltern und Kids entspannt bleiben.</p>
         </div>
@@ -565,6 +593,24 @@
     return await res.json();
   }
 
+  function setIcon(imgId, phId, url){
+    const img = document.getElementById(imgId);
+    const ph = document.getElementById(phId);
+    if (!img || !ph) return;
+
+    if (!url) return; // keep placeholder
+
+    img.src = url;
+    img.onload = () => {
+      img.style.display = "block";
+      ph.style.display = "none";
+    };
+    img.onerror = () => {
+      img.style.display = "none";
+      ph.style.display = "inline";
+    };
+  }
+
   (async () => {
     const logo = document.getElementById("logoImg");
     if (logo) logo.style.display = "block";
@@ -590,9 +636,7 @@
     setHref("btnIG", links.instagram);
 
     const heroVideoLink = document.getElementById("heroVideoLink");
-    if (heroVideoLink) {
-      heroVideoLink.href = links.hero_video || links.camps || links.booking || "#";
-    }
+    if (heroVideoLink) heroVideoLink.href = links.hero_video || links.camps || links.booking || "#";
 
     // TEXTE
     let texts = {};
@@ -619,6 +663,11 @@
     setText("usp2Text", (texts.usp2_text || "Respekt, Teamgeist und Freude an Bewegung stehen bei uns immer im Mittelpunkt."));
     setText("usp3Title", (texts.usp3_title || "Schnell & unkompliziert").toUpperCase());
     setText("usp3Text", (texts.usp3_text || "Anmeldung online, klare Infos, gute Organisation – damit Eltern und Kids entspannt bleiben."));
+
+    // ICONS from CMS (image widget)
+    setIcon("usp1Icon", "usp1IconPh", texts.usp1_icon);
+    setIcon("usp2Icon", "usp2IconPh", texts.usp2_icon);
+    setIcon("usp3Icon", "usp3IconPh", texts.usp3_icon);
   })();
 </script>
 
