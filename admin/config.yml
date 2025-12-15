@@ -30,6 +30,10 @@ collections:
           - { label: "USP 2 Text", name: "usp2_text", widget: "text", required: false }
           - { label: "USP 3 Titel", name: "usp3_title", widget: "string", required: false }
           - { label: "USP 3 Text", name: "usp3_text", widget: "text", required: false }
+          - { label: "USP 1 Icon", name: "usp1_icon", widget: "image", required: false }
+          - { label: "USP 2 Icon", name: "usp2_icon", widget: "image", required: false }
+          - { label: "USP 3 Icon", name: "usp3_icon", widget: "image", required: false }
+
 
 
   - name: "texts"
