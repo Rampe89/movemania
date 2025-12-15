@@ -1,0 +1,29 @@
+{
+  "colors": {
+    "bg": "#ffffff",
+    "ink": "#0b1020",
+    "muted": "#5e6880",
+    "line": "#e6e8ee",
+    "primary": "#1e3366",
+    "accent": "#d2182d",
+    "card_bg": "#ffffff",
+    "card_border": "#e6e8ee"
+  },
+  "type": {
+    "body_size": 14,
+    "hero_title_size": 68,
+    "section_title_size": 24,
+    "card_title_size": 14
+  },
+  "layout": {
+    "content_width": 1120,
+    "radius": 0,
+    "shadow_strength": 0.12
+  },
+  "pattern": {
+    "enabled": true,
+    "dot": "rgba(11,16,32,.075)",
+    "opacity": 0.9,
+    "size": 22
+  }
+}
