@@ -35,7 +35,7 @@
     a{color:inherit; text-decoration:none}
     .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
 
-    /* Stylischer Punktmuster-Layer */
+    /* Stylischer Punktmuster-Layer (wie Vorlage: nicht platt überall, sondern mit Fade) */
     .pattern{
       position:relative;
       isolation:isolate;
@@ -50,6 +50,7 @@
       background-position: 0 0;
       opacity:.9;
       pointer-events:none;
+      /* Fade oben/unten für "edler" */
       -webkit-mask-image: linear-gradient(to bottom,
         transparent 0%,
         rgba(0,0,0,.9) 12%,
@@ -158,14 +159,21 @@
     .btnGhost{border-color:rgba(11,16,32,.35); color:var(--ink); background:#fff;}
     .btnGhost:hover{background:rgba(11,16,32,.03)}
 
-    /* media frame */
+    /* HERO MEDIA – FIX: immer richtige Größe/Ration (verhindert "halbe Größe") */
     .mediaFrame{
       border:1px solid var(--line);
       background:#fff;
-      min-height:280px;
       position:relative;
       overflow:hidden;
+
+      /* wichtig: 16:9 wie typische YouTube-Videos */
+      aspect-ratio: 16 / 9;
+      min-height: 320px;
     }
+    @media (max-width: 980px){
+      .mediaFrame{ min-height: 220px; }
+    }
+
     .mediaFrame iframe,
     .mediaFrame video{
       width:100%;
@@ -182,31 +190,24 @@
       padding:18px;
       text-align:center;
     }
-
-    /* Consent overlay inside hero media */
-    .consentBox{
-      height:100%;
-      display:grid;
-      place-items:center;
-      padding:20px;
-      text-align:center;
-      gap:10px;
-      background:
-        linear-gradient(to bottom, rgba(255,255,255,.96), rgba(255,255,255,.98));
+    .playOverlay{
+      position:absolute; inset:0;
+      display:grid; place-items:center;
+      pointer-events:none;
     }
-    .consentBox b{color:var(--ink)}
-    .consentSmall{
-      max-width:50ch;
-      color:rgba(11,16,32,.58);
-      line-height:1.7;
-      font-size:12px;
+    .playBox{
+      width:86px; height:56px;
+      border:2px solid rgba(255,255,255,.92);
+      background:rgba(11,16,32,.25);
+      backdrop-filter: blur(6px);
+      display:grid; place-items:center;
     }
-    .consentActions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:center;
-      margin-top:6px;
+    .playTri{
+      width:0; height:0;
+      border-left:16px solid #fff;
+      border-top:10px solid transparent;
+      border-bottom:10px solid transparent;
+      margin-left:4px;
     }
 
     /* Sections */
@@ -317,6 +318,7 @@
       .uspGhost{top:18px}
     }
 
+    /* ICONS from CMS */
     .uspIcon{
       width:120px; height:120px;
       margin:0 auto 14px;
@@ -408,41 +410,32 @@
       100%{background-position: -200% 0}
     }
 
-    /* Cookie banner (minimal, clean) */
-    .cookieBar{
+    /* Cookie Consent (siteweit) */
+    .cc{
       position:fixed;
-      left:16px;
-      right:16px;
-      bottom:16px;
+      left:18px;
+      bottom:18px;
       z-index:9999;
+      width:min(420px, calc(100vw - 36px));
       border:1px solid var(--line);
-      background:rgba(255,255,255,.96);
-      backdrop-filter: blur(10px);
+      background:#fff;
       padding:14px 14px 12px;
-      display:none;
+      box-shadow: 0 14px 40px rgba(11,16,32,.12);
     }
-    .cookieInner{
-      max-width:var(--max);
-      margin:0 auto;
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      justify-content:space-between;
-      flex-wrap:wrap;
+    .cc h4{
+      margin:0 0 8px;
+      font-size:14px;
+      font-weight:900;
     }
-    .cookieText{
-      max-width:72ch;
-      color:rgba(11,16,32,.62);
+    .cc p{
+      margin:0 0 12px;
+      color:var(--muted);
       font-size:12px;
       line-height:1.6;
     }
-    .cookieText b{color:var(--ink)}
-    .cookieActions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
+    .ccActions{display:flex; gap:10px; flex-wrap:wrap}
+    .cc small{display:block; margin-top:10px; color:rgba(11,16,32,.45); font-size:11px; line-height:1.5}
+    .cc.hidden{display:none}
   </style>
 </head>
 
@@ -491,7 +484,7 @@
         </div>
       </div>
 
-      <!-- HERO MEDIA (Consent-gated embed) -->
+      <!-- HERO MEDIA (Embed / Fallback Link) -->
       <div class="mediaFrame" id="heroMedia" aria-label="Video">
         <div class="mediaPlaceholder" id="heroMediaPlaceholder">
           Video lädt…
@@ -627,19 +620,19 @@
   </div>
 </footer>
 
-<!-- Minimal Cookie Banner -->
-<div class="cookieBar" id="cookieBar" role="dialog" aria-live="polite" aria-label="Cookie-Einstellungen">
-  <div class="cookieInner">
-    <div class="cookieText">
-      <b>Video & externe Inhalte</b><br>
-      Für eingebettete Videos (z. B. YouTube/Vimeo) können Cookies und externe Inhalte geladen werden.
-      Du kannst das Video auch ohne Zustimmung als Link öffnen.
-    </div>
-    <div class="cookieActions">
-      <button class="btn btnGhost" id="cookieDecline" type="button">Ablehnen</button>
-      <button class="btn btnBlue" id="cookieAccept" type="button">Akzeptieren</button>
-    </div>
+<!-- Cookie Consent (siteweit): zeigt Hinweis + steuert externe Medien (YouTube/Vimeo) -->
+<div class="cc hidden" id="cc">
+  <h4>Wir schätzen deine Privatsphäre</h4>
+  <p>
+    Diese Website verwendet externe Inhalte (z. B. eingebettete Videos). Wenn du zustimmst, können dabei Cookies/Requests zu Drittanbietern (z. B. YouTube) gesetzt werden.
+  </p>
+  <div class="ccActions">
+    <button class="btn btnGhost" id="ccDecline" type="button">Ablehnen</button>
+    <button class="btn btnBlue" id="ccAccept" type="button">Akzeptieren</button>
   </div>
+  <small>
+    Hinweis: Ohne Zustimmung wird das Video als Link angezeigt. Du kannst deine Entscheidung jederzeit ändern, indem du den LocalStorage-Eintrag „movemania_consent“ löschst.
+  </small>
 </div>
 
 <script>
@@ -653,181 +646,135 @@
     const img = document.getElementById(imgId);
     const ph = document.getElementById(phId);
     if (!img || !ph) return;
-    if (!url) return;
+
+    if (!url) return; // keep placeholder
+
     img.src = url;
-    img.onload = () => { img.style.display = "block"; ph.style.display = "none"; };
-    img.onerror = () => { img.style.display = "none"; ph.style.display = "inline"; };
+    img.onload = () => {
+      img.style.display = "block";
+      ph.style.display = "none";
+    };
+    img.onerror = () => {
+      img.style.display = "none";
+      ph.style.display = "inline";
+    };
   }
 
-  // Consent state for external media (YouTube/Vimeo)
-  const CONSENT_KEY = "movemania_external_media_consent"; // "yes" | "no" | null
-
-  function getConsent(){
-    return localStorage.getItem(CONSENT_KEY);
+  function isYouTubeEmbed(url){
+    return /youtube\.com\/embed\//i.test(url) || /youtube-nocookie\.com\/embed\//i.test(url);
   }
-  function setConsent(v){
-    localStorage.setItem(CONSENT_KEY, v);
-  }
-
-  function showCookieBar(){
-    const bar = document.getElementById("cookieBar");
-    if (bar) bar.style.display = "block";
-  }
-  function hideCookieBar(){
-    const bar = document.getElementById("cookieBar");
-    if (bar) bar.style.display = "none";
-  }
-
-  function safeText(s){
-    return String(s || "").replace(/[<>&"]/g, (c) => ({ "<":"&lt;", ">":"&gt;", "&":"&amp;", "\"":"&quot;" }[c]));
-  }
-
-  // Convert YouTube URL to privacy-friendly embed with autoplay muted.
-  function normalizeYouTubeEmbed(url){
-    if (!url) return "";
-
-    const u = String(url).trim();
-
-    // If already embed url
-    // Examples:
-    // https://www.youtube.com/embed/VIDEOID
-    // https://www.youtube-nocookie.com/embed/VIDEOID
-    let m = u.match(/(?:youtube(?:-nocookie)?\.com)\/embed\/([a-zA-Z0-9_-]+)/);
-    if (m && m[1]) {
-      const id = m[1];
-      return `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`;
-    }
-
-    // youtu.be/VIDEOID
-    m = u.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
-    if (m && m[1]) {
-      const id = m[1];
-      return `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`;
-    }
-
-    // watch?v=VIDEOID
-    m = u.match(/[?&]v=([a-zA-Z0-9_-]+)/);
-    if (m && m[1]) {
-      const id = m[1];
-      return `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`;
-    }
-
-    return "";
-  }
-
   function isVimeoEmbed(url){
-    return /player\.vimeo\.com\/video\/\d+/i.test(url || "");
+    return /player\.vimeo\.com\/video\//i.test(url);
   }
 
-  function buildVimeoAutoplayMuted(url){
-    const u = String(url || "").trim();
-    if (!isVimeoEmbed(u)) return "";
-    // Vimeo supports autoplay & muted parameters
-    const hasQ = u.includes("?");
-    return u + (hasQ ? "&" : "?") + "autoplay=1&muted=1&title=0&byline=0&portrait=0";
+  function normalizeYouTubeEmbed(url){
+    // sorgt für autoplay + mute + loop (loop braucht playlist=VIDEOID)
+    // akzeptiert auch "youtube-nocookie.com"
+    try{
+      const u = new URL(url);
+      const videoId = (u.pathname.split("/embed/")[1] || "").split("/")[0] || "";
+      // Standard-Parameter
+      u.searchParams.set("autoplay", "1");
+      u.searchParams.set("mute", "1");
+      u.searchParams.set("playsinline", "1");
+      u.searchParams.set("modestbranding", "1");
+      u.searchParams.set("rel", "0");
+      // loop optional:
+      u.searchParams.set("loop", "1");
+      if (videoId) u.searchParams.set("playlist", videoId);
+      return u.toString();
+    }catch(e){
+      return url;
+    }
   }
 
-  function renderHeroMedia({ consent, fallbackUrl, embedUrl }){
+  function normalizeVimeoEmbed(url){
+    try{
+      const u = new URL(url);
+      u.searchParams.set("autoplay", "1");
+      u.searchParams.set("muted", "1");
+      u.searchParams.set("loop", "1");
+      u.searchParams.set("autopause", "0");
+      return u.toString();
+    }catch(e){
+      return url;
+    }
+  }
+
+  function renderHeroMedia({embedUrl, fallbackUrl, consent}){
     const heroMedia = document.getElementById("heroMedia");
     if (!heroMedia) return;
 
-    const e = (embedUrl || "").trim();
-    const isMp4 = /\.mp4(\?|$)/i.test(e);
+    const embed = (embedUrl || "").trim();
+    const fallback = fallbackUrl || "#";
 
-    // If we have consent and embeddable: render iframe/video
-    if (consent === "yes" && e) {
-      if (isMp4) {
-        heroMedia.innerHTML = `
-          <video autoplay muted playsinline controls preload="metadata" poster="assets/img/hero.jpg">
-            <source src="${safeText(e)}" type="video/mp4">
-            Dein Browser unterstützt das Video-Tag nicht.
-          </video>
-        `;
-        return;
-      }
-
-      // YouTube
-      const yt = normalizeYouTubeEmbed(e);
-      if (yt) {
-        heroMedia.innerHTML = `
-          <iframe
-            src="${safeText(yt)}"
-            title="Movemania FS Video"
-            loading="lazy"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen>
-          </iframe>
-        `;
-        return;
-      }
-
-      // Vimeo
-      const vimeo = buildVimeoAutoplayMuted(e);
-      if (vimeo) {
-        heroMedia.innerHTML = `
-          <iframe
-            src="${safeText(vimeo)}"
-            title="Movemania FS Video"
-            loading="lazy"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowfullscreen>
-          </iframe>
-        `;
-        return;
-      }
-
-      // Unknown embed -> fallback to link
+    // Wenn Consent fehlt oder Embed nicht geeignet => Link-Kachel
+    if (!consent || !embed || !(isYouTubeEmbed(embed) || isVimeoEmbed(embed) || embed.match(/\.mp4(\?|$)/i))) {
       heroMedia.innerHTML = `
-        <a href="${safeText(fallbackUrl)}" target="_blank" rel="noreferrer" style="display:block;width:100%;height:100%">
+        <a href="${fallback}" target="_blank" rel="noreferrer" style="display:block;width:100%;height:100%">
           <div class="mediaPlaceholder">
-            Video öffnen (Link)<br><br>
-            <b>${safeText(fallbackUrl)}</b>
+            Video ansehen (Link)<br><br>
+            <b>${fallback}</b>
           </div>
         </a>
       `;
       return;
     }
 
-    // No consent yet or no embed URL -> show consent box with options + fallback link
-    heroMedia.innerHTML = `
-      <div class="consentBox">
-        <b>Video direkt auf der Seite ansehen</b>
-        <div class="consentSmall">
-          Um das Video einzubetten, müssen externe Inhalte (z. B. YouTube/Vimeo) geladen werden.
-          Du kannst zustimmen und das Video wird sofort (ohne Ton) automatisch gestartet.
-        </div>
-        <div class="consentActions">
-          <button class="btn btnBlue" type="button" id="heroConsentAccept">Akzeptieren & Video laden</button>
-          <a class="btn btnGhost" href="${safeText(fallbackUrl)}" target="_blank" rel="noreferrer">Als Link öffnen</a>
-        </div>
-      </div>
-    `;
-
-    const btn = document.getElementById("heroConsentAccept");
-    if (btn) {
-      btn.addEventListener("click", () => {
-        setConsent("yes");
-        hideCookieBar();
-        renderHeroMedia({ consent: "yes", fallbackUrl, embedUrl });
-      });
+    // YouTube/Vimeo iFrame (autoplay muted)
+    if (isYouTubeEmbed(embed)) {
+      const src = normalizeYouTubeEmbed(embed);
+      heroMedia.innerHTML = `
+        <iframe
+          src="${src}"
+          title="Movemania FS Video"
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      `;
+      return;
+    }
+    if (isVimeoEmbed(embed)) {
+      const src = normalizeVimeoEmbed(embed);
+      heroMedia.innerHTML = `
+        <iframe
+          src="${src}"
+          title="Movemania FS Video"
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      `;
+      return;
     }
 
-    // If no decision stored yet, show global cookie bar once
-    if (!getConsent()) showCookieBar();
+    // MP4 (autoplay muted)
+    if (embed.match(/\.mp4(\?|$)/i)) {
+      heroMedia.innerHTML = `
+        <video autoplay muted loop playsinline preload="metadata" poster="assets/img/hero.jpg">
+          <source src="${embed}" type="video/mp4">
+          Dein Browser unterstützt das Video-Tag nicht.
+        </video>
+      `;
+      return;
+    }
   }
 
   (async () => {
     const logo = document.getElementById("logoImg");
     if (logo) logo.style.display = "block";
 
-    // Cookie bar events
-    const acceptBtn = document.getElementById("cookieAccept");
-    const declineBtn = document.getElementById("cookieDecline");
+    // Cookie Consent State (siteweit)
+    const cc = document.getElementById("cc");
+    const ccAccept = document.getElementById("ccAccept");
+    const ccDecline = document.getElementById("ccDecline");
 
-    if (acceptBtn) acceptBtn.addEventListener("click", () => { setConsent("yes"); hideCookieBar(); location.reload(); });
-    if (declineBtn) declineBtn.addEventListener("click", () => { setConsent("no"); hideCookieBar(); });
+    const CONSENT_KEY = "movemania_consent"; // "yes" | "no"
+    const consentVal = localStorage.getItem(CONSENT_KEY);
+    const hasConsent = consentVal === "yes";
 
     // LINKS
     let links = {};
@@ -849,13 +796,29 @@
     setHref("btnPower1617", links.power1617);
     setHref("btnIG", links.instagram);
 
-    // HERO VIDEO: prefer hero_video_embed; fallback to hero_video (may be youtube link)
-    const fallbackUrl = (links.hero_video || links.camps || links.booking || "#");
-    const embedUrl = (links.hero_video_embed || links.hero_video || "").trim();
+    // HERO: embedUrl aus CMS:
+    //  - links.hero_video_embed => erwartet youtube.com/embed/... oder vimeo player url oder mp4
+    //  - links.hero_video => fallback (z.B. Insta Link)
+    const fallbackUrl = links.hero_video || links.camps || links.booking || "#";
+    const embedUrl = links.hero_video_embed || ""; // bitte im CMS so pflegen: https://www.youtube.com/embed/VIDEOID
 
-    // Render hero media respecting consent
-    const consent = getConsent(); // "yes" | "no" | null
-    renderHeroMedia({ consent, fallbackUrl, embedUrl });
+    // Consent Banner nur zeigen, wenn noch keine Entscheidung getroffen
+    if (cc && !consentVal) cc.classList.remove("hidden");
+
+    // initial render
+    renderHeroMedia({ embedUrl, fallbackUrl, consent: hasConsent });
+
+    // Consent Buttons
+    if (ccAccept) ccAccept.addEventListener("click", () => {
+      localStorage.setItem(CONSENT_KEY, "yes");
+      if (cc) cc.classList.add("hidden");
+      renderHeroMedia({ embedUrl, fallbackUrl, consent: true });
+    });
+    if (ccDecline) ccDecline.addEventListener("click", () => {
+      localStorage.setItem(CONSENT_KEY, "no");
+      if (cc) cc.classList.add("hidden");
+      renderHeroMedia({ embedUrl, fallbackUrl, consent: false });
+    });
 
     // TEXTE
     let texts = {};
@@ -887,9 +850,6 @@
     setIcon("usp1Icon", "usp1IconPh", texts.usp1_icon);
     setIcon("usp2Icon", "usp2IconPh", texts.usp2_icon);
     setIcon("usp3Icon", "usp3IconPh", texts.usp3_icon);
-
-    // If user already decided, keep banner hidden.
-    if (getConsent()) hideCookieBar();
   })();
 </script>
 
@@ -909,6 +869,7 @@
 
 </body>
 </html>
+
 
 
 
