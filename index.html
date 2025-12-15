@@ -62,7 +62,7 @@
       border-radius:50%;
       object-fit:cover;
       background:#fff;
-      display:none; /* wird eingeblendet wenn Datei existiert */
+      display:none;
     }
     .brandText b{display:block; font-weight:900; font-size:14px; letter-spacing:.02em}
     .brandText span{display:block; color:var(--muted); font-size:12px; margin-top:2px}
@@ -85,7 +85,7 @@
       border-bottom-color:var(--red);
     }
 
-    /* HERO: now with media block (like we had before) */
+    /* HERO */
     .hero{
       padding:64px 0 34px;
       border-bottom:1px solid var(--line);
@@ -152,7 +152,7 @@
     }
     .btnGhost:hover{background:rgba(11,16,32,.03)}
 
-    /* media frame (video-look) */
+    /* media frame */
     .mediaFrame{
       border:1px solid var(--line);
       background:#fff;
@@ -243,7 +243,7 @@
       display:flex; gap:10px; flex-wrap:wrap;
     }
 
-    /* Gallery (placeholders back) */
+    /* Gallery */
     .galleryGrid{
       display:grid;
       grid-template-columns: 2fr 1fr;
@@ -271,6 +271,88 @@
       width:100%; height:100%;
       object-fit:cover; display:block;
     }
+
+    /* NEW: USP / Value Props block */
+    .usp{
+      padding:56px 0;
+      border-bottom:1px solid var(--line);
+      position:relative;
+      overflow:hidden;
+    }
+    .uspHead{
+      text-align:center;
+      position:relative;
+      padding:8px 0 30px;
+    }
+    .uspKicker{
+      margin:0 0 10px;
+      color:rgba(11,16,32,.55);
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.22em;
+      font-size:11px;
+    }
+    .uspTitle{
+      margin:0;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:-.01em;
+      font-size: clamp(34px, 4.5vw, 48px);
+      line-height:1.05;
+      position:relative;
+      z-index:2;
+    }
+    .uspGhost{
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      font-size: clamp(64px, 10vw, 120px);
+      color:rgba(11,16,32,.05);
+      user-select:none;
+      pointer-events:none;
+      z-index:1;
+      transform: translateY(6px);
+    }
+    .uspGrid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:24px;
+      text-align:center;
+      margin-top:14px;
+    }
+    @media (max-width: 980px){
+      .uspGrid{grid-template-columns:1fr; gap:18px}
+    }
+    .uspItem{
+      padding:10px 10px 0;
+    }
+    .uspIcon{
+      width:86px; height:86px;
+      margin:0 auto 14px;
+      display:grid; place-items:center;
+    }
+    .uspItem h3{
+      margin:0 0 8px;
+      font-weight:900;
+      text-transform:uppercase;
+      font-size:14px;
+      letter-spacing:.02em;
+    }
+    .uspItem p{
+      margin:0;
+      color:rgba(11,16,32,.45);
+      line-height:1.8;
+      font-size:13px;
+      max-width:36ch;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    .iconStroke{stroke: var(--ink); stroke-width:2.2; fill:none}
+    .iconAccent{stroke: var(--navy); stroke-width:2.2; fill:none}
 
     /* Kontakt */
     .kontaktRow{
@@ -317,6 +399,7 @@
       <nav class="menu" aria-label="Hauptnavigation">
         <a href="#home" class="active">Home</a>
         <a href="#angebote">Angebote</a>
+        <a href="#vorteile">Vorteile</a>
         <a href="#galerie">Galerie</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
@@ -326,7 +409,7 @@
 
 <main id="home" class="gridBg">
 
-  <!-- HERO with media -->
+  <!-- HERO -->
   <section class="hero">
     <div class="wrap heroInner">
       <div>
@@ -344,7 +427,6 @@
         </div>
       </div>
 
-      <!-- media block (optional click to video) -->
       <a class="mediaFrame" id="heroVideoLink" href="#" target="_blank" rel="noreferrer" aria-label="Video öffnen">
         <img src="assets/img/hero.jpg" alt="Movemania FS – Training"
              onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;mediaPlaceholder&quot;>Hero-Media: <b>assets/img/hero.jpg</b><br>Optional kannst du hier auch ein Video verlinken.</div>';">
@@ -389,121 +471,9 @@
     </div>
   </section>
 
-  <!-- GALERIE (placeholders back) -->
-  <section id="galerie" class="section">
+  <!-- NEW: VORTEILE / VALUE PROPS -->
+  <section id="vorteile" class="usp">
     <div class="wrap">
-      <h2 class="sectionTitle">Galerie</h2>
+      <div clas
 
-      <div class="galleryGrid">
-        <div class="frame">
-          <img src="assets/img/placeholder-1.jpg" alt="Galerie 1"
-               onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;mediaPlaceholder&quot;>Platzhalter: <b>assets/img/placeholder-1.jpg</b></div>';">
-        </div>
-
-        <div class="gCol">
-          <div class="frame">
-            <img src="assets/img/placeholder-2.jpg" alt="Galerie 2"
-                 onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;mediaPlaceholder&quot;>Platzhalter: <b>assets/img/placeholder-2.jpg</b></div>';">
-          </div>
-          <div class="frame">
-            <img src="assets/img/placeholder-3.jpg" alt="Galerie 3"
-                 onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;mediaPlaceholder&quot;>Platzhalter: <b>assets/img/placeholder-3.jpg</b></div>';">
-          </div>
-          <div class="frame">
-            <img src="assets/img/placeholder-4.jpg" alt="Galerie 4"
-                 onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;mediaPlaceholder&quot;>Platzhalter: <b>assets/img/placeholder-4.jpg</b></div>';">
-          </div>
-          <div class="frame">
-            <img src="assets/img/placeholder-5.jpg" alt="Galerie 5"
-                 onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;mediaPlaceholder&quot;>Platzhalter: <b>assets/img/placeholder-5.jpg</b></div>';">
-          </div>
-        </div>
-      </div>
-
-      <p style="margin:16px 0 0; color:var(--muted); font-size:13px; line-height:1.8;">
-        Hinweis: Die Galerie kann ich als nächsten Schritt auch automatisch aus CMS-Einträgen rendern (Decap „Galerie“ Collection),
-        dann muss niemand mehr Platzhalter-Dateien pflegen.
-      </p>
-    </div>
-  </section>
-
-  <!-- KONTAKT -->
-  <section id="kontakt" class="section">
-    <div class="wrap">
-      <h2 class="sectionTitle">Kontakt</h2>
-
-      <div class="kontaktRow">
-        <a class="btn btnRed" id="btnBooking" href="#" target="_blank" rel="noreferrer">Jetzt anmelden</a>
-        <a class="btn btnBlue" id="btnIG" href="#" target="_blank" rel="noreferrer">Instagram</a>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <div class="wrap">
-    <b style="color:var(--ink)">Movemania FS</b><br>
-    Fußballschule mit Haltung &amp; Herz
-  </div>
-</footer>
-
-<script>
-  async function loadJSON(path){
-    const res = await fetch(path, { cache: "no-store" });
-    if (!res.ok) throw new Error("Failed to load " + path + " (" + res.status + ")");
-    return await res.json();
-  }
-
-  (async () => {
-    // show logo if file exists
-    const logo = document.getElementById("logoImg");
-    if (logo) logo.style.display = "block";
-
-    // LINKS
-    let links = {};
-    try { links = await loadJSON("/assets/content/links.json"); }
-    catch (e) { console.warn("links.json fehlt oder nicht erreichbar:", e); }
-
-    const setHref = (id, url) => {
-      const el = document.getElementById(id);
-      if (el && url) el.href = url;
-    };
-
-    setHref("ctaBooking", links.booking);
-    setHref("ctaCamps", links.camps);
-    setHref("ctaWA", links.whatsapp);
-
-    setHref("btnBooking", links.booking);
-    setHref("btnCamps", links.camps);
-    setHref("btnPower1819", links.power1819);
-    setHref("btnPower1617", links.power1617);
-    setHref("btnIG", links.instagram);
-
-    // Optional: Hero video link (if you want)
-    // If not provided, link falls back to booking
-    const heroVideoLink = document.getElementById("heroVideoLink");
-    if (heroVideoLink) {
-      heroVideoLink.href = links.hero_video || links.camps || links.booking || "#";
-    }
-
-    // TEXTE
-    let texts = {};
-    try { texts = await loadJSON("/assets/content/texts.json"); }
-    catch (e) { console.warn("texts.json fehlt oder nicht erreichbar:", e); }
-
-    const setText = (id, value) => {
-      const el = document.getElementById(id);
-      if (!el || !value) return;
-      el.textContent = value;
-    };
-
-    setText("heroTitle", (texts.hero_title || "FERIENCAMPS & KURSE").toUpperCase());
-    setText("heroText", texts.hero_text || "In unseren Feriencamps kommen bewegungsfreudige Kinder voll auf ihre Kosten.");
-    setText("aboutText", texts.about_text || "Wir stehen für modernes Fußballtraining mit Haltung, Herz und Verantwortung.");
-  })();
-</script>
-
-</body>
-</html>
 
