@@ -6,19 +6,31 @@ media_folder: "assets/img/uploads"
 public_folder: "/assets/img/uploads"
 
 collections:
-  - name: "settings"
-    label: "Einstellungen"
+
+  - name: "links"
+    label: "Links"
     files:
-      - name: "links"
-        label: "Links"
+      - name: "main"
+        label: "Hauptlinks"
         file: "assets/content/links.json"
         fields:
-          - { label: "Booking (Jetzt anmelden)", name: "booking", widget: "string" }
+          - { label: "Booking / Jetzt anmelden", name: "booking", widget: "string" }
           - { label: "Feriencamps", name: "camps", widget: "string" }
-          - { label: "Powerkurse 2018/2019", name: "power1819", widget: "string" }
-          - { label: "Powerkurse 2016/2017", name: "power1617", widget: "string" }
+          - { label: "Powerkurse 18/19", name: "power1819", widget: "string" }
+          - { label: "Powerkurse 16/17", name: "power1617", widget: "string" }
           - { label: "WhatsApp Community", name: "whatsapp", widget: "string" }
           - { label: "Instagram", name: "instagram", widget: "string" }
+
+  - name: "texts"
+    label: "Texte"
+    files:
+      - name: "home"
+        label: "Startseite"
+        file: "assets/content/texts.json"
+        fields:
+          - { label: "Hero Überschrift", name: "hero_title", widget: "string" }
+          - { label: "Hero Text", name: "hero_text", widget: "text" }
+          - { label: "Über uns Text", name: "about_text", widget: "text" }
 
   - name: "gallery"
     label: "Galerie"
@@ -28,4 +40,3 @@ collections:
     fields:
       - { label: "Titel", name: "title", widget: "string" }
       - { label: "Bild", name: "image", widget: "image" }
-      - { label: "Alt-Text", name: "alt", widget: "string", required: false }
