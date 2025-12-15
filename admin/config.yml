@@ -2,58 +2,88 @@ backend:
   name: git-gateway
   branch: main
 
+# Optional, aber hilfreich bei lokalen Tests
+local_backend: false
+
+publish_mode: simple
+
+# Medien
 media_folder: "assets/img/uploads"
 public_folder: "/assets/img/uploads"
 
+site_url: "https://movemania-fs.netlify.app"
+
+# =========================
+# COLLECTIONS
+# =========================
 collections:
 
-  - name: "links"
-    label: "Links"
-    files:
-      - name: "main"
-        label: "Hauptlinks"
-        file: "assets/content/links.json"
-        fields:
-          - { label: "Booking / Jetzt anmelden", name: "booking", widget: "string" }
-          - { label: "Feriencamps", name: "camps", widget: "string" }
-          - { label: "Powerkurse 18/19", name: "power1819", widget: "string" }
-          - { label: "Powerkurse 16/17", name: "power1617", widget: "string" }
-          - { label: "WhatsApp Community", name: "whatsapp", widget: "string" }
-          - { label: "Instagram", name: "instagram", widget: "string" }
-          - { label: "USP Titel (klein)", name: "usp_kicker", widget: "string", required: false }
-          - { label: "USP Überschrift", name: "usp_title", widget: "string", required: false }
-          - { label: "USP Ghost-Word (hinterlegt)", name: "usp_ghost", widget: "string", required: false }
-
-          - { label: "USP 1 Titel", name: "usp1_title", widget: "string", required: false }
-          - { label: "USP 1 Text", name: "usp1_text", widget: "text", required: false }
-          - { label: "USP 2 Titel", name: "usp2_title", widget: "string", required: false }
-          - { label: "USP 2 Text", name: "usp2_text", widget: "text", required: false }
-          - { label: "USP 3 Titel", name: "usp3_title", widget: "string", required: false }
-          - { label: "USP 3 Text", name: "usp3_text", widget: "text", required: false }
-          - { label: "USP 1 Icon", name: "usp1_icon", widget: "image", required: false }
-          - { label: "USP 2 Icon", name: "usp2_icon", widget: "image", required: false }
-          - { label: "USP 3 Icon", name: "usp3_icon", widget: "image", required: false }
-
-
-
+  # -------------------------
+  # TEXTE (Startseite)
+  # -------------------------
   - name: "texts"
     label: "Texte"
     files:
-      - name: "home"
+      - file: "assets/content/texts.json"
         label: "Startseite"
-        file: "assets/content/texts.json"
+        name: "home"
         fields:
-          - { label: "Hero Überschrift", name: "hero_title", widget: "string" }
-          - { label: "Hero Text", name: "hero_text", widget: "text" }
-          - { label: "Über uns Text", name: "about_text", widget: "text" }
+          - { label: "Hero Titel", name: "hero_title", widget: "string", required: false }
+          - { label: "Hero Text", name: "hero_text", widget: "text", required: false }
 
+          - { label: "Über uns Text", name: "about_text", widget: "text", required: false }
+
+          - { label: "USP Kicker", name: "usp_kicker", widget: "string", required: false }
+          - { label: "USP Überschrift", name: "usp_title", widget: "string", required: false }
+          - { label: "USP Ghost-Wort (groß im Hintergrund)", name: "usp_ghost", widget: "string", required: false }
+
+          - { label: "USP 1 Titel", name: "usp1_title", widget: "string", required: false }
+          - { label: "USP 1 Text", name: "usp1_text", widget: "text", required: false }
+          - { label: "USP 1 Icon", name: "usp1_icon", widget: "image", required: false }
+
+          - { label: "USP 2 Titel", name: "usp2_title", widget: "string", required: false }
+          - { label: "USP 2 Text", name: "usp2_text", widget: "text", required: false }
+          - { label: "USP 2 Icon", name: "usp2_icon", widget: "image", required: false }
+
+          - { label: "USP 3 Titel", name: "usp3_title", widget: "string", required: false }
+          - { label: "USP 3 Text", name: "usp3_text", widget: "text", required: false }
+          - { label: "USP 3 Icon", name: "usp3_icon", widget: "image", required: false }
+
+  # -------------------------
+  # LINKS / BUTTONS
+  # -------------------------
+  - name: "links"
+    label: "Links & Buttons"
+    files:
+      - file: "assets/content/links.json"
+        label: "Externe Links"
+        name: "links"
+        fields:
+          - { label: "Anmeldung / Buchung", name: "booking", widget: "string", required: false }
+          - { label: "Feriencamps", name: "camps", widget: "string", required: false }
+          - { label: "WhatsApp Community", name: "whatsapp", widget: "string", required: false }
+          - { label: "Hero Video Link", name: "hero_video", widget: "string", required: false }
+
+          - { label: "Powerkurs 18/19", name: "power1819", widget: "string", required: false }
+          - { label: "Powerkurs 16/17", name: "power1617", widget: "string", required: false }
+
+          - { label: "Instagram", name: "instagram", widget: "string", required: false }
+
+  # -------------------------
+  # GALERIE
+  # -------------------------
   - name: "gallery"
     label: "Galerie"
-    folder: "assets/content/gallery"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - { label: "Titel", name: "title", widget: "string" }
-      - { label: "Bild", name: "image", widget: "image" }
+    files:
+      - file: "assets/content/gallery.json"
+        label: "Galeriebilder"
+        name: "gallery"
+        fields:
+          - label: "Bilder"
+            name: "images"
+            widget: "list"
+            allow_add: true
+            fields:
+              - { label: "Bild", name: "image", widget: "image" }
+              - { label: "Alt-Text", name: "alt", widget: "string", required: false }
 
-      
