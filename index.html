@@ -12,14 +12,31 @@
 
   <style>
     :root{
+      /* Base */
       --bg:#ffffff;
       --ink:#0b1020;
       --muted:#5e6880;
       --line:#e6e8ee;
+
       --navy:#1e3366;
       --red:#d2182d;
+
       --max: 1120px;
       --radius: 0px;
+
+      /* Theme-driven extras */
+      --card-bg:#ffffff;
+      --card-border: var(--line);
+      --shadow: 0 14px 40px rgba(11,16,32,.12);
+
+      --base: 14px;
+      --hero-title-max: 68px; /* clamp max */
+      --section-title: 24px;
+      --card-title: 14px;
+
+      --patternOpacity:.9;
+      --patternDot: rgba(11,16,32,.075);
+      --patternSize: 22px;
     }
 
     *{box-sizing:border-box}
@@ -29,6 +46,7 @@
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--ink);
       background:var(--bg);
+      font-size: var(--base);
     }
     a{color:inherit; text-decoration:none}
     .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
@@ -40,10 +58,10 @@
       position:absolute;
       inset:0;
       z-index:-1;
-      background-image: radial-gradient(rgba(11,16,32,.075) 1px, transparent 1px);
-      background-size: 22px 22px;
+      background-image: radial-gradient(var(--patternDot) 1px, transparent 1px);
+      background-size: var(--patternSize) var(--patternSize);
       background-position: 0 0;
-      opacity:.9;
+      opacity: var(--patternOpacity);
       pointer-events:none;
       -webkit-mask-image: linear-gradient(to bottom,
         transparent 0%,
@@ -114,7 +132,7 @@
       font-weight:900;
       letter-spacing:-.02em;
       text-transform:uppercase;
-      font-size: clamp(44px, 5.8vw, 68px);
+      font-size: clamp(44px, 5.8vw, var(--hero-title-max));
       line-height: .95;
     }
     .heroText{
@@ -155,6 +173,7 @@
       overflow:hidden;
       aspect-ratio: 16 / 9;
       min-height: 320px;
+      border-radius: var(--radius);
     }
     @media (max-width: 980px){
       .mediaFrame{ min-height: 220px; }
@@ -183,7 +202,7 @@
       font-weight:900;
       text-transform:uppercase;
       letter-spacing:-.01em;
-      font-size:24px;
+      font-size: var(--section-title);
     }
 
     /* Cards */
@@ -196,17 +215,19 @@
       .cards{grid-template-columns:1fr}
     }
     .card{
-      border:1px solid var(--line);
-      background:#fff;
+      border:1px solid var(--card-border);
+      background:var(--card-bg);
       padding:18px 18px 16px;
       min-height:170px;
+      border-radius: var(--radius);
+      box-shadow: none;
     }
     .card h3{
       margin:0 0 10px;
       font-weight:900;
       text-transform:uppercase;
       letter-spacing:-.01em;
-      font-size:14px;
+      font-size: var(--card-title);
     }
     .card p{
       margin:0;
@@ -283,8 +304,9 @@
       width:120px; height:120px;
       margin:0 auto 14px;
       display:grid; place-items:center;
-      border:1px solid var(--line);
-      background:#fff;
+      border:1px solid var(--card-border);
+      background:var(--card-bg);
+      border-radius: var(--radius);
     }
     .uspIcon img{
       width:100%;
@@ -336,10 +358,11 @@
       .gCol{grid-template-columns:1fr}
     }
     .frame{
-      border:1px solid var(--line);
-      background:#fff;
+      border:1px solid var(--card-border);
+      background:var(--card-bg);
       overflow:hidden;
       min-height:190px;
+      border-radius: var(--radius);
     }
     .frame img{width:100%; height:100%; object-fit:cover; display:block;}
 
@@ -372,10 +395,11 @@
       z-index:9999;
       width:min(420px, calc(100vw - 36px));
       border:1px solid var(--line);
-      background:#fff;
+      background:var(--card-bg);
       padding:14px 14px 12px;
-      box-shadow: 0 14px 40px rgba(11,16,32,.12);
+      box-shadow: var(--shadow);
       display:none;
+      border-radius: var(--radius);
     }
     .cc h4{ margin:0 0 8px; font-size:14px; font-weight:900; }
     .cc p{ margin:0 0 12px; color:var(--muted); font-size:12px; line-height:1.6; }
@@ -623,6 +647,54 @@
     `;
   }
 
+  function applyTheme(theme){
+    const root = document.documentElement;
+    const setVar = (k, v) => {
+      if (v === undefined || v === null || v === "") return;
+      root.style.setProperty(k, v);
+    };
+
+    const colors = theme?.colors || {};
+    const type = theme?.type || {};
+    const layout = theme?.layout || {};
+    const pattern = theme?.pattern || {};
+
+    // Colors
+    setVar("--bg", colors.bg);
+    setVar("--ink", colors.ink);
+    setVar("--muted", colors.muted);
+    setVar("--line", colors.line);
+
+    setVar("--navy", colors.primary);
+    setVar("--red", colors.accent);
+
+    setVar("--card-bg", colors.card_bg);
+    setVar("--card-border", colors.card_border);
+
+    // Typography
+    if (typeof type.body_size === "number") setVar("--base", type.body_size + "px");
+    if (typeof type.hero_title_size === "number") setVar("--hero-title-max", type.hero_title_size + "px");
+    if (typeof type.section_title_size === "number") setVar("--section-title", type.section_title_size + "px");
+    if (typeof type.card_title_size === "number") setVar("--card-title", type.card_title_size + "px");
+
+    // Layout
+    if (typeof layout.content_width === "number") setVar("--max", layout.content_width + "px");
+    if (typeof layout.radius === "number") setVar("--radius", layout.radius + "px");
+    if (typeof layout.shadow_strength === "number") {
+      const s = Math.max(0, Math.min(0.3, layout.shadow_strength));
+      setVar("--shadow", `0 14px 40px rgba(11,16,32,${s})`);
+    }
+
+    // Pattern
+    if (pattern.enabled === false) {
+      setVar("--patternOpacity", "0");
+    } else {
+      if (typeof pattern.opacity === "number") setVar("--patternOpacity", String(pattern.opacity));
+      if (pattern.dot) setVar("--patternDot", pattern.dot);
+      if (typeof pattern.size === "number") setVar("--patternSize", pattern.size + "px");
+    }
+  }
+
   (async () => {
     // Cookie Hinweis (global)
     const cc = document.getElementById("cc");
@@ -633,6 +705,14 @@
       localStorage.setItem(CC_KEY, "1");
       if (cc) cc.style.display = "none";
     });
+
+    // Theme aus CMS
+    try {
+      const theme = await loadJSON("/assets/content/theme.json");
+      applyTheme(theme);
+    } catch (e) {
+      console.warn("theme.json fehlt oder nicht erreichbar (ok für Start):", e);
+    }
 
     // Logo anzeigen, wenn vorhanden
     const logo = document.getElementById("logoImg");
@@ -654,7 +734,6 @@
     setHref("btnIG", links.instagram);
 
     // HERO VIDEO: Self-hosted (optional über CMS steuerbar)
-    // Falls ihr im CMS schon was habt: links.hero_video_mp4 / links.hero_video_poster
     mountHeroVideo({
       mp4: links.hero_video_mp4 || "assets/video/hero.mp4",
       poster: links.hero_video_poster || "assets/img/hero.jpg"
@@ -668,8 +747,6 @@
     setText("heroTitle", (texts.hero_title || "FERIENCAMPS & KURSE").toUpperCase());
     setText("heroText", texts.hero_text || "In unseren Feriencamps kommen bewegungsfreudige Kinder voll auf ihre Kosten.");
 
-    // About kann gerne mit Sonderzeichen/Zeilenumbrüchen sein
-    // Wenn ihr im CMS HTML reinpackt (z.B. <br>), könnt ihr setTextKeepHtml nutzen:
     if (texts.about_text && /<\/?[a-z][\s\S]*>/i.test(texts.about_text)) {
       setTextKeepHtml("aboutText", texts.about_text);
     } else {
