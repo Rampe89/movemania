@@ -21,7 +21,7 @@
       --red:#d2182d;
 
       --max: 1120px;
-      --radius: 0px;     /* Screenshot wirkt sehr "kantig" */
+      --radius: 0px;
     }
 
     *{box-sizing:border-box}
@@ -34,6 +34,14 @@
     }
     a{color:inherit; text-decoration:none}
     .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
+
+    /* dotted background like reference */
+    .gridBg{
+      background-image: radial-gradient(rgba(11,16,32,.06) 1px, transparent 1px);
+      background-size: 22px 22px;
+      background-position: 0 0;
+    }
+
     .topbar{
       position:sticky; top:0; z-index:50;
       background:rgba(255,255,255,.92);
@@ -54,7 +62,7 @@
       border-radius:50%;
       object-fit:cover;
       background:#fff;
-      display:none; /* wenn du logo.png hast -> per JS einblenden */
+      display:none; /* wird eingeblendet wenn Datei existiert */
     }
     .brandText b{display:block; font-weight:900; font-size:14px; letter-spacing:.02em}
     .brandText span{display:block; color:var(--muted); font-size:12px; margin-top:2px}
@@ -77,16 +85,22 @@
       border-bottom-color:var(--red);
     }
 
-    /* Layout spacing similar to screenshot */
+    /* HERO: now with media block (like we had before) */
     .hero{
       padding:64px 0 34px;
       border-bottom:1px solid var(--line);
     }
     .heroInner{
       display:grid;
-      grid-template-columns: 1fr;
-      gap:26px;
+      grid-template-columns: 1.05fr .95fr;
+      gap:34px;
+      align-items:center;
     }
+    @media (max-width: 980px){
+      .menu{display:none}
+      .heroInner{grid-template-columns:1fr}
+    }
+
     .heroTitle{
       margin:0 0 10px;
       font-weight:900;
@@ -118,6 +132,7 @@
       background:transparent;
       border-radius:var(--radius);
       cursor:pointer;
+      white-space:nowrap;
     }
     .btnRed{
       border-color:var(--red);
@@ -137,6 +152,49 @@
     }
     .btnGhost:hover{background:rgba(11,16,32,.03)}
 
+    /* media frame (video-look) */
+    .mediaFrame{
+      border:1px solid var(--line);
+      background:#fff;
+      min-height:280px;
+      position:relative;
+      overflow:hidden;
+    }
+    .mediaFrame img{
+      width:100%; height:100%;
+      object-fit:cover;
+      display:block;
+      filter:saturate(1.05);
+    }
+    .mediaPlaceholder{
+      height:100%;
+      display:grid; place-items:center;
+      color:rgba(11,16,32,.45);
+      font-weight:700;
+      font-size:13px;
+      padding:18px;
+      text-align:center;
+    }
+    .playOverlay{
+      position:absolute; inset:0;
+      display:grid; place-items:center;
+      pointer-events:none;
+    }
+    .playBox{
+      width:86px; height:56px;
+      border:2px solid rgba(255,255,255,.92);
+      background:rgba(11,16,32,.25);
+      backdrop-filter: blur(6px);
+      display:grid; place-items:center;
+    }
+    .playTri{
+      width:0; height:0;
+      border-left:16px solid #fff;
+      border-top:10px solid transparent;
+      border-bottom:10px solid transparent;
+      margin-left:4px;
+    }
+
     /* Sections */
     .section{
       padding:30px 0;
@@ -151,7 +209,7 @@
       font-size:24px;
     }
 
-    /* Cards like screenshot: white with light border */
+    /* Cards */
     .cards{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -159,7 +217,6 @@
     }
     @media (max-width: 980px){
       .cards{grid-template-columns:1fr}
-      .menu{display:none}
     }
     .card{
       border:1px solid var(--line);
@@ -186,7 +243,36 @@
       display:flex; gap:10px; flex-wrap:wrap;
     }
 
-    /* Kontakt section mimic */
+    /* Gallery (placeholders back) */
+    .galleryGrid{
+      display:grid;
+      grid-template-columns: 2fr 1fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){
+      .galleryGrid{grid-template-columns:1fr}
+    }
+    .gCol{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:18px;
+    }
+    @media (max-width: 980px){
+      .gCol{grid-template-columns:1fr}
+    }
+    .frame{
+      border:1px solid var(--line);
+      background:#fff;
+      overflow:hidden;
+      min-height:190px;
+    }
+    .frame img{
+      width:100%; height:100%;
+      object-fit:cover; display:block;
+    }
+
+    /* Kontakt */
     .kontaktRow{
       display:flex; gap:14px; flex-wrap:wrap;
       padding-top:6px;
@@ -199,9 +285,9 @@
       font-size:12px;
     }
 
-    /* Small helper for "loading" */
+    /* skeleton */
     .skeleton{
-      background: linear-gradient(90deg, rgba(11,16,32,.04), rgba(11,16,32,.02), rgba(11,16,32,.04));
+      background: linear-gradient(90deg, rgba(11,16,32,.05), rgba(11,16,32,.02), rgba(11,16,32,.05));
       background-size: 200% 100%;
       animation: shimmer 1.2s infinite;
       border-radius: 4px;
@@ -231,28 +317,41 @@
       <nav class="menu" aria-label="Hauptnavigation">
         <a href="#home" class="active">Home</a>
         <a href="#angebote">Angebote</a>
+        <a href="#galerie">Galerie</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
     </div>
   </div>
 </header>
 
-<main id="home">
+<main id="home" class="gridBg">
 
-  <!-- HERO -->
+  <!-- HERO with media -->
   <section class="hero">
     <div class="wrap heroInner">
-      <h1 class="heroTitle" id="heroTitle">FERIENCAMPS &amp; KURSE</h1>
-      <p class="heroText" id="heroText">
-        <span class="skeleton" style="width:46ch;height:1em"></span><br>
-        <span class="skeleton" style="width:34ch;height:1em;margin-top:8px"></span>
-      </p>
+      <div>
+        <h1 class="heroTitle" id="heroTitle">FERIENCAMPS &amp; KURSE</h1>
 
-      <div class="btnRow">
-        <a class="btn btnRed" id="ctaBooking" href="#" target="_blank" rel="noreferrer">Jetzt anmelden</a>
-        <a class="btn btnBlue" id="ctaCamps" href="#" target="_blank" rel="noreferrer">Feriencamps</a>
-        <a class="btn btnGhost" id="ctaWA" href="#" target="_blank" rel="noreferrer">WA-Community</a>
+        <p class="heroText" id="heroText">
+          <span class="skeleton" style="width:46ch;height:1em"></span><br>
+          <span class="skeleton" style="width:34ch;height:1em;margin-top:8px"></span>
+        </p>
+
+        <div class="btnRow">
+          <a class="btn btnRed" id="ctaBooking" href="#" target="_blank" rel="noreferrer">Jetzt anmelden</a>
+          <a class="btn btnBlue" id="ctaCamps" href="#" target="_blank" rel="noreferrer">Feriencamps</a>
+          <a class="btn btnGhost" id="ctaWA" href="#" target="_blank" rel="noreferrer">WA-Community</a>
+        </div>
       </div>
+
+      <!-- media block (optional click to video) -->
+      <a class="mediaFrame" id="heroVideoLink" href="#" target="_blank" rel="noreferrer" aria-label="Video öffnen">
+        <img src="assets/img/hero.jpg" alt="Movemania FS – Training"
+             onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;mediaPlaceholder&quot;>Hero-Media: <b>assets/img/hero.jpg</b><br>Optional kannst du hier auch ein Video verlinken.</div>';">
+        <div class="playOverlay" aria-hidden="true">
+          <div class="playBox"><div class="playTri"></div></div>
+        </div>
+      </a>
     </div>
   </section>
 
@@ -264,9 +363,7 @@
       <div class="cards">
         <div class="card">
           <h3>Feriencamps</h3>
-          <p>
-            Abwechslungsreiche Trainingseinheiten, Spiele, warmes Mittagessen und jede Menge Spaß.
-          </p>
+          <p>Abwechslungsreiche Trainingseinheiten, Spiele, warmes Mittagessen und jede Menge Spaß.</p>
           <div class="cardActions">
             <a class="btn btnRed" id="btnCamps" href="#" target="_blank" rel="noreferrer">Camps buchen</a>
           </div>
@@ -274,9 +371,7 @@
 
         <div class="card">
           <h3>Powerkurse</h3>
-          <p>
-            Gezielte Technik- und Athletikeinheiten in kleinen Gruppen.
-          </p>
+          <p>Gezielte Technik- und Athletikeinheiten in kleinen Gruppen.</p>
           <div class="cardActions">
             <a class="btn btnGhost" id="btnPower1819" href="#" target="_blank" rel="noreferrer">Power 18/19</a>
             <a class="btn btnGhost" id="btnPower1617" href="#" target="_blank" rel="noreferrer">Power 16/17</a>
@@ -291,6 +386,44 @@
           </p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- GALERIE (placeholders back) -->
+  <section id="galerie" class="section">
+    <div class="wrap">
+      <h2 class="sectionTitle">Galerie</h2>
+
+      <div class="galleryGrid">
+        <div class="frame">
+          <img src="assets/img/placeholder-1.jpg" alt="Galerie 1"
+               onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;mediaPlaceholder&quot;>Platzhalter: <b>assets/img/placeholder-1.jpg</b></div>';">
+        </div>
+
+        <div class="gCol">
+          <div class="frame">
+            <img src="assets/img/placeholder-2.jpg" alt="Galerie 2"
+                 onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;mediaPlaceholder&quot;>Platzhalter: <b>assets/img/placeholder-2.jpg</b></div>';">
+          </div>
+          <div class="frame">
+            <img src="assets/img/placeholder-3.jpg" alt="Galerie 3"
+                 onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;mediaPlaceholder&quot;>Platzhalter: <b>assets/img/placeholder-3.jpg</b></div>';">
+          </div>
+          <div class="frame">
+            <img src="assets/img/placeholder-4.jpg" alt="Galerie 4"
+                 onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;mediaPlaceholder&quot;>Platzhalter: <b>assets/img/placeholder-4.jpg</b></div>';">
+          </div>
+          <div class="frame">
+            <img src="assets/img/placeholder-5.jpg" alt="Galerie 5"
+                 onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;mediaPlaceholder&quot;>Platzhalter: <b>assets/img/placeholder-5.jpg</b></div>';">
+          </div>
+        </div>
+      </div>
+
+      <p style="margin:16px 0 0; color:var(--muted); font-size:13px; line-height:1.8;">
+        Hinweis: Die Galerie kann ich als nächsten Schritt auch automatisch aus CMS-Einträgen rendern (Decap „Galerie“ Collection),
+        dann muss niemand mehr Platzhalter-Dateien pflegen.
+      </p>
     </div>
   </section>
 
@@ -323,18 +456,14 @@
   }
 
   (async () => {
-    // Optional logo show (if file exists)
+    // show logo if file exists
     const logo = document.getElementById("logoImg");
     if (logo) logo.style.display = "block";
 
-    // 1) LINKS aus CMS
-    let links = null;
-    try {
-      links = await loadJSON("/assets/content/links.json");
-    } catch (e) {
-      console.warn("links.json fehlt oder nicht erreichbar:", e);
-      links = {};
-    }
+    // LINKS
+    let links = {};
+    try { links = await loadJSON("/assets/content/links.json"); }
+    catch (e) { console.warn("links.json fehlt oder nicht erreichbar:", e); }
 
     const setHref = (id, url) => {
       const el = document.getElementById(id);
@@ -351,14 +480,17 @@
     setHref("btnPower1617", links.power1617);
     setHref("btnIG", links.instagram);
 
-    // 2) TEXTE aus CMS
-    let texts = null;
-    try {
-      texts = await loadJSON("/assets/content/texts.json");
-    } catch (e) {
-      console.warn("texts.json fehlt oder nicht erreichbar:", e);
-      texts = {};
+    // Optional: Hero video link (if you want)
+    // If not provided, link falls back to booking
+    const heroVideoLink = document.getElementById("heroVideoLink");
+    if (heroVideoLink) {
+      heroVideoLink.href = links.hero_video || links.camps || links.booking || "#";
     }
+
+    // TEXTE
+    let texts = {};
+    try { texts = await loadJSON("/assets/content/texts.json"); }
+    catch (e) { console.warn("texts.json fehlt oder nicht erreichbar:", e); }
 
     const setText = (id, value) => {
       const el = document.getElementById(id);
@@ -366,11 +498,8 @@
       el.textContent = value;
     };
 
-    // Hero
     setText("heroTitle", (texts.hero_title || "FERIENCAMPS & KURSE").toUpperCase());
     setText("heroText", texts.hero_text || "In unseren Feriencamps kommen bewegungsfreudige Kinder voll auf ihre Kosten.");
-
-    // About
     setText("aboutText", texts.about_text || "Wir stehen für modernes Fußballtraining mit Haltung, Herz und Verantwortung.");
   })();
 </script>
