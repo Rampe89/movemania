@@ -16,523 +16,227 @@
       --ink:#0b1020;
       --muted:#5e6880;
       --line:#e6e8ee;
-
       --navy:#1e3366;
       --red:#d2182d;
-
-      --max: 1120px;
-      --radius: 0px;
+      --max:1120px;
     }
 
     *{box-sizing:border-box}
-    html,body{height:100%}
     body{
       margin:0;
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--ink);
       background:var(--bg);
     }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
 
-    /* Punktmuster */
-    .pattern{ position:relative; isolation:isolate; }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
+
+    /* dotted background */
+    .pattern{position:relative}
     .pattern::before{
       content:"";
-      position:absolute; inset:0; z-index:-1;
-      background-image: radial-gradient(rgba(11,16,32,.075) 1px, transparent 1px);
-      background-size: 22px 22px;
-      opacity:.9; pointer-events:none;
-      -webkit-mask-image: linear-gradient(to bottom,
-        transparent 0%,
-        rgba(0,0,0,.9) 12%,
-        rgba(0,0,0,1) 50%,
-        rgba(0,0,0,.9) 88%,
-        transparent 100%);
-      mask-image: linear-gradient(to bottom,
-        transparent 0%,
-        rgba(0,0,0,.9) 12%,
-        rgba(0,0,0,1) 50%,
-        rgba(0,0,0,.9) 88%,
-        transparent 100%);
+      position:absolute;inset:0;z-index:-1;
+      background-image:radial-gradient(rgba(11,16,32,.06) 1px, transparent 1px);
+      background-size:22px 22px;
+      mask-image:linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
     }
 
-    .topbar{
-      position:sticky; top:0; z-index:50;
+    /* header */
+    header{
+      position:sticky;top:0;z-index:10;
       background:rgba(255,255,255,.92);
-      backdrop-filter: blur(10px);
+      backdrop-filter:blur(8px);
       border-bottom:1px solid var(--line);
     }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:16px 0; gap:18px;
-    }
-    .brand{display:flex; align-items:flex-start; gap:14px;}
-    .logo{
-      width:46px; height:46px;
-      border:1px solid var(--line);
-      border-radius:50%;
-      object-fit:cover;
-      background:#fff;
-      display:none;
-    }
-    .brandText b{display:block; font-weight:900; font-size:14px; letter-spacing:.02em}
-    .brandText span{display:block; color:var(--muted); font-size:12px; margin-top:2px}
+    .nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+    .brand b{display:block;font-weight:900}
+    .brand span{font-size:12px;color:var(--muted)}
 
-    .menu{
-      display:flex; gap:26px; align-items:center;
+    nav a{
+      font-size:11px;
       font-weight:900;
       letter-spacing:.18em;
       text-transform:uppercase;
-      font-size:11px;
+      margin-left:22px;
+      color:rgba(11,16,32,.6);
     }
-    .menu a{
-      color:rgba(11,16,32,.70);
-      padding:10px 0;
-      border-bottom:2px solid transparent;
-    }
-    .menu a:hover{color:var(--ink)}
-    .menu a.active{color:var(--ink); border-bottom-color:var(--red);}
+    nav a.active{color:var(--ink);border-bottom:2px solid var(--red);padding-bottom:6px}
 
-    /* HERO */
-    .hero{ padding:64px 0 34px; border-bottom:1px solid var(--line); }
+    /* hero */
+    .hero{padding:64px 0 40px;border-bottom:1px solid var(--line)}
     .heroInner{
       display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap:34px;
+      grid-template-columns:1.05fr .95fr;
+      gap:36px;
       align-items:center;
     }
-    @media (max-width: 980px){
-      .menu{display:none}
+    @media(max-width:900px){
       .heroInner{grid-template-columns:1fr}
+      nav{display:none}
     }
 
-    .heroTitle{
-      margin:0 0 10px;
+    h1{
+      margin:0 0 14px;
+      font-size:clamp(42px,6vw,68px);
       font-weight:900;
-      letter-spacing:-.02em;
-      text-transform:uppercase;
-      font-size: clamp(44px, 5.8vw, 68px);
-      line-height: .95;
+      line-height:.95;
     }
-    .heroText{
-      margin:0;
-      max-width:65ch;
-      color:var(--muted);
-      line-height:1.85;
-      font-size:14px;
-    }
-    .btnRow{
-      display:flex; gap:14px; flex-wrap:wrap;
-      margin-top:18px;
-    }
+    .heroText{color:var(--muted);max-width:60ch;line-height:1.8}
+
+    .btnRow{margin-top:20px;display:flex;gap:14px;flex-wrap:wrap}
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      min-height:44px;
+      height:44px;
       padding:0 18px;
       font-size:11px;
       font-weight:900;
-      text-transform:uppercase;
       letter-spacing:.18em;
+      text-transform:uppercase;
       border:1px solid var(--ink);
-      background:transparent;
-      border-radius:var(--radius);
+      background:#fff;
       cursor:pointer;
-      white-space:nowrap;
     }
-    .btnRed{border-color:var(--red); color:var(--red);}
-    .btnRed:hover{background:rgba(210,24,45,.06)}
-    .btnBlue{border-color:var(--navy); background:var(--navy); color:#fff;}
-    .btnBlue:hover{filter:brightness(.97)}
-    .btnGhost{border-color:rgba(11,16,32,.35); color:var(--ink); background:#fff;}
-    .btnGhost:hover{background:rgba(11,16,32,.03)}
+    .btnRed{border-color:var(--red);color:var(--red)}
+    .btnBlue{background:var(--navy);border-color:var(--navy);color:#fff}
+    .btnGhost{border-color:#bbb}
 
-    /* HERO MEDIA – fix: immer volle Größe mit 16:9 */
+    /* hero video */
     .mediaFrame{
       border:1px solid var(--line);
-      background:#fff;
-      position:relative;
+      background:#000;
+      aspect-ratio:16/9;
       overflow:hidden;
-      aspect-ratio: 16 / 9;
-      min-height: 320px;
     }
-    @media (max-width: 980px){
-      .mediaFrame{ min-height: 220px; }
-    }
-    .mediaFrame iframe,
     .mediaFrame video{
       width:100%;
       height:100%;
+      object-fit:cover;
       display:block;
-      border:0;
     }
     .mediaPlaceholder{
       height:100%;
-      display:grid; place-items:center;
-      color:rgba(11,16,32,.45);
-      font-weight:700;
-      font-size:13px;
-      padding:18px;
-      text-align:center;
-    }
-
-    /* Sections */
-    .section{ padding:30px 0; border-bottom:1px solid var(--line); }
-    .section:last-of-type{border-bottom:none}
-    .sectionTitle{
-      margin:0 0 14px;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:-.01em;
-      font-size:24px;
-    }
-
-    /* Cards */
-    .cards{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:18px;
+      place-items:center;
+      color:#777;
+      background:#fff;
+      text-align:center;
+      padding:20px;
     }
-    @media (max-width: 980px){
-      .cards{grid-template-columns:1fr}
-    }
+
+    /* sections */
+    section{padding:40px 0;border-bottom:1px solid var(--line)}
+    h2{margin:0 0 18px;font-size:24px;font-weight:900}
+
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    @media(max-width:900px){.cards{grid-template-columns:1fr}}
+
     .card{
       border:1px solid var(--line);
-      background:#fff;
-      padding:18px 18px 16px;
-      min-height:170px;
-    }
-    .card h3{
-      margin:0 0 10px;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:-.01em;
-      font-size:14px;
-    }
-    .card p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.85;
-      font-size:13px;
-      max-width:52ch;
-    }
-    .cardActions{
-      margin-top:14px;
-      display:flex; gap:10px; flex-wrap:wrap;
-    }
-
-    /* USP block */
-    .usp{ padding:62px 0 58px; border-bottom:1px solid var(--line); position:relative; overflow:hidden; }
-    .uspHead{ text-align:center; position:relative; padding:8px 0 28px; }
-    .uspGhost{
-      position:absolute; left:50%; top:28px; transform:translateX(-50%);
-      font-weight:900; text-transform:uppercase; letter-spacing:.12em;
-      font-size: clamp(92px, 11vw, 168px);
-      color:rgba(11,16,32,.04);
-      user-select:none; pointer-events:none; white-space:nowrap; z-index:1; line-height:1;
-    }
-    .uspKicker{
-      margin:0 0 10px;
-      color:rgba(11,16,32,.55);
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.22em;
-      font-size:11px;
-      position:relative; z-index:2;
-    }
-    .uspTitle{
-      margin:0;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:-.01em;
-      font-size: clamp(34px, 4.5vw, 48px);
-      line-height:1.05;
-      position:relative; z-index:2;
-    }
-    .uspGrid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:34px;
-      text-align:center;
-      margin-top:14px;
-    }
-    @media (max-width: 980px){
-      .uspGrid{grid-template-columns:1fr; gap:22px}
-      .uspGhost{top:18px}
-    }
-
-    .uspIcon{
-      width:120px; height:120px;
-      margin:0 auto 14px;
-      display:grid; place-items:center;
-      border:1px solid var(--line);
-      background:#fff;
-    }
-    .uspIcon img{
-      width:100%; height:100%;
-      object-fit:contain;
       padding:18px;
-      display:block;
-    }
-    .uspIcon .ph{
-      font-size:11px;
-      font-weight:900;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      color:rgba(11,16,32,.45);
-    }
-    .uspItem h3{
-      margin:0 0 8px;
-      font-weight:900;
-      text-transform:uppercase;
-      font-size:14px;
-      letter-spacing:.02em;
-    }
-    .uspItem p{
-      margin:0;
-      color:rgba(11,16,32,.45);
-      line-height:1.8;
-      font-size:13px;
-      max-width:36ch;
-      margin-left:auto;
-      margin-right:auto;
-    }
-
-    /* Gallery */
-    .galleryGrid{
-      display:grid;
-      grid-template-columns: 2fr 1fr;
-      gap:18px;
-      align-items:stretch;
-    }
-    @media (max-width: 980px){
-      .galleryGrid{grid-template-columns:1fr}
-    }
-    .gCol{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap:18px;
-    }
-    @media (max-width: 980px){
-      .gCol{grid-template-columns:1fr}
-    }
-    .frame{
-      border:1px solid var(--line);
       background:#fff;
-      overflow:hidden;
-      min-height:190px;
     }
-    .frame img{width:100%; height:100%; object-fit:cover; display:block;}
-
-    .kontaktRow{ display:flex; gap:14px; flex-wrap:wrap; padding-top:6px; }
+    .card h3{margin:0 0 10px;font-size:14px;font-weight:900}
+    .card p{margin:0;color:var(--muted);line-height:1.7}
 
     footer{
-      padding:28px 0 44px;
-      border-top:1px solid var(--line);
-      color:var(--muted);
+      padding:30px 0;
       font-size:12px;
+      color:var(--muted);
     }
 
-    .skeleton{
-      background: linear-gradient(90deg, rgba(11,16,32,.05), rgba(11,16,32,.02), rgba(11,16,32,.05));
-      background-size: 200% 100%;
-      animation: shimmer 1.2s infinite;
-      border-radius: 4px;
-      display:inline-block;
+    /* cookie banner */
+    #cookie{
+      position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+      background:#fff;border:1px solid var(--line);
+      padding:14px 18px;z-index:100;
+      display:none;
+      box-shadow:0 10px 30px rgba(0,0,0,.08);
+      font-size:13px;
     }
-    @keyframes shimmer{
-      0%{background-position: 200% 0}
-      100%{background-position: -200% 0}
-    }
-
-    /* Cookie Consent (siteweit) */
-    .cc{
-      position:fixed;
-      left:18px;
-      bottom:18px;
-      z-index:9999;
-      width:min(420px, calc(100vw - 36px));
-      border:1px solid var(--line);
+    #cookie button{
+      margin-left:12px;
+      border:1px solid var(--ink);
       background:#fff;
-      padding:14px 14px 12px;
-      box-shadow: 0 14px 40px rgba(11,16,32,.12);
+      font-weight:700;
+      cursor:pointer;
     }
-    .cc h4{ margin:0 0 8px; font-size:14px; font-weight:900; }
-    .cc p{ margin:0 0 12px; color:var(--muted); font-size:12px; line-height:1.6; }
-    .ccActions{display:flex; gap:10px; flex-wrap:wrap}
-    .cc small{display:block; margin-top:10px; color:rgba(11,16,32,.45); font-size:11px; line-height:1.5}
-    .cc.hidden{display:none}
   </style>
 </head>
 
 <body>
 
-<header class="topbar">
-  <div class="wrap">
-    <div class="nav">
-      <div class="brand">
-        <img class="logo" id="logoImg" src="assets/img/logo.png" alt="Movemania FS Logo"
-             onerror="this.style.display='none';" />
-        <div class="brandText">
-          <b>Movemania FS</b>
-          <span>Fußballschule · Region BS</span>
-        </div>
-      </div>
-
-      <nav class="menu" aria-label="Hauptnavigation">
-        <a href="#home" class="active">Home</a>
-        <a href="#angebote">Angebote</a>
-        <a href="#vorteile">Vorteile</a>
-        <a href="#galerie">Galerie</a>
-        <a href="#kontakt">Kontakt</a>
-      </nav>
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <b>Movemania FS</b>
+      <span>Fußballschule · Region BS</span>
     </div>
+    <nav>
+      <a class="active">Home</a>
+      <a href="#angebote">Angebote</a>
+      <a href="#vorteile">Vorteile</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
   </div>
 </header>
 
-<main id="home" class="pattern">
+<main class="pattern">
 
   <!-- HERO -->
   <section class="hero">
     <div class="wrap heroInner">
       <div>
-        <h1 class="heroTitle" id="heroTitle">FERIENCAMPS &amp; KURSE</h1>
-
+        <h1 id="heroTitle">FERIENCAMPS &amp; KURSE</h1>
         <p class="heroText" id="heroText">
-          <span class="skeleton" style="width:46ch;height:1em"></span><br>
-          <span class="skeleton" style="width:34ch;height:1em;margin-top:8px"></span>
+          In unseren Feriencamps kommen bewegungsfreudige Kinder voll auf ihre Kosten.
         </p>
 
         <div class="btnRow">
-          <a class="btn btnRed" id="ctaBooking" href="#" target="_blank" rel="noreferrer">Jetzt anmelden</a>
-          <a class="btn btnBlue" id="ctaCamps" href="#" target="_blank" rel="noreferrer">Feriencamps</a>
-          <a class="btn btnGhost" id="ctaWA" href="#" target="_blank" rel="noreferrer">WA-Community</a>
+          <a class="btn btnRed" id="ctaBooking">JETZT ANMELDEN</a>
+          <a class="btn btnBlue" id="ctaCamps">FERIENCAMPS</a>
+          <a class="btn btnGhost" id="ctaWA">WA-COMMUNITY</a>
         </div>
       </div>
 
-      <!-- HERO MEDIA -->
-      <div class="mediaFrame" id="heroMedia" aria-label="Video">
-        <div class="mediaPlaceholder">
-          Video lädt…
-        </div>
+      <div class="mediaFrame" id="heroMedia">
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster="assets/img/hero.jpg">
+          <source src="assets/video/hero.mp4" type="video/mp4">
+        </video>
       </div>
     </div>
   </section>
 
   <!-- ANGEBOTE -->
-  <section id="angebote" class="section">
+  <section id="angebote">
     <div class="wrap">
-      <h2 class="sectionTitle">Angebote</h2>
-
+      <h2>ANGEBOTE</h2>
       <div class="cards">
         <div class="card">
-          <h3>Feriencamps</h3>
+          <h3>FERIENCAMPS</h3>
           <p>Abwechslungsreiche Trainingseinheiten, Spiele, warmes Mittagessen und jede Menge Spaß.</p>
-          <div class="cardActions">
-            <a class="btn btnRed" id="btnCamps" href="#" target="_blank" rel="noreferrer">Camps buchen</a>
-          </div>
+          <br>
+          <a class="btn btnRed" id="btnCamps">CAMPS BUCHEN</a>
         </div>
 
         <div class="card">
-          <h3>Powerkurse</h3>
+          <h3>POWERKURSE</h3>
           <p>Gezielte Technik- und Athletikeinheiten in kleinen Gruppen.</p>
-          <div class="cardActions">
-            <a class="btn btnGhost" id="btnPower1819" href="#" target="_blank" rel="noreferrer">Power 18/19</a>
-            <a class="btn btnGhost" id="btnPower1617" href="#" target="_blank" rel="noreferrer">Power 16/17</a>
-          </div>
+          <br>
+          <a class="btn btnGhost" id="btnPower1819">POWER 18/19</a>
+          <a class="btn btnGhost" id="btnPower1617">POWER 16/17</a>
         </div>
 
         <div class="card">
-          <h3>Haltung &amp; Herz</h3>
-          <p id="aboutText">
-            <span class="skeleton" style="width:40ch;height:1em"></span><br>
-            <span class="skeleton" style="width:30ch;height:1em;margin-top:8px"></span>
-          </p>
+          <h3>HALTUNG &amp; HERZ</h3>
+          <p id="aboutText">Modernes Fußballtraining mit Verantwortung.</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- VORTEILE -->
-  <section id="vorteile" class="usp">
-    <div class="wrap">
-      <div class="uspHead">
-        <div class="uspGhost" id="uspGhost">WERTE</div>
-        <p class="uspKicker" id="uspKicker">Gemeinsam zum Erfolg</p>
-        <h2 class="uspTitle" id="uspTitle">Movemania Vorteile</h2>
-      </div>
-
-      <div class="uspGrid">
-        <div class="uspItem">
-          <div class="uspIcon">
-            <img id="usp1Icon" alt="Vorteil 1 Icon" style="display:none" />
-            <span class="ph" id="usp1IconPh">ICON</span>
-          </div>
-          <h3 id="usp1Title">Training mit System</h3>
-          <p id="usp1Text">Abwechslungsreiche Einheiten mit klarer Struktur, Spielintelligenz und echter Weiterentwicklung.</p>
-        </div>
-
-        <div class="uspItem">
-          <div class="uspIcon">
-            <img id="usp2Icon" alt="Vorteil 2 Icon" style="display:none" />
-            <span class="ph" id="usp2IconPh">ICON</span>
-          </div>
-          <h3 id="usp2Title">Haltung &amp; Herz</h3>
-          <p id="usp2Text">Respekt, Teamgeist und Freude an Bewegung stehen bei uns immer im Mittelpunkt.</p>
-        </div>
-
-        <div class="uspItem">
-          <div class="uspIcon">
-            <img id="usp3Icon" alt="Vorteil 3 Icon" style="display:none" />
-            <span class="ph" id="usp3IconPh">ICON</span>
-          </div>
-          <h3 id="usp3Title">Schnell &amp; unkompliziert</h3>
-          <p id="usp3Text">Anmeldung online, klare Infos, gute Organisation – damit Eltern und Kids entspannt bleiben.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- GALERIE -->
-  <section id="galerie" class="section">
-    <div class="wrap">
-      <h2 class="sectionTitle">Galerie</h2>
-
-      <div class="galleryGrid">
-        <div class="frame">
-          <img src="assets/img/placeholder-1.jpg" alt="Galerie 1"
-               onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;mediaPlaceholder&quot;>Platzhalter: <b>assets/img/placeholder-1.jpg</b></div>';">
-        </div>
-
-        <div class="gCol">
-          <div class="frame">
-            <img src="assets/img/placeholder-2.jpg" alt="Galerie 2"
-                 onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;mediaPlaceholder&quot;>Platzhalter: <b>assets/img/placeholder-2.jpg</b></div>';">
-          </div>
-          <div class="frame">
-            <img src="assets/img/placeholder-3.jpg" alt="Galerie 3"
-                 onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;mediaPlaceholder&quot;>Platzhalter: <b>assets/img/placeholder-3.jpg</b></div>';">
-          </div>
-          <div class="frame">
-            <img src="assets/img/placeholder-4.jpg" alt="Galerie 4"
-                 onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;mediaPlaceholder&quot;>Platzhalter: <b>assets/img/placeholder-4.jpg</b></div>';">
-          </div>
-          <div class="frame">
-            <img src="assets/img/placeholder-5.jpg" alt="Galerie 5"
-                 onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;mediaPlaceholder&quot;>Platzhalter: <b>assets/img/placeholder-5.jpg</b></div>';">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- KONTAKT -->
-  <section id="kontakt" class="section">
-    <div class="wrap">
-      <h2 class="sectionTitle">Kontakt</h2>
-      <div class="kontaktRow">
-        <a class="btn btnRed" id="btnBooking" href="#" target="_blank" rel="noreferrer">Jetzt anmelden</a>
-        <a class="btn btnBlue" id="btnIG" href="#" target="_blank" rel="noreferrer">Instagram</a>
       </div>
     </div>
   </section>
@@ -541,297 +245,33 @@
 
 <footer>
   <div class="wrap">
-    <b style="color:var(--ink)">Movemania FS</b><br>
+    <b>Movemania FS</b><br>
     Fußballschule mit Haltung &amp; Herz
   </div>
 </footer>
 
-<!-- Cookie Consent (siteweit) -->
-<div class="cc hidden" id="cc">
-  <h4>Wir schätzen deine Privatsphäre</h4>
-  <p>
-    Diese Website verwendet externe Inhalte (z. B. eingebettete Videos). Bei Zustimmung können dabei Cookies/Requests zu Drittanbietern (z. B. YouTube) gesetzt werden.
-  </p>
-  <div class="ccActions">
-    <button class="btn btnGhost" id="ccDecline" type="button">Ablehnen</button>
-    <button class="btn btnBlue" id="ccAccept" type="button">Akzeptieren</button>
-  </div>
-  <small>
-    Ohne Zustimmung wird das Video als Link angezeigt.
-  </small>
+<!-- COOKIE -->
+<div id="cookie">
+  Diese Website verwendet keine Tracking-Cookies.
+  <button onclick="acceptCookies()">OK</button>
 </div>
 
 <script>
-  async function loadJSON(path){
-    const res = await fetch(path, { cache: "no-store" });
-    if (!res.ok) throw new Error("Failed to load " + path + " (" + res.status + ")");
-    return await res.json();
+  function acceptCookies(){
+    localStorage.setItem("cookiesAccepted","1");
+    document.getElementById("cookie").style.display="none";
   }
-
-  function setIcon(imgId, phId, url){
-    const img = document.getElementById(imgId);
-    const ph = document.getElementById(phId);
-    if (!img || !ph) return;
-    if (!url) return;
-
-    img.src = url;
-    img.onload = () => { img.style.display = "block"; ph.style.display = "none"; };
-    img.onerror = () => { img.style.display = "none"; ph.style.display = "inline"; };
+  if(!localStorage.getItem("cookiesAccepted")){
+    document.getElementById("cookie").style.display="block";
   }
-
-  function safeUrl(str){
-    try { return new URL(str); } catch(e){ return null; }
-  }
-
-  function toYouTubeEmbed(anyUrl){
-    const u = safeUrl(anyUrl);
-    if (!u) return "";
-    const host = u.hostname.toLowerCase();
-
-    // already embed
-    if (host.includes("youtube.com") && u.pathname.startsWith("/embed/")) return u.toString();
-    if (host.includes("youtube-nocookie.com") && u.pathname.startsWith("/embed/")) return u.toString();
-
-    let id = "";
-
-    // youtu.be/<id>
-    if (host === "youtu.be") {
-      id = u.pathname.replace("/", "").trim();
-    }
-
-    // youtube.com/watch?v=<id>
-    if (!id && host.includes("youtube.com") && u.pathname === "/watch") {
-      id = (u.searchParams.get("v") || "").trim();
-    }
-
-    // youtube.com/shorts/<id>
-    if (!id && host.includes("youtube.com") && u.pathname.startsWith("/shorts/")) {
-      id = u.pathname.split("/shorts/")[1].split("/")[0].trim();
-    }
-
-    if (!id) return "";
-    return "https://www.youtube.com/embed/" + encodeURIComponent(id);
-  }
-
-  function isVimeo(anyUrl){
-    const u = safeUrl(anyUrl);
-    if (!u) return false;
-    const host = u.hostname.toLowerCase();
-    return host.includes("vimeo.com") || host.includes("player.vimeo.com");
-  }
-
-  function toVimeoEmbed(anyUrl){
-    const u = safeUrl(anyUrl);
-    if (!u) return "";
-    const host = u.hostname.toLowerCase();
-
-    // already embed
-    if (host.includes("player.vimeo.com") && u.pathname.startsWith("/video/")) return u.toString();
-
-    // vimeo.com/<id>
-    if (host.includes("vimeo.com")) {
-      const parts = u.pathname.split("/").filter(Boolean);
-      const id = parts[0] || "";
-      if (id && /^\d+$/.test(id)) return "https://player.vimeo.com/video/" + id;
-    }
-    return "";
-  }
-
-  function normalizeYouTubeEmbed(url){
-    try{
-      const u = new URL(url);
-      const videoId = (u.pathname.split("/embed/")[1] || "").split("/")[0] || "";
-      u.searchParams.set("autoplay", "1");
-      u.searchParams.set("mute", "1");
-      u.searchParams.set("playsinline", "1");
-      u.searchParams.set("modestbranding", "1");
-      u.searchParams.set("rel", "0");
-      u.searchParams.set("loop", "1");
-      if (videoId) u.searchParams.set("playlist", videoId);
-      return u.toString();
-    }catch(e){ return url; }
-  }
-
-  function normalizeVimeoEmbed(url){
-    try{
-      const u = new URL(url);
-      u.searchParams.set("autoplay", "1");
-      u.searchParams.set("muted", "1");
-      u.searchParams.set("loop", "1");
-      u.searchParams.set("autopause", "0");
-      return u.toString();
-    }catch(e){ return url; }
-  }
-
-  function renderHeroMedia({rawUrl, fallbackUrl, consent}){
-    const heroMedia = document.getElementById("heroMedia");
-    if (!heroMedia) return;
-
-    const raw = (rawUrl || "").trim();
-    const fallback = (fallbackUrl || "#").trim();
-
-    // Consent fehlt => Link-Kachel
-    if (!consent){
-      heroMedia.innerHTML = `
-        <a href="${fallback}" target="_blank" rel="noreferrer" style="display:block;width:100%;height:100%">
-          <div class="mediaPlaceholder">
-            Video ansehen (Link)
-          </div>
-        </a>
-      `;
-      return;
-    }
-
-    // MP4
-    if (raw && raw.match(/\.mp4(\?|$)/i)) {
-      heroMedia.innerHTML = `
-        <video autoplay muted loop playsinline preload="metadata" poster="assets/img/hero.jpg">
-          <source src="${raw}" type="video/mp4">
-          Dein Browser unterstützt das Video-Tag nicht.
-        </video>
-      `;
-      return;
-    }
-
-    // YouTube (egal ob watch oder embed)
-    const ytEmbed = toYouTubeEmbed(raw) || (raw.includes("youtube.com/embed/") ? raw : "");
-    if (ytEmbed){
-      const src = normalizeYouTubeEmbed(ytEmbed);
-      heroMedia.innerHTML = `
-        <iframe
-          src="${src}"
-          title="Movemania FS Video"
-          loading="lazy"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen>
-        </iframe>
-      `;
-      return;
-    }
-
-    // Vimeo
-    if (isVimeo(raw)){
-      const vmEmbed = toVimeoEmbed(raw) || raw;
-      const src = normalizeVimeoEmbed(vmEmbed);
-      heroMedia.innerHTML = `
-        <iframe
-          src="${src}"
-          title="Movemania FS Video"
-          loading="lazy"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allow="autoplay; fullscreen; picture-in-picture"
-          allowfullscreen>
-        </iframe>
-      `;
-      return;
-    }
-
-    // Alles andere (Instagram etc.)
-    heroMedia.innerHTML = `
-      <a href="${fallback}" target="_blank" rel="noreferrer" style="display:block;width:100%;height:100%">
-        <div class="mediaPlaceholder">
-          Video ansehen (Link)
-        </div>
-      </a>
-    `;
-  }
-
-  (async () => {
-    const logo = document.getElementById("logoImg");
-    if (logo) logo.style.display = "block";
-
-    const cc = document.getElementById("cc");
-    const ccAccept = document.getElementById("ccAccept");
-    const ccDecline = document.getElementById("ccDecline");
-
-    const CONSENT_KEY = "movemania_consent"; // "yes" | "no"
-    const consentVal = localStorage.getItem(CONSENT_KEY);
-    const hasConsent = consentVal === "yes";
-
-    // LINKS
-    let links = {};
-    try { links = await loadJSON("/assets/content/links.json"); }
-    catch (e) { console.warn("links.json fehlt oder nicht erreichbar:", e); }
-
-    const setHref = (id, url) => {
-      const el = document.getElementById(id);
-      if (el && url) el.href = url;
-    };
-
-    setHref("ctaBooking", links.booking);
-    setHref("ctaCamps", links.camps);
-    setHref("ctaWA", links.whatsapp);
-
-    setHref("btnBooking", links.booking);
-    setHref("btnCamps", links.camps);
-    setHref("btnPower1819", links.power1819);
-    setHref("btnPower1617", links.power1617);
-    setHref("btnIG", links.instagram);
-
-    // Wichtig: wir nutzen NUR links.hero_video als Quelle (embed oder fallback)
-    const rawHeroUrl = (links.hero_video || "").trim();
-    const fallbackUrl = rawHeroUrl || links.camps || links.booking || "#";
-
-    // Banner anzeigen, wenn noch keine Entscheidung
-    if (cc && !consentVal) cc.classList.remove("hidden");
-
-    // Initial render
-    renderHeroMedia({ rawUrl: rawHeroUrl, fallbackUrl, consent: hasConsent });
-
-    if (ccAccept) ccAccept.addEventListener("click", () => {
-      localStorage.setItem(CONSENT_KEY, "yes");
-      if (cc) cc.classList.add("hidden");
-      renderHeroMedia({ rawUrl: rawHeroUrl, fallbackUrl, consent: true });
-    });
-    if (ccDecline) ccDecline.addEventListener("click", () => {
-      localStorage.setItem(CONSENT_KEY, "no");
-      if (cc) cc.classList.add("hidden");
-      renderHeroMedia({ rawUrl: rawHeroUrl, fallbackUrl, consent: false });
-    });
-
-    // TEXTE
-    let texts = {};
-    try { texts = await loadJSON("/assets/content/texts.json"); }
-    catch (e) { console.warn("texts.json fehlt oder nicht erreichbar:", e); }
-
-    const setText = (id, value) => {
-      const el = document.getElementById(id);
-      if (!el || !value) return;
-      el.textContent = value;
-    };
-
-    setText("heroTitle", (texts.hero_title || "FERIENCAMPS & KURSE").toUpperCase());
-    setText("heroText", texts.hero_text || "In unseren Feriencamps kommen bewegungsfreudige Kinder voll auf ihre Kosten.");
-    setText("aboutText", texts.about_text || "Wir stehen für modernes Fußballtraining mit Haltung, Herz und Verantwortung.");
-
-    setText("uspKicker", (texts.usp_kicker || "Gemeinsam zum Erfolg"));
-    setText("uspTitle", (texts.usp_title || "Movemania Vorteile").toUpperCase());
-    setText("uspGhost", (texts.usp_ghost || "WERTE").toUpperCase());
-
-    setText("usp1Title", (texts.usp1_title || "Training mit System").toUpperCase());
-    setText("usp1Text", (texts.usp1_text || "Abwechslungsreiche Einheiten mit klarer Struktur, Spielintelligenz und echter Weiterentwicklung."));
-    setText("usp2Title", (texts.usp2_title || "Haltung & Herz").toUpperCase());
-    setText("usp2Text", (texts.usp2_text || "Respekt, Teamgeist und Freude an Bewegung stehen bei uns immer im Mittelpunkt."));
-    setText("usp3Title", (texts.usp3_title || "Schnell & unkompliziert").toUpperCase());
-    setText("usp3Text", (texts.usp3_text || "Anmeldung online, klare Infos, gute Organisation – damit Eltern und Kids entspannt bleiben."));
-
-    setIcon("usp1Icon", "usp1IconPh", texts.usp1_icon);
-    setIcon("usp2Icon", "usp2IconPh", texts.usp2_icon);
-    setIcon("usp3Icon", "usp3IconPh", texts.usp3_icon);
-  })();
 </script>
 
-<!-- Netlify Identity Token Catcher (wichtig für /admin Bestätigung/Recovery) -->
+<!-- NETLIFY IDENTITY TOKEN CATCHER -->
 <script>
-(function () {
-  const hash = window.location.hash || "";
-  if (
-    hash.includes("confirmation_token=") ||
-    hash.includes("invite_token=") ||
-    hash.includes("recovery_token=")
-  ) {
-    window.location.replace("/admin/" + hash);
+(function(){
+  const h=location.hash||"";
+  if(h.includes("confirmation_token=")||h.includes("invite_token=")||h.includes("recovery_token=")){
+    location.replace("/admin/"+h);
   }
 })();
 </script>
