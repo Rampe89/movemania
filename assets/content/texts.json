@@ -1,16 +1,14 @@
 {
-  "hero_title": "Feriencamps & Kurse",
-  "hero_text": "In unseren Feriencamps kommen bewegungsfreudige Kinder voll auf ihre Kosten.",
-  "about_text": "Wir stehen für modernes Fußballtraining mit Haltung, Herz und Verantwortung.",
-
   "usp_kicker": "Gemeinsam zum Erfolg",
-  "usp_title": "Movemania Vorteile",
   "usp_ghost": "WERTE",
-
-  "usp1_title": "Training mit System",
-  "usp1_text": "Abwechslungsreiche Einheiten mit klarer Struktur, Spielintelligenz und echter Weiterentwicklung.",
-  "usp2_title": "Haltung & Herz",
+  "usp_title": "Movemania Vorteile",
+  "usp3_text": "Anmeldung online, klare Infos, gute Organisation – damit Eltern und Kids entspannt bleiben.",
   "usp2_text": "Respekt, Teamgeist und Freude an Bewegung stehen bei uns immer im Mittelpunkt.",
+  "usp1_text": "Abwechslungsreiche Einheiten mit klarer Struktur, Spielintelligenz und echter Weiterentwicklung.",
+  "hero_text": "In unseren Feriencamps kommen bewegungsfreudige Kinder voll auf ihre Kosten.\nDas ist ein Test",
+  "hero_title": "Feriencamps & Kurse",
+  "usp1_title": "Training mit System",
+  "usp2_title": "Haltung & Herz",
   "usp3_title": "Schnell & unkompliziert",
-  "usp3_text": "Anmeldung online, klare Infos, gute Organisation – damit Eltern und Kids entspannt bleiben."
+  "about_text": "Wir stehen für modernes Fußballtraining mit Haltung, Herz und Verantwortung."
 }
