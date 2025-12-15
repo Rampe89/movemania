@@ -4,178 +4,305 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Movemania FS – Fußballschule mit Haltung & Herz</title>
+  <meta name="description" content="Movemania FS: Fußballschule (6–12) in der Region BS. Feriencamps, Trainingskurse, Ballschule. Jetzt anmelden." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root{
+      --bg:#ffffff;
       --ink:#0b1020;
-      --muted:#5b6478;
-      --line:rgba(11,16,32,.12);
+      --muted:#5e6880;
+      --line:#e6e8ee;
+
       --navy:#1e3366;
       --red:#d2182d;
-      --bg:#ffffff;
-      --max:1160px;
+
+      --max: 1120px;
+      --radius: 0px;     /* Screenshot wirkt sehr "kantig" */
     }
+
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
-      font-family:Inter,system-ui,Arial,sans-serif;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--ink);
       background:var(--bg);
     }
-    a{text-decoration:none;color:inherit}
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
-
-    header{
-      position:sticky;top:0;z-index:10;
-      background:#fff;border-bottom:1px solid var(--line)
-    }
-    .nav{
-      display:flex;align-items:center;justify-content:space-between;
-      padding:18px 0
-    }
-    .brand b{font-weight:900}
-    nav a{
-      margin-left:22px;
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      color:var(--muted);
-      border-bottom:2px solid transparent;
-      padding-bottom:6px;
-    }
-    nav a:hover{color:var(--ink)}
-    nav a.active{border-color:var(--red);color:var(--ink)}
-
-    .hero{
-      padding:64px 0;
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      background:rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
       border-bottom:1px solid var(--line);
     }
-    h1{
-      margin:0 0 14px;
-      font-size:clamp(36px,5vw,60px);
-      font-weight:900;
-      text-transform:uppercase;
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 0;
+      gap:18px;
     }
-    .lead{
-      max-width:60ch;
+    .brand{
+      display:flex; align-items:flex-start; gap:14px;
+    }
+    .logo{
+      width:46px; height:46px;
+      border:1px solid var(--line);
+      border-radius:50%;
+      object-fit:cover;
+      background:#fff;
+      display:none; /* wenn du logo.png hast -> per JS einblenden */
+    }
+    .brandText b{display:block; font-weight:900; font-size:14px; letter-spacing:.02em}
+    .brandText span{display:block; color:var(--muted); font-size:12px; margin-top:2px}
+
+    .menu{
+      display:flex; gap:26px; align-items:center;
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:11px;
+    }
+    .menu a{
+      color:rgba(11,16,32,.70);
+      padding:10px 0;
+      border-bottom:2px solid transparent;
+    }
+    .menu a:hover{color:var(--ink)}
+    .menu a.active{
+      color:var(--ink);
+      border-bottom-color:var(--red);
+    }
+
+    /* Layout spacing similar to screenshot */
+    .hero{
+      padding:64px 0 34px;
+      border-bottom:1px solid var(--line);
+    }
+    .heroInner{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:26px;
+    }
+    .heroTitle{
+      margin:0 0 10px;
+      font-weight:900;
+      letter-spacing:-.02em;
+      text-transform:uppercase;
+      font-size: clamp(44px, 5.8vw, 68px);
+      line-height: .95;
+    }
+    .heroText{
+      margin:0;
+      max-width:65ch;
       color:var(--muted);
-      line-height:1.8;
+      line-height:1.85;
+      font-size:14px;
     }
-    .ctaRow{margin-top:24px;display:flex;gap:14px;flex-wrap:wrap}
+    .btnRow{
+      display:flex; gap:14px; flex-wrap:wrap;
+      margin-top:18px;
+    }
     .btn{
-      padding:14px 18px;
-      font-size:12px;
+      display:inline-flex; align-items:center; justify-content:center;
+      min-height:44px;
+      padding:0 18px;
+      font-size:11px;
       font-weight:900;
-      letter-spacing:.12em;
       text-transform:uppercase;
+      letter-spacing:.18em;
       border:1px solid var(--ink);
-      background:none;
+      background:transparent;
+      border-radius:var(--radius);
       cursor:pointer;
     }
-    .btn.primary{border-color:var(--red);color:var(--red)}
-    .btn.dark{background:var(--navy);color:#fff;border-color:var(--navy)}
+    .btnRed{
+      border-color:var(--red);
+      color:var(--red);
+    }
+    .btnRed:hover{background:rgba(210,24,45,.06)}
+    .btnBlue{
+      border-color:var(--navy);
+      background:var(--navy);
+      color:#fff;
+    }
+    .btnBlue:hover{filter:brightness(.97)}
+    .btnGhost{
+      border-color:rgba(11,16,32,.35);
+      color:var(--ink);
+      background:#fff;
+    }
+    .btnGhost:hover{background:rgba(11,16,32,.03)}
 
-    section{padding:64px 0}
-    h2{
-      margin:0 0 18px;
-      font-size:28px;
+    /* Sections */
+    .section{
+      padding:30px 0;
+      border-bottom:1px solid var(--line);
+    }
+    .section:last-of-type{border-bottom:none}
+    .sectionTitle{
+      margin:0 0 14px;
       font-weight:900;
       text-transform:uppercase;
+      letter-spacing:-.01em;
+      font-size:24px;
     }
 
+    /* Cards like screenshot: white with light border */
     .cards{
       display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:22px;
+      grid-template-columns: repeat(3, 1fr);
+      gap:18px;
     }
-    @media(max-width:900px){.cards{grid-template-columns:1fr}}
-
+    @media (max-width: 980px){
+      .cards{grid-template-columns:1fr}
+      .menu{display:none}
+    }
     .card{
       border:1px solid var(--line);
-      padding:22px;
+      background:#fff;
+      padding:18px 18px 16px;
+      min-height:170px;
     }
     .card h3{
-      margin-top:0;
+      margin:0 0 10px;
       font-weight:900;
       text-transform:uppercase;
+      letter-spacing:-.01em;
+      font-size:14px;
     }
-    .card p{color:var(--muted);line-height:1.8}
+    .card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.85;
+      font-size:13px;
+      max-width:52ch;
+    }
+    .cardActions{
+      margin-top:14px;
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+
+    /* Kontakt section mimic */
+    .kontaktRow{
+      display:flex; gap:14px; flex-wrap:wrap;
+      padding-top:6px;
+    }
 
     footer{
+      padding:28px 0 44px;
       border-top:1px solid var(--line);
-      padding:36px 0;
-      font-size:13px;
       color:var(--muted);
+      font-size:12px;
+    }
+
+    /* Small helper for "loading" */
+    .skeleton{
+      background: linear-gradient(90deg, rgba(11,16,32,.04), rgba(11,16,32,.02), rgba(11,16,32,.04));
+      background-size: 200% 100%;
+      animation: shimmer 1.2s infinite;
+      border-radius: 4px;
+      display:inline-block;
+    }
+    @keyframes shimmer{
+      0%{background-position: 200% 0}
+      100%{background-position: -200% 0}
     }
   </style>
 </head>
 
 <body>
 
-<header>
-  <div class="wrap nav">
-    <div class="brand">
-      <b>Movemania FS</b><br>
-      <span style="font-size:12px;color:var(--muted)">Fußballschule · Region BS</span>
+<header class="topbar">
+  <div class="wrap">
+    <div class="nav">
+      <div class="brand">
+        <img class="logo" id="logoImg" src="assets/img/logo.png" alt="Movemania FS Logo"
+             onerror="this.style.display='none';" />
+        <div class="brandText">
+          <b>Movemania FS</b>
+          <span>Fußballschule · Region BS</span>
+        </div>
+      </div>
+
+      <nav class="menu" aria-label="Hauptnavigation">
+        <a href="#home" class="active">Home</a>
+        <a href="#angebote">Angebote</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
     </div>
-    <nav>
-      <a href="#home" class="active">Home</a>
-      <a href="#angebote">Angebote</a>
-      <a href="#kontakt">Kontakt</a>
-    </nav>
   </div>
 </header>
 
 <main id="home">
 
   <!-- HERO -->
-  <section class="hero wrap">
-    <h1 id="heroTitle">Feriencamps & Kurse</h1>
-    <p class="lead" id="heroText"></p>
+  <section class="hero">
+    <div class="wrap heroInner">
+      <h1 class="heroTitle" id="heroTitle">FERIENCAMPS &amp; KURSE</h1>
+      <p class="heroText" id="heroText">
+        <span class="skeleton" style="width:46ch;height:1em"></span><br>
+        <span class="skeleton" style="width:34ch;height:1em;margin-top:8px"></span>
+      </p>
 
-    <div class="ctaRow">
-      <a class="btn primary" id="ctaBooking">Jetzt anmelden</a>
-      <a class="btn dark" id="ctaCamps">Feriencamps</a>
-      <a class="btn" id="ctaWA">WA-Community</a>
+      <div class="btnRow">
+        <a class="btn btnRed" id="ctaBooking" href="#" target="_blank" rel="noreferrer">Jetzt anmelden</a>
+        <a class="btn btnBlue" id="ctaCamps" href="#" target="_blank" rel="noreferrer">Feriencamps</a>
+        <a class="btn btnGhost" id="ctaWA" href="#" target="_blank" rel="noreferrer">WA-Community</a>
+      </div>
     </div>
   </section>
 
   <!-- ANGEBOTE -->
-  <section id="angebote" class="wrap">
-    <h2>Angebote</h2>
+  <section id="angebote" class="section">
+    <div class="wrap">
+      <h2 class="sectionTitle">Angebote</h2>
 
-    <div class="cards">
-      <div class="card">
-        <h3>Feriencamps</h3>
-        <p>Abwechslungsreiche Trainingseinheiten, Spiele, warmes Mittagessen und jede Menge Spaß.</p>
-        <a class="btn primary" id="btnCamps">Camps buchen</a>
-      </div>
+      <div class="cards">
+        <div class="card">
+          <h3>Feriencamps</h3>
+          <p>
+            Abwechslungsreiche Trainingseinheiten, Spiele, warmes Mittagessen und jede Menge Spaß.
+          </p>
+          <div class="cardActions">
+            <a class="btn btnRed" id="btnCamps" href="#" target="_blank" rel="noreferrer">Camps buchen</a>
+          </div>
+        </div>
 
-      <div class="card">
-        <h3>Powerkurse</h3>
-        <p>Gezielte Technik- und Athletikeinheiten in kleinen Gruppen.</p>
-        <a class="btn" id="btnPower1819">Power 18/19</a>
-        <a class="btn" id="btnPower1617">Power 16/17</a>
-      </div>
+        <div class="card">
+          <h3>Powerkurse</h3>
+          <p>
+            Gezielte Technik- und Athletikeinheiten in kleinen Gruppen.
+          </p>
+          <div class="cardActions">
+            <a class="btn btnGhost" id="btnPower1819" href="#" target="_blank" rel="noreferrer">Power 18/19</a>
+            <a class="btn btnGhost" id="btnPower1617" href="#" target="_blank" rel="noreferrer">Power 16/17</a>
+          </div>
+        </div>
 
-      <div class="card">
-        <h3>Haltung & Herz</h3>
-        <p id="aboutText"></p>
+        <div class="card">
+          <h3>Haltung &amp; Herz</h3>
+          <p id="aboutText">
+            <span class="skeleton" style="width:40ch;height:1em"></span><br>
+            <span class="skeleton" style="width:30ch;height:1em;margin-top:8px"></span>
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- KONTAKT -->
-  <section id="kontakt" class="wrap">
-    <h2>Kontakt</h2>
-    <div class="ctaRow">
-      <a class="btn primary" id="btnBooking">Jetzt anmelden</a>
-      <a class="btn dark" id="btnIG">Instagram</a>
+  <section id="kontakt" class="section">
+    <div class="wrap">
+      <h2 class="sectionTitle">Kontakt</h2>
+
+      <div class="kontaktRow">
+        <a class="btn btnRed" id="btnBooking" href="#" target="_blank" rel="noreferrer">Jetzt anmelden</a>
+        <a class="btn btnBlue" id="btnIG" href="#" target="_blank" rel="noreferrer">Instagram</a>
+      </div>
     </div>
   </section>
 
@@ -183,38 +310,69 @@
 
 <footer>
   <div class="wrap">
-    <b>Movemania FS</b><br>
-    Fußballschule mit Haltung & Herz
+    <b style="color:var(--ink)">Movemania FS</b><br>
+    Fußballschule mit Haltung &amp; Herz
   </div>
 </footer>
 
-<!-- CMS DATA LOADER -->
 <script>
-async function loadJSON(path){
-  const res = await fetch(path);
-  return await res.json();
-}
+  async function loadJSON(path){
+    const res = await fetch(path, { cache: "no-store" });
+    if (!res.ok) throw new Error("Failed to load " + path + " (" + res.status + ")");
+    return await res.json();
+  }
 
-(async ()=>{
-  const links = await loadJSON('/assets/content/links.json');
-  const texts = await loadJSON('/assets/content/texts.json');
+  (async () => {
+    // Optional logo show (if file exists)
+    const logo = document.getElementById("logoImg");
+    if (logo) logo.style.display = "block";
 
-  const setHref=(id,val)=>{const e=document.getElementById(id);if(e&&val)e.href=val;}
-  const setText=(id,val)=>{const e=document.getElementById(id);if(e&&val)e.textContent=val;}
+    // 1) LINKS aus CMS
+    let links = null;
+    try {
+      links = await loadJSON("/assets/content/links.json");
+    } catch (e) {
+      console.warn("links.json fehlt oder nicht erreichbar:", e);
+      links = {};
+    }
 
-  setHref("ctaBooking",links.booking);
-  setHref("ctaCamps",links.camps);
-  setHref("ctaWA",links.whatsapp);
-  setHref("btnBooking",links.booking);
-  setHref("btnCamps",links.camps);
-  setHref("btnPower1819",links.power1819);
-  setHref("btnPower1617",links.power1617);
-  setHref("btnIG",links.instagram);
+    const setHref = (id, url) => {
+      const el = document.getElementById(id);
+      if (el && url) el.href = url;
+    };
 
-  setText("heroTitle",texts.hero_title);
-  setText("heroText",texts.hero_text);
-  setText("aboutText",texts.about_text);
-})();
+    setHref("ctaBooking", links.booking);
+    setHref("ctaCamps", links.camps);
+    setHref("ctaWA", links.whatsapp);
+
+    setHref("btnBooking", links.booking);
+    setHref("btnCamps", links.camps);
+    setHref("btnPower1819", links.power1819);
+    setHref("btnPower1617", links.power1617);
+    setHref("btnIG", links.instagram);
+
+    // 2) TEXTE aus CMS
+    let texts = null;
+    try {
+      texts = await loadJSON("/assets/content/texts.json");
+    } catch (e) {
+      console.warn("texts.json fehlt oder nicht erreichbar:", e);
+      texts = {};
+    }
+
+    const setText = (id, value) => {
+      const el = document.getElementById(id);
+      if (!el || !value) return;
+      el.textContent = value;
+    };
+
+    // Hero
+    setText("heroTitle", (texts.hero_title || "FERIENCAMPS & KURSE").toUpperCase());
+    setText("heroText", texts.hero_text || "In unseren Feriencamps kommen bewegungsfreudige Kinder voll auf ihre Kosten.");
+
+    // About
+    setText("aboutText", texts.about_text || "Wir stehen für modernes Fußballtraining mit Haltung, Herz und Verantwortung.");
+  })();
 </script>
 
 </body>
