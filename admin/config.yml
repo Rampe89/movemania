@@ -1,0 +1,31 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/img/uploads"
+public_folder: "/assets/img/uploads"
+
+collections:
+  - name: "settings"
+    label: "Einstellungen"
+    files:
+      - name: "links"
+        label: "Links"
+        file: "assets/content/links.json"
+        fields:
+          - { label: "Booking (Jetzt anmelden)", name: "booking", widget: "string" }
+          - { label: "Feriencamps", name: "camps", widget: "string" }
+          - { label: "Powerkurse 2018/2019", name: "power1819", widget: "string" }
+          - { label: "Powerkurse 2016/2017", name: "power1617", widget: "string" }
+          - { label: "WhatsApp Community", name: "whatsapp", widget: "string" }
+          - { label: "Instagram", name: "instagram", widget: "string" }
+
+  - name: "gallery"
+    label: "Galerie"
+    folder: "assets/content/gallery"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Titel", name: "title", widget: "string" }
+      - { label: "Bild", name: "image", widget: "image" }
+      - { label: "Alt-Text", name: "alt", widget: "string", required: false }
