@@ -5,392 +5,709 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Movemania FS – Fußballschule mit Haltung & Herz</title>
   <meta name="description" content="Movemania FS: Fußballschule (6–12) in der Region BS. Feriencamps, Trainingskurse, Ballschule. Jetzt anmelden." />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --bg:#0b0f16; --card:#0f1623; --card2:#0c1320; --text:#e8edf6; --muted:#a9b4c6;
-      --line:rgba(255,255,255,.08); --brand:#62d0ff; --brand2:#7c5cff; --ok:#35d07f;
-      --shadow: 0 12px 40px rgba(0,0,0,.45);
-      --radius: 20px;
-      --max: 1120px;
+      --bg:#ffffff;
+      --ink:#0b1020;
+      --muted:#5b6478;
+      --line:rgba(11,16,32,.10);
+      --navy:#1e3366;
+      --red:#d2182d;
+      --card:#ffffff;
+      --shadow: 0 18px 50px rgba(11,16,32,.10);
+      --radius:16px;
+      --max:1160px;
+
+      --gridDot: rgba(11,16,32,.05);
+      --gridDot2: rgba(11,16,32,.03);
     }
+
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text); background:
-        radial-gradient(1200px 800px at 10% 0%, rgba(124,92,255,.22), transparent 55%),
-        radial-gradient(1100px 700px at 90% 10%, rgba(98,208,255,.20), transparent 55%),
-        linear-gradient(180deg, #070a10 0%, #0b0f16 55%, #070a10 100%);
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink);
+      background: var(--bg);
     }
     a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
+
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
+
+    /* Subtle dotted grid background like reference */
+    .gridBg{
+      background-image:
+        radial-gradient(var(--gridDot) 1.1px, transparent 1.1px);
+      background-size: 22px 22px;
+      background-position: 0 0;
+    }
+
+    /* Header */
     .topbar{
-      position:sticky; top:0; z-index:10;
-      background:rgba(11,15,22,.72); backdrop-filter: blur(14px);
+      position:sticky; top:0; z-index:50;
+      background:rgba(255,255,255,.86);
+      backdrop-filter: blur(10px);
       border-bottom:1px solid var(--line);
     }
     .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0;
+      display:grid;
+      grid-template-columns: 220px 1fr 90px;
+      align-items:center;
+      gap:16px;
+      padding:18px 0;
     }
-    .brand{display:flex; gap:12px; align-items:center}
-    .logo{
-      width:38px; height:38px; border-radius:12px;
-      background:linear-gradient(135deg, rgba(98,208,255,.95), rgba(124,92,255,.95));
-      display:grid; place-items:center; box-shadow: var(--shadow);
-      font-weight:900;
+    .brand{
+      display:flex; align-items:center; gap:14px;
+      min-height:48px;
     }
-    .brand b{letter-spacing:.2px}
-    .links{display:flex; gap:18px; align-items:center}
-    .links a{color:var(--muted); font-weight:600; font-size:14px}
-    .links a:hover{color:var(--text)}
-    .cta{
-      display:inline-flex; align-items:center; gap:10px;
-      background:linear-gradient(135deg, rgba(98,208,255,.95), rgba(124,92,255,.95));
-      color:#051018; font-weight:800; padding:10px 14px; border-radius:14px;
-      box-shadow: var(--shadow);
-    }
-    .hero{padding:56px 0 26px}
-    .grid{display:grid; gap:18px}
-    .heroGrid{grid-template-columns: 1.2fr .8fr; align-items:stretch}
-    @media (max-width: 920px){ .heroGrid{grid-template-columns:1fr} .links{display:none} }
-    .kicker{color:var(--muted); font-weight:700; letter-spacing:.18em; text-transform:uppercase; font-size:12px}
-    h1{margin:.4rem 0 .9rem; font-size:44px; line-height:1.05}
-    @media (max-width: 520px){ h1{font-size:36px} }
-    .lead{color:var(--muted); font-size:16px; line-height:1.7; max-width:58ch}
-    .row{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
-    .ghost{
-      display:inline-flex; align-items:center; gap:10px;
-      border:1px solid var(--line); color:var(--text);
-      padding:10px 14px; border-radius:14px; background:rgba(255,255,255,.02)
-    }
-    .ghost:hover{border-color:rgba(255,255,255,.16)}
-    .card{
+    .logoImg{
+      width:48px; height:48px; border-radius:50%;
       border:1px solid var(--line);
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-      box-shadow: 0 16px 50px rgba(0,0,0,.35);
+      object-fit:cover;
+      background:#fff;
     }
-    .heroCard{padding:18px}
-    .badgeRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
-    .badge{
-      font-size:12px; color:var(--muted); border:1px solid var(--line);
-      padding:8px 10px; border-radius:999px; background:rgba(255,255,255,.02)
+    .brandText b{font-weight:900; letter-spacing:.2px}
+    .brandText span{display:block; font-size:12px; color:var(--muted); margin-top:2px}
+
+    .menu{
+      display:flex; justify-content:center; gap:28px; flex-wrap:wrap;
+      font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+      font-size:12px;
     }
-    .section{padding:30px 0}
-    .secHead{display:flex; align-items:flex-end; justify-content:space-between; gap:18px; margin-bottom:14px}
-    .secHead h2{margin:0; font-size:22px}
-    .secHead p{margin:0; color:var(--muted); line-height:1.6; max-width:70ch}
-    .cards{grid-template-columns: repeat(3, 1fr)}
-    @media (max-width: 920px){ .cards{grid-template-columns:1fr} }
-    .offer{padding:18px}
-    .offer h3{margin:10px 0 6px; font-size:18px}
-    .offer p{margin:0 0 12px; color:var(--muted); line-height:1.6}
-    ul{margin:0; padding-left:18px; color:var(--muted); line-height:1.7}
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      font-size:12px; padding:7px 10px; border-radius:999px;
-      border:1px solid var(--line); color:var(--muted); background:rgba(255,255,255,.02)
+    .menu a{
+      padding:10px 0;
+      color:rgba(11,16,32,.80);
+      border-bottom:2px solid transparent;
     }
-    .pill i{width:8px; height:8px; border-radius:50%; background:var(--ok); display:inline-block}
-    .gallery{grid-template-columns: repeat(12, 1fr)}
-    .ph{background:rgba(255,255,255,.03); border:1px dashed rgba(255,255,255,.12); border-radius:16px; padding:18px; color:var(--muted)}
-    .img{
-      border-radius:16px; overflow:hidden; border:1px solid var(--line); background:rgba(255,255,255,.02);
-      min-height:160px;
+    .menu a:hover{color:var(--ink)}
+    .menu a.active{border-bottom-color:var(--red); color:var(--ink)}
+
+    .hambox{
+      display:flex; justify-content:flex-end;
     }
-    .img img{width:100%; height:100%; object-fit:cover; display:block}
-    .g1{grid-column: span 7} .g2{grid-column: span 5}
-    .g3{grid-column: span 4} .g4{grid-column: span 4} .g5{grid-column: span 4}
-    @media (max-width: 920px){ .g1,.g2,.g3,.g4,.g5{grid-column: span 12} }
-    .faq{grid-template-columns: 1fr 1fr}
-    @media (max-width: 920px){ .faq{grid-template-columns:1fr} }
+    .hamburger{
+      width:56px; height:56px; border-radius:0;
+      background:var(--navy);
+      display:grid; place-items:center;
+      box-shadow: 0 10px 24px rgba(30,51,102,.18);
+      border:none; cursor:pointer;
+    }
+    .hamburger span{
+      width:22px; height:2px; background:#fff; display:block; position:relative;
+    }
+    .hamburger span::before,
+    .hamburger span::after{
+      content:""; position:absolute; left:0; width:22px; height:2px; background:#fff;
+    }
+    .hamburger span::before{top:-7px}
+    .hamburger span::after{top:7px}
+
+    /* Mobile nav */
+    @media (max-width: 980px){
+      .nav{grid-template-columns: 1fr 90px}
+      .menu{display:none}
+    }
+
+    /* Hero */
+    .hero{
+      border-bottom:1px solid var(--line);
+    }
+    .heroInner{
+      padding:44px 0 54px;
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:34px;
+      align-items:center;
+    }
+    @media (max-width: 980px){
+      .heroInner{grid-template-columns:1fr; padding:34px 0 44px}
+    }
+
+    .crumb{
+      display:flex; gap:10px; align-items:center;
+      font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+      color:rgba(11,16,32,.45);
+    }
+    .crumb .dot{width:6px; height:6px; border-radius:50%; background:var(--red); display:inline-block}
+    h1{
+      margin:14px 0 12px;
+      font-size: clamp(40px, 5vw, 64px);
+      line-height: .95;
+      letter-spacing:-.02em;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+    .bigGhost{
+      position:relative;
+    }
+    .bigGhost::after{
+      content:"MOVEMANIA";
+      position:absolute;
+      top:-28px; left:-6px;
+      font-size: clamp(56px, 7vw, 104px);
+      font-weight: 900;
+      letter-spacing:.06em;
+      color:rgba(11,16,32,.05);
+      z-index:-1;
+      user-select:none;
+      white-space:nowrap;
+    }
+
+    .lead{
+      margin:0;
+      color:var(--muted);
+      line-height:1.85;
+      font-size:15px;
+      max-width:62ch;
+    }
+
+    .ctaRow{display:flex; gap:12px; flex-wrap:wrap; margin-top:22px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.10em;
+      font-size:12px;
+      padding:14px 18px;
+      border-radius:0;
+      border:1px solid var(--ink);
+      background:transparent;
+      cursor:pointer;
+    }
+    .btnPrimary{
+      border-color:var(--red);
+      color:var(--red);
+    }
+    .btnPrimary:hover{background:rgba(210,24,45,.06)}
+    .btnDark{
+      border-color:var(--navy);
+      color:#fff;
+      background:var(--navy);
+    }
+    .btnDark:hover{filter:brightness(.95)}
+    .btnGhost{
+      border-color:rgba(11,16,32,.25);
+      color:rgba(11,16,32,.85);
+    }
+    .btnGhost:hover{background:rgba(11,16,32,.03)}
+
+    /* Hero media */
+    .heroMedia{
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      min-height:360px;
+    }
+    .heroMedia img{
+      width:100%; height:100%;
+      object-fit:cover;
+      display:block;
+      filter:saturate(1.05);
+    }
+    .heroMedia .play{
+      position:absolute; inset:0;
+      display:grid; place-items:center;
+      pointer-events:none;
+    }
+    .playBox{
+      width:88px; height:56px;
+      border:2px solid rgba(255,255,255,.92);
+      display:grid; place-items:center;
+      background:rgba(11,16,32,.25);
+      backdrop-filter: blur(6px);
+    }
+    .playTri{
+      width:0; height:0;
+      border-left:16px solid #fff;
+      border-top:10px solid transparent;
+      border-bottom:10px solid transparent;
+      margin-left:4px;
+    }
+
+    /* Sections */
+    .section{padding:58px 0}
+    .sectionHead{
+      display:flex; justify-content:space-between; gap:22px; align-items:flex-end;
+      margin-bottom:22px;
+    }
+    .eyebrow{
+      font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+      color:var(--red); font-weight:900;
+    }
+    h2{
+      margin:8px 0 0;
+      font-size:28px;
+      text-transform:uppercase;
+      letter-spacing:-.01em;
+      font-weight: 900;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      line-height:1.85;
+      max-width:70ch;
+      font-size:14px;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:18px;
+    }
+    @media (max-width: 980px){ .cards{grid-template-columns:1fr} }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      box-shadow: none;
+      padding:20px;
+    }
+    .cardTop{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      margin-bottom:10px;
+    }
+    .tag{
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:rgba(11,16,32,.62);
+    }
+    .tick{
+      width:10px; height:10px; background:var(--red);
+      display:inline-block;
+    }
+    .card h3{
+      margin:0 0 10px;
+      font-size:18px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:-.01em;
+    }
+    .card p{
+      margin:0 0 14px;
+      color:var(--muted);
+      line-height:1.85;
+      font-size:14px;
+    }
+    .card ul{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+      line-height:1.85;
+      font-size:14px;
+    }
+    .card .actions{margin-top:16px; display:flex; gap:10px; flex-wrap:wrap}
+
+    /* Gallery */
+    .gallery{
+      display:grid;
+      grid-template-columns: 2fr 1fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){ .gallery{grid-template-columns:1fr} }
+    .gGrid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:18px;
+    }
+    @media (max-width: 980px){ .gGrid{grid-template-columns:1fr} }
+
+    .frame{
+      border:1px solid var(--line);
+      background:#fff;
+      overflow:hidden;
+      min-height:220px;
+    }
+    .frame img{width:100%; height:100%; object-fit:cover; display:block}
+    .placeholder{
+      height:100%;
+      display:grid; place-items:center;
+      color:rgba(11,16,32,.45);
+      font-weight:700;
+      font-size:13px;
+      padding:18px;
+      text-align:center;
+    }
+
+    /* FAQ */
+    .faq{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    @media (max-width: 980px){ .faq{grid-template-columns:1fr} }
     details{
-      border:1px solid var(--line); border-radius:16px; padding:14px 14px;
-      background:rgba(255,255,255,.02)
+      border:1px solid var(--line);
+      background:#fff;
+      padding:16px 16px;
     }
-    summary{cursor:pointer; font-weight:700}
-    details p{color:var(--muted); line-height:1.7; margin:10px 0 0}
-    .footer{padding:26px 0 40px; border-top:1px solid var(--line); color:var(--muted)}
-    .footGrid{display:grid; grid-template-columns: 1fr 1fr 1fr; gap:16px}
-    @media (max-width: 920px){ .footGrid{grid-template-columns:1fr} }
-    .small{font-size:13px; line-height:1.7}
+    summary{
+      cursor:pointer;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-size:12px;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    details p{
+      margin:12px 0 0;
+      color:var(--muted);
+      line-height:1.85;
+      font-size:14px;
+    }
+
+    /* Footer */
+    .footer{
+      border-top:1px solid var(--line);
+      padding:26px 0 44px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.85;
+    }
+    .foot{
+      display:grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      gap:16px;
+    }
+    @media (max-width: 980px){ .foot{grid-template-columns:1fr} }
+    .foot b{color:var(--ink)}
+    .miniLinks{display:flex; gap:10px; flex-wrap:wrap}
+    .miniLinks a{color:var(--navy); font-weight:800; text-transform:uppercase; letter-spacing:.10em; font-size:11px}
+    .miniLinks a:hover{text-decoration:underline}
   </style>
 </head>
 
 <body>
+
   <header class="topbar">
     <div class="wrap">
       <div class="nav">
         <div class="brand">
-          <div class="logo">M</div>
-          <div>
-            <b>Movemania FS</b><br>
-            <span style="color:var(--muted); font-size:12px">Fußballschule mit Haltung & Herz</span>
+          <!-- optional: assets/img/logo.png -->
+          <img class="logoImg" src="assets/img/logo.png" alt="Movemania FS Logo"
+               onerror="this.style.display='none';" />
+          <div class="brandText">
+            <b>Movemania FS</b>
+            <span>Fußballschule mit Haltung & Herz · Region BS</span>
           </div>
         </div>
 
-        <nav class="links">
+        <nav class="menu" aria-label="Hauptnavigation">
+          <a href="#home" class="active">Home</a>
+          <a href="#ueberuns">Über uns</a>
           <a href="#angebote">Angebote</a>
           <a href="#galerie">Galerie</a>
-          <a href="#philosophie">Haltung</a>
-          <a href="#faq">FAQ</a>
           <a href="#kontakt">Kontakt</a>
         </nav>
 
-        <a class="cta" id="ctaBooking" href="#" target="_blank" rel="noreferrer">
-          Jetzt anmelden <span aria-hidden="true">↘</span>
-        </a>
+        <div class="hambox">
+          <button class="hamburger" type="button" aria-label="Menü">
+            <span></span>
+          </button>
+        </div>
       </div>
     </div>
   </header>
 
-  <main>
+  <main id="home" class="gridBg">
+
+    <!-- HERO -->
     <section class="hero">
       <div class="wrap">
-        <div class="grid heroGrid">
-          <div class="card heroCard">
-            <div class="kicker">Sport- und Fitnesstraining</div>
-            <h1>Fußballschule für Kids (6–12) – Region BS</h1>
+        <div class="heroInner">
+          <div class="bigGhost">
+            <div class="crumb"><span>Home</span> <span class="dot"></span> <span>Fußballschule</span></div>
+            <h1>Feriencamps & Kurse</h1>
             <p class="lead">
-              In unseren Feriencamps und Kursen erleben bewegungsfreudige Kinder ein professionelles,
-              abwechslungsreiches Training – mit Teamgeist, Spaß und echter Weiterentwicklung.
+              In unseren Feriencamps kommen bewegungsfreudige und fußballbegeisterte Kinder voll auf ihre Kosten.
+              Abwechslungsreiche Spiel- und Übungsformen, warmes Mittagessen, Obstpausen, Ausrüstung und jede Menge Spaß.
             </p>
 
-            <div class="row">
-              <a class="cta" id="ctaCamps" href="#" target="_blank" rel="noreferrer">Feriencamps buchen ↘</a>
-              <a class="ghost" id="ctaWA" href="#" target="_blank" rel="noreferrer">WA-Community ↘</a>
-              <a class="ghost" href="#angebote">Angebote ansehen</a>
+            <div class="ctaRow">
+              <a class="btn btnPrimary" id="ctaBooking" href="#" target="_blank" rel="noreferrer">Jetzt anmelden</a>
+              <a class="btn btnDark" id="ctaCamps" href="#" target="_blank" rel="noreferrer">Feriencamps</a>
+              <a class="btn btnGhost" id="ctaWA" href="#" target="_blank" rel="noreferrer">WA-Community</a>
             </div>
 
-            <div class="badgeRow">
-              <span class="badge">6–12 Jahre</span>
-              <span class="badge">Spielintelligenz-Ansatz</span>
-              <span class="badge">Warmes Mittagessen</span>
-              <span class="badge">Trikot & Hose</span>
-              <span class="badge">Teilnehmerurkunde</span>
+            <div style="margin-top:18px; color:rgba(11,16,32,.45); font-size:12px; letter-spacing:.16em; text-transform:uppercase; font-weight:900;">
+              6–12 Jahre · Spielintelligenz-Ansatz · Region BS
             </div>
           </div>
 
-          <div class="card heroCard">
-            <div class="pill"><i></i> Schnellzugriff</div>
-            <div style="margin-top:12px" class="grid">
-              <a class="ghost" id="lnkCamps" href="#" target="_blank" rel="noreferrer">Feriencamps ↘</a>
-              <a class="ghost" id="lnkPower1819" href="#" target="_blank" rel="noreferrer">Powerkurse 2018/2019 ↘</a>
-              <a class="ghost" id="lnkPower1617" href="#" target="_blank" rel="noreferrer">Powerkurse 2016/2017 ↘</a>
-              <a class="ghost" id="lnkBooking" href="#" target="_blank" rel="noreferrer">Jetzt anmelden ↘</a>
-              <a class="ghost" id="lnkIG" href="#" target="_blank" rel="noreferrer">Instagram ↘</a>
-            </div>
-
-            <div style="margin-top:14px" class="ph">
-              Tipp: Diese Links + Texte kann der Kollege später über das CMS pflegen, ohne Code.
+          <div class="heroMedia">
+            <!-- optional: assets/img/hero.jpg -->
+            <img src="assets/img/hero.jpg" alt="Movemania FS Training"
+                 onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;placeholder&quot;>Lege ein Hero-Foto ab: <b>assets/img/hero.jpg</b><br> (z.B. Teamfoto, Training, Camp-Szene)</div>';">
+            <div class="play">
+              <div class="playBox" aria-hidden="true"><div class="playTri"></div></div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="angebote" class="section">
+    <!-- ÜBER UNS -->
+    <section id="ueberuns" class="section">
       <div class="wrap">
-        <div class="secHead">
+        <div class="sectionHead">
           <div>
-            <h2>Angebote</h2>
-            <p>Klare, moderne Angebotskarten – ideal für mobile Nutzer und schnelle Entscheidungen.</p>
+            <div class="eyebrow">Haltung & Herz</div>
+            <h2>Über uns</h2>
           </div>
-        </div>
-
-        <div class="grid cards">
-          <div class="card offer">
-            <div class="pill"><i></i> Feriencamps</div>
-            <h3>Ferienzeit ist Movemania-Zeit</h3>
-            <p>
-              Tägliche Trainingseinheiten, Spiel- & Übungsformen, warmes Mittagessen, Obstpausen und ein freudvolles Rahmenprogramm.
-            </p>
-            <ul>
-              <li>Abwechslungsreiches Training (Spielintelligenz)</li>
-              <li>Trikot & Hose, Trinkflasche, Urkunde</li>
-              <li>Wasser, warmes Mittagessen, Obstpausen</li>
-            </ul>
-            <div class="row">
-              <a class="cta" id="btnCamps" href="#" target="_blank" rel="noreferrer">Camps buchen ↘</a>
-            </div>
-          </div>
-
-          <div class="card offer">
-            <div class="pill"><i></i> Powerkurse</div>
-            <h3>Technik. Athletik. Selbstvertrauen.</h3>
-            <p>
-              Für Kinder, die gezielt an Technik, Bewegung und Spielverständnis arbeiten wollen – in kleinen Gruppen und mit Struktur.
-            </p>
-            <ul>
-              <li>Technik- & Koordinationsschwerpunkte</li>
-              <li>Matchnahe Spielformen</li>
-              <li>Messbarer Fortschritt</li>
-            </ul>
-            <div class="row">
-              <a class="ghost" id="btnPower1819" href="#" target="_blank" rel="noreferrer">Powerkurse 18/19 ↘</a>
-              <a class="ghost" id="btnPower1617" href="#" target="_blank" rel="noreferrer">Powerkurse 16/17 ↘</a>
-            </div>
-          </div>
-
-          <div class="card offer">
-            <div class="pill"><i></i> Beratung</div>
-            <h3>Vereine, Talente, Eltern</h3>
-            <p>
-              Unterstützung bei Trainingskonzept, Talentförderung und sportlicher Entwicklung – sachlich, transparent, kindgerecht.
-            </p>
-            <ul>
-              <li>Vereinsberatung & Trainingsimpulse</li>
-              <li>Elternberatung / Förderplanung</li>
-              <li>Talent- & Perspektivgespräche</li>
-            </ul>
-            <div class="row">
-              <a class="ghost" href="#kontakt">Kontakt aufnehmen</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="galerie" class="section">
-      <div class="wrap">
-        <div class="secHead">
-          <div>
-            <h2>Galerie</h2>
-            <p>Hier kommen eure Trainings- und Camp-Fotos rein. Im CMS kann der Kollege die Bilder später selbst hochladen.</p>
-          </div>
-        </div>
-
-        <div class="grid gallery">
-          <div class="img g1"><img src="assets/img/placeholder-1.jpg" alt="Training Foto 1" onerror="this.remove(); this.parentElement.innerHTML='Platzhalterbild: assets/img/placeholder-1.jpg';" /></div>
-          <div class="img g2"><img src="assets/img/placeholder-2.jpg" alt="Training Foto 2" onerror="this.remove(); this.parentElement.innerHTML='Platzhalterbild: assets/img/placeholder-2.jpg';" /></div>
-          <div class="img g3"><img src="assets/img/placeholder-3.jpg" alt="Training Foto 3" onerror="this.remove(); this.parentElement.innerHTML='Platzhalterbild: assets/img/placeholder-3.jpg';" /></div>
-          <div class="img g4"><img src="assets/img/placeholder-4.jpg" alt="Training Foto 4" onerror="this.remove(); this.parentElement.innerHTML='Platzhalterbild: assets/img/placeholder-4.jpg';" /></div>
-          <div class="img g5"><img src="assets/img/placeholder-5.jpg" alt="Training Foto 5" onerror="this.remove(); this.parentElement.innerHTML='Platzhalterbild: assets/img/placeholder-5.jpg';" /></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="philosophie" class="section">
-      <div class="wrap">
-        <div class="secHead">
-          <div>
-            <h2>Haltung & Herz</h2>
-            <p>Ein kurzer, klarer Abschnitt, der eure Philosophie erklärt – ohne Marketing-Blabla.</p>
-          </div>
-        </div>
-        <div class="card offer">
-          <p class="lead" style="margin:0">
-            Wir verbinden modernes Fußballtraining mit Werten: Respekt, Teamgeist, Freude an Bewegung und mutiges Ausprobieren.
+          <p class="sub">
+            Modernes Fußballtraining kombiniert mit Werten: Respekt, Teamgeist, Freude an Bewegung und mutiges Ausprobieren.
             Kinder sollen sich sicher fühlen, wachsen dürfen und mit einem guten Gefühl nach Hause gehen.
           </p>
         </div>
       </div>
     </section>
 
-    <section id="faq" class="section">
+    <!-- ANGEBOTE -->
+    <section id="angebote" class="section">
       <div class="wrap">
-        <div class="secHead">
+        <div class="sectionHead">
           <div>
-            <h2>FAQ</h2>
-            <p>Die wichtigsten Fragen direkt beantwortet – reduziert Rückfragen und wirkt professionell.</p>
+            <div class="eyebrow">Gemeinsam zum Erfolg</div>
+            <h2>Angebote</h2>
           </div>
+          <p class="sub">Klar strukturiert, schnell verständlich, mobile-tauglich – so wie im Beispiel.</p>
         </div>
 
-        <div class="grid faq">
-          <details class="card"><summary>Für welches Alter ist das?</summary><p>Unsere Angebote richten sich primär an Kinder von 6 bis 12 Jahren.</p></details>
-          <details class="card"><summary>Was ist im Camp enthalten?</summary><p>Training, Spiel- & Übungsformen, Wasser, warmes Mittagessen, Obstpausen, Ausrüstung (z. B. Trikot/Hose), Trinkflasche und Urkunde (je nach Angebot).</p></details>
-          <details class="card"><summary>Wo findet das statt?</summary><p>Region BS (genauen Ort bitte im jeweiligen Angebot/Booking-Link angeben).</p></details>
-          <details class="card"><summary>Wie melde ich mein Kind an?</summary><p>Über den „Jetzt anmelden“- bzw. „Feriencamps buchen“-Link (Booking).</p></details>
+        <div class="cards">
+          <div class="card">
+            <div class="cardTop">
+              <div class="tag">Feriencamps</div>
+              <span class="tick" aria-hidden="true"></span>
+            </div>
+            <h3>Campwoche</h3>
+            <p>Abwechslungsreiche Trainingseinheiten, Spiele & Übungsformen plus warmes Mittagessen und Obstpausen.</p>
+            <ul>
+              <li>Spielintelligenz-orientierte Inhalte</li>
+              <li>Ausrüstung (Trikot/Hose je nach Angebot)</li>
+              <li>Trinkflasche & Teilnehmerurkunde</li>
+            </ul>
+            <div class="actions">
+              <a class="btn btnPrimary" id="btnCamps" href="#" target="_blank" rel="noreferrer">Camps buchen</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="cardTop">
+              <div class="tag">Powerkurse</div>
+              <span class="tick" aria-hidden="true"></span>
+            </div>
+            <h3>Technik & Athletik</h3>
+            <p>Gezielte Schwerpunkte, kleine Gruppen, klare Progression – für sichtbaren Fortschritt.</p>
+            <ul>
+              <li>Technik, Koordination, Spielformen</li>
+              <li>Strukturierte Einheiten</li>
+              <li>Förderung mit Spaßfaktor</li>
+            </ul>
+            <div class="actions">
+              <a class="btn btnGhost" id="btnPower1819" href="#" target="_blank" rel="noreferrer">Power 18/19</a>
+              <a class="btn btnGhost" id="btnPower1617" href="#" target="_blank" rel="noreferrer">Power 16/17</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="cardTop">
+              <div class="tag">Beratung</div>
+              <span class="tick" aria-hidden="true"></span>
+            </div>
+            <h3>Vereine & Eltern</h3>
+            <p>Unterstützung bei Förderung, Trainingsimpulsen und sportlicher Entwicklung – transparent und kindgerecht.</p>
+            <ul>
+              <li>Vereinsberatung & Trainingskonzept</li>
+              <li>Elternberatung / Förderplanung</li>
+              <li>Talent & Perspektive</li>
+            </ul>
+            <div class="actions">
+              <a class="btn btnDark" href="#kontakt">Kontakt</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- GALERIE -->
+    <section id="galerie" class="section">
+      <div class="wrap">
+        <div class="sectionHead">
+          <div>
+            <div class="eyebrow">Einblicke</div>
+            <h2>Galerie</h2>
+          </div>
+          <p class="sub">Fotos können später sauber über das CMS hochgeladen werden. Hier erstmal Platzhalter.</p>
+        </div>
+
+        <div class="gallery">
+          <div class="frame">
+            <img src="assets/img/placeholder-1.jpg" alt="Training Foto 1"
+                 onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;placeholder&quot;>Großes Bild: <b>assets/img/placeholder-1.jpg</b></div>';">
+          </div>
+
+          <div class="gGrid">
+            <div class="frame">
+              <img src="assets/img/placeholder-2.jpg" alt="Training Foto 2"
+                   onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;placeholder&quot;>Bild: <b>assets/img/placeholder-2.jpg</b></div>';">
+            </div>
+            <div class="frame">
+              <img src="assets/img/placeholder-3.jpg" alt="Training Foto 3"
+                   onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;placeholder&quot;>Bild: <b>assets/img/placeholder-3.jpg</b></div>';">
+            </div>
+            <div class="frame">
+              <img src="assets/img/placeholder-4.jpg" alt="Training Foto 4"
+                   onerror="this.remove(); this.parentElement.innerHTML='<div class=&quot;placeholder&quot;>Bild: <b>assets/img/placeholder-4.jpg</b></div>';">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section">
+      <div class="wrap">
+        <div class="sectionHead">
+          <div>
+            <div class="eyebrow">Kurz & klar</div>
+            <h2>FAQ</h2>
+          </div>
+          <p class="sub">Weniger Rückfragen, mehr Professionalität.</p>
+        </div>
+
+        <div class="faq">
+          <details>
+            <summary>Für welches Alter ist das?</summary>
+            <p>Unsere Angebote richten sich primär an Kinder von 6 bis 12 Jahren.</p>
+          </details>
+
+          <details>
+            <summary>Was ist im Camp enthalten?</summary>
+            <p>Training, Spiel- & Übungsformen, Wasser, warmes Mittagessen, Obstpausen sowie je nach Angebot Ausrüstung, Trinkflasche und Urkunde.</p>
+          </details>
+
+          <details>
+            <summary>Wo findet das statt?</summary>
+            <p>Region BS. Den genauen Ort bitte im jeweiligen Angebot / Booking-Link nachsehen.</p>
+          </details>
+
+          <details>
+            <summary>Wie melde ich an?</summary>
+            <p>Über „Jetzt anmelden“ oder „Feriencamps“ (Booking-Link). Zusätzlich kann die WhatsApp-Community für Updates genutzt werden.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- KONTAKT -->
     <section id="kontakt" class="section">
       <div class="wrap">
-        <div class="secHead">
+        <div class="sectionHead">
           <div>
+            <div class="eyebrow">Let’s go</div>
             <h2>Kontakt</h2>
-            <p>Kurzer Kontaktbereich mit klaren Links. Optional später: Formular + Datenschutz/Impressum.</p>
           </div>
+          <p class="sub">Direkt zu den wichtigsten Links – schlicht und effektiv.</p>
         </div>
 
-        <div class="grid cards" style="grid-template-columns: 1.2fr .8fr .8fr">
-          <div class="card offer">
-            <h3>Movemania FS</h3>
-            <p>Schreib uns, wenn du Fragen zu Camps, Kursen oder Kooperationen hast.</p>
-            <div class="row">
-              <a class="cta" id="btnBooking" href="#" target="_blank" rel="noreferrer">Jetzt anmelden ↘</a>
-              <a class="ghost" id="btnWA" href="#" target="_blank" rel="noreferrer">WhatsApp Community ↘</a>
+        <div class="cards" style="grid-template-columns: 1.3fr .85fr .85fr;">
+          <div class="card">
+            <div class="cardTop">
+              <div class="tag">Anmeldung</div>
+              <span class="tick" aria-hidden="true"></span>
             </div>
-            <p class="small" style="margin-top:14px">
-              Hinweis: Impressum & Datenschutz gehören rechtlich dazu (gerade in DE). Das kann man als separate Seiten ergänzen.
-            </p>
+            <h3>Jetzt anmelden</h3>
+            <p>Plätze sichern, Angebot auswählen, fertig. Alles läuft über den Booking-Link.</p>
+            <div class="actions">
+              <a class="btn btnPrimary" id="btnBooking" href="#" target="_blank" rel="noreferrer">Jetzt anmelden</a>
+              <a class="btn btnGhost" id="btnWA" href="#" target="_blank" rel="noreferrer">WA-Community</a>
+            </div>
           </div>
 
-          <div class="card offer">
+          <div class="card">
+            <div class="cardTop">
+              <div class="tag">Social</div>
+              <span class="tick" aria-hidden="true"></span>
+            </div>
+            <h3>Instagram</h3>
+            <p>Updates, Einblicke, Camp-Momente.</p>
+            <div class="actions">
+              <a class="btn btnDark" id="btnIG" href="#" target="_blank" rel="noreferrer">@movemania_fs</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="cardTop">
+              <div class="tag">Schnellzugriff</div>
+              <span class="tick" aria-hidden="true"></span>
+            </div>
             <h3>Links</h3>
-            <div class="grid">
-              <a class="ghost" id="btnIG" href="#" target="_blank" rel="noreferrer">Instagram ↘</a>
-              <a class="ghost" id="btnCamps2" href="#" target="_blank" rel="noreferrer">Feriencamps ↘</a>
-              <a class="ghost" id="btnPower2" href="#" target="_blank" rel="noreferrer">Powerkurse ↘</a>
+            <p>Direkt zu Camps & Kursen.</p>
+            <div class="actions">
+              <a class="btn btnGhost" id="btnCamps2" href="#" target="_blank" rel="noreferrer">Feriencamps</a>
+              <a class="btn btnGhost" id="btnPower2" href="#" target="_blank" rel="noreferrer">Powerkurse</a>
             </div>
           </div>
-
-          <div class="card offer">
-            <h3>Kooperation</h3>
-            <p>Vereine / Eltern / Talente – wir freuen uns über Austausch.</p>
-            <p class="small">Kontaktweg: über Instagram / Booking-Link / WhatsApp-Community.</p>
-          </div>
         </div>
+
       </div>
     </section>
 
     <footer class="footer">
       <div class="wrap">
-        <div class="footGrid">
-          <div class="small">
-            <b style="color:var(--text)">Movemania FS</b><br>
+        <div class="foot">
+          <div>
+            <b>Movemania FS</b><br>
             Fußballschule mit Haltung & Herz · Region BS
           </div>
-          <div class="small">
-            <b style="color:var(--text)">Rechtliches</b><br>
+          <div>
+            <b>Rechtliches</b><br>
             <span>Impressum</span> · <span>Datenschutz</span>
           </div>
-          <div class="small">
-            <b style="color:var(--text)">Social</b><br>
-            <span id="footIG">Instagram: @movemania_fs</span>
+          <div>
+            <b>Quicklinks</b><br>
+            <div class="miniLinks">
+              <a id="footCamps" href="#" target="_blank" rel="noreferrer">Camps</a>
+              <a id="footBooking" href="#" target="_blank" rel="noreferrer">Anmelden</a>
+              <a id="footIG" href="#" target="_blank" rel="noreferrer">Instagram</a>
+            </div>
           </div>
         </div>
       </div>
     </footer>
+
   </main>
 
   <script>
-    // Diese Links ersetzt ihr später im CMS oder direkt hier:
+    // Links hier eintragen (aus euren Yolawo/WhatsApp/IG Links)
     const LINKS = {
-      booking: "https://widgets.yolawo.de/w/0/bookables/6836eafcd...",  // "Jetzt anmelden"
-      camps:   "https://widgets.yolawo.de/w/0/bookables/6836eafcd...",  // Feriencamps
-      power1819:"https://widgets.yolawo.de/w/0/offers/684ec20...",      // Powerkurse 2018/2019
-      power1617:"https://widgets.yolawo.de/w/0/offers/687de44...",      // Powerkurse 2016/2017
-      whatsapp:"https://chat.whatsapp.com/BG6jb0qTCah6m2S...",          // WA-Community
-      instagram:"https://www.instagram.com/movemania_fs/"
+      booking:   "https://widgets.yolawo.de/w/0/bookables/6836eafcd...", // Jetzt anmelden
+      camps:     "https://widgets.yolawo.de/w/0/bookables/6836eafcd...", // Feriencamps
+      power1819: "https://widgets.yolawo.de/w/0/offers/684ec20...",      // Powerkurse 2018/2019
+      power1617: "https://widgets.yolawo.de/w/0/offers/687de44...",      // Powerkurse 2016/2017
+      whatsapp:  "https://chat.whatsapp.com/BG6jb0qTCah6m2S...",
+      instagram: "https://www.instagram.com/movemania_fs/"
     };
 
-    const setHref = (id, url) => { const el = document.getElementById(id); if (el) el.href = url; };
+    const setHref = (id, url) => {
+      const el = document.getElementById(id);
+      if (el) el.href = url;
+    };
 
     setHref("ctaBooking", LINKS.booking);
     setHref("ctaCamps", LINKS.camps);
     setHref("ctaWA", LINKS.whatsapp);
-
-    setHref("lnkCamps", LINKS.camps);
-    setHref("lnkPower1819", LINKS.power1819);
-    setHref("lnkPower1617", LINKS.power1617);
-    setHref("lnkBooking", LINKS.booking);
-    setHref("lnkIG", LINKS.instagram);
 
     setHref("btnCamps", LINKS.camps);
     setHref("btnPower1819", LINKS.power1819);
@@ -401,6 +718,12 @@
     setHref("btnIG", LINKS.instagram);
     setHref("btnCamps2", LINKS.camps);
     setHref("btnPower2", LINKS.power1819);
+
+    setHref("footCamps", LINKS.camps);
+    setHref("footBooking", LINKS.booking);
+    setHref("footIG", LINKS.instagram);
   </script>
+
 </body>
 </html>
+
