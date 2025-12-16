@@ -898,7 +898,13 @@
     catch (e) { console.warn("texts.json fehlt oder nicht erreichbar:", e); }
 
     setText("heroBrand", (texts.hero_brand || "MOVEMANIA").toUpperCase());
-    setTextKeepHtml("heroClaim", (texts.hero_title || "KINDER STÄRKEN.<br>SPIELER ENTWICKELN.").toUpperCase());
+    let claim = (texts.hero_title || "KINDER STÄRKEN.<br>SPIELER ENTWICKELN.").toUpperCase();
+
+    // Entfernt nur äußere Anführungszeichen aus dem CMS
+    claim = claim.replace(/^[\s"“”„‚'«»]+|[\s"“”„‚'«»]+$/g, "");
+
+    setTextKeepHtml("heroClaim", claim);
+
 
     setText("heroText", texts.hero_text || "In unseren Feriencamps kommen bewegungsfreudige Kinder voll auf ihre Kosten.");
 
