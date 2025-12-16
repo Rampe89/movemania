@@ -119,7 +119,7 @@
     .hero{ padding:64px 0 34px; border-bottom:1px solid var(--line); }
     .heroInner{
       display:grid;
-      grid-template-columns: 1.05fr .95fr;
+      grid-template-columns: .95fr 1.05fr; /* Video etwas größer/gewichtiger */
       gap:34px;
       align-items:center;
     }
@@ -129,9 +129,27 @@
     }
 
     .heroTitle{
-      font-size: clamp(38px, 4.6vw, 56px);
       line-height: 1.02;
-      max-width: 10ch; /* verhindert zu breite Blockoptik */
+      max-width: 16ch;
+      margin:0;
+    }
+
+    .heroBrand{
+      display:block;
+      font-weight:900;
+      letter-spacing:-.02em;
+      font-size: clamp(44px, 5.2vw, 68px);
+      line-height:1.00;
+    }
+
+    .heroClaim{
+      display:block;
+      margin-top: 12px; /* abgesetzt vom Brand */
+      font-weight:900;
+      letter-spacing:-.01em;
+      font-size: clamp(26px, 2.9vw, 40px);
+      line-height:1.08;
+      text-transform:uppercase;
     }
 
     .heroText{
@@ -142,8 +160,12 @@
       margin-top: 14px;
     }
 
-
-    .btnRow{ display:flex; gap:14px; flex-wrap:wrap; margin-top:18px; }
+    .btnRow{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:28px; /* Buttons etwas weiter runter */
+    }
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       min-height:44px;
@@ -172,11 +194,11 @@
       position:relative;
       overflow:hidden;
       aspect-ratio: 16 / 9;
-      min-height: 320px;
+      min-height: 420px; /* größer */
       border-radius: var(--radius);
     }
     @media (max-width: 980px){
-      .mediaFrame{ min-height: 220px; }
+      .mediaFrame{ min-height: 260px; }
     }
     .mediaFrame video{
       width:100%;
@@ -214,7 +236,7 @@
       opacity:0;
       transform: translateY(6px);
       transition: .18s ease;
-      pointer-events:none; /* wird per .show aktiviert */
+      pointer-events:none;
     }
 
     .mediaFrame:hover .vControls,
@@ -242,7 +264,6 @@
 
     .vBtn:hover{ background: rgba(0,0,0,.45); }
 
-    /* Optional: kleines Play-Icon in der Mitte, wenn pausiert */
     .vCenter{
       position:absolute;
       inset:0;
@@ -509,7 +530,10 @@
   <section class="hero">
     <div class="wrap heroInner">
       <div>
-        <h1 class="heroTitle" id="heroTitle">FERIENCAMPS &amp; KURSE</h1>
+        <h1 class="heroTitle" id="heroTitle">
+          <span class="heroBrand" id="heroBrand">MOVEMANIA</span>
+          <span class="heroClaim" id="heroClaim">KINDER STÄRKEN.<br>SPIELER ENTWICKELN.</span>
+        </h1>
 
         <p class="heroText" id="heroText">
           <span class="skeleton" style="width:46ch;height:1em"></span><br>
@@ -736,11 +760,10 @@
     const btnPlay = document.getElementById("vPlay");
     const btnMute = document.getElementById("vMute");
 
-    // Hard set: Start stumm (robust gegen Browser-Eigenheiten)
     v.muted = true;
     v.volume = 0;
 
-    const frame = heroMedia; // .mediaFrame
+    const frame = heroMedia;
     const setPausedState = () => {
       frame.classList.toggle("vPaused", v.paused);
       btnPlay.textContent = v.paused ? "Play" : "Pause";
@@ -749,7 +772,6 @@
       btnMute.textContent = v.muted ? "Stumm" : "Ton an";
     };
 
-    // Klick auf Video toggelt Play/Pause (außer man klickt Buttons)
     frame.addEventListener("click", (e) => {
       const isButton = e.target && e.target.closest && e.target.closest("button");
       if (isButton) return;
@@ -774,7 +796,6 @@
     v.addEventListener("play", setPausedState);
     v.addEventListener("pause", setPausedState);
 
-    // Initial UI state
     setPausedState();
     setMuteState();
   }
@@ -876,7 +897,9 @@
     try { texts = await loadJSON("/assets/content/texts.json"); }
     catch (e) { console.warn("texts.json fehlt oder nicht erreichbar:", e); }
 
-    setText("heroTitle", (texts.hero_title || "FERIENCAMPS & KURSE").toUpperCase());
+    setText("heroBrand", (texts.hero_brand || "MOVEMANIA").toUpperCase());
+    setTextKeepHtml("heroClaim", (texts.hero_title || "KINDER STÄRKEN.<br>SPIELER ENTWICKELN.").toUpperCase());
+
     setText("heroText", texts.hero_text || "In unseren Feriencamps kommen bewegungsfreudige Kinder voll auf ihre Kosten.");
 
     if (texts.about_text && /<\/?[a-z][\s\S]*>/i.test(texts.about_text)) {
@@ -919,6 +942,7 @@
 
 </body>
 </html>
+
 
 
 
