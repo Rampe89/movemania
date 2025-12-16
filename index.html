@@ -194,6 +194,76 @@
       text-align:center;
     }
 
+    /* Video Controls Overlay */
+    .mediaFrame { cursor: pointer; }
+
+    .vWrap{
+      position:relative;
+      width:100%;
+      height:100%;
+    }
+
+    .vControls{
+      position:absolute;
+      left:12px;
+      right:12px;
+      bottom:12px;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      opacity:0;
+      transform: translateY(6px);
+      transition: .18s ease;
+      pointer-events:none; /* wird per .show aktiviert */
+    }
+
+    .mediaFrame:hover .vControls,
+    .mediaFrame:focus-within .vControls{
+      opacity:1;
+      transform: translateY(0);
+      pointer-events:auto;
+    }
+
+    .vBtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      height:38px;
+      padding:0 14px;
+      border:1px solid rgba(255,255,255,.55);
+      background: rgba(0,0,0,.35);
+      color:#fff;
+      font-size:11px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      user-select:none;
+    }
+
+    .vBtn:hover{ background: rgba(0,0,0,.45); }
+
+    /* Optional: kleines Play-Icon in der Mitte, wenn pausiert */
+    .vCenter{
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      pointer-events:none;
+      opacity:0;
+      transition:.18s ease;
+    }
+    .vCenter span{
+      border:1px solid rgba(255,255,255,.55);
+      background: rgba(0,0,0,.35);
+      color:#fff;
+      padding:10px 14px;
+      font-size:11px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+    }
+    .vPaused .vCenter{ opacity:1; }
+
     /* Sections */
     .section{ padding:30px 0; border-bottom:1px solid var(--line); }
     .section:last-of-type{border-bottom:none}
@@ -647,11 +717,66 @@
     const pst = (poster || "assets/img/hero.jpg").trim();
 
     heroMedia.innerHTML = `
-      <video autoplay muted loop playsinline preload="metadata" poster="${pst}">
-        <source src="${src}" type="video/mp4">
-        <div class="mediaPlaceholder">Dein Browser unterstützt Video nicht. Bitte aktualisiere den Browser.</div>
-      </video>
+      <div class="vWrap">
+        <video id="heroVid" autoplay muted loop playsinline preload="metadata" poster="${pst}">
+          <source src="${src}" type="video/mp4">
+          <div class="mediaPlaceholder">Dein Browser unterstützt Video nicht. Bitte aktualisiere den Browser.</div>
+        </video>
+
+        <div class="vCenter"><span>Play</span></div>
+
+        <div class="vControls" aria-label="Video-Steuerung">
+          <button class="vBtn" id="vPlay" type="button">Pause</button>
+          <button class="vBtn" id="vMute" type="button">Stumm</button>
+        </div>
+      </div>
     `;
+
+    const v = document.getElementById("heroVid");
+    const btnPlay = document.getElementById("vPlay");
+    const btnMute = document.getElementById("vMute");
+
+    // Hard set: Start stumm (robust gegen Browser-Eigenheiten)
+    v.muted = true;
+    v.volume = 0;
+
+    const frame = heroMedia; // .mediaFrame
+    const setPausedState = () => {
+      frame.classList.toggle("vPaused", v.paused);
+      btnPlay.textContent = v.paused ? "Play" : "Pause";
+    };
+    const setMuteState = () => {
+      btnMute.textContent = v.muted ? "Stumm" : "Ton an";
+    };
+
+    // Klick auf Video toggelt Play/Pause (außer man klickt Buttons)
+    frame.addEventListener("click", (e) => {
+      const isButton = e.target && e.target.closest && e.target.closest("button");
+      if (isButton) return;
+
+      if (v.paused) v.play().catch(()=>{});
+      else v.pause();
+      setPausedState();
+    });
+
+    btnPlay.addEventListener("click", () => {
+      if (v.paused) v.play().catch(()=>{});
+      else v.pause();
+      setPausedState();
+    });
+
+    btnMute.addEventListener("click", () => {
+      v.muted = !v.muted;
+      v.volume = v.muted ? 0 : 1;
+      setMuteState();
+    });
+
+    v.addEventListener("play", setPausedState);
+    v.addEventListener("pause", setPausedState);
+
+    // Initial UI state
+    setPausedState();
+    setMuteState();
   }
 
   function applyTheme(theme){
@@ -794,6 +919,7 @@
 
 </body>
 </html>
+
 
 
 
