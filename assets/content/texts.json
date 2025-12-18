@@ -1,16 +1,50 @@
 {
-  "usp_kicker": "Gemeinsam zum Erfolg",
+  "hero_brand": "Movemania",
+  "hero_title": "Kinder stärken.<br>Spieler entwickeln.",
+  "hero_text": "Movemania FS steht für modernes Fußballtraining mit Haltung, Herz und klarer Struktur. Wir fördern Kinder individuell – sportlich, sozial und menschlich.",
+
+  "hero_slide1_title": "Vorstellung",
+  "hero_slide1_text": "Ich bin der Kopf hinter Movemania FS. Mein Ziel: Kinder stark machen – auf und neben dem Platz.",
+
+  "hero_slide2_title": "Wofür wir stehen",
+  "hero_slide2_text": "Respekt, Entwicklung und Freude an Bewegung sind die Basis unserer täglichen Arbeit.",
+
+  "hero_slide3_title": "Was wir machen",
+  "hero_slide3_text": "Feriencamps, Kurse, Ballschule und individuelle Förderung – strukturiert und kindgerecht.",
+
+  "about_kicker": "Über uns",
+  "about_title": "Wer wir sind",
+  "about_head_title": "Vorstellung Headcoach",
+  "about_head_text": "Movemania FS wurde gegründet, um Kindern mehr als nur Fußballtraining zu bieten. Wir verbinden sportliche Entwicklung mit klaren Werten, Verantwortungsbewusstsein und echter Freude an Bewegung. Jedes Kind wird bei uns gesehen und individuell begleitet.",
+
+  "usp_kicker": "Wofür wir stehen",
+  "usp_title": "Mut · Einsatz · Werte",
   "usp_ghost": "WERTE",
-  "usp_title": "Movemania Vorteile",
-  "usp3_text": "Anmeldung online, klare Infos, gute Organisation – damit Eltern und Kids entspannt bleiben.",
-  "usp2_text": "Respekt, Teamgeist und Freude an Bewegung stehen bei uns immer im Mittelpunkt.",
-  "usp1_text": "Abwechslungsreiche Einheiten mit klarer Struktur, Spielintelligenz und echter Weiterentwicklung.",
-  "hero_text": "Movemania ist eine moderne Fußballschule für Kinder, in der sportliche Entwicklung und Persönlichkeit gleichermaßen im Mittelpunkt stehen.\nMit klarer Struktur, hoher Qualität und echtem Herz fördern wir junge Spieler individuell – technisch, spielerisch und mental.\nUnsere Trainings sind anspruchsvoll, spielnah und motivierend und helfen Kindern, mutig zu sein, Verantwortung zu übernehmen und über sich hinauszuwachsen.\nBei Movemania geht es um mehr als Fußball: Wir stärken Kinder – und entwickeln Spieler.",
-  "hero_title": "\"Kinder stärken. Spieler entwickeln.\"",
-  "usp2_icon": "/assets/img/uploads/test.png",
-  "usp1_title": "Training mit System",
-  "usp2_title": "Haltung & Herz",
-  "usp1_icon": "",
-  "usp3_title": "Schnell & unkompliziert",
-  "about_text": "Movemania steht für hochwertigen Kinder- und Jugendfußball mit Herz und Haltung.\nWir begleiten Kinder auf ihrem Weg – mit Spaß, Einsatz und Mut – und fördern sie individuell auf und neben dem Platz.\nIn einem sicheren, wertschätzenden Umfeld lernen Kinder und Jugendliche, sich zu entwickeln, an Herausforderungen zu wachsen und Vertrauen in die eigenen Fähigkeiten zu gewinnen.\nMovemania verbindet Fußball mit Werten fürs Leben."
+
+  "value1_title": "Mut",
+  "value1_text": "Wir ermutigen Kinder, Entscheidungen zu treffen, Neues auszuprobieren und an sich zu glauben.",
+
+  "value2_title": "Einsatz",
+  "value2_text": "Leistung entsteht durch Freude, Wiederholung und gemeinsames Arbeiten an Zielen.",
+
+  "value3_title": "Werte",
+  "value3_text": "Respekt, Fairness und Teamgeist sind für uns unverzichtbar – im Training wie im Alltag.",
+
+  "offers_camps_text": "Unsere Camps verbinden Training, Spiel und Gemeinschaft – mit klarer Tagesstruktur und viel Bewegung.",
+  "offers_ferien_text": "Feriencamps mit abwechslungsreichen Einheiten, Spielen und gemeinsamem Mittagessen.",
+  "offers_elite_text": "Elitecamps für ambitionierte Spielerinnen und Spieler mit höherem Trainingsanspruch.",
+
+  "offers_kurse_text": "Powerkurse in kleinen Gruppen mit Fokus auf Technik, Athletik und Spielverständnis.",
+  "offers_elite_kurse_text": "Elitekurse richten sich an leistungsorientierte Kinder mit besonderem Entwicklungsfokus.",
+
+  "offers_balls_text": "Die Ballschule legt spielerisch die Grundlagen für Koordination, Motorik und Ballgefühl.",
+  "offers_kiga_text": "Im Fußballkindergarten stehen Bewegung, Spaß und erste fußballerische Erfahrungen im Vordergrund.",
+
+  "offers_beratung_text": "Wir beraten Vereine, Trainer und Organisationen in Trainingskonzepten, Entwicklung und Struktur.",
+
+  "contact_mail_label": "Direkt schreiben",
+  "contact_ig_label": "Updates & Einblicke",
+  "contact_wa_label": "Community & Infos",
+
+  "faq_hint": "Hast du weitere Fragen? Dann melde dich gern per E-Mail bei uns."
 }
