@@ -1,4 +1,10 @@
 {
   "title": "Partner",
-  "items": []
+  "items": [
+    {
+      "name": "Testpartner",
+      "url": "www.test.de",
+      "logo": "/assets/img/uploads/test.png"
+    }
+  ]
 }
