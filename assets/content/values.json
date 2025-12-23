@@ -36,5 +36,31 @@
       "icon": "assets/img/icons/spass.svg",
       "icon_alt": "Spaß"
     }
+  ],
+  "items": [
+    {
+      "title": "Spaß",
+      "text": "Freude ist der Motor zur Entwicklung.\n\"Bei uns geht es um die Freude und Leidenschaft für das Spiel.\""
+    },
+    {
+      "title": "Mut",
+      "text": "Wir wollen, dass sich Kinder trauen - auf und neben dem Platz.\n\"Fehler sind erlaubt und gehören zum Prozess.\""
+    },
+    {
+      "title": "Zusammenhalt",
+      "text": "Erfolg kommt nur gemeinsam. \n\"Alle gehören dazu - egal ob laut, leise, stark oder schüchtern.\""
+    },
+    {
+      "title": "Entwicklung",
+      "text": "Jeder bringt etwas mit- und geht ein Stück weiter.\n\"Wir messen nicht mit Lineal, sondern mit offenen Augen und Herz.\""
+    },
+    {
+      "title": "Respekt",
+      "text": "Gegenüber Mitspieler, Gegner, Trainern und sich selbst.\n\"Wir sagen Danke, Entschuldigung und feiern andere genauso wie uns selbst.\""
+    },
+    {
+      "title": "Haltung vor Ergebnis",
+      "text": "Der Charakter zählt mehr als das Torverhältnis.\n\"Wer verliert und trotzdem aufrecht bleibt, hat gewonnen.\""
+    }
   ]
 }
