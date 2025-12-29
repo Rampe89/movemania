@@ -1,0 +1,26 @@
+{
+  "title": "FAQs",
+  "hint": "Hast du weitere Fragen? Dann nimm Kontakt per E-Mail auf.",
+  "items": [
+    {
+      "q": "Ab welchem Alter können Kinder teilnehmen?",
+      "a": "Unsere Angebote richten sich in der Regel an Kinder im Alter von 6–12 Jahren. Details stehen jeweils bei Camps/Kursen."
+    },
+    {
+      "q": "Wo finden Trainings und Camps statt?",
+      "a": "Die Standorte variieren je nach Angebot. Du findest die aktuellen Infos in der jeweiligen Camp- oder Kursbeschreibung."
+    },
+    {
+      "q": "Wie läuft die Anmeldung ab?",
+      "a": "Über den Anmelde-Button (Booking-Link). Bei Fragen schreib uns gerne eine E-Mail."
+    },
+    {
+      "q": "Braucht mein Kind Vorerfahrung?",
+      "a": "Nein. Viele Angebote sind für Einsteiger geeignet. Wichtig sind Spaß an Bewegung und passende Sportsachen."
+    },
+    {
+      "q": "Gibt es Ermäßigungen oder Geschwisterrabatt?",
+      "a": "Wenn wir Rabatte anbieten, steht das direkt beim jeweiligen Angebot. Frag ansonsten kurz per E-Mail nach."
+    }
+  ]
+}
