@@ -1,0 +1,10 @@
+{
+  "coaches": [
+    {
+      "name": "Vorname Nachname",
+      "role": "Coach",
+      "bio": "Kurzprofil / Schwerpunkt.",
+      "image": ""
+    }
+  ]
+}
