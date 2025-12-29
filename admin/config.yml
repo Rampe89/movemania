@@ -208,5 +208,103 @@ collections:
               - { label: Rolle (optional), name: role, widget: string, required: false }
               - { label: Bio / Schwerpunkt, name: bio, widget: text, required: false }
               - { label: Bild (optional), name: image, widget: image, required: false }
+  - name: offers
+    label: Angebote
+    files:
+      - file: assets/content/offers.json
+        label: Angebote Inhalte
+        name: offers
+        format: json
+        fields:
+          - label: Angebote
+            name: offers
+            widget: object
+            fields:
+              - label: Camps
+                name: camps
+                widget: object
+                fields:
+                  - { label: Titel, name: title, widget: string, required: false }
+                  - { label: Text, name: text, widget: text, required: false }
+                  - { label: Button Label, name: button_label, widget: string, required: false }
+                  - { label: Button Link, name: button_link, widget: string, required: false }
+                  - label: Unterpunkte (2)
+                    name: sub
+                    widget: list
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: text, required: false }
+
+              - label: Kurse
+                name: kurse
+                widget: object
+                fields:
+                  - { label: Titel, name: title, widget: string, required: false }
+                  - { label: Text, name: text, widget: text, required: false }
+                  - { label: Power Box Label, name: power_box_label, widget: string, required: false }
+                  - { label: Power Box Text, name: power_box_text, widget: string, required: false }
+                  - label: Power Pills (z.B. 12/13)
+                    name: power_pills
+                    widget: list
+                    required: false
+                    field: { label: Pill, name: pill, widget: string }
+                  - { label: Elite Box Label, name: elite_box_label, widget: string, required: false }
+                  - { label: Elite Box Text, name: elite_box_text, widget: text, required: false }
+                  - label: Buttons (z.B. Power 18/19)
+                    name: buttons
+                    widget: list
+                    required: false
+                    fields:
+                      - { label: Button Label, name: label, widget: string }
+                      - { label: Button Link, name: link, widget: string, required: false }
+
+              - label: Ballschule
+                name: ballschule
+                widget: object
+                fields:
+                  - { label: Titel, name: title, widget: string, required: false }
+                  - { label: Text, name: text, widget: text, required: false }
+
+              - label: Fußballkindergarten
+                name: kiga
+                widget: object
+                fields:
+                  - { label: Titel, name: title, widget: string, required: false }
+                  - { label: Text, name: text, widget: text, required: false }
+
+              - label: Beratung
+                name: beratung
+                widget: object
+                fields:
+                  - { label: Titel, name: title, widget: string, required: false }
+                  - { label: Text, name: text, widget: text, required: false }
+                  - label: Kacheln (max. 5)
+                    name: sub
+                    widget: list
+                    required: false
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: string, required: false }
+                      - { label: Link, name: link, widget: string, required: false }
+
+  - name: events
+    label: Events
+    files:
+      - file: assets/content/events.json
+        label: Events Inhalte
+        name: events
+        format: json
+        fields:
+          - { label: Bereichstitel, name: title, widget: string, required: false, default: "Events" }
+          - label: Events
+            name: items
+            widget: list
+            fields:
+              - { label: Titel, name: title, widget: string }
+              - { label: Datum (optional), name: date, widget: string, required: false }
+              - { label: Text, name: text, widget: text, required: false }
+              - { label: Link Label (optional), name: link_label, widget: string, required: false }
+              - { label: Link (optional), name: link, widget: string, required: false }
+              - { label: Bild (optional), name: image, widget: image, required: false }
 
 
