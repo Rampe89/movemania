@@ -8,7 +8,7 @@ media_folder: assets/img/uploads
 public_folder: /assets/img/uploads
 
 collections:
-  # --- TEXTE (bestehend) ---
+  # --- TEXTE ---
   - name: texts
     label: Texte
     files:
@@ -39,7 +39,7 @@ collections:
           - { label: Angebote Toggle (zugeklappt), name: offers_toggle_closed, widget: string, required: false }
           - { label: Angebote Toggle (aufgeklappt), name: offers_toggle_open, widget: string, required: false }
 
-  # --- HERO SLIDER (bestehend) ---
+  # --- HERO SLIDER ---
   - name: hero
     label: Hero Slider
     files:
@@ -61,7 +61,7 @@ collections:
               - { label: Titel, name: title, widget: string, required: false }
               - { label: Text, name: text, widget: text, required: false }
 
-  # --- WERTE (bestehend: schreibt nach items, passt zu robustem index.html) ---
+  # --- WERTE (values.json -> items) ---
   - name: values
     label: Werte & Icons
     files:
@@ -79,7 +79,7 @@ collections:
               - { label: Icon (Upload), name: icon, widget: image, required: false }
               - { label: Icon ALT (optional), name: icon_alt, widget: string, required: false }
 
-  # --- LINKS (bestehend) ---
+  # --- LINKS ---
   - name: links
     label: Links
     files:
@@ -99,7 +99,7 @@ collections:
           - { label: Power 18/19, name: power1819, widget: string, required: false }
           - { label: Power 16/17, name: power1617, widget: string, required: false }
 
-  # --- SPONSORS (bestehend) ---
+  # --- SPONSORS ---
   - name: sponsors
     label: Partner
     files:
@@ -119,7 +119,7 @@ collections:
               - { label: Link, name: url, widget: string, required: false }
               - { label: Logo, name: logo, widget: image, required: false }
 
-  # --- GALLERY (bestehend Dummy) ---
+  # --- GALLERY (Dummy) ---
   - name: gallery
     label: Galerie
     files:
@@ -129,7 +129,7 @@ collections:
         fields:
           - { label: Inhalt, name: body, widget: text, required: false }
 
-  # --- THEME (bestehend) ---
+  # --- THEME ---
   - name: theme
     label: Theme
     files:
@@ -177,7 +177,7 @@ collections:
               - { label: Opacity (0..1), name: opacity, widget: number, required: false, value_type: float }
               - { label: Pattern Size (px), name: size, widget: number, required: false, value_type: int }
 
-  # --- NEU: HEADCOACH MEDIA (für Bild/Video neben Text) ---
+  # --- HEADCOACH MEDIA ---
   - name: headcoach
     label: Headcoach (Media)
     files:
@@ -191,7 +191,7 @@ collections:
           - { label: Video MP4 (optional, Pfad/URL), name: video, widget: string, required: false }
           - { label: Poster (optional), name: poster, widget: string, required: false }
 
-  # --- NEU: COACHES (Team-Karten editierbar) ---
+  # --- COACHES ---
   - name: coaches
     label: Coaches
     files:
@@ -208,6 +208,8 @@ collections:
               - { label: Rolle (optional), name: role, widget: string, required: false }
               - { label: Bio / Schwerpunkt, name: bio, widget: text, required: false }
               - { label: Bild (optional), name: image, widget: image, required: false }
+
+  # --- ANGEBOTE ---
   - name: offers
     label: Angebote
     files:
@@ -287,6 +289,7 @@ collections:
                       - { label: Text, name: text, widget: string, required: false }
                       - { label: Link, name: link, widget: string, required: false }
 
+  # --- EVENTS ---
   - name: events
     label: Events
     files:
@@ -307,33 +310,23 @@ collections:
               - { label: Link (optional), name: link, widget: string, required: false }
               - { label: Bild (optional), name: image, widget: image, required: false }
 
-              - name: faq
-  label: FAQs
-  files:
-  - file: assets/content/faq.json
-    label: FAQ Startseite
-    name: faq
-    format: json
-    fields:
-    - label: Titel
-      name: title
-      widget: string
-      required: false
-      default: FAQs
-    - label: Hinweis unter FAQs
-      name: hint
-      widget: string
-      required: false
-    - label: Fragen & Antworten
-      name: items
-      widget: list
-      fields:
-      - label: Frage
-        name: q
-        widget: string
-      - label: Antwort
-        name: a
-        widget: text
+  # --- FAQS ---
+  - name: faq
+    label: FAQs
+    files:
+      - file: assets/content/faq.json
+        label: FAQ Startseite
+        name: faq
+        format: json
+        fields:
+          - { label: Titel, name: title, widget: string, required: false, default: "FAQs" }
+          - { label: Hinweis unter FAQs, name: hint, widget: string, required: false }
+          - label: Fragen & Antworten
+            name: items
+            widget: list
+            fields:
+              - { label: Frage, name: q, widget: string }
+              - { label: Antwort, name: a, widget: text }
 
 
 
