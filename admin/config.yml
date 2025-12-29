@@ -90,14 +90,22 @@ collections:
         fields:
           - { label: Booking Link, name: booking, widget: string, required: false }
           - { label: Camps Link, name: camps, widget: string, required: false }
-          - { label: WhatsApp Community, name: whatsapp, widget: string, required: false }
-          - { label: Instagram, name: instagram, widget: string, required: false }
-          - { label: Mailto (z.B. mailto:info@...), name: mailto, widget: string, required: false }
+
+          - { label: Instagram Link (URL), name: instagram, widget: string, required: false }
+          - { label: Instagram Text (z.B. @movemania_fs), name: instagram_text, widget: string, required: false }
+
+          - { label: WhatsApp Link (URL), name: whatsapp, widget: string, required: false }
+          - { label: WhatsApp Text (z.B. Community & Infos), name: whatsapp_text, widget: string, required: false }
+
+          - { label: E-Mail (z.B. movemania@mail.de ODER mailto:...), name: mailto, widget: string, required: false }
+          - { label: E-Mail Text (z.B. movemania@mail.de), name: mail_text, widget: string, required: false }
+
           - { label: Shop (extern), name: shop, widget: string, required: false }
           - { label: Hero Video MP4 (Fallback), name: hero_video_mp4, widget: string, required: false }
           - { label: Hero Video Poster (Fallback), name: hero_video_poster, widget: string, required: false }
           - { label: Power 18/19, name: power1819, widget: string, required: false }
           - { label: Power 16/17, name: power1617, widget: string, required: false }
+
 
   # --- SPONSORS ---
   - name: sponsors
