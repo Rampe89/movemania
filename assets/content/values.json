@@ -1,67 +1,41 @@
 {
-  "values": [
+  "items": [
     {
       "title": "Mut",
       "text": "Wir stärken Kinder, Entscheidungen zu treffen, Verantwortung zu übernehmen und sich etwas zuzutrauen.",
-      "icon": "assets/img/icons/mut.svg",
+      "icon": "assets/img/uploads/mut.svg",
       "icon_alt": "Mut"
     },
     {
       "title": "Einsatz",
-      "text": "Leistung entsteht durch Freude am Training, Dranbleiben und gemeinsames Arbeiten an Zielen.",
-      "icon": "assets/img/icons/einsatz.svg",
+      "text": "Leistung entsteht durch Freude am Training, Dranbleiben und gemeinsames Arbeiten an klaren Zielen.",
+      "icon": "assets/img/uploads/einsatz.svg",
       "icon_alt": "Einsatz"
     },
     {
       "title": "Respekt",
       "text": "Respekt, Fairness und ein positives Miteinander sind bei uns nicht verhandelbar.",
-      "icon": "assets/img/icons/respekt.svg",
+      "icon": "assets/img/uploads/respekt.svg",
       "icon_alt": "Respekt"
     },
     {
       "title": "Entwicklung",
-      "text": "Wir fördern Fortschritte – individuell, mit Struktur und kindgerechten Zielen.",
-      "icon": "assets/img/icons/entwicklung.svg",
+      "text": "Wir fördern individuelle Fortschritte – kindgerecht, strukturiert und mit realistischen Zielen.",
+      "icon": "assets/img/uploads/entwicklung.svg",
       "icon_alt": "Entwicklung"
     },
     {
       "title": "Teamgeist",
       "text": "Gemeinsam wachsen: miteinander spielen, voneinander lernen, füreinander einstehen.",
-      "icon": "assets/img/icons/teamgeist.svg",
+      "icon": "assets/img/uploads/teamgeist.svg",
       "icon_alt": "Teamgeist"
     },
     {
       "title": "Spaß",
       "text": "Freude an Bewegung ist die Basis. Ohne Spaß kein Lernen – ohne Lachen kein Team.",
-      "icon": "assets/img/icons/spass.svg",
+      "icon": "assets/img/uploads/spass.svg",
       "icon_alt": "Spaß"
-    }
-  ],
-  "items": [
-    {
-      "title": "Spaß",
-      "text": "Freude ist der Motor zur Entwicklung.\n\"Bei uns geht es um die Freude und Leidenschaft für das Spiel..\"",
-      "icon": "/assets/img/uploads/test.png"
-    },
-    {
-      "title": "Mut",
-      "text": "Wir wollen, dass sich Kinder trauen - auf und neben dem Platz.\n\"Fehler sind erlaubt und gehören zum Prozess.\""
-    },
-    {
-      "title": "Zusammenhalt",
-      "text": "Erfolg kommt nur gemeinsam. \n\"Alle gehören dazu - egal ob laut, leise, stark oder schüchtern.\""
-    },
-    {
-      "title": "Entwicklung",
-      "text": "Jeder bringt etwas mit- und geht ein Stück weiter.\n\"Wir messen nicht mit Lineal, sondern mit offenen Augen und Herz.\""
-    },
-    {
-      "title": "Respekt",
-      "text": "Gegenüber Mitspieler, Gegner, Trainern und sich selbst.\n\"Wir sagen Danke, Entschuldigung und feiern andere genauso wie uns selbst.\""
-    },
-    {
-      "title": "Haltung vor Ergebnis",
-      "text": "Der Charakter zählt mehr als das Torverhältnis.\n\"Wer verliert und trotzdem aufrecht bleibt, hat gewonnen.\""
     }
   ]
 }
+
