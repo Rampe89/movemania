@@ -1,324 +1,212 @@
 backend:
   name: git-gateway
   branch: main
+
 publish_mode: simple
+
 media_folder: assets/img/uploads
 public_folder: /assets/img/uploads
+
 collections:
-- name: texts
-  label: Texte
-  files:
-  - file: assets/content/texts.json
-    label: Startseite
-    name: home
-    fields:
-    - label: Hero Brand
-      name: hero_brand
-      widget: string
-      required: false
-    - label: Hero Titel (HTML erlaubt, z.B. <br>)
-      name: hero_title
-      widget: string
-      required: false
-    - label: Hero Text
-      name: hero_text
-      widget: text
-      required: false
-    - label: Über uns Kicker
-      name: about_kicker
-      widget: string
-      required: false
-    - label: Über uns Titel
-      name: about_title
-      widget: string
-      required: false
-    - label: Headcoach Titel
-      name: about_head_title
-      widget: string
-      required: false
-    - label: Headcoach Text
-      name: about_head_text
-      widget: text
-      required: false
-    - label: Werte Kicker
-      name: usp_kicker
-      widget: string
-      required: false
-    - label: Werte Titel
-      name: usp_title
-      widget: string
-      required: false
-    - label: Werte Ghost (Hintergrund)
-      name: usp_ghost
-      widget: string
-      required: false
-    - label: Kontakt Label Mail
-      name: contact_mail_label
-      widget: string
-      required: false
-    - label: Kontakt Label Instagram
-      name: contact_ig_label
-      widget: string
-      required: false
-    - label: Kontakt Label WhatsApp
-      name: contact_wa_label
-      widget: string
-      required: false
-    - label: FAQ Hinweis
-      name: faq_hint
-      widget: string
-      required: false
-    - label: Angebote Toggle (zugeklappt)
-      name: offers_toggle_closed
-      widget: string
-      required: false
-    - label: Angebote Toggle (aufgeklappt)
-      name: offers_toggle_open
-      widget: string
-      required: false
-- name: hero
-  label: Hero Slider
-  files:
-  - file: assets/content/hero.json
-    label: Slides
-    name: slides
-    format: json
-    fields:
-    - label: Slides
-      name: slides
-      widget: list
-      fields:
-      - label: Typ
-        name: type
-        widget: select
-        options:
-        - video
-        - image
-      - label: Quelle (src)
-        name: src
-        widget: string
-      - label: Poster (nur Video)
-        name: poster
-        widget: string
-        required: false
-      - label: Titel
-        name: title
-        widget: string
-        required: false
-      - label: Text
-        name: text
-        widget: text
-        required: false
-- name: values
-  label: Werte & Icons
-  files:
-  - file: assets/content/values.json
-    label: Werte
-    name: values
-    format: json
-    fields:
-    - label: Werte (max. 6)
-      name: items
-      widget: list
-      fields:
-      - label: Titel
-        name: title
-        widget: string
-      - label: Text
-        name: text
-        widget: text
-        required: false
-      - label: Icon (Pfad oder Upload)
-        name: icon
-        widget: image
-        required: false
-- name: links
-  label: Links
-  files:
-  - file: assets/content/links.json
-    label: Links (Buttons / Kontakt)
-    name: links
-    fields:
-    - label: Booking Link
-      name: booking
-      widget: string
-      required: false
-    - label: Camps Link
-      name: camps
-      widget: string
-      required: false
-    - label: WhatsApp Community
-      name: whatsapp
-      widget: string
-      required: false
-    - label: Instagram
-      name: instagram
-      widget: string
-      required: false
-    - label: Mailto (z.B. mailto:info@...)
-      name: mailto
-      widget: string
-      required: false
-    - label: Shop (extern)
-      name: shop
-      widget: string
-      required: false
-    - label: Hero Video MP4 (Fallback)
-      name: hero_video_mp4
-      widget: string
-      required: false
-    - label: Hero Video Poster (Fallback)
-      name: hero_video_poster
-      widget: string
-      required: false
-    - label: Power 18/19
-      name: power1819
-      widget: string
-      required: false
-    - label: Power 16/17
-      name: power1617
-      widget: string
-      required: false
-- name: sponsors
-  label: Partner
-  files:
-  - file: assets/content/sponsors.json
-    label: Partnerliste
-    name: sponsors
-    format: json
-    fields:
-    - label: Titel
-      name: title
-      widget: string
-      required: false
-      default: Partner
-    - label: Partner
-      name: items
-      widget: list
-      required: false
-      summary: '{{fields.name}}'
-      fields:
-      - label: Name
-        name: name
-        widget: string
-      - label: Link
-        name: url
-        widget: string
-        required: false
-      - label: Logo
-        name: logo
-        widget: image
-        required: false
-- name: gallery
-  label: Galerie
-  files:
-  - file: assets/content/gallery/1.txt
-    label: Dummy (für spätere Galerie)
-    name: gallery_dummy
-    fields:
-    - label: Inhalt
-      name: body
-      widget: text
-      required: false
-- name: theme
-  label: Theme
-  files:
-  - file: assets/content/theme.json
-    label: Design
-    name: theme
-    format: json
-    fields:
-    - label: Farben
-      name: colors
-      widget: object
-      fields:
-      - label: Background
-        name: bg
-        widget: string
-        required: false
-      - label: Ink
-        name: ink
-        widget: string
-        required: false
-      - label: Muted
-        name: muted
-        widget: string
-        required: false
-      - label: Line
-        name: line
-        widget: string
-        required: false
-      - label: Primary
-        name: primary
-        widget: string
-        required: false
-      - label: Accent
-        name: accent
-        widget: string
-        required: false
-      - label: Card BG
-        name: card_bg
-        widget: string
-        required: false
-      - label: Card Border
-        name: card_border
-        widget: string
-        required: false
-    - label: Typografie
-      name: type
-      widget: object
-      fields:
-      - label: Body Size (px)
-        name: body_size
-        widget: number
-        required: false
-      - label: Hero Title Max (px)
-        name: hero_title_size
-        widget: number
-        required: false
-      - label: Section Title (px)
-        name: section_title_size
-        widget: number
-        required: false
-      - label: Card Title (px)
-        name: card_title_size
-        widget: number
-        required: false
-    - label: Layout
-      name: layout
-      widget: object
-      fields:
-      - label: Content Width (px)
-        name: content_width
-        widget: number
-        required: false
-      - label: Radius (px)
-        name: radius
-        widget: number
-        required: false
-      - label: Shadow Strength (0..0.30)
-        name: shadow_strength
-        widget: number
-        required: false
-    - label: Hintergrund Pattern
-      name: pattern
-      widget: object
-      fields:
-      - label: Pattern aktiv
-        name: enabled
-        widget: boolean
-        default: true
-        required: false
-      - label: Dot Color (CSS, z.B. rgba(11,16,32,.075))
-        name: dot
-        widget: string
-        required: false
-      - label: Opacity (0..1)
-        name: opacity
-        widget: number
-        required: false
-      - label: Pattern Size (px)
-        name: size
-        widget: number
-        required: false
+  # --- TEXTE (bestehend) ---
+  - name: texts
+    label: Texte
+    files:
+      - file: assets/content/texts.json
+        label: Startseite
+        name: home
+        format: json
+        fields:
+          - { label: Hero Brand, name: hero_brand, widget: string, required: false }
+          - { label: Hero Titel (HTML erlaubt, z.B. <br>), name: hero_title, widget: string, required: false }
+          - { label: Hero Text, name: hero_text, widget: text, required: false }
+
+          - { label: Über uns Kicker, name: about_kicker, widget: string, required: false }
+          - { label: Über uns Titel, name: about_title, widget: string, required: false }
+          - { label: Headcoach Titel, name: about_head_title, widget: string, required: false }
+          - { label: Headcoach Text, name: about_head_text, widget: text, required: false }
+
+          - { label: Werte Kicker, name: usp_kicker, widget: string, required: false }
+          - { label: Werte Titel, name: usp_title, widget: string, required: false }
+          - { label: Werte Ghost (Hintergrund), name: usp_ghost, widget: string, required: false }
+
+          - { label: Kontakt Label Mail, name: contact_mail_label, widget: string, required: false }
+          - { label: Kontakt Label Instagram, name: contact_ig_label, widget: string, required: false }
+          - { label: Kontakt Label WhatsApp, name: contact_wa_label, widget: string, required: false }
+
+          - { label: FAQ Hinweis, name: faq_hint, widget: string, required: false }
+
+          - { label: Angebote Toggle (zugeklappt), name: offers_toggle_closed, widget: string, required: false }
+          - { label: Angebote Toggle (aufgeklappt), name: offers_toggle_open, widget: string, required: false }
+
+  # --- HERO SLIDER (bestehend) ---
+  - name: hero
+    label: Hero Slider
+    files:
+      - file: assets/content/hero.json
+        label: Slides
+        name: slides
+        format: json
+        fields:
+          - label: Slides
+            name: slides
+            widget: list
+            fields:
+              - label: Typ
+                name: type
+                widget: select
+                options: [video, image]
+              - { label: Quelle (src), name: src, widget: string }
+              - { label: Poster (nur Video), name: poster, widget: string, required: false }
+              - { label: Titel, name: title, widget: string, required: false }
+              - { label: Text, name: text, widget: text, required: false }
+
+  # --- WERTE (bestehend: schreibt nach items, passt zu robustem index.html) ---
+  - name: values
+    label: Werte & Icons
+    files:
+      - file: assets/content/values.json
+        label: Werte
+        name: values
+        format: json
+        fields:
+          - label: Werte (max. 6)
+            name: items
+            widget: list
+            fields:
+              - { label: Titel, name: title, widget: string }
+              - { label: Text, name: text, widget: text, required: false }
+              - { label: Icon (Upload), name: icon, widget: image, required: false }
+              - { label: Icon ALT (optional), name: icon_alt, widget: string, required: false }
+
+  # --- LINKS (bestehend) ---
+  - name: links
+    label: Links
+    files:
+      - file: assets/content/links.json
+        label: Links (Buttons / Kontakt)
+        name: links
+        format: json
+        fields:
+          - { label: Booking Link, name: booking, widget: string, required: false }
+          - { label: Camps Link, name: camps, widget: string, required: false }
+          - { label: WhatsApp Community, name: whatsapp, widget: string, required: false }
+          - { label: Instagram, name: instagram, widget: string, required: false }
+          - { label: Mailto (z.B. mailto:info@...), name: mailto, widget: string, required: false }
+          - { label: Shop (extern), name: shop, widget: string, required: false }
+          - { label: Hero Video MP4 (Fallback), name: hero_video_mp4, widget: string, required: false }
+          - { label: Hero Video Poster (Fallback), name: hero_video_poster, widget: string, required: false }
+          - { label: Power 18/19, name: power1819, widget: string, required: false }
+          - { label: Power 16/17, name: power1617, widget: string, required: false }
+
+  # --- SPONSORS (bestehend) ---
+  - name: sponsors
+    label: Partner
+    files:
+      - file: assets/content/sponsors.json
+        label: Partnerliste
+        name: sponsors
+        format: json
+        fields:
+          - { label: Titel, name: title, widget: string, required: false, default: Partner }
+          - label: Partner
+            name: items
+            widget: list
+            required: false
+            summary: "{{fields.name}}"
+            fields:
+              - { label: Name, name: name, widget: string }
+              - { label: Link, name: url, widget: string, required: false }
+              - { label: Logo, name: logo, widget: image, required: false }
+
+  # --- GALLERY (bestehend Dummy) ---
+  - name: gallery
+    label: Galerie
+    files:
+      - file: assets/content/gallery/1.txt
+        label: Dummy (für spätere Galerie)
+        name: gallery_dummy
+        fields:
+          - { label: Inhalt, name: body, widget: text, required: false }
+
+  # --- THEME (bestehend) ---
+  - name: theme
+    label: Theme
+    files:
+      - file: assets/content/theme.json
+        label: Design
+        name: theme
+        format: json
+        fields:
+          - label: Farben
+            name: colors
+            widget: object
+            fields:
+              - { label: Background, name: bg, widget: string, required: false }
+              - { label: Ink, name: ink, widget: string, required: false }
+              - { label: Muted, name: muted, widget: string, required: false }
+              - { label: Line, name: line, widget: string, required: false }
+              - { label: Primary, name: primary, widget: string, required: false }
+              - { label: Accent, name: accent, widget: string, required: false }
+              - { label: Card BG, name: card_bg, widget: string, required: false }
+              - { label: Card Border, name: card_border, widget: string, required: false }
+
+          - label: Typografie
+            name: type
+            widget: object
+            fields:
+              - { label: Body Size (px), name: body_size, widget: number, required: false, value_type: int }
+              - { label: Hero Title Max (px), name: hero_title_size, widget: number, required: false, value_type: int }
+              - { label: Section Title (px), name: section_title_size, widget: number, required: false, value_type: int }
+              - { label: Card Title (px), name: card_title_size, widget: number, required: false, value_type: int }
+
+          - label: Layout
+            name: layout
+            widget: object
+            fields:
+              - { label: Content Width (px), name: content_width, widget: number, required: false, value_type: int }
+              - { label: Radius (px), name: radius, widget: number, required: false, value_type: int }
+              - { label: Shadow Strength (0..0.30), name: shadow_strength, widget: number, required: false, value_type: float }
+
+          - label: Hintergrund Pattern
+            name: pattern
+            widget: object
+            fields:
+              - { label: Pattern aktiv, name: enabled, widget: boolean, default: true, required: false }
+              - { label: Dot Color (CSS, z.B. rgba(11,16,32,.075)), name: dot, widget: string, required: false }
+              - { label: Opacity (0..1), name: opacity, widget: number, required: false, value_type: float }
+              - { label: Pattern Size (px), name: size, widget: number, required: false, value_type: int }
+
+  # --- NEU: HEADCOACH MEDIA (für Bild/Video neben Text) ---
+  - name: headcoach
+    label: Headcoach (Media)
+    files:
+      - file: assets/content/headcoach.json
+        label: Headcoach Datei
+        name: headcoach
+        format: json
+        fields:
+          - { label: Name (optional), name: name, widget: string, required: false }
+          - { label: Bild (optional), name: image, widget: image, required: false }
+          - { label: Video MP4 (optional, Pfad/URL), name: video, widget: string, required: false }
+          - { label: Poster (optional), name: poster, widget: string, required: false }
+
+  # --- NEU: COACHES (Team-Karten editierbar) ---
+  - name: coaches
+    label: Coaches
+    files:
+      - file: assets/content/coaches.json
+        label: Coach-Liste
+        name: coaches
+        format: json
+        fields:
+          - label: Coaches
+            name: coaches
+            widget: list
+            fields:
+              - { label: Name, name: name, widget: string }
+              - { label: Rolle (optional), name: role, widget: string, required: false }
+              - { label: Bio / Schwerpunkt, name: bio, widget: text, required: false }
+              - { label: Bild (optional), name: image, widget: image, required: false }
+
 
