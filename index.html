@@ -122,6 +122,7 @@
       .menu{display:none}
       .navCtas{display:none}
     }
+
     /* Sponsors / Partners (Topbar right) */
     .sponsorsBar{
       display:flex;
@@ -176,7 +177,6 @@
       color:rgba(11,16,32,.55);
       white-space:nowrap;
     }
-
 
     /* Buttons */
     .btn{
@@ -395,8 +395,6 @@
       display:flex; gap:10px; flex-wrap:wrap;
     }
 
-    
-
     /* Value cards (icons) */
     .valueTop{
       display:flex;
@@ -465,7 +463,8 @@
     @media (max-width: 980px){
       .offerAccWide{ grid-column: auto; }
     }
-/* About */
+
+    /* About */
     .aboutGrid{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -606,67 +605,6 @@
     }
     @media (max-width: 980px){
       .offerGrid{grid-template-columns:1fr}
-    }
-    .offerBlock{
-      border:1px solid var(--card-border);
-      background:var(--card-bg);
-      padding:18px 18px 16px;
-      border-radius:var(--radius);
-    }
-    .offerBlock h3{
-      margin:0 0 10px;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:-.01em;
-      font-size: var(--card-title);
-    }
-    .offerBlock p{ margin:0; color:var(--muted); line-height:1.85; font-size:13px; }
-    .subOffers{
-      margin-top:14px;
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px;
-    }
-    @media (max-width: 640px){
-      .subOffers{grid-template-columns:1fr}
-    }
-    .subCard{
-      border:1px solid var(--card-border);
-      background:#fff;
-      padding:12px 12px 10px;
-      border-radius:var(--radius);
-      min-height:72px;
-    }
-    .subCard b{
-      display:block;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.02em;
-      font-size:12px;
-      margin-bottom:6px;
-    }
-    .subCard small{
-      display:block;
-      color:rgba(11,16,32,.55);
-      line-height:1.6;
-      font-size:12px;
-    }
-    .dates{
-      margin-top:10px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .datePill{
-      border:1px solid var(--card-border);
-      padding:8px 10px;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.18em;
-      font-size:11px;
-      border-radius:var(--radius);
-      background:#fff;
-      color:rgba(11,16,32,.8);
     }
 
     /* FAQ */
@@ -825,7 +763,7 @@
           </div>
         </div>
       </div>
-</div>
+    </div>
   </div>
 </header>
 
@@ -891,6 +829,7 @@
           Coaches
         </h3>
         <div class="peopleGrid" id="coachGrid">
+          <!-- Wird aus /assets/content/coaches.json befüllt -->
           <div class="person">
             <div class="ph">Coach</div>
             <div class="personBody">
@@ -931,8 +870,7 @@
         <div class="uspGhost" id="uspGhost">WERTE</div>
         <p class="uspKicker" id="uspKicker">Wofür wir stehen</p>
         <h2 class="uspTitle" id="uspTitle">Spaß · Mut · Einsatz</h2>
-        <div class="pillRow" aria-label="Grundwerte">
-        </div>
+        <div class="pillRow" aria-label="Grundwerte"></div>
       </div>
 
       <div class="cards" id="valuesGrid" aria-label="Werte">
@@ -1089,7 +1027,7 @@
     </div>
   </section>
 
-<!-- KONTAKT -->
+  <!-- KONTAKT -->
   <section id="kontakt" class="section">
     <div class="wrap">
       <h2 class="sectionTitle">Kontakt</h2>
@@ -1263,6 +1201,9 @@
     const heroMedia = document.getElementById("heroMedia");
     if (!heroMedia) return;
 
+    const SOUND_KEY = "movemania_hero_sound_on";
+    let soundOn = localStorage.getItem(SOUND_KEY) === "1";
+
     const safeSlides = Array.isArray(slides) && slides.length ? slides : [
       {
         type: "video",
@@ -1288,6 +1229,21 @@
     let idx = 0;
     let timer = null;
 
+    function applySoundStateToActiveVideo(){
+      const activeSlide = heroMedia.querySelector(".slide.isActive");
+      if (!activeSlide) return;
+      const v = activeSlide.querySelector("video");
+      if (!v) return;
+
+      // Autoplay policy: start muted; allow unmute only after user gesture
+      v.muted = !soundOn;
+      v.volume = 1;
+
+      // Try to continue playback (some browsers need explicit play after toggling mute)
+      const p = v.play?.();
+      if (p && typeof p.catch === "function") p.catch(() => {});
+    }
+
     const render = () => {
       heroMedia.innerHTML = "";
 
@@ -1296,6 +1252,7 @@
         slide.className = "slide" + (i === idx ? " isActive" : "");
 
         if (s.type === "video") {
+          // Start muted by default; we unmute only via user click (Sound button)
           slide.innerHTML = `
             <video ${i === idx ? "autoplay" : ""} muted loop playsinline preload="metadata" poster="${s.poster || ""}">
               <source src="${s.src}" type="video/mp4">
@@ -1317,12 +1274,15 @@
         heroMedia.appendChild(slide);
       });
 
-      // UI
+      // UI (Prev/Next + Sound)
       const ui = document.createElement("div");
       ui.className = "sliderUi";
       ui.innerHTML = `
         <button class="vBtn" id="sPrev" type="button">Zurück</button>
-        <button class="vBtn" id="sNext" type="button">Weiter</button>
+        <div style="display:flex;gap:10px;pointer-events:auto;">
+          <button class="vBtn" id="sSound" type="button">${soundOn ? "Sound: AN" : "Sound: AUS"}</button>
+          <button class="vBtn" id="sNext" type="button">Weiter</button>
+        </div>
       `;
       heroMedia.appendChild(ui);
 
@@ -1339,10 +1299,29 @@
       heroMedia.appendChild(dots);
 
       // Bind
-      heroMedia.querySelector("#sPrev").addEventListener("click", () => { idx = (idx - 1 + safeSlides.length) % safeSlides.length; render(); restart(); });
-      heroMedia.querySelector("#sNext").addEventListener("click", () => { idx = (idx + 1) % safeSlides.length; render(); restart(); });
+      heroMedia.querySelector("#sPrev").addEventListener("click", () => {
+        idx = (idx - 1 + safeSlides.length) % safeSlides.length;
+        render();
+        restart();
+      });
+      heroMedia.querySelector("#sNext").addEventListener("click", () => {
+        idx = (idx + 1) % safeSlides.length;
+        render();
+        restart();
+      });
 
-      // Pause on hover handled outside render() (see below)
+      // Sound toggle must be a user gesture
+      heroMedia.querySelector("#sSound").addEventListener("click", () => {
+        soundOn = !soundOn;
+        localStorage.setItem(SOUND_KEY, soundOn ? "1" : "0");
+        // Re-render button label quickly
+        const btn = heroMedia.querySelector("#sSound");
+        if (btn) btn.textContent = soundOn ? "Sound: AN" : "Sound: AUS";
+        applySoundStateToActiveVideo();
+      });
+
+      // After rendering, try applying sound state (will remain muted unless already unlocked by user)
+      applySoundStateToActiveVideo();
     };
 
     const stop = () => { if (timer) clearInterval(timer); timer = null; };
@@ -1377,6 +1356,72 @@
     });
   }
 
+  function mountAboutMedia(headcoach){
+    const el = document.getElementById("aboutMedia");
+    if (!el || !headcoach) return;
+
+    const img = headcoach.image || "";
+    const video = headcoach.video || "";
+    const poster = headcoach.poster || "";
+
+    if (video){
+      el.innerHTML = `
+        <video muted loop playsinline preload="metadata" poster="${poster || ""}" style="width:100%;height:100%;object-fit:cover;display:block;">
+          <source src="${video}" type="video/mp4">
+        </video>
+      `;
+      // Keep it muted (about section). Could be extended later.
+      const v = el.querySelector("video");
+      if (v) {
+        const p = v.play?.();
+        if (p && typeof p.catch === "function") p.catch(() => {});
+      }
+      return;
+    }
+
+    if (img){
+      el.innerHTML = `<img src="${img}" alt="${headcoach.name || "Headcoach"}" loading="lazy" />`;
+      return;
+    }
+  }
+
+  function mountCoaches(data){
+    const grid = document.getElementById("coachGrid");
+    if (!grid) return;
+
+    const coaches = Array.isArray(data?.coaches) ? data.coaches
+                  : Array.isArray(data?.items) ? data.items
+                  : Array.isArray(data) ? data
+                  : [];
+
+    if (!coaches.length) return; // keep fallback placeholders
+
+    grid.innerHTML = "";
+    coaches.slice(0, 8).forEach((c) => {
+      const card = document.createElement("div");
+      card.className = "person";
+
+      const img = c?.image || "";
+      const name = (c?.name || "Coach").toUpperCase();
+      const bio = c?.bio || c?.text || "";
+      const role = c?.role ? ` (${c.role})` : "";
+
+      const top = img
+        ? `<img src="${img}" alt="${c?.name || "Coach"}" loading="lazy" />`
+        : `<div class="ph">Coach</div>`;
+
+      card.innerHTML = `
+        ${top}
+        <div class="personBody">
+          <b>${name}${role}</b>
+          <p>${bio}</p>
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
+  }
+
   (async () => {
     // Cookie Hinweis (global)
     const cc = document.getElementById("cc");
@@ -1400,14 +1445,15 @@
     const logo = document.getElementById("logoImg");
     if (logo) logo.style.display = "block";
 
-    // LINKS aus CMS (bestehende Struktur beibehalten)
+    // LINKS aus CMS
     let links = {};
     try { links = await loadJSON("/assets/content/links.json"); }
     catch (e) { console.warn("links.json fehlt oder nicht erreichbar:", e); }
-setHref("ctaBooking", links.booking);
+
+    setHref("ctaBooking", links.booking);
     setHref("btnBooking", links.booking);
-setHref("btnCamps", links.camps);
-setHref("kWA", links.whatsapp);
+    setHref("btnCamps", links.camps);
+    setHref("kWA", links.whatsapp);
 
     setHref("btnPower1819", links.power1819);
     setHref("btnPower1617", links.power1617);
@@ -1417,9 +1463,8 @@ setHref("kWA", links.whatsapp);
     // Mail: falls ihr im links.json z.B. "mailto:..." hinterlegt
     setHref("kMail", links.mailto || links.email);
 
-    // Shop: extern – aktuell noch nicht vorhanden -> bleibt '#', kann später via links.shop gesetzt werden
+    // Shop
     setHref("navShop", links.shop);
-
 
     // PARTNER / SPONSOREN aus CMS
     let sponsorsData = {};
@@ -1441,8 +1486,7 @@ setHref("kWA", links.whatsapp);
                   : [];
 
       if (!items.length){
-        // keep placeholder
-        return;
+        return; // keep placeholder
       }
 
       itemsEl.innerHTML = "";
@@ -1474,7 +1518,7 @@ setHref("kWA", links.whatsapp);
       });
     })(sponsorsData);
 
-    // TEXTE aus CMS (bestehende Struktur beibehalten)
+    // TEXTE aus CMS
     let texts = {};
     try { texts = await loadJSON("/assets/content/texts.json"); }
     catch (e) { console.warn("texts.json fehlt oder nicht erreichbar:", e); }
@@ -1486,7 +1530,7 @@ setHref("kWA", links.whatsapp);
 
     setText("heroText", texts.hero_text || "In unseren Camps und Kursen entwickeln Kinder Freude an Bewegung – mit Struktur, Haltung und Herz.");
 
-    // Werte
+    // Werte Headline
     setText("uspKicker", (texts.usp_kicker || "Wofür wir stehen"));
     setText("uspTitle", (texts.usp_title || "Mut · Einsatz · Werte").toUpperCase());
     setText("uspGhost", (texts.usp_ghost || "WERTE").toUpperCase());
@@ -1505,14 +1549,19 @@ setHref("kWA", links.whatsapp);
     try { valuesData = await loadJSON("/assets/content/values.json"); }
     catch (e) { /* ok */ }
 
-    const values = Array.isArray(valuesData?.values) && valuesData.values.length ? valuesData.values : defaultValues;
+    const values = (Array.isArray(valuesData?.values) && valuesData.values.length) ? valuesData.values
+                : (Array.isArray(valuesData?.items) && valuesData.items.length) ? valuesData.items
+                : defaultValues;
+
     const valuesGrid = document.getElementById("valuesGrid");
     if (valuesGrid) {
       valuesGrid.innerHTML = "";
       values.slice(0, 6).forEach((v) => {
         const card = document.createElement("div");
         card.className = "card";
-        const iconHtml = v.icon ? `<span class="valueIcon"><img src="${v.icon}" alt="${(v.icon_alt || v.title || "Icon")}" loading="lazy"></span>` : `<span class="valueIcon"></span>`;
+        const iconHtml = v.icon
+          ? `<span class="valueIcon"><img src="${v.icon}" alt="${(v.icon_alt || v.title || "Icon")}" loading="lazy"></span>`
+          : `<span class="valueIcon"></span>`;
         card.innerHTML = `
           <div class="valueTop">
             ${iconHtml}
@@ -1523,6 +1572,7 @@ setHref("kWA", links.whatsapp);
         valuesGrid.appendChild(card);
       });
     }
+
     // Angebote: einzelne Accordions (default geschlossen)
     document.querySelectorAll("details.offerAcc").forEach((d) => {
       const icon = d.querySelector(".offerAccIcon");
@@ -1531,7 +1581,7 @@ setHref("kWA", links.whatsapp);
       d.addEventListener("toggle", sync);
     });
 
-    // About (optional)
+    // About (optional texts)
     setText("aboutKicker", texts.about_kicker || "Über uns");
     setText("aboutTitle", (texts.about_title || "Wer wir sind").toUpperCase());
     setText("aboutHeadTitle", (texts.about_head_title || "Vorstellung Headcoach").toUpperCase());
@@ -1581,6 +1631,24 @@ setHref("kWA", links.whatsapp);
 
     mountHeroSlider(heroSlides);
 
+    // TEAM: Headcoach Media + Coaches
+    try {
+      const headcoach = await loadJSON("/assets/content/headcoach.json");
+      mountAboutMedia(headcoach);
+      if (headcoach?.name) {
+        // optional: wenn du willst, kannst du name in aboutHeadTitle etc. einbauen
+      }
+    } catch (e) {
+      // ok
+    }
+
+    try {
+      const coachesData = await loadJSON("/assets/content/coaches.json");
+      mountCoaches(coachesData);
+    } catch (e) {
+      console.warn("coaches.json fehlt oder nicht erreichbar:", e);
+    }
+
     initFaq();
   })();
 </script>
@@ -1601,3 +1669,4 @@ setHref("kWA", links.whatsapp);
 
 </body>
 </html>
+
