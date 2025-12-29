@@ -1,0 +1,52 @@
+{
+  "offers": {
+    "camps": {
+      "title": "Camps",
+      "text": "Feriencamps und Elitecamps – strukturierte Tage, Bewegung, Spiele und Teamgefühl.",
+      "button_label": "Camps buchen",
+      "button_link": "",
+      "sub": [
+        {
+          "title": "Feriencamps",
+          "text": "Abwechslungsreiche Einheiten, warmes Mittagessen, viel Spaß."
+        },
+        {
+          "title": "Elitecamps",
+          "text": "Intensiver, fokussierter, leistungsorientierter – für Kids, die mehr wollen."
+        }
+      ]
+    },
+    "kurse": {
+      "title": "Kurse",
+      "text": "Powerkurse in kleinen Gruppen – Technik, Athletik, Spielintelligenz.",
+      "power_box_label": "Powerkurse",
+      "power_box_text": "Termine & Gruppen (Beispiele):",
+      "power_pills": ["12/13", "14/15", "16/17", "18/19"],
+      "elite_box_label": "Elitekurse",
+      "elite_box_text": "Zusatzkurse (Erklärungstext aus CMS).",
+      "buttons": [
+        { "label": "Power 18/19", "link": "" },
+        { "label": "Power 16/17", "link": "" }
+      ]
+    },
+    "ballschule": {
+      "title": "Ballschule",
+      "text": "Motorik, Ballgefühl, Koordination – ideal als Fundament (z. B. für Einsteiger)."
+    },
+    "kiga": {
+      "title": "Fußballkindergarten",
+      "text": "Spielerisches Training für die Kleineren – Bewegung, Spaß und erste Fußball-Basics."
+    },
+    "beratung": {
+      "title": "Beratung",
+      "text": "Unterstützung für Vereine, Trainer und Teams – von Konzept bis Fortbildung.",
+      "sub": [
+        { "title": "Vereinsberatung", "text": "", "link": "" },
+        { "title": "Rent a Coach", "text": "", "link": "" },
+        { "title": "Trainerfortbildung", "text": "", "link": "" },
+        { "title": "Trainer", "text": "", "link": "" },
+        { "title": "Spiele", "text": "", "link": "" }
+      ]
+    }
+  }
+}
