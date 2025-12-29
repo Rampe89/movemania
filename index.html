@@ -12,7 +12,6 @@
 
   <style>
     :root{
-      /* Base */
       --bg:#ffffff;
       --ink:#0b1020;
       --muted:#5e6880;
@@ -24,13 +23,12 @@
       --max: 1120px;
       --radius: 0px;
 
-      /* Theme-driven extras */
       --card-bg:#ffffff;
       --card-border: var(--line);
       --shadow: 0 14px 40px rgba(11,16,32,.12);
 
       --base: 14px;
-      --hero-title-max: 68px; /* clamp max */
+      --hero-title-max: 68px;
       --section-title: 24px;
       --card-title: 14px;
 
@@ -51,7 +49,6 @@
     a{color:inherit; text-decoration:none}
     .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
 
-    /* Subtle dot pattern layer */
     .pattern{ position:relative; isolation:isolate; }
     .pattern::before{
       content:"";
@@ -77,7 +74,6 @@
         transparent 100%);
     }
 
-    /* Topbar */
     .topbar{
       position:sticky; top:0; z-index:50;
       background:rgba(255,255,255,.92);
@@ -123,7 +119,6 @@
       .navCtas{display:none}
     }
 
-    /* Sponsors / Partners (Topbar right) */
     .sponsorsBar{
       display:flex;
       align-items:center;
@@ -141,11 +136,7 @@
       color:rgba(11,16,32,.60);
       white-space:nowrap;
     }
-    .sponsorsItems{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
+    .sponsorsItems{display:flex; align-items:center; gap:10px;}
     .sponsorLink{
       display:inline-flex;
       align-items:center;
@@ -159,12 +150,7 @@
       white-space:nowrap;
     }
     .sponsorLink:hover{ background: rgba(11,16,32,.03); }
-    .sponsorLink img{
-      height:22px;
-      width:auto;
-      display:block;
-      object-fit:contain;
-    }
+    .sponsorLink img{height:22px; width:auto; display:block; object-fit:contain;}
     .sponsorFallback{
       font-size:11px;
       font-weight:900;
@@ -172,13 +158,8 @@
       text-transform:uppercase;
       color:rgba(11,16,32,.70);
     }
-    .sponsorsEmpty{
-      font-size:11px;
-      color:rgba(11,16,32,.55);
-      white-space:nowrap;
-    }
+    .sponsorsEmpty{font-size:11px; color:rgba(11,16,32,.55); white-space:nowrap;}
 
-    /* Buttons */
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       min-height:44px;
@@ -200,7 +181,6 @@
     .btnGhost{border-color:rgba(11,16,32,.35); color:var(--ink); background:#fff;}
     .btnGhost:hover{background:rgba(11,16,32,.03)}
 
-    /* HERO */
     .hero{ padding:56px 0 30px; border-bottom:1px solid var(--line); }
     .heroInner{
       display:grid;
@@ -212,11 +192,7 @@
       .heroInner{grid-template-columns:1fr}
     }
 
-    .heroTitle{
-      line-height: 1.02;
-      max-width: 16ch;
-      margin:0;
-    }
+    .heroTitle{ line-height: 1.02; max-width: 16ch; margin:0; }
     .heroBrand{
       display:block;
       font-weight:900;
@@ -239,6 +215,7 @@
       color: rgba(11,16,32,.65);
       max-width: 56ch;
       margin-top: 14px;
+      white-space:pre-line;
     }
     .btnRow{
       display:flex;
@@ -247,7 +224,6 @@
       margin-top:26px;
     }
 
-    /* HERO SLIDER */
     .mediaFrame{
       border:1px solid var(--line);
       background:#000;
@@ -260,12 +236,7 @@
     @media (max-width: 980px){
       .mediaFrame{ min-height: 260px; }
     }
-    .slide{
-      position:absolute;
-      inset:0;
-      opacity:0;
-      transition: opacity .28s ease;
-    }
+    .slide{ position:absolute; inset:0; opacity:0; transition: opacity .28s ease; }
     .slide.isActive{ opacity:1; }
     .slide video,
     .slide img{
@@ -332,7 +303,6 @@
       cursor:pointer;
     }
     .sliderUi .vBtn:hover{ background: rgba(0,0,0,.45); }
-
     .dots{
       position:absolute;
       left:12px;
@@ -350,7 +320,6 @@
     }
     .dot.isActive{ background: rgba(255,255,255,.90); }
 
-    /* Sections */
     .section{ padding:30px 0; border-bottom:1px solid var(--line); }
     .section:last-of-type{border-bottom:none}
     .sectionTitle{
@@ -369,7 +338,6 @@
       font-size:11px;
     }
 
-    /* Cards */
     .cards{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -398,22 +366,13 @@
       line-height:1.85;
       font-size:13px;
       max-width:60ch;
+      white-space:pre-line;
     }
-    .cardActions{
-      margin-top:14px;
-      display:flex; gap:10px; flex-wrap:wrap;
-    }
+    .cardActions{ margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; }
 
-    /* Value cards (icons) */
-    .valueTop{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin-bottom:10px;
-    }
+    .valueTop{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
     .valueIcon{
-      width:34px;
-      height:34px;
+      width:34px; height:34px;
       border:1px solid var(--card-border);
       border-radius: var(--radius);
       background:#fff;
@@ -422,14 +381,8 @@
       flex:0 0 auto;
       padding:6px;
     }
-    .valueIcon img{
-      width:100%;
-      height:100%;
-      object-fit:contain;
-      display:block;
-    }
+    .valueIcon img{ width:100%; height:100%; object-fit:contain; display:block; }
 
-    /* Accordions (Angebote: einzelne Blöcke) */
     details.offerAcc{
       border:1px solid var(--card-border);
       background:var(--card-bg);
@@ -459,30 +412,19 @@
       font-weight:900;
       letter-spacing:.18em;
     }
-    .offerAccBody{
-      padding:16px 14px 14px;
-      border-top:1px solid var(--card-border);
-    }
-    .offerAccBody p{
-      margin-top:0;
-    }
-    .offerAccWide{
-      grid-column: 1 / -1;
-    }
-    @media (max-width: 980px){
-      .offerAccWide{ grid-column: auto; }
-    }
+    .offerAccBody{ padding:16px 14px 14px; border-top:1px solid var(--card-border); }
+    .offerAccBody p{ margin-top:0; }
 
-    /* About */
+    .offerAccWide{ grid-column: 1 / -1; }
+    @media (max-width: 980px){ .offerAccWide{ grid-column:auto; } }
+
     .aboutGrid{
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap:18px;
       align-items:stretch;
     }
-    @media (max-width: 980px){
-      .aboutGrid{grid-template-columns:1fr}
-    }
+    @media (max-width: 980px){ .aboutGrid{grid-template-columns:1fr} }
     .aboutMedia{
       border:1px solid var(--card-border);
       background:var(--card-bg);
@@ -504,12 +446,8 @@
       gap:18px;
       margin-top:18px;
     }
-    @media (max-width: 1120px){
-      .peopleGrid{grid-template-columns: repeat(2, 1fr)}
-    }
-    @media (max-width: 980px){
-      .peopleGrid{grid-template-columns:1fr}
-    }
+    @media (max-width: 1120px){ .peopleGrid{grid-template-columns: repeat(2, 1fr)} }
+    @media (max-width: 980px){ .peopleGrid{grid-template-columns:1fr} }
     .person{
       border:1px solid var(--card-border);
       background:var(--card-bg);
@@ -527,7 +465,7 @@
       font-size:11px;
       border-bottom:1px solid var(--card-border);
     }
-    /* FIX: Coach-Bilder nicht abschneiden */
+    /* Coach-Bilder nicht abschneiden */
     .person img{
       width:100%;
       height:170px;
@@ -538,20 +476,15 @@
     }
     .personBody{ padding:14px 14px 12px; }
     .personBody b{ display:block; font-weight:900; text-transform:uppercase; letter-spacing:.02em; font-size:12px; }
-    .personBody p{ margin:8px 0 0; color:var(--muted); line-height:1.8; font-size:13px; }
+    .personBody p{ margin:8px 0 0; color:var(--muted); line-height:1.8; font-size:13px; white-space:pre-line; }
 
-    /* Values / USP headline */
     .usp{
       padding:54px 0 50px;
       border-bottom:1px solid var(--line);
       position:relative;
       overflow:hidden;
     }
-    .uspHead{
-      text-align:center;
-      position:relative;
-      padding:8px 0 24px;
-    }
+    .uspHead{ text-align:center; position:relative; padding:8px 0 24px; }
     .uspGhost{
       position:absolute;
       left:50%;
@@ -608,16 +541,13 @@
       border-radius: var(--radius);
     }
 
-    /* Offers: blocks with subcards */
     .offerGrid{
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap:18px;
       align-items:stretch;
     }
-    @media (max-width: 980px){
-      .offerGrid{grid-template-columns:1fr}
-    }
+    @media (max-width: 980px){ .offerGrid{grid-template-columns:1fr} }
 
     .subOffers{
       margin-top:14px;
@@ -625,9 +555,7 @@
       grid-template-columns: 1fr 1fr;
       gap:10px;
     }
-    @media (max-width: 640px){
-      .subOffers{grid-template-columns:1fr}
-    }
+    @media (max-width: 640px){ .subOffers{grid-template-columns:1fr} }
     .subCard{
       border:1px solid var(--card-border);
       background:#fff;
@@ -650,12 +578,7 @@
       font-size:12px;
       white-space:pre-line;
     }
-    .dates{
-      margin-top:10px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
+    .dates{ margin-top:10px; display:flex; gap:10px; flex-wrap:wrap; }
     .datePill{
       border:1px solid var(--card-border);
       padding:8px 10px;
@@ -711,16 +634,15 @@
     }
     .faqItem.isOpen .faqA{ display:block; }
 
-    /* Contact */
+    /* CONTACT (neu, sauberer) */
     .kontaktRow{ display:flex; gap:14px; flex-wrap:wrap; padding-top:6px; }
     .kontaktGrid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       gap:18px;
     }
-    @media (max-width: 980px){
-      .kontaktGrid{grid-template-columns:1fr}
-    }
+    @media (max-width: 980px){ .kontaktGrid{grid-template-columns:1fr} }
+
     .kontaktCard{
       border:1px solid var(--card-border);
       background:var(--card-bg);
@@ -729,9 +651,28 @@
       display:flex;
       justify-content:space-between;
       align-items:center;
-      gap:12px;
+      gap:14px;
+      transition: background .15s ease, transform .08s ease;
     }
-    .kontaktCard b{
+    .kontaktCard:hover{ background: rgba(11,16,32,.02); }
+    .kontaktCard:active{ transform: translateY(1px); }
+
+    .kontaktLeft{ display:flex; align-items:center; gap:12px; min-width:0; }
+    .kontaktBadge{
+      width:44px; height:44px;
+      border:1px solid var(--card-border);
+      border-radius: 999px;
+      display:grid; place-items:center;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:11px;
+      color:rgba(11,16,32,.55);
+      background:#fff;
+      flex:0 0 auto;
+    }
+    .kontaktText{ min-width:0; }
+    .kontaktText b{
       display:block;
       font-weight:900;
       text-transform:uppercase;
@@ -739,18 +680,22 @@
       font-size:12px;
       margin-bottom:4px;
     }
-    .kontaktCard small{ color:rgba(11,16,32,.55); font-size:12px; line-height:1.6; }
-    .kontaktIcon{
-      width:44px; height:44px;
-      border:1px solid var(--card-border);
-      border-radius: var(--radius);
-      display:grid; place-items:center;
+    .kontaktText small{
+      display:block;
+      color:rgba(11,16,32,.55);
+      font-size:12px;
+      line-height:1.6;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width: 100%;
+    }
+    .kontaktArrow{
+      color:rgba(11,16,32,.35);
       font-weight:900;
       letter-spacing:.18em;
       text-transform:uppercase;
       font-size:11px;
-      color:rgba(11,16,32,.55);
-      background:#fff;
       flex:0 0 auto;
     }
 
@@ -773,7 +718,6 @@
       100%{background-position: -200% 0}
     }
 
-    /* Cookie Banner (minimal, global) */
     .cc{
       position:fixed;
       left:18px;
@@ -850,7 +794,6 @@
         </div>
       </div>
 
-      <!-- HERO SLIDER (Videos/Bilder) -->
       <div class="mediaFrame" id="heroMedia" aria-label="Hero Slider">
         <div class="slide isActive">
           <div style="height:100%;display:grid;place-items:center;color:rgba(255,255,255,.85);font-weight:800;font-size:13px;padding:18px;text-align:center;">
@@ -891,7 +834,6 @@
           Coaches
         </h3>
         <div class="peopleGrid" id="coachGrid">
-          <!-- wird aus /assets/content/coaches.json befüllt -->
           <div class="person">
             <div class="ph">Coach</div>
             <div class="personBody">
@@ -904,7 +846,7 @@
     </div>
   </section>
 
-  <!-- WOFÜR WIR STEHEN / WERTE -->
+  <!-- WERTE -->
   <section id="werte" class="usp">
     <div class="wrap">
       <div class="uspHead">
@@ -1009,7 +951,7 @@
           </div>
         </details>
 
-        <details class="offerAcc offerAccWide" id="beratungAcc">
+        <details class="offerAcc offerAccWide">
           <summary>
             <span class="offerAccTitle" id="offersBeratungTitle">Beratung</span>
             <i class="offerAccIcon">+</i>
@@ -1045,34 +987,43 @@
     </div>
   </section>
 
-  <!-- KONTAKT -->
+  <!-- KONTAKT (neu) -->
   <section id="kontakt" class="section">
     <div class="wrap">
       <h2 class="sectionTitle">Kontakt</h2>
 
       <div class="kontaktGrid">
-        <a class="kontaktCard" id="kMail" href="#" target="_blank" rel="noreferrer">
-          <div>
-            <b>E-Mail</b>
-            <small id="kMailText">Direkt schreiben</small>
+        <a class="kontaktCard" id="kMail" href="#" rel="noreferrer">
+          <div class="kontaktLeft">
+            <div class="kontaktBadge">MAIL</div>
+            <div class="kontaktText">
+              <b>E-Mail</b>
+              <small id="kMailText">Direkt schreiben</small>
+            </div>
           </div>
-          <div class="kontaktIcon">MAIL</div>
+          <div class="kontaktArrow">→</div>
         </a>
 
         <a class="kontaktCard" id="kIG" href="#" target="_blank" rel="noreferrer">
-          <div>
-            <b>Instagram</b>
-            <small id="kIGText">Updates & Einblicke</small>
+          <div class="kontaktLeft">
+            <div class="kontaktBadge">IG</div>
+            <div class="kontaktText">
+              <b>Instagram</b>
+              <small id="kIGText">Updates & Einblicke</small>
+            </div>
           </div>
-          <div class="kontaktIcon">IG</div>
+          <div class="kontaktArrow">→</div>
         </a>
 
         <a class="kontaktCard" id="kWA" href="#" target="_blank" rel="noreferrer">
-          <div>
-            <b>WhatsApp</b>
-            <small id="kWAText">Community / Infos</small>
+          <div class="kontaktLeft">
+            <div class="kontaktBadge">WA</div>
+            <div class="kontaktText">
+              <b>WhatsApp</b>
+              <small id="kWAText">Community / Infos</small>
+            </div>
           </div>
-          <div class="kontaktIcon">WA</div>
+          <div class="kontaktArrow">→</div>
         </a>
       </div>
 
@@ -1082,31 +1033,15 @@
     </div>
   </section>
 
-  <!-- FAQS -->
+  <!-- FAQS (CMS) -->
   <section id="faqs" class="section">
     <div class="wrap">
-      <h2 class="sectionTitle">FAQs</h2>
+      <h2 class="sectionTitle" id="faqTitle">FAQs</h2>
 
       <div class="faq" id="faqBox">
         <div class="faqItem">
-          <button class="faqQ" type="button"><span>1. Frage (Platzhalter)</span><i>+</i></button>
-          <div class="faqA">Antworttext (Platzhalter). Kann später aus dem CMS geladen werden.</div>
-        </div>
-        <div class="faqItem">
-          <button class="faqQ" type="button"><span>2. Frage (Platzhalter)</span><i>+</i></button>
-          <div class="faqA">Antworttext (Platzhalter). Kann später aus dem CMS geladen werden.</div>
-        </div>
-        <div class="faqItem">
-          <button class="faqQ" type="button"><span>3. Frage (Platzhalter)</span><i>+</i></button>
-          <div class="faqA">Antworttext (Platzhalter). Kann später aus dem CMS geladen werden.</div>
-        </div>
-        <div class="faqItem">
-          <button class="faqQ" type="button"><span>4. Frage (Platzhalter)</span><i>+</i></button>
-          <div class="faqA">Antworttext (Platzhalter). Kann später aus dem CMS geladen werden.</div>
-        </div>
-        <div class="faqItem">
-          <button class="faqQ" type="button"><span>5. Frage (Platzhalter)</span><i>+</i></button>
-          <div class="faqA">Antworttext (Platzhalter). Kann später aus dem CMS geladen werden.</div>
+          <button class="faqQ" type="button"><span>Frage (Platzhalter)</span><i>+</i></button>
+          <div class="faqA">Antworttext (Platzhalter).</div>
         </div>
       </div>
 
@@ -1131,7 +1066,6 @@
   </div>
 </footer>
 
-<!-- Minimaler Cookie-Hinweis (global) -->
 <div class="cc" id="cc">
   <h4>Hinweis</h4>
   <p>Diese Website nutzt keine Tracking-Cookies. Technisch notwendige Speicherungen (z. B. diese Bestätigung) erfolgen lokal im Browser.</p>
@@ -1142,12 +1076,10 @@
 </div>
 
 <script>
-  // Debug aktivieren: ?debug=1
   const DEBUG = new URLSearchParams(window.location.search).get("debug") === "1";
   const dlog = (...args) => { if (DEBUG) console.log("[movemania]", ...args); };
 
   async function loadJSON(path){
-    // Cache-busting (hilft gegen "CMS gespeichert, Seite zeigt alt")
     const url = path + (path.includes("?") ? "&" : "?") + "v=" + Date.now();
     const t0 = performance.now();
     const res = await fetch(url, { cache: "no-store" });
@@ -1165,17 +1097,25 @@
     const el = document.getElementById(id);
     if (el && url) el.href = url;
   }
-
   function setText(id, value){
     const el = document.getElementById(id);
     if (!el || value === undefined || value === null || value === "") return;
     el.textContent = value;
   }
-
   function setHtml(id, value){
     const el = document.getElementById(id);
     if (!el || value === undefined || value === null || value === "") return;
     el.innerHTML = value;
+  }
+
+  function normalizeMailto(v){
+    if (!v) return "";
+    const s = String(v).trim();
+    if (!s) return "";
+    if (s.startsWith("mailto:")) return s;
+    // Wenn jemand im CMS nur "info@domain.de" einträgt:
+    if (s.includes("@") && !s.includes("://")) return "mailto:" + s;
+    return s;
   }
 
   function applyTheme(theme){
@@ -1190,7 +1130,6 @@
     const layout = theme?.layout || {};
     const pattern = theme?.pattern || {};
 
-    // Colors
     setVar("--bg", colors.bg);
     setVar("--ink", colors.ink);
     setVar("--muted", colors.muted);
@@ -1202,13 +1141,11 @@
     setVar("--card-bg", colors.card_bg);
     setVar("--card-border", colors.card_border);
 
-    // Typography
     if (typeof type.body_size === "number") setVar("--base", type.body_size + "px");
     if (typeof type.hero_title_size === "number") setVar("--hero-title-max", type.hero_title_size + "px");
     if (typeof type.section_title_size === "number") setVar("--section-title", type.section_title_size + "px");
     if (typeof type.card_title_size === "number") setVar("--card-title", type.card_title_size + "px");
 
-    // Layout
     if (typeof layout.content_width === "number") setVar("--max", layout.content_width + "px");
     if (typeof layout.radius === "number") setVar("--radius", layout.radius + "px");
     if (typeof layout.shadow_strength === "number") {
@@ -1216,7 +1153,6 @@
       setVar("--shadow", `0 14px 40px rgba(11,16,32,${s})`);
     }
 
-    // Pattern
     if (pattern.enabled === false) {
       setVar("--patternOpacity", "0");
     } else {
@@ -1226,8 +1162,6 @@
     }
   }
 
-  /* HERO Slider: expects array of slides:
-     [{type:"video"|"image", src:"...", poster:"...", title:"...", text:"..."}] */
   function mountHeroSlider(slides){
     const heroMedia = document.getElementById("heroMedia");
     if (!heroMedia) return;
@@ -1238,7 +1172,7 @@
 
     let idx = 0;
     let timer = null;
-    let soundOn = false; // global for slider session
+    let soundOn = false;
 
     const render = () => {
       heroMedia.innerHTML = "";
@@ -1248,10 +1182,8 @@
         slide.className = "slide" + (i === idx ? " isActive" : "");
 
         if (s.type === "video") {
-          // Autoplay braucht muted. Sound aktivieren nur per Nutzeraktion (Button).
           slide.innerHTML = `
-            <video ${i === idx ? "autoplay" : ""} ${i === idx ? "playsinline" : "playsinline"}
-                   muted loop preload="metadata" poster="${s.poster || ""}" controls>
+            <video ${i === idx ? "autoplay" : ""} playsinline muted loop preload="metadata" poster="${s.poster || ""}" controls>
               <source src="${s.src}" type="video/mp4">
             </video>
             <div class="slideOverlay">
@@ -1271,7 +1203,6 @@
         heroMedia.appendChild(slide);
       });
 
-      // UI
       const ui = document.createElement("div");
       ui.className = "sliderUi";
       ui.innerHTML = `
@@ -1298,20 +1229,17 @@
       heroMedia.appendChild(dots);
 
       const applySoundState = () => {
-        // only affects current active video
         const activeSlide = heroMedia.querySelector(".slide.isActive");
         const v = activeSlide ? activeSlide.querySelector("video") : null;
         if (!v) return;
         v.muted = !soundOn;
         if (soundOn) {
           v.volume = 1;
-          // try play again in case browser paused it
           const p = v.play();
           if (p && typeof p.catch === "function") p.catch(() => {});
         }
       };
 
-      // Bind
       heroMedia.querySelector("#sPrev").addEventListener("click", () => {
         idx = (idx - 1 + safeSlides.length) % safeSlides.length;
         render(); restart();
@@ -1322,11 +1250,10 @@
       });
       heroMedia.querySelector("#sSound").addEventListener("click", () => {
         soundOn = !soundOn;
-        render(); // rerender button label and reapply state
+        render();
         applySoundState();
       });
 
-      // apply sound state after render (if current is video)
       applySoundState();
     };
 
@@ -1344,21 +1271,6 @@
 
     render();
     restart();
-  }
-
-  function initFaq(){
-    const box = document.getElementById("faqBox");
-    if (!box) return;
-    box.querySelectorAll(".faqItem").forEach((item) => {
-      const btn = item.querySelector(".faqQ");
-      const icon = btn ? btn.querySelector("i") : null;
-      if (!btn) return;
-
-      btn.addEventListener("click", () => {
-        const isOpen = item.classList.toggle("isOpen");
-        if (icon) icon.textContent = isOpen ? "–" : "+";
-      });
-    });
   }
 
   function mountHeadcoachMedia(data){
@@ -1381,8 +1293,6 @@
       wrap.innerHTML = `<img src="${img}" alt="${data?.name || "Headcoach"}" loading="lazy">`;
       return;
     }
-
-    // fallback placeholder bleibt
   }
 
   function mountCoaches(data){
@@ -1421,7 +1331,6 @@
     const o = data?.offers;
     if (!o) return;
 
-    // Camps
     if (o.camps){
       setText("offersCampsTitle", o.camps.title);
       setText("offersCampsText", o.camps.text);
@@ -1434,12 +1343,10 @@
         setText("offersEliteTitle", o.camps.sub[1].title);
         setText("offersEliteText", o.camps.sub[1].text);
       }
-
       if (o.camps.button_label) setText("btnCamps", o.camps.button_label);
       if (o.camps.button_link) setHref("btnCamps", o.camps.button_link);
     }
 
-    // Kurse
     if (o.kurse){
       setText("offersKurseTitle", o.kurse.title);
       setText("offersKurseText", o.kurse.text);
@@ -1465,19 +1372,16 @@
       }
     }
 
-    // Ballschule
     if (o.ballschule){
       setText("offersBallsTitle", o.ballschule.title);
       setText("offersBallsText", o.ballschule.text);
     }
 
-    // Kiga
     if (o.kiga){
       setText("offersKigaTitle", o.kiga.title);
       setText("offersKigaText", o.kiga.text);
     }
 
-    // Beratung
     if (o.beratung){
       setText("offersBeratungTitle", o.beratung.title);
       setText("offersBeratungText", o.beratung.text);
@@ -1487,7 +1391,6 @@
         const subs = Array.isArray(o.beratung.sub) ? o.beratung.sub : [];
         if (subs.length){
           grid.innerHTML = "";
-          // keep layout responsive
           grid.style.gridTemplateColumns = `repeat(${Math.min(5, subs.length)}, 1fr)`;
 
           subs.slice(0, 5).forEach((s) => {
@@ -1512,7 +1415,6 @@
 
   function applyEvents(data){
     if (!data) return;
-
     if (data.title) setText("eventsTitle", data.title);
 
     const grid = document.getElementById("eventsGrid");
@@ -1534,11 +1436,9 @@
       const dateHtml = date
         ? `<p style="margin:0 0 8px;color:rgba(11,16,32,.55);font-weight:900;letter-spacing:.18em;text-transform:uppercase;font-size:11px;">${date}</p>`
         : "";
-
       const imgHtml = img
         ? `<img src="${img}" alt="${title}" style="width:100%;height:140px;object-fit:cover;border:1px solid var(--card-border);margin-bottom:10px;display:block;">`
         : "";
-
       const linkHtml = link
         ? `<div class="cardActions" style="margin-top:12px;"><a class="btn btnGhost" href="${link}" target="_blank" rel="noreferrer">${linkLabel}</a></div>`
         : "";
@@ -1554,8 +1454,42 @@
     });
   }
 
+  function mountFaq(data){
+    if (!data) return;
+
+    if (data.title) setText("faqTitle", data.title);
+    if (data.hint) setText("faqHint", data.hint);
+
+    const box = document.getElementById("faqBox");
+    const items = Array.isArray(data.items) ? data.items : [];
+    if (!box || !items.length) return;
+
+    box.innerHTML = "";
+    items.slice(0, 50).forEach((it) => {
+      const item = document.createElement("div");
+      item.className = "faqItem";
+      item.innerHTML = `
+        <button class="faqQ" type="button"><span>${it.q || ""}</span><i>+</i></button>
+        <div class="faqA">${it.a || ""}</div>
+      `;
+      box.appendChild(item);
+    });
+
+    // Toggle
+    box.querySelectorAll(".faqItem").forEach((item) => {
+      const btn = item.querySelector(".faqQ");
+      const icon = btn ? btn.querySelector("i") : null;
+      if (!btn) return;
+
+      btn.addEventListener("click", () => {
+        const isOpen = item.classList.toggle("isOpen");
+        if (icon) icon.textContent = isOpen ? "–" : "+";
+      });
+    });
+  }
+
   (async () => {
-    // Cookie Hinweis (global)
+    // Cookie Hinweis
     const cc = document.getElementById("cc");
     const ccOk = document.getElementById("ccOk");
     const CC_KEY = "movemania_cookie_notice_ok";
@@ -1565,7 +1499,7 @@
       if (cc) cc.style.display = "none";
     });
 
-    // Theme aus CMS
+    // Theme
     try {
       const theme = await loadJSON("/assets/content/theme.json");
       applyTheme(theme);
@@ -1573,11 +1507,10 @@
       console.warn("theme.json fehlt oder nicht erreichbar (ok für Start):", e);
     }
 
-    // Logo anzeigen, wenn vorhanden
     const logo = document.getElementById("logoImg");
     if (logo) logo.style.display = "block";
 
-    // LINKS aus CMS
+    // LINKS
     let links = {};
     try { links = await loadJSON("/assets/content/links.json"); }
     catch (e) { console.warn("links.json fehlt oder nicht erreichbar:", e); }
@@ -1589,19 +1522,21 @@
     setHref("btnPower1819", links.power1819);
     setHref("btnPower1617", links.power1617);
     setHref("kIG", links.instagram);
-    setHref("kMail", links.mailto || links.email);
     setHref("navShop", links.shop);
 
-    // PARTNER / SPONSOREN aus CMS
+    // MAIL FIX: mailto oder email
+    const mail = normalizeMailto(links.mailto || links.email);
+    if (mail) setHref("kMail", mail);
+
+    // Partner
     let sponsorsData = {};
     try { sponsorsData = await loadJSON("/assets/content/sponsors.json"); }
     catch (e) { console.warn("sponsors.json fehlt oder nicht erreichbar:", e); }
 
     (function mountSponsors(data){
-      const bar = document.getElementById("sponsorsBar");
       const label = document.getElementById("sponsorsLabel");
       const itemsEl = document.getElementById("sponsorsItems");
-      if (!bar || !itemsEl) return;
+      if (!itemsEl) return;
 
       const title = data && (data.title || data.label);
       if (label && title) label.textContent = title;
@@ -1642,7 +1577,7 @@
       });
     })(sponsorsData);
 
-    // TEXTE aus CMS
+    // TEXTE
     let texts = {};
     try { texts = await loadJSON("/assets/content/texts.json"); }
     catch (e) { console.warn("texts.json fehlt oder nicht erreichbar:", e); }
@@ -1652,58 +1587,39 @@
     claim = claim.replace(/^[\s\"“”„‚'«»]+|[\s\"“”„‚'«»]+$/g, "");
     setHtml("heroClaim", claim);
 
-    // heroText ist <p> — setText passt, wechselt skeleton zu Text
     setText("heroText", texts.hero_text || "In unseren Camps und Kursen entwickeln Kinder Freude an Bewegung – mit Struktur, Haltung und Herz.");
 
-    // Werte Header
     setText("uspKicker", (texts.usp_kicker || "Wofür wir stehen"));
     setText("uspTitle", (texts.usp_title || "Mut · Einsatz · Werte").toUpperCase());
     setText("uspGhost", (texts.usp_ghost || "WERTE").toUpperCase());
 
-    // About (Text)
     setText("aboutKicker", texts.about_kicker || "Über uns");
     setText("aboutTitle", (texts.about_title || "Wer wir sind").toUpperCase());
     setText("aboutHeadTitle", (texts.about_head_title || "Vorstellung Headcoach").toUpperCase());
-    setText("aboutHeadText", texts.about_head_text || "Hier kommt eure Vorstellung (Headcoach) rein – kurz, klar, authentisch. Später aus dem CMS.");
+    setText("aboutHeadText", texts.about_head_text || "Hier kommt eure Vorstellung (Headcoach) rein – kurz, klar, authentisch.");
 
-    // Kontakt labels
+    // Kontaktlabels: nur hübsche Labels (keine URLs)
     setText("kMailText", texts.contact_mail_label || "Direkt schreiben");
     setText("kIGText", texts.contact_ig_label || "Updates & Einblicke");
     setText("kWAText", texts.contact_wa_label || "Community / Infos");
 
-    // FAQ hint
-    setText("faqHint", texts.faq_hint || "Hast du weitere Fragen? Dann nimm Kontakt per E-Mail auf.");
+    // Headcoach Media
+    try { mountHeadcoachMedia(await loadJSON("/assets/content/headcoach.json")); }
+    catch (e) { console.warn("headcoach.json fehlt oder nicht erreichbar:", e); }
 
-    // HEADCOACH MEDIA
-    try {
-      const headcoach = await loadJSON("/assets/content/headcoach.json");
-      mountHeadcoachMedia(headcoach);
-    } catch (e) {
-      console.warn("headcoach.json fehlt oder nicht erreichbar:", e);
-    }
+    // Coaches
+    try { mountCoaches(await loadJSON("/assets/content/coaches.json")); }
+    catch (e) { console.warn("coaches.json fehlt oder nicht erreichbar:", e); }
 
-    // COACHES
-    try {
-      const coaches = await loadJSON("/assets/content/coaches.json");
-      mountCoaches(coaches);
-    } catch (e) {
-      console.warn("coaches.json fehlt oder nicht erreichbar:", e);
-    }
-
-    // WERTE aus CMS: values.json (Key items) – fallback robust
+    // Werte
     const defaultValues = [
       { title: "Mut", text: "Wir stärken Kinder, Entscheidungen zu treffen, Verantwortung zu übernehmen und sich etwas zuzutrauen.", icon: "assets/img/icons/mut.svg", icon_alt:"Mut" },
       { title: "Einsatz", text: "Leistung entsteht durch Freude am Training, Dranbleiben und gemeinsames Arbeiten an Zielen.", icon: "assets/img/icons/einsatz.svg", icon_alt:"Einsatz" },
-      { title: "Respekt", text: "Respekt, Fairness und ein positives Miteinander sind bei uns nicht verhandelbar.", icon: "assets/img/icons/respekt.svg", icon_alt:"Respekt" },
-      { title: "Entwicklung", text: "Wir fördern Fortschritte – individuell, mit Struktur und kindgerechten Zielen.", icon: "assets/img/icons/entwicklung.svg", icon_alt:"Entwicklung" },
-      { title: "Teamgeist", text: "Gemeinsam wachsen: miteinander spielen, voneinander lernen, füreinander einstehen.", icon: "assets/img/icons/teamgeist.svg", icon_alt:"Teamgeist" },
-      { title: "Spaß", text: "Freude an Bewegung ist die Basis. Ohne Spaß kein Lernen – ohne Lachen kein Team.", icon: "assets/img/icons/spass.svg", icon_alt:"Spaß" }
+      { title: "Respekt", text: "Respekt, Fairness und ein positives Miteinander sind bei uns nicht verhandelbar.", icon: "assets/img/icons/respekt.svg", icon_alt:"Respekt" }
     ];
 
     let valuesData = null;
-    try { valuesData = await loadJSON("/assets/content/values.json"); }
-    catch (e) { /* ok */ }
-
+    try { valuesData = await loadJSON("/assets/content/values.json"); } catch (e) {}
     const values =
       (Array.isArray(valuesData?.items) && valuesData.items.length) ? valuesData.items :
       (Array.isArray(valuesData?.values) && valuesData.values.length) ? valuesData.values :
@@ -1729,23 +1645,19 @@
       });
     }
 
-    // ANGEBOTE aus CMS
-    try {
-      const offers = await loadJSON("/assets/content/offers.json");
-      applyOffers(offers);
-    } catch (e) {
-      console.warn("offers.json fehlt oder nicht erreichbar:", e);
-    }
+    // Angebote
+    try { applyOffers(await loadJSON("/assets/content/offers.json")); }
+    catch (e) { console.warn("offers.json fehlt oder nicht erreichbar:", e); }
 
-    // EVENTS aus CMS
-    try {
-      const events = await loadJSON("/assets/content/events.json");
-      applyEvents(events);
-    } catch (e) {
-      console.warn("events.json fehlt oder nicht erreichbar:", e);
-    }
+    // Events
+    try { applyEvents(await loadJSON("/assets/content/events.json")); }
+    catch (e) { console.warn("events.json fehlt oder nicht erreichbar:", e); }
 
-    // Angebote: Accordions Icon Sync (default geschlossen)
+    // FAQ (CMS)
+    try { mountFaq(await loadJSON("/assets/content/faq.json")); }
+    catch (e) { console.warn("faq.json fehlt oder nicht erreichbar:", e); }
+
+    // Accordion Icons sync
     document.querySelectorAll("details.offerAcc").forEach((d) => {
       const icon = d.querySelector(".offerAccIcon");
       const sync = () => { if (icon) icon.textContent = d.open ? "–" : "+"; };
@@ -1753,12 +1665,12 @@
       d.addEventListener("toggle", sync);
     });
 
-    // HERO SLIDES: zuerst hero.json, sonst fallback
+    // Hero
     let heroSlides = null;
-    try { heroSlides = await loadJSON("/assets/content/hero.json"); }
-    catch (e) { /* ok */ }
-
-    if (heroSlides && heroSlides.slides) heroSlides = heroSlides.slides;
+    try {
+      const hero = await loadJSON("/assets/content/hero.json");
+      heroSlides = hero?.slides || hero;
+    } catch (e) {}
 
     if (!heroSlides) {
       heroSlides = [
@@ -1767,30 +1679,16 @@
           src: links.hero_video_mp4 || "assets/video/hero.mp4",
           poster: links.hero_video_poster || "assets/img/hero.jpg",
           title: texts.hero_slide1_title || "Vorstellung",
-          text: texts.hero_slide1_text || "Hier steht später die Vorstellung / kurze Einordnung (aus dem CMS)."
-        },
-        {
-          type: "image",
-          src: texts.hero_slide2_img || "assets/img/placeholder-1.jpg",
-          title: texts.hero_slide2_title || "Wofür wir stehen",
-          text: texts.hero_slide2_text || "Werte, Haltung, Herz – kurz und klar (aus dem CMS)."
-        },
-        {
-          type: "image",
-          src: texts.hero_slide3_img || "assets/img/placeholder-2.jpg",
-          title: texts.hero_slide3_title || "Was wir machen",
-          text: texts.hero_slide3_text || "Camps, Kurse, Ballschule – Überblick (aus dem CMS)."
+          text: texts.hero_slide1_text || "Hier steht später die Vorstellung."
         }
       ];
     }
 
     mountHeroSlider(heroSlides);
-    initFaq();
 
   })();
 </script>
 
-<!-- Netlify Identity Token Catcher (wichtig für /admin Bestätigung/Recovery) -->
 <script>
 (function () {
   const hash = window.location.hash || "";
@@ -1806,3 +1704,4 @@
 
 </body>
 </html>
+
