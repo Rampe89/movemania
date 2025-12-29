@@ -1,10 +1,13 @@
 {
   "coaches": [
     {
-      "name": "Vorname Nachname",
+      "name": "Mustermann Max",
       "role": "Coach",
-      "bio": "Kurzprofil / Schwerpunkt.",
-      "image": ""
+      "bio": "Das ist ein Test. ",
+      "image": "/assets/img/uploads/chatgpt-image-3.-apr.-2025-09_59_21.png"
+    },
+    {
+      "name": "Das ist ein Test"
     }
   ]
 }
