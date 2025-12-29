@@ -1,13 +1,28 @@
 {
   "coaches": [
     {
-      "name": "Mustermann Max",
+      "name": "Vorname Nachname",
       "role": "Coach",
-      "bio": "Das ist ein Test. ",
-      "image": "/assets/img/uploads/chatgpt-image-3.-apr.-2025-09_59_21.png"
+      "bio": "Schwerpunkt Technik & Spielformen. Begeistert Kinder für Bewegung und Teamarbeit.",
+      "image": ""
     },
     {
-      "name": "Das ist ein Test"
+      "name": "Vorname Nachname",
+      "role": "Athletik",
+      "bio": "Koordination, Schnelligkeit und motorische Grundlagen – altersgerecht und spielerisch.",
+      "image": ""
+    },
+    {
+      "name": "Vorname Nachname",
+      "role": "Torwart",
+      "bio": "Spezialtraining für Torhüter – Technik, Mut und Spielverständnis.",
+      "image": ""
+    },
+    {
+      "name": "Vorname Nachname",
+      "role": "Coach",
+      "bio": "Fokus auf Spaß, Fairplay und positive Entwicklung jedes Kindes.",
+      "image": ""
     }
   ]
 }
