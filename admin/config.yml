@@ -307,4 +307,33 @@ collections:
               - { label: Link (optional), name: link, widget: string, required: false }
               - { label: Bild (optional), name: image, widget: image, required: false }
 
+              - name: faq
+  label: FAQs
+  files:
+  - file: assets/content/faq.json
+    label: FAQ Startseite
+    name: faq
+    format: json
+    fields:
+    - label: Titel
+      name: title
+      widget: string
+      required: false
+      default: FAQs
+    - label: Hinweis unter FAQs
+      name: hint
+      widget: string
+      required: false
+    - label: Fragen & Antworten
+      name: items
+      widget: list
+      fields:
+      - label: Frage
+        name: q
+        widget: string
+      - label: Antwort
+        name: a
+        widget: text
+
+
 
