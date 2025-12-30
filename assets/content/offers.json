@@ -23,23 +23,34 @@
       ]
     },
     "kurse": {
-      "title": "Kurse",
-      "text": "Powerkurse in kleinen Gruppen – Technik, Athletik, Spielintelligenz.",
-      "link": "",
-      "link_label": "",
-      "power_box_label": "Powerkurse",
-      "power_box_text": "Termine & Gruppen (Beispiele):",
-      "power_link": "",
-      "power_link_label": "",
-      "power_pills": ["12/13", "14/15", "16/17", "18/19"],
-      "elite_box_label": "Elitekurse",
-      "elite_box_text": "Zusatzkurse (Erklärungstext aus CMS).",
-      "elite_link": "",
-      "elite_link_label": "",
+      "power_pills": [
+        "12/13",
+        "14/15",
+        "16/17",
+        "18/19"
+      ],
       "buttons": [
-        { "label": "Power 18/19", "link": "" },
-        { "label": "Power 16/17", "link": "" }
-      ]
+        {
+          "label": "Power 18/19",
+          "link": ""
+        },
+        {
+          "label": "Power 16/17",
+          "link": ""
+        }
+      ],
+      "power_box_label": "Powerkurse",
+      "elite_link": "",
+      "power_link_label": "",
+      "text": "Powerkurse in kleinen Gruppen – Technik, Athletik, Spielintelligenz.",
+      "elite_box_text": "Zusatzkurse (Erklärungstext aus CMS).",
+      "link_label": "",
+      "elite_box_label": "Elitekurse",
+      "power_link": "",
+      "title": "Kurse",
+      "link": "",
+      "power_box_text": "Termine & Gruppen (Beispiele):",
+      "elite_link_label": ""
     },
     "ballschule": {
       "title": "Ballschule",
@@ -56,16 +67,40 @@
     "beratung": {
       "title": "Beratung",
       "text": "Unterstützung für Vereine, Trainer und Teams – von Konzept bis Fortbildung.",
-      "link": "",
-      "link_label": "",
+      "link": "www.test.de",
+      "link_label": "Linktest",
       "sub": [
-        { "title": "Vereinsberatung", "text": "", "link": "", "link_label": "" },
-        { "title": "Rent a Coach", "text": "", "link": "", "link_label": "" },
-        { "title": "Trainerfortbildung", "text": "", "link": "", "link_label": "" },
-        { "title": "Trainer", "text": "", "link": "", "link_label": "" },
-        { "title": "Spiele", "text": "", "link": "", "link_label": "" }
+        {
+          "title": "Vereinsberatung",
+          "text": "",
+          "link": "",
+          "link_label": ""
+        },
+        {
+          "title": "Rent a Coach",
+          "text": "",
+          "link": "",
+          "link_label": ""
+        },
+        {
+          "title": "Trainerfortbildung",
+          "text": "",
+          "link": "",
+          "link_label": ""
+        },
+        {
+          "title": "Trainer",
+          "text": "",
+          "link": "",
+          "link_label": ""
+        },
+        {
+          "title": "Spiele",
+          "text": "",
+          "link": "",
+          "link_label": ""
+        }
       ]
     }
   }
 }
-
