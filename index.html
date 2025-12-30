@@ -628,13 +628,18 @@
       border-radius:var(--radius);
       overflow:hidden;
     }
+
+    /* CHANGED: contain statt cover, damit das Bild nicht abgeschnitten wird */
     .person img{
       width:100%;
       height:170px;
-      object-fit:cover;
+      object-fit:contain;
+      object-position:center;
+      background:#f5f6fa;
       display:block;
       border-bottom:1px solid var(--card-border);
     }
+
     .person .ph{
       height:170px;
       display:grid;
@@ -1206,13 +1211,22 @@
     let timer = null;
     let soundOn = false;
 
-    const stop = () => { if (timer) clearInterval(timer); timer = null; };
+    /* CHANGED: clearTimeout + setTimeout (pro Slide unterschiedliche Dauer) */
+    const stop = () => { if (timer) clearTimeout(timer); timer = null; };
+
+    const slideDelayMs = () => {
+      const s = safeSlides[idx] || {};
+      if (s.type === "video") return 66000; // CHANGED: 66 Sekunden für Videos
+      return 6500; // Bilder: 6.5 Sekunden
+    };
+
     const restart = () => {
       stop();
-      timer = setInterval(() => {
+      timer = setTimeout(() => {
         idx = (idx + 1) % safeSlides.length;
         render();
-      }, 6500);
+        restart();
+      }, slideDelayMs());
     };
 
     const applySoundToActiveVideo = () => {
@@ -1226,7 +1240,6 @@
           try { v.pause(); } catch (e) {}
           v.muted = true;
           v.volume = 1.0;
-          // Optional: reset so it doesn't keep downloading/playing audio buffers
           try { v.currentTime = 0; } catch (e) {}
         }
       });
@@ -1235,7 +1248,6 @@
       if (!v) return;
       v.muted = !soundOn;
       v.volume = 1.0;
-      // attempt to play (user gesture not required when muted; if soundOn, button click is a gesture)
       v.play().catch(() => {});
     };
 
@@ -1468,7 +1480,6 @@
   function mountOffers(offersData, links){
     const offers = offersData?.offers || offersData || {};
 
-    // Helper: add optional link button inside a container
     const addOptionalLinkButton = (containerEl, link, label, cssClass) => {
       if (!containerEl) return;
       const href = (link || "").trim();
@@ -1493,7 +1504,6 @@
       if (offers.camps.button_link) setHref("btnCamps", offers.camps.button_link);
       else setHref("btnCamps", links?.camps);
 
-      // Optional main link for the section (if present in future JSON/config)
       const campsBody = document.querySelector("#accCamps .offerAccBody");
       addOptionalLinkButton(campsBody, offers.camps.link, offers.camps.link_label, "btn btnGhost");
 
@@ -1501,14 +1511,12 @@
       if (subs[0]){
         setText("offersCampsSub1Title", subs[0].title);
         setText("offersCampsSub1Text", subs[0].text);
-        // optional sub link
         const sub1 = document.querySelector("#offersCampsSubs .subCard:nth-child(1)");
         addOptionalLinkButton(sub1, subs[0].link, subs[0].link_label, "btn btnGhost");
       }
       if (subs[1]){
         setText("offersCampsSub2Title", subs[1].title);
         setText("offersCampsSub2Text", subs[1].text);
-        // optional sub link
         const sub2 = document.querySelector("#offersCampsSubs .subCard:nth-child(2)");
         addOptionalLinkButton(sub2, subs[1].link, subs[1].link_label, "btn btnGhost");
       }
@@ -1519,14 +1527,12 @@
       setText("offersKurseTitle", offers.kurse.title || "Kurse");
       setText("offersKurseText", offers.kurse.text);
 
-      // Optional main link for kurse (future-proof)
       const kurseBody = document.querySelector("#accKurse .offerAccBody");
       addOptionalLinkButton(kurseBody, offers.kurse.link, offers.kurse.link_label, "btn btnGhost");
 
       setText("offersKursePowerBoxLabel", offers.kurse.power_box_label || "Powerkurse");
       setText("offersKursePowerBoxText", offers.kurse.power_box_text || "Termine & Gruppen (Beispiele):");
 
-      // Pills
       const pillsEl = document.getElementById("offersPowerPills");
       if (pillsEl && Array.isArray(offers.kurse.power_pills) && offers.kurse.power_pills.length){
         pillsEl.innerHTML = "";
@@ -1538,7 +1544,6 @@
         });
       }
 
-      // Optional link inside Power/Elite boxes (future-proof)
       const powerBox = document.getElementById("powerBox");
       addOptionalLinkButton(powerBox, offers.kurse.power_link, offers.kurse.power_link_label, "btn btnGhost");
 
@@ -1548,13 +1553,12 @@
       const eliteBox = document.getElementById("eliteBox");
       addOptionalLinkButton(eliteBox, offers.kurse.elite_link, offers.kurse.elite_link_label, "btn btnGhost");
 
-      // Buttons
       const btnWrap = document.getElementById("offersKurseButtons");
       if (btnWrap && Array.isArray(offers.kurse.buttons) && offers.kurse.buttons.length){
         btnWrap.innerHTML = "";
         offers.kurse.buttons.slice(0, 6).forEach((b) => {
           const href = (b.link || "").trim();
-          if (!href) return; // only render real links
+          if (!href) return;
           const a = document.createElement("a");
           a.className = "btn btnGhost";
           a.textContent = b.label || "Button";
@@ -1564,7 +1568,6 @@
           btnWrap.appendChild(a);
         });
 
-        // If all were empty links, fall back to existing placeholders wired by links.json
         if (!btnWrap.children.length){
           setHref("btnPower1819", links?.power1819);
           setHref("btnPower1617", links?.power1617);
@@ -1587,7 +1590,6 @@
           btnWrap.appendChild(a2);
         }
       } else {
-        // fallback: existing buttons wired by links.json
         setHref("btnPower1819", links?.power1819);
         setHref("btnPower1617", links?.power1617);
       }
@@ -1638,7 +1640,6 @@
       }
     }
 
-    // Toggle Icons
     document.querySelectorAll("details.offerAcc").forEach((d) => {
       const icon = d.querySelector(".offerAccIcon");
       const sync = () => { if (icon) icon.textContent = d.open ? "–" : "+"; };
@@ -1697,7 +1698,6 @@
   }
 
   (async () => {
-    // Cookie Hinweis
     const cc = document.getElementById("cc");
     const ccOk = document.getElementById("ccOk");
     const CC_KEY = "movemania_cookie_notice_ok";
@@ -1707,47 +1707,38 @@
       if (cc) cc.style.display = "none";
     });
 
-    // Theme
     try {
       const theme = await loadJSON("/assets/content/theme.json");
       applyTheme(theme);
     } catch (e) {}
 
-    // Logo anzeigen, wenn vorhanden
     const logo = document.getElementById("logoImg");
     if (logo) logo.style.display = "block";
 
-    // LINKS
     let links = {};
     try { links = await loadJSON("/assets/content/links.json"); } catch (e) {}
 
-    // TEXTE
     let texts = {};
     try { texts = await loadJSON("/assets/content/texts.json"); } catch (e) {}
 
-    // HERO text
     setText("heroBrand", (texts.hero_brand || "MOVEMANIA").toUpperCase());
     let claim = (texts.hero_title || "KINDER STÄRKEN.<br>SPIELER ENTWICKELN.").toUpperCase();
     claim = claim.replace(/^[\s\"“”„‚'«»]+|[\s\"“”„‚'«»]+$/g, "");
     setHtml("heroClaim", claim);
     setText("heroText", texts.hero_text || "In unseren Camps und Kursen entwickeln Kinder Freude an Bewegung – mit Struktur, Haltung und Herz.");
 
-    // CTA links
     setHref("ctaBooking", links.booking);
     setHref("btnBooking", links.booking);
     setHref("btnCamps", links.camps);
 
-    // Shop
     setHref("navShop", links.shop);
 
-    // CONTACT hrefs
     setHref("kIG", links.instagram);
     setHref("kWA", links.whatsapp);
 
     const mailHref = normalizeMailto(links.mailto || links.email);
     if (mailHref) setHref("kMail", mailHref);
 
-    // CONTACT visible texts (niemals URLs anzeigen)
     setText("kIGText", links.instagram_text || texts.contact_ig_label || "Updates & Einblicke");
     setText("kWAText", links.whatsapp_text || texts.contact_wa_label || "Community / Infos");
 
@@ -1759,54 +1750,45 @@
 
     setText("kMailText", mailVisible);
 
-    // ABOUT
     setText("aboutKicker", texts.about_kicker || "Über uns");
     setText("aboutTitle", (texts.about_title || "Wer wir sind").toUpperCase());
     setText("aboutHeadTitle", (texts.about_head_title || "Vorstellung Headcoach").toUpperCase());
     setText("aboutHeadText", texts.about_head_text || "Hier kommt eure Vorstellung (Headcoach) rein – kurz, klar, authentisch.");
 
-    // Werte headline
     setText("uspKicker", (texts.usp_kicker || "Wofür wir stehen"));
     setText("uspTitle", (texts.usp_title || "Spaß · Mut · Einsatz").toUpperCase());
     setText("uspGhost", (texts.usp_ghost || "WERTE").toUpperCase());
 
-    // Sponsors
     try {
       const sponsorsData = await loadJSON("/assets/content/sponsors.json");
       mountSponsors(sponsorsData);
     } catch (e) {}
 
-    // Headcoach media
     try {
       const headcoachData = await loadJSON("/assets/content/headcoach.json");
       mountHeadcoachMedia(headcoachData);
     } catch (e) {}
 
-    // Coaches
     try {
       const coachesData = await loadJSON("/assets/content/coaches.json");
       mountCoaches(coachesData);
     } catch (e) {}
 
-    // Values
     try {
       const valuesData = await loadJSON("/assets/content/values.json");
       mountValues(valuesData);
     } catch (e) {}
 
-    // Offers
     try {
       const offersData = await loadJSON("/assets/content/offers.json");
       mountOffers(offersData, links);
     } catch (e) {}
 
-    // Events
     try {
       const eventsData = await loadJSON("/assets/content/events.json");
       mountEvents(eventsData);
     } catch (e) {}
 
-    // FAQ
     try {
       const faqData = await loadJSON("/assets/content/faq.json");
       mountFaq(faqData, texts.faq_hint || "");
@@ -1814,7 +1796,6 @@
       initFaq();
     }
 
-    // HERO SLIDES
     let heroSlides = null;
     try {
       heroSlides = await loadJSON("/assets/content/hero.json");
@@ -1866,6 +1847,7 @@
 
 </body>
 </html>
+
 
 
 
