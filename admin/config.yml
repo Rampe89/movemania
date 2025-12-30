@@ -106,7 +106,6 @@ collections:
           - { label: Power 18/19, name: power1819, widget: string, required: false }
           - { label: Power 16/17, name: power1617, widget: string, required: false }
 
-
   # --- SPONSORS ---
   - name: sponsors
     label: Partner
@@ -236,6 +235,8 @@ collections:
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
                   - { label: Text, name: text, widget: text, required: false }
+                  - { label: Haupt-Link (optional), name: link, widget: string, required: false }
+                  - { label: Haupt-Link Label (optional), name: link_label, widget: string, required: false }
                   - { label: Button Label, name: button_label, widget: string, required: false }
                   - { label: Button Link, name: button_link, widget: string, required: false }
                   - label: Unterpunkte (2)
@@ -244,6 +245,8 @@ collections:
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
+                      - { label: Link (optional), name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
 
               - label: Kurse
                 name: kurse
@@ -251,15 +254,25 @@ collections:
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
                   - { label: Text, name: text, widget: text, required: false }
+                  - { label: Haupt-Link (optional), name: link, widget: string, required: false }
+                  - { label: Haupt-Link Label (optional), name: link_label, widget: string, required: false }
+
                   - { label: Power Box Label, name: power_box_label, widget: string, required: false }
                   - { label: Power Box Text, name: power_box_text, widget: string, required: false }
+                  - { label: Power Box Link (optional), name: power_link, widget: string, required: false }
+                  - { label: Power Box Link Label (optional), name: power_link_label, widget: string, required: false }
+
                   - label: Power Pills (z.B. 12/13)
                     name: power_pills
                     widget: list
                     required: false
                     field: { label: Pill, name: pill, widget: string }
+
                   - { label: Elite Box Label, name: elite_box_label, widget: string, required: false }
                   - { label: Elite Box Text, name: elite_box_text, widget: text, required: false }
+                  - { label: Elite Box Link (optional), name: elite_link, widget: string, required: false }
+                  - { label: Elite Box Link Label (optional), name: elite_link_label, widget: string, required: false }
+
                   - label: Buttons (z.B. Power 18/19)
                     name: buttons
                     widget: list
@@ -274,6 +287,8 @@ collections:
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
                   - { label: Text, name: text, widget: text, required: false }
+                  - { label: Link (optional), name: link, widget: string, required: false }
+                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
 
               - label: Fußballkindergarten
                 name: kiga
@@ -281,6 +296,8 @@ collections:
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
                   - { label: Text, name: text, widget: text, required: false }
+                  - { label: Link (optional), name: link, widget: string, required: false }
+                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
 
               - label: Beratung
                 name: beratung
@@ -288,6 +305,8 @@ collections:
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
                   - { label: Text, name: text, widget: text, required: false }
+                  - { label: Haupt-Link (optional), name: link, widget: string, required: false }
+                  - { label: Haupt-Link Label (optional), name: link_label, widget: string, required: false }
                   - label: Kacheln (max. 5)
                     name: sub
                     widget: list
@@ -296,6 +315,7 @@ collections:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: string, required: false }
                       - { label: Link, name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
 
   # --- EVENTS ---
   - name: events
