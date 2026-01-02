@@ -2,37 +2,37 @@
   "items": [
     {
       "title": "Mut",
-      "text": "Wir stärken Kinder, Entscheidungen zu treffen, Verantwortung zu übernehmen und sich etwas zuzutrauen. das ist ein test.",
+      "text": "Wir wollen, dass sich Kinder trauen - auf und neben dem Platz. Fehler sind erlaubt und gehören zum Prozess. ",
       "icon": "assets/img/uploads/mut.svg",
       "icon_alt": "Mut"
     },
     {
       "title": "Einsatz",
-      "text": "Leistung entsteht durch Freude am Training, Dranbleiben und gemeinsames Arbeiten an klaren Zielen.",
+      "text": "Der Charakter zählt mehr als das Torverhältnis. Wer verliert und trotzdem aufrecht bleibt, hat gewonnen. ",
       "icon": "assets/img/uploads/einsatz.svg",
       "icon_alt": "Einsatz"
     },
     {
       "title": "Respekt",
-      "text": "Respekt, Fairness und ein positives Miteinander sind bei uns nicht verhandelbar.",
+      "text": "Gegenüber Mitspielern, Gegnern, Trainern und sich selbst. Wir sagen Danke, Entschuldigung und feiern andere genauso wie uns selbst. ",
       "icon": "assets/img/uploads/respekt.svg",
       "icon_alt": "Respekt"
     },
     {
       "title": "Entwicklung",
-      "text": "Wir fördern individuelle Fortschritte – kindgerecht, strukturiert und mit realistischen Zielen.",
+      "text": "Jeder bringt etwas mit - und geht ein Stück weiter. Wir messen nicht mit dem Lineal, sondern mit offenen Augen und Herz. ",
       "icon": "assets/img/uploads/entwicklung.svg",
       "icon_alt": "Entwicklung"
     },
     {
-      "title": "Teamgeist",
-      "text": "Gemeinsam wachsen: miteinander spielen, voneinander lernen, füreinander einstehen.",
+      "title": "Zusammenhalt",
+      "text": "Erfolg kommt nur gemeinsam. Alle gehören dazu - egal ob laut, leise, stark oder schüchtern.",
       "icon": "assets/img/uploads/teamgeist.svg",
       "icon_alt": "Teamgeist"
     },
     {
       "title": "Spaß",
-      "text": "Freude an Bewegung ist die Basis. Ohne Spaß kein Lernen – ohne Lachen kein Team.",
+      "text": "Freude ist der Motor zur Entwicklung. Bei uns geht es um die Freunde am Spiel. ",
       "icon": "assets/img/uploads/spass.svg",
       "icon_alt": "Spaß"
     }
