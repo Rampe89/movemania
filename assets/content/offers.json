@@ -5,7 +5,7 @@
       "text": "Feriencamps und Elitecamps – strukturierte Tage, Bewegung, Spiele und Teamgefühl.",
       "link": "",
       "link_label": "",
-      "button_label": "Camps buchen",
+      "button_label": "Zur Anmeldung",
       "button_link": "",
       "sub": [
         {
@@ -23,20 +23,21 @@
       ]
     },
     "kurse": {
-      "power_pills": [
-        "12/13",
-        "14/15",
-        "16/17",
-        "18/19"
-      ],
+      "power_pills": [],
       "buttons": [
         {
-          "label": "Power 18/19",
+          "label": "Powerkurs 2018/19",
           "link": ""
         },
         {
-          "label": "Power 16/17",
+          "label": "Powerkurs 2016/17",
           "link": ""
+        },
+        {
+          "label": "Powerkurs 2012/13"
+        },
+        {
+          "label": "Powerkurs 2014/15"
         }
       ],
       "power_box_label": "Powerkurse",
@@ -78,27 +79,31 @@
         },
         {
           "title": "Rent a Coach",
-          "text": "",
+          "text": "Mit „Rent a Coach“ können Vereine, Mannschaften oder Trainer mich zeitlich begrenzt als Coach buchen. Ich arbeite direkt mit dem Team auf dem Platz – zu individuell abgestimmten Schwerpunkten wie Technik, Spielintelligenz, Mentalität, Teamstruktur oder Trainingsqualität. Die Inhalte richten sich immer nach den Wünschen und Zielen des Teams und werden praxisnah, klar und entwicklungsorientiert umgesetzt.",
           "link": "",
           "link_label": ""
         },
         {
           "title": "Trainerfortbildung",
-          "text": "",
+          "text": "Movemania bietet praxisnahe Trainerfortbildungen zu verschiedenen Themen rund um modernes Fußballtraining. Schwerpunkte können unter anderem sein: Training effizienter gestalten, Spielformen sinnvoll einsetzen, Kinder individuell fördern oder Coaching klar und wirksam gestalten. Die Fortbildungen verbinden Theorie und Praxis und geben Trainern konkrete Werkzeuge für den Trainingsalltag an die Hand.",
           "link": "",
           "link_label": ""
         },
         {
           "title": "Trainer",
-          "text": "",
+          "text": "Ich begleite Trainer individuell auf ihrem persönlichen und fachlichen Entwicklungsweg. Ob Nachwuchstrainer, ambitionierter Vereinstrainer oder angehender Leistungstrainer – gemeinsam analysieren wir den aktuellen Stand, definieren Ziele und erarbeiten konkrete nächste Schritte. Die Beratung ist ehrlich, realistisch und auf langfristige Entwicklung ausgelegt – fachlich, menschlich und beruflich.",
           "link": "",
           "link_label": ""
         },
         {
           "title": "Spieler",
-          "text": "",
+          "text": "Movemania begleitet junge Spieler auf ihrem sportlichen Weg – unabhängig von Leistungsstand oder Vereinszugehörigkeit. Ich berate Spieler so, wie ich mich selbst und meinen Sohn beraten würde: ehrlich, schützend, realistisch und mit Blick auf das große Ganze. Im Fokus stehen Entwicklung, Entscheidungsfindung, Belastungssteuerung und ein gesunder Umgang mit Erwartungen und Zielen.",
           "link": "",
           "link_label": ""
+        },
+        {
+          "title": "Eltern",
+          "text": "Eltern spielen eine entscheidende Rolle im Fußballalltag ihrer Kinder. Movemania unterstützt Eltern dabei, ihr Kind sinnvoll, ruhig und entwicklungsfördernd zu begleiten – ohne Druck, aber mit Orientierung. Bei steigendem Interesse sind auch Eltern-Fortbildungen möglich, z. B. zu Themen wie Ernährung, mentale Begleitung oder der richtige Umgang mit Erfolg, Rückschlägen und Leistungsdruck."
         }
       ]
     }
