@@ -2,9 +2,17 @@
   "title": "Partner",
   "items": [
     {
-      "name": "Testpartner",
-      "url": "www.test.de",
+      "name": "EDEKA Rickel",
+      "url": "https://www.edeka.de/eh/minden-hannover/edeka-rickel-barbecker-str.-2/index.jsp",
       "logo": "/assets/img/uploads/test.png"
+    },
+    {
+      "name": "Aloha Sportclub ",
+      "url": "https://www.alohasport.de/?ved=2ahUKEwjnv5q3ydiNAxXUxgIHHfOCDgQQgU96BAgiEA4"
+    },
+    {
+      "url": "https://www.fussballspezi.de",
+      "name": "Fußball Spezialist"
     }
   ]
 }
