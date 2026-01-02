@@ -1,28 +1,28 @@
 {
   "coaches": [
     {
-      "name": "Ramiro",
-      "role": "Hausmeister",
-      "bio": "Facility Management",
+      "name": "Volkan Tanriverdi",
+      "role": "Coach für Kurse und Camps",
+      "bio": "C-Lizenz",
       "image": "/assets/img/uploads/chatgpt-image-3.-apr.-2025-09_59_21.png"
     },
     {
-      "name": "Vorname Nachname",
-      "role": "Athletik",
+      "name": "Jannik Grabowski",
+      "role": "Coach im Feriencamp",
       "bio": "Koordination, Schnelligkeit und motorische Grundlagen – altersgerecht und spielerisch.",
-      "image": ""
+      "image": "/assets/img/uploads/jannik-kickt.jpg"
     },
     {
-      "name": "Vorname Nachname",
-      "role": "Torwart",
+      "name": "Leon Kopetzki",
+      "role": "Coach im Feriencamp",
       "bio": "Spezialtraining für Torhüter – Technik, Mut und Spielverständnis.",
-      "image": ""
+      "image": "/assets/img/uploads/leon.jpg"
     },
     {
-      "name": "Vorname Nachname",
-      "role": "Coach",
+      "name": "Niklas Prinke",
+      "role": "Coach im Feriencamp",
       "bio": "Fokus auf Spaß, Fairplay und positive Entwicklung jedes Kindes.",
-      "image": ""
+      "image": "/assets/img/uploads/niki.jpg"
     }
   ]
 }
