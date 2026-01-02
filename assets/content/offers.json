@@ -67,9 +67,9 @@
     },
     "beratung": {
       "title": "Beratung",
-      "text": "Unterstützung für Vereine, Trainer und Teams – von Konzept bis Fortbildung.",
-      "link": "www.test.de",
-      "link_label": "Linktest",
+      "text": "Unterstützung für Vereine, Trainer, Teams, Spieler und Eltern – von Beratung und Konzept bis Fortbildung.",
+      "link": "",
+      "link_label": "",
       "sub": [
         {
           "title": "Vereinsberatung",
