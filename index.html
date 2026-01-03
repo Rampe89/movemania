@@ -156,11 +156,13 @@
     .sponsorsItems{
       display:flex;
       align-items:center;
-      gap:8px;
-      flex-wrap:wrap;              /* FIX: verhindert Überlappung */
-      justify-content:flex-end;    /* rechts bündig */
-      max-width:260px;             /* kontrolliert die Item-Spalte */
+      gap:6px;
+      flex-wrap:nowrap;          /* WICHTIG: eine Zeile */
+      justify-content:flex-end;
+      max-width:260px;
+      overflow:hidden;           /* kein Chaos */
     }
+
 
     .sponsorLink{
       display:inline-flex;
