@@ -1435,48 +1435,63 @@
   }
 
   function mountSponsors(data){
-    const bar = document.getElementById("sponsorsBar");
-    const label = document.getElementById("sponsorsLabel");
-    const itemsEl = document.getElementById("sponsorsItems");
-    if (!bar || !itemsEl) return;
+  const bar = document.getElementById("sponsorsBar");
+  const label = document.getElementById("sponsorsLabel");
+  const itemsEl = document.getElementById("sponsorsItems");
+  if (!bar || !itemsEl) return;
 
-    const title = data && (data.title || data.label);
-    if (label && title) label.textContent = title;
+  const title = data && (data.title || data.label);
+  if (label && title) label.textContent = title;
 
-    const items = Array.isArray(data?.items) ? data.items
-                : Array.isArray(data?.sponsors) ? data.sponsors
-                : Array.isArray(data) ? data
-                : [];
+  const items = Array.isArray(data?.items) ? data.items
+              : Array.isArray(data?.sponsors) ? data.sponsors
+              : Array.isArray(data) ? data
+              : [];
 
-    if (!items.length) return;
+  if (!items.length) return;
 
-    itemsEl.innerHTML = "";
-    items.slice(0, 12).forEach((it) => {
-      const name = it?.name || "";
-      const url = it?.url || "";
-      const logo = it?.logo || "";
+  itemsEl.innerHTML = "";
+  items.slice(0, 12).forEach((it) => {
+    const name = it?.name || "";
+    const url = it?.url || "";
+    const logo = it?.logo || "";
 
-      const a = document.createElement(url ? "a" : "span");
-      a.className = "sponsorLink";
-      if (url){
-        a.href = url;
-        a.target = "_blank";
-        a.rel = "noreferrer";
-      }
-      if (logo){
-        const img = document.createElement("img");
-        img.src = logo;
-        img.alt = name || "Partner";
-        img.loading = "lazy";
-        a.appendChild(img);
-      } else {
-        const t = document.createElement("span");
-        t.className = "sponsorFallback";
-        t.textContent = (name || "Partner").toUpperCase();
-        a.appendChild(t);
-      }
-      itemsEl.appendChild(a);
-    });
+    const a = document.createElement(url ? "a" : "span");
+    a.className = "sponsorLink";
+
+    if (url){
+      a.href = url;
+      a.target = "_blank";
+      a.rel = "noreferrer";
+    }
+
+    if (logo){
+      const img = document.createElement("img");
+      img.src = logo;
+      img.alt = name || "Partner";
+      img.loading = "lazy";
+      a.appendChild(img);
+
+      // Optional: nochmal scrollen, sobald das Bild geladen ist (stabiler bei Logos)
+      img.addEventListener("load", () => {
+        itemsEl.scrollLeft = itemsEl.scrollWidth;
+      });
+    } else {
+      const t = document.createElement("span");
+      t.className = "sponsorFallback";
+      t.textContent = (name || "Partner").toUpperCase();
+      a.appendChild(t);
+    }
+
+    itemsEl.appendChild(a);
+  });
+
+  // FIX: always show the right-most partner items (since the bar sits on the right)
+  requestAnimationFrame(() => {
+    itemsEl.scrollLeft = itemsEl.scrollWidth;
+  });
+}
+
   }
 
   function mountValues(valuesData){
