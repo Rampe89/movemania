@@ -125,9 +125,13 @@
     .menu a.active{color:var(--ink); border-bottom-color:var(--red);}
 
     .navCtas{
-      justify-self:end; /* CHANGED */
-      display:flex; gap:10px; align-items:center;
+    justify-self:end;
+    display:flex; gap:10px; align-items:center;
+  
+    /* FIX: push sponsors to the viewport edge (cancel wrap padding-right) */
+    margin-right: -22px;
     }
+
     @media (max-width: 980px){
       .menu{display:none}
       .navCtas{display:none}
