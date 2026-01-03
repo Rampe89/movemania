@@ -157,12 +157,17 @@
       display:flex;
       align-items:center;
       gap:6px;
-      flex-wrap:nowrap;          /* WICHTIG: eine Zeile */
+      flex-wrap:nowrap;            /* eine Zeile */
       justify-content:flex-end;
       max-width:260px;
-      overflow:hidden;           /* kein Chaos */
+    
+      overflow-x:auto;             /* FIX: statt Abschneiden */
+      overflow-y:hidden;
+      -webkit-overflow-scrolling: touch;
+    
+      scrollbar-width:none;        /* Firefox: keine Scrollbar */
     }
-
+    .sponsorsItems::-webkit-scrollbar{ display:none; } /* Chrome/Safari */
 
     .sponsorLink{
       display:inline-flex;
@@ -174,6 +179,7 @@
       background:#fff;
       border-radius: var(--radius);
       transition: background .15s ease;
+      flex:0 0 auto;
       white-space:nowrap;
     }
     .sponsorLink:hover{ background: rgba(11,16,32,.03); }
