@@ -137,13 +137,13 @@
     /* CHANGED: smaller sizing */
     .sponsorsBar{
       display:flex;
-      align-items:center;
+      align-items:flex-start;
       gap:10px;
       padding:6px 8px;
       border:1px solid var(--line);
       background:#fff;
       border-radius: var(--radius);
-      max-width: 320px;
+      max-width: 360px;
     }
     .sponsorsLabel{
       font-size:9px;
@@ -156,8 +156,12 @@
     .sponsorsItems{
       display:flex;
       align-items:center;
-      gap:10px;
+      gap:8px;
+      flex-wrap:wrap;              /* FIX: verhindert Überlappung */
+      justify-content:flex-end;    /* rechts bündig */
+      max-width:260px;             /* kontrolliert die Item-Spalte */
     }
+
     .sponsorLink{
       display:inline-flex;
       align-items:center;
