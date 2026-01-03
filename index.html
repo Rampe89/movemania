@@ -152,7 +152,17 @@
       letter-spacing:.14em;
       color:rgba(11,16,32,.60);
       white-space:nowrap;
+    
+      /* FIX: make it a badge so it belongs visually */
+      display:inline-flex;
+      align-items:center;
+      height:26px;                 /* same as sponsor chips */
+      padding:0 8px;
+      border:1px solid rgba(11,16,32,.12);
+      background: rgba(11,16,32,.02);
+      border-radius: var(--radius);
     }
+
     .sponsorsItems{
       display:flex;
       align-items:center;
