@@ -356,5 +356,29 @@ collections:
               - { label: Frage, name: q, widget: string }
               - { label: Antwort, name: a, widget: text }
 
+  # --- FEEDBACK ---
+  - name: feedback
+    label: Feedback
+    files:
+      - file: assets/content/feedback.json
+        label: Feedback Startseite
+        name: feedback
+        format: json
+        fields:
+          - { label: Bereichstitel, name: title, widget: string, required: false, default: "Feedback" }
+          - { label: Kicker, name: kicker, widget: string, required: false, default: "Stimmen von Eltern & Kindern" }
+          - label: Einträge
+            name: items
+            widget: list
+            required: false
+            fields:
+              - { label: Titel, name: title, widget: string, required: false }
+              - { label: Name (optional), name: name, widget: string, required: false }
+              - { label: Text (optional), name: text, widget: text, required: false }
+              - { label: Bild (optional), name: image, widget: image, required: false }
+              - { label: Video MP4 (optional), name: video, widget: file, required: false }
+              - { label: Poster (optional), name: poster, widget: image, required: false }
+              
+
 
 
