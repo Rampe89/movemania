@@ -56,8 +56,17 @@ collections:
                 name: type
                 widget: select
                 options: [video, image]
-              - { label: Quelle (src), name: src, widget: string }
-              - { label: Poster (nur Video), name: poster, widget: string, required: false }
+
+              # CHANGED: src via upload, passend zum Typ
+              # - bei image: Bild hochladen
+              # - bei video: MP4 hochladen
+              - label: Quelle (src)
+                name: src
+                widget: file
+
+              # CHANGED: Poster als Bild-Upload (optional)
+              - { label: Poster (nur Video), name: poster, widget: image, required: false }
+
               - { label: Titel, name: title, widget: string, required: false }
               - { label: Text, name: text, widget: text, required: false }
 
@@ -101,10 +110,15 @@ collections:
           - { label: E-Mail Text (z.B. movemania@mail.de), name: mail_text, widget: string, required: false }
 
           - { label: Shop (extern), name: shop, widget: string, required: false }
+
           - { label: Hero Video MP4 (Fallback), name: hero_video_mp4, widget: string, required: false }
           - { label: Hero Video Poster (Fallback), name: hero_video_poster, widget: string, required: false }
-          - { label: Power 18/19, name: power1819, widget: string, required: false }
-          - { label: Power 16/17, name: power1617, widget: string, required: false }
+
+          # CHANGED: alle Powerkurse editierbar
+          - { label: Power 2012/13, name: power1213, widget: string, required: false }
+          - { label: Power 2014/15, name: power1415, widget: string, required: false }
+          - { label: Power 2016/17, name: power1617, widget: string, required: false }
+          - { label: Power 2018/19, name: power1819, widget: string, required: false }
 
   # --- SPONSORS ---
   - name: sponsors
@@ -234,6 +248,10 @@ collections:
                 widget: object
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
+
+                  # CHANGED: optionales Bild
+                  - { label: Bild (optional), name: image, widget: image, required: false }
+
                   - { label: Text, name: text, widget: text, required: false }
                   - { label: Haupt-Link (optional), name: link, widget: string, required: false }
                   - { label: Haupt-Link Label (optional), name: link_label, widget: string, required: false }
@@ -253,6 +271,10 @@ collections:
                 widget: object
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
+
+                  # CHANGED: optionales Bild
+                  - { label: Bild (optional), name: image, widget: image, required: false }
+
                   - { label: Text, name: text, widget: text, required: false }
                   - { label: Haupt-Link (optional), name: link, widget: string, required: false }
                   - { label: Haupt-Link Label (optional), name: link_label, widget: string, required: false }
@@ -273,7 +295,7 @@ collections:
                   - { label: Elite Box Link (optional), name: elite_link, widget: string, required: false }
                   - { label: Elite Box Link Label (optional), name: elite_link_label, widget: string, required: false }
 
-                  - label: Buttons (z.B. Power 18/19)
+                  - label: Buttons (z.B. Powerkurs 2018/19)
                     name: buttons
                     widget: list
                     required: false
@@ -286,6 +308,10 @@ collections:
                 widget: object
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
+
+                  # CHANGED: optionales Bild
+                  - { label: Bild (optional), name: image, widget: image, required: false }
+
                   - { label: Text, name: text, widget: text, required: false }
                   - { label: Link (optional), name: link, widget: string, required: false }
                   - { label: Link Label (optional), name: link_label, widget: string, required: false }
@@ -295,6 +321,10 @@ collections:
                 widget: object
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
+
+                  # CHANGED: optionales Bild
+                  - { label: Bild (optional), name: image, widget: image, required: false }
+
                   - { label: Text, name: text, widget: text, required: false }
                   - { label: Link (optional), name: link, widget: string, required: false }
                   - { label: Link Label (optional), name: link_label, widget: string, required: false }
@@ -304,6 +334,10 @@ collections:
                 widget: object
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
+
+                  # CHANGED: optionales Bild
+                  - { label: Bild (optional), name: image, widget: image, required: false }
+
                   - { label: Text, name: text, widget: text, required: false }
                   - { label: Haupt-Link (optional), name: link, widget: string, required: false }
                   - { label: Haupt-Link Label (optional), name: link_label, widget: string, required: false }
@@ -378,7 +412,7 @@ collections:
               - { label: Bild (optional), name: image, widget: image, required: false }
               - { label: Video MP4 (optional), name: video, widget: file, required: false }
               - { label: Poster (optional), name: poster, widget: image, required: false }
-              
+
 
 
 
