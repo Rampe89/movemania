@@ -500,12 +500,14 @@
     }
 
     /* Value cards (icons) */
+    
     .valueTop{
       display:flex;
       align-items:center;
       gap:10px;
       margin-bottom:10px;
     }
+    
     .valueIcon{
       width:56px;
       height:56px;
@@ -516,13 +518,17 @@
       place-items:center;
       flex:0 0 auto;
       padding:10px;
+      overflow:hidden; /* Zoom-Fix: schneidet Leerraum sauber ab */
     }
+    
     .valueIcon img{
-      width:100%;
-      height:100%;
+      width:140%;
+      height:140%;
       object-fit:contain;
       display:block;
+      transform:translate(-14%, -14%); /* optisch zentriert */
     }
+
 
     /* Accordions */
     details.offerAcc{
