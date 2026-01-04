@@ -56,17 +56,8 @@ collections:
                 name: type
                 widget: select
                 options: [video, image]
-
-              # CHANGED: src via upload, passend zum Typ
-              # - bei image: Bild hochladen
-              # - bei video: MP4 hochladen
-              - label: Quelle (src)
-                name: src
-                widget: file
-
-              # CHANGED: Poster als Bild-Upload (optional)
-              - { label: Poster (nur Video), name: poster, widget: image, required: false }
-
+              - { label: Quelle (src), name: src, widget: string }
+              - { label: Poster (nur Video), name: poster, widget: string, required: false }
               - { label: Titel, name: title, widget: string, required: false }
               - { label: Text, name: text, widget: text, required: false }
 
@@ -89,7 +80,6 @@ collections:
               - { label: Icon ALT (optional), name: icon_alt, widget: string, required: false }
 
   # --- LINKS ---
-    # --- LINKS ---
   - name: links
     label: Links
     files:
@@ -121,7 +111,6 @@ collections:
           - { label: Power 2014/15, name: power1415, widget: string, required: false }
           - { label: Power 2016/17, name: power1617, widget: string, required: false }
           - { label: Power 2018/19, name: power1819, widget: string, required: false }
-
 
   # --- SPONSORS ---
   - name: sponsors
@@ -251,10 +240,7 @@ collections:
                 widget: object
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
-
-                  # CHANGED: optionales Bild
                   - { label: Bild (optional), name: image, widget: image, required: false }
-
                   - { label: Text, name: text, widget: text, required: false }
                   - { label: Haupt-Link (optional), name: link, widget: string, required: false }
                   - { label: Haupt-Link Label (optional), name: link_label, widget: string, required: false }
@@ -274,10 +260,7 @@ collections:
                 widget: object
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
-
-                  # CHANGED: optionales Bild
                   - { label: Bild (optional), name: image, widget: image, required: false }
-
                   - { label: Text, name: text, widget: text, required: false }
                   - { label: Haupt-Link (optional), name: link, widget: string, required: false }
                   - { label: Haupt-Link Label (optional), name: link_label, widget: string, required: false }
@@ -311,10 +294,7 @@ collections:
                 widget: object
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
-
-                  # CHANGED: optionales Bild
                   - { label: Bild (optional), name: image, widget: image, required: false }
-
                   - { label: Text, name: text, widget: text, required: false }
                   - { label: Link (optional), name: link, widget: string, required: false }
                   - { label: Link Label (optional), name: link_label, widget: string, required: false }
@@ -324,10 +304,7 @@ collections:
                 widget: object
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
-
-                  # CHANGED: optionales Bild
                   - { label: Bild (optional), name: image, widget: image, required: false }
-
                   - { label: Text, name: text, widget: text, required: false }
                   - { label: Link (optional), name: link, widget: string, required: false }
                   - { label: Link Label (optional), name: link_label, widget: string, required: false }
@@ -337,10 +314,7 @@ collections:
                 widget: object
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
-
-                  # CHANGED: optionales Bild
                   - { label: Bild (optional), name: image, widget: image, required: false }
-
                   - { label: Text, name: text, widget: text, required: false }
                   - { label: Haupt-Link (optional), name: link, widget: string, required: false }
                   - { label: Haupt-Link Label (optional), name: link_label, widget: string, required: false }
@@ -400,7 +374,7 @@ collections:
       - file: assets/content/feedback.json
         label: Feedback Startseite
         name: feedback
-        format: json
+       format: json
         fields:
           - { label: Bereichstitel, name: title, widget: string, required: false, default: "Feedback" }
           - { label: Kicker, name: kicker, widget: string, required: false, default: "Stimmen von Eltern & Kindern" }
