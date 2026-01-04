@@ -89,6 +89,7 @@ collections:
               - { label: Icon ALT (optional), name: icon_alt, widget: string, required: false }
 
   # --- LINKS ---
+    # --- LINKS ---
   - name: links
     label: Links
     files:
@@ -102,23 +103,25 @@ collections:
 
           - { label: Instagram Link (URL), name: instagram, widget: string, required: false }
           - { label: Instagram Text (z.B. @movemania_fs), name: instagram_text, widget: string, required: false }
+          - { label: Instagram Icon (Upload), name: instagram_icon, widget: image, required: false }
 
           - { label: WhatsApp Link (URL), name: whatsapp, widget: string, required: false }
           - { label: WhatsApp Text (z.B. Community & Infos), name: whatsapp_text, widget: string, required: false }
+          - { label: WhatsApp Icon (Upload), name: whatsapp_icon, widget: image, required: false }
 
           - { label: E-Mail (z.B. movemania@mail.de ODER mailto:...), name: mailto, widget: string, required: false }
           - { label: E-Mail Text (z.B. movemania@mail.de), name: mail_text, widget: string, required: false }
+          - { label: Mail Icon (Upload), name: mail_icon, widget: image, required: false }
 
           - { label: Shop (extern), name: shop, widget: string, required: false }
-
           - { label: Hero Video MP4 (Fallback), name: hero_video_mp4, widget: string, required: false }
           - { label: Hero Video Poster (Fallback), name: hero_video_poster, widget: string, required: false }
 
-          # CHANGED: alle Powerkurse editierbar
           - { label: Power 2012/13, name: power1213, widget: string, required: false }
           - { label: Power 2014/15, name: power1415, widget: string, required: false }
           - { label: Power 2016/17, name: power1617, widget: string, required: false }
           - { label: Power 2018/19, name: power1819, widget: string, required: false }
+
 
   # --- SPONSORS ---
   - name: sponsors
