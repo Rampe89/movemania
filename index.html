@@ -1,0 +1,2016 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Movemania FS – Fußballschule mit Haltung & Herz</title>
+  <meta name="description" content="Movemania FS: Fußballschule (6–12) in der Region BS. Feriencamps, Trainingskurse, Ballschule. Jetzt anmelden." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Base */
+      --bg:#ffffff;
+      --ink:#0b1020;
+      --muted:#5e6880;
+      --line:#e6e8ee;
+
+      --navy:#1e3366;
+      --red:#d2182d;
+
+      --max: 1120px;
+      --radius: 0px;
+
+      /* Theme-driven extras */
+      --card-bg:#ffffff;
+      --card-border: var(--line);
+      --shadow: 0 14px 40px rgba(11,16,32,.12);
+
+      --base: 14px;
+      --hero-title-max: 68px; /* clamp max */
+      --section-title: 24px;
+      --card-title: 14px;
+
+      --patternOpacity:.9;
+      --patternDot: rgba(11,16,32,.075);
+      --patternSize: 22px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      font-size: var(--base);
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
+
+    /* Subtle dot pattern layer */
+    .pattern{ position:relative; isolation:isolate; }
+    .pattern::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      background-image: radial-gradient(var(--patternDot) 1px, transparent 1px);
+      background-size: var(--patternSize) var(--patternSize);
+      background-position: 0 0;
+      opacity: var(--patternOpacity);
+      pointer-events:none;
+      -webkit-mask-image: linear-gradient(to bottom,
+        transparent 0%,
+        rgba(0,0,0,.9) 12%,
+        rgba(0,0,0,1) 50%,
+        rgba(0,0,0,.9) 88%,
+        transparent 100%);
+      mask-image: linear-gradient(to bottom,
+        transparent 0%,
+        rgba(0,0,0,.9) 12%,
+        rgba(0,0,0,1) 50%,
+        rgba(0,0,0,.9) 88%,
+        transparent 100%);
+    }
+
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      background:rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+
+    /* 3-column grid so menu stays centered, sponsors remain right */
+    .nav{
+      display:grid;
+      grid-template-columns: auto 1fr auto;
+      align-items:center;
+      padding:16px 0;
+      gap:18px;
+    }
+
+    .brand{display:flex; align-items:flex-start; gap:14px;}
+    .logo{
+      height:48px;
+      width:auto;
+      max-width:180px;
+      object-fit:contain;
+      background:transparent;
+      border:none;
+      display:block;
+    }
+    .brandText b{display:block; font-weight:900; font-size:14px; letter-spacing:.02em}
+    .brandText span{display:block; color:var(--muted); font-size:12px; margin-top:2px}
+
+    .menu{
+      display:flex; gap:22px; align-items:center;
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:11px;
+      white-space:nowrap;
+      justify-self:center;
+    }
+    .menu a{
+      color:rgba(11,16,32,.70);
+      padding:10px 0;
+      border-bottom:2px solid transparent;
+    }
+    .menu a:hover{color:var(--ink)}
+    .menu a.active{color:var(--ink); border-bottom-color:var(--red);}
+
+    .navCtas{
+      justify-self:end;
+      display:flex; gap:10px; align-items:center;
+
+      /* push sponsors to the viewport edge (cancel wrap padding-right) */
+      margin-right: -22px;
+    }
+
+    @media (max-width: 980px){
+      .menu{display:none}
+      .navCtas{display:none}
+    }
+
+    /* Sponsors / Partners (Topbar right) */
+    .sponsorsBar{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:6px 8px;
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius: var(--radius);
+      max-width: min(520px, 40vw);
+    }
+    .sponsorsLabel{
+      font-size:9px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      color:rgba(11,16,32,.60);
+      white-space:nowrap;
+
+      display:inline-flex;
+      align-items:center;
+      height:26px;
+      padding:0 8px;
+      border:1px solid rgba(11,16,32,.12);
+      background: rgba(11,16,32,.02);
+      border-radius: var(--radius);
+    }
+
+    .sponsorsItems{
+      display:flex;
+      align-items:center;
+      gap:8px;
+
+      flex-wrap:nowrap;
+
+      overflow-x:auto;
+      overflow-y:hidden;
+      -webkit-overflow-scrolling: touch;
+
+      scrollbar-width:none; /* Firefox */
+    }
+    .sponsorsItems::-webkit-scrollbar{ display:none; } /* Chrome/Safari */
+
+    .sponsorLink{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      height:26px;
+      padding:0 8px;
+      border:1px solid rgba(11,16,32,.15);
+      background:#fff;
+      border-radius: var(--radius);
+      transition: background .15s ease;
+      flex:0 0 auto;
+      white-space:nowrap;
+    }
+    .sponsorLink:hover{ background: rgba(11,16,32,.03); }
+    .sponsorLink img{
+      height:18px;
+      width:auto;
+      display:block;
+      object-fit:contain;
+    }
+    .sponsorFallback{
+      font-size:10px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:rgba(11,16,32,.70);
+      white-space: nowrap;
+    }
+
+    .sponsorsEmpty{
+      font-size:11px;
+      color:rgba(11,16,32,.55);
+      white-space:nowrap;
+    }
+
+    /* Buttons */
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      min-height:44px;
+      padding:0 18px;
+      font-size:11px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      border:1px solid var(--ink);
+      background:transparent;
+      border-radius:var(--radius);
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .btnRed{border-color:var(--red); color:var(--red);}
+    .btnRed:hover{background:rgba(210,24,45,.06)}
+    .btnBlue{border-color:var(--navy); background:var(--navy); color:#fff;}
+    .btnBlue:hover{filter:brightness(.97)}
+    .btnGhost{border-color:rgba(11,16,32,.35); color:var(--ink); background:#fff;}
+    .btnGhost:hover{background:rgba(11,16,32,.03)}
+
+    /* HERO */
+    .hero{ padding:56px 0 30px; border-bottom:1px solid var(--line); }
+    .heroInner{
+      display:grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap:34px;
+      align-items:center;
+    }
+    @media (max-width: 980px){
+      .heroInner{grid-template-columns:1fr}
+    }
+
+    .heroTitle{
+      line-height: 1.02;
+      max-width: 16ch;
+      margin:0;
+    }
+    .heroBrand{
+      display:block;
+      font-weight:900;
+      letter-spacing:-.02em;
+      font-size: clamp(44px, 5.2vw, var(--hero-title-max));
+      line-height:1.00;
+    }
+    .heroClaim{
+      display:block;
+      margin-top: 12px;
+      font-weight:900;
+      letter-spacing:-.01em;
+      font-size: clamp(26px, 2.9vw, 40px);
+      line-height:1.08;
+      text-transform:uppercase;
+    }
+    .heroText{
+      font-size:13px;
+      line-height:1.7;
+      color: rgba(11,16,32,.65);
+      max-width: 56ch;
+      margin-top: 14px;
+    }
+    .btnRow{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:26px;
+    }
+
+    /* HERO SLIDER */
+    .mediaFrame{
+      border:1px solid var(--line);
+      background:#000;
+      position:relative;
+      overflow:hidden;
+      aspect-ratio: 16 / 9;
+      min-height: 420px;
+      border-radius: var(--radius);
+    }
+    @media (max-width: 980px){
+      .mediaFrame{ min-height: 260px; }
+    }
+    .slide{
+      position:absolute;
+      inset:0;
+      opacity:0;
+      transition: opacity .28s ease;
+    }
+    .slide.isActive{ opacity:1; }
+    .slide video,
+    .slide img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .slideOverlay{
+      position:absolute;
+      left:0; right:0; bottom:0;
+      padding:16px 16px 14px;
+      background: linear-gradient(to top, rgba(0,0,0,.60), rgba(0,0,0,0));
+      color:#fff;
+    }
+    .slideOverlay b{
+      display:block;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      margin-bottom:6px;
+    }
+    .slideOverlay p{
+      margin:0;
+      font-size:13px;
+      line-height:1.5;
+      color:rgba(255,255,255,.88);
+      max-width: 62ch;
+    }
+
+    .sliderUi{
+      position:absolute;
+      left:12px; right:12px;
+      top:12px;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      pointer-events:none;
+    }
+    .sliderUi .vBtn{
+      pointer-events:auto;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      height:38px;
+      padding:0 14px;
+      border:1px solid rgba(255,255,255,.55);
+      background: rgba(0,0,0,.35);
+      color:#fff;
+      font-size:11px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      user-select:none;
+    }
+    .sliderUi .vBtn:hover{ background: rgba(0,0,0,.45); }
+
+    .soundBtn{
+      pointer-events:auto;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      height:38px;
+      padding:0 14px;
+      border:1px solid rgba(255,255,255,.55);
+      background: rgba(0,0,0,.35);
+      color:#fff;
+      font-size:11px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      user-select:none;
+    }
+    .soundBtn:hover{ background: rgba(0,0,0,.45); }
+
+    .dots{
+      position:absolute;
+      left:12px;
+      bottom:12px;
+      display:flex;
+      gap:8px;
+      pointer-events:auto;
+    }
+    .dot{
+      width:9px; height:9px;
+      border-radius:99px;
+      border:1px solid rgba(255,255,255,.65);
+      background: rgba(0,0,0,.25);
+      cursor:pointer;
+    }
+    .dot.isActive{ background: rgba(255,255,255,.90); }
+
+    /* Sections */
+    .section{ padding:30px 0; border-bottom:1px solid var(--line); }
+    .section:last-of-type{border-bottom:none}
+    .sectionTitle{
+      margin:0 0 14px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:-.01em;
+      font-size: var(--section-title);
+    }
+    .sectionKicker{
+      margin:0 0 10px;
+      color:rgba(11,16,32,.55);
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.22em;
+      font-size:11px;
+    }
+
+    /* Cards */
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:18px;
+    }
+    @media (max-width: 980px){
+      .cards{grid-template-columns:1fr}
+    }
+    .card{
+      border:1px solid var(--card-border);
+      background:var(--card-bg);
+      padding:18px 18px 16px;
+      border-radius: var(--radius);
+      box-shadow:none;
+    }
+    .card h3{
+      margin:0 0 10px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:-.01em;
+      font-size: var(--card-title);
+    }
+    .card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.85;
+      font-size:13px;
+      max-width:60ch;
+    }
+    .cardActions{
+      margin-top:14px;
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+
+    /* Values / USP headline */
+    .usp{
+      padding:54px 0 50px;
+      border-bottom:1px solid var(--line);
+      position:relative;
+      overflow:hidden;
+    }
+    .uspHead{
+      text-align:center;
+      position:relative;
+      padding:8px 0 24px;
+    }
+    .uspGhost{
+      position:absolute;
+      left:50%;
+      top:24px;
+      transform:translateX(-50%);
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      font-size: clamp(92px, 11vw, 168px);
+      color:rgba(11,16,32,.04);
+      user-select:none;
+      pointer-events:none;
+      white-space:nowrap;
+      z-index:1;
+      line-height:1;
+    }
+    .uspKicker{
+      margin:0 0 10px;
+      color:rgba(11,16,32,.55);
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.22em;
+      font-size:11px;
+      position:relative;
+      z-index:2;
+    }
+    .uspTitle{
+      margin:0;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:-.01em;
+      font-size: clamp(34px, 4.5vw, 48px);
+      line-height:1.05;
+      position:relative;
+      z-index:2;
+    }
+
+    /* Value cards (icons) */
+    .valueTop{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:10px;
+    }
+    .valueIcon{
+      width:34px;
+      height:34px;
+      border:1px solid var(--card-border);
+      border-radius: var(--radius);
+      background:#fff;
+      display:grid;
+      place-items:center;
+      flex:0 0 auto;
+      padding:6px;
+    }
+    .valueIcon img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+    }
+
+    /* Accordions */
+    details.offerAcc{
+      border:1px solid var(--card-border);
+      background:var(--card-bg);
+      border-radius: var(--radius);
+      overflow:hidden;
+    }
+    details.offerAcc > summary{
+      list-style:none;
+      cursor:pointer;
+      padding:14px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      user-select:none;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.10em;
+      font-size:11px;
+      background:#fff;
+    }
+    details.offerAcc > summary::-webkit-details-marker{ display:none; }
+    .offerAccTitle{ color:rgba(11,16,32,.8); }
+    .offerAccIcon{
+      font-style:normal;
+      color:rgba(11,16,32,.55);
+      font-weight:900;
+      letter-spacing:.18em;
+    }
+    .offerAccBody{
+      padding:16px 14px 14px;
+      border-top:1px solid var(--card-border);
+    }
+    .offerAccBody p{ margin-top:0; }
+    .offerAccWide{ grid-column: 1 / -1; }
+    @media (max-width: 980px){
+      .offerAccWide{ grid-column: auto; }
+    }
+
+    /* Offers layout */
+    .offerGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){
+      .offerGrid{grid-template-columns:1fr}
+    }
+
+    /* NEW: optional media in offers (only shows if an image is provided via CMS) */
+    .offerMedia{
+      width:100%;
+      height:170px;
+      border:1px solid var(--card-border);
+      border-radius: var(--radius);
+      overflow:hidden;
+      background:var(--card-bg);
+      margin:0 0 12px;
+      display:none;
+    }
+    .offerMedia img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .subOffers{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    @media (max-width: 640px){
+      .subOffers{grid-template-columns:1fr}
+    }
+    .subCard{
+      border:1px solid var(--card-border);
+      background:#fff;
+      padding:12px 12px 10px;
+      border-radius:var(--radius);
+      min-height:72px;
+    }
+    .subCard b{
+      display:block;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.02em;
+      font-size:12px;
+      margin-bottom:6px;
+    }
+    .subCard small{
+      display:block;
+      color:rgba(11,16,32,.55);
+      line-height:1.6;
+      font-size:12px;
+    }
+    .dates{
+      margin-top:10px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .datePill{
+      border:1px solid var(--card-border);
+      padding:8px 10px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      font-size:11px;
+      border-radius:var(--radius);
+      background:#fff;
+      color:rgba(11,16,32,.8);
+    }
+
+    /* About */
+    .aboutGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){
+      .aboutGrid{grid-template-columns:1fr}
+    }
+    .aboutMedia{
+      border:1px solid var(--card-border);
+      background:var(--card-bg);
+      overflow:hidden;
+      border-radius:var(--radius);
+      min-height:280px;
+    }
+    .aboutMedia img,
+    .aboutMedia video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .peopleGrid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:18px;
+      margin-top:18px;
+    }
+    @media (max-width: 1120px){
+      .peopleGrid{grid-template-columns: repeat(2, 1fr)}
+    }
+    @media (max-width: 980px){
+      .peopleGrid{grid-template-columns:1fr}
+    }
+    .person{
+      border:1px solid var(--card-border);
+      background:var(--card-bg);
+      border-radius:var(--radius);
+      overflow:hidden;
+    }
+    .person img{
+      width:100%;
+      height:170px;
+      object-fit:contain;
+      object-position:center;
+      background:#f5f6fa;
+      display:block;
+      border-bottom:1px solid var(--card-border);
+    }
+    .person .ph{
+      height:170px;
+      display:grid;
+      place-items:center;
+      color:rgba(11,16,32,.45);
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:11px;
+      border-bottom:1px solid var(--card-border);
+    }
+    .personBody{ padding:14px 14px 12px; }
+    .personBody b{ display:block; font-weight:900; text-transform:uppercase; letter-spacing:.02em; font-size:12px; }
+    .personBody small{ display:block; margin-top:6px; color:rgba(11,16,32,.55); font-size:12px; line-height:1.5; }
+    .personBody p{ margin:8px 0 0; color:var(--muted); line-height:1.8; font-size:13px; }
+
+    /* FAQ */
+    .faq{
+      border:1px solid var(--card-border);
+      background:var(--card-bg);
+      border-radius: var(--radius);
+      overflow:hidden;
+    }
+    .faqItem{ border-top:1px solid var(--card-border); }
+    .faqItem:first-child{ border-top:none; }
+    .faqQ{
+      width:100%;
+      text-align:left;
+      background:#fff;
+      border:none;
+      padding:14px 14px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.10em;
+      font-size:11px;
+      cursor:pointer;
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      align-items:center;
+    }
+    .faqQ span{ color:rgba(11,16,32,.8); }
+    .faqQ i{
+      font-style:normal;
+      color:rgba(11,16,32,.55);
+      font-weight:900;
+      letter-spacing:.18em;
+    }
+    .faqA{
+      display:none;
+      padding:0 14px 14px;
+      color:var(--muted);
+      line-height:1.8;
+      font-size:13px;
+      max-width: 80ch;
+    }
+    .faqItem.isOpen .faqA{ display:block; }
+
+    /* Contact */
+    .kontaktGrid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:18px;
+    }
+    @media (max-width: 980px){
+      .kontaktGrid{grid-template-columns:1fr}
+    }
+    .kontaktCard{
+      border:1px solid var(--card-border);
+      background:var(--card-bg);
+      border-radius:var(--radius);
+      padding:16px 16px 14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      min-height:76px;
+    }
+    .kontaktCard b{
+      display:block;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.02em;
+      font-size:12px;
+      margin-bottom:4px;
+    }
+    .kontaktCard small{ color:rgba(11,16,32,.55); font-size:12px; line-height:1.6; }
+
+    .kontaktIcon{
+      width:44px; height:44px;
+      border:1px solid var(--card-border);
+      border-radius: 99px;
+      display:grid; place-items:center;
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:11px;
+      color:rgba(11,16,32,.55);
+      background:#fff;
+      flex:0 0 auto;
+      overflow:hidden;
+    }
+    /* NEW: icon image in contact chip (only shows if provided via CMS) */
+    .kontaktIcon img{
+      width:28px;
+      height:28px;
+      object-fit:contain;
+      display:block;
+    }
+
+    .kontaktRow{ display:flex; gap:14px; flex-wrap:wrap; padding-top:6px; }
+
+    footer{
+      padding:28px 0 44px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    /* Cookie Banner */
+    .cc{
+      position:fixed;
+      left:18px;
+      bottom:18px;
+      z-index:9999;
+      width:min(420px, calc(100vw - 36px));
+      border:1px solid var(--line);
+      background:var(--card-bg);
+      padding:14px 14px 12px;
+      box-shadow: var(--shadow);
+      display:none;
+      border-radius: var(--radius);
+    }
+    .cc h4{ margin:0 0 8px; font-size:14px; font-weight:900; }
+    .cc p{ margin:0 0 12px; color:var(--muted); font-size:12px; line-height:1.6; }
+    .ccActions{display:flex; gap:10px; flex-wrap:wrap}
+    .cc small{display:block; margin-top:10px; color:rgba(11,16,32,.45); font-size:11px; line-height:1.5}
+  </style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="nav">
+      <div class="brand">
+        <img class="logo" id="logoImg" src="assets/img/logo.png" alt="Movemania FS Logo"
+             onerror="this.style.display='none';" />
+        <div class="brandText">
+          <b>Movemania FS</b>
+          <span> Spaß. Mut. Einsatz. </span>
+        </div>
+      </div>
+
+      <nav class="menu" aria-label="Hauptnavigation">
+        <a href="#home" class="active">Home</a>
+        <a href="#ueber-uns">Über uns</a>
+        <a href="#angebote">Angebote</a>
+        <a href="#" id="navShop" target="_blank" rel="noreferrer">Shop</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#faqs">FAQs</a>
+      </nav>
+
+      <div class="navCtas" aria-label="Partner & Sponsoren">
+        <div class="sponsorsBar" id="sponsorsBar">
+          <span class="sponsorsLabel" id="sponsorsLabel">Partner</span>
+          <div class="sponsorsItems" id="sponsorsItems">
+            <span class="sponsorsEmpty">Partner-Logos folgen</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="home" class="pattern">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap heroInner">
+      <div>
+        <h1 class="heroTitle" id="heroTitle">
+          <span class="heroBrand" id="heroBrand">MOVEMANIA</span>
+          <span class="heroClaim" id="heroClaim">KINDER STÄRKEN.<br>SPIELER ENTWICKELN.</span>
+        </h1>
+
+        <p class="heroText" id="heroText">
+          Inhalte laden…
+        </p>
+      </div>
+
+      <!-- HERO SLIDER -->
+      <div class="mediaFrame" id="heroMedia" aria-label="Hero Slider">
+        <div class="slide isActive">
+          <div style="height:100%;display:grid;place-items:center;color:rgba(255,255,255,.85);font-weight:800;font-size:13px;padding:18px;text-align:center;">
+            Inhalte laden…
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÜBER UNS -->
+  <section id="ueber-uns" class="section">
+    <div class="wrap">
+      <p class="sectionKicker" id="aboutKicker">Über uns</p>
+      <h2 class="sectionTitle" id="aboutTitle">WER WIR SIND</h2>
+
+      <div class="aboutGrid">
+        <div class="aboutMedia" id="aboutMedia">
+          <div style="height:100%;display:grid;place-items:center;color:rgba(11,16,32,.45);font-weight:900;letter-spacing:.18em;text-transform:uppercase;font-size:11px;">
+            Bild/Video (Headcoach)
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 id="aboutHeadTitle">VORSTELLUNG HEADCOACH</h3>
+          <p id="aboutHeadText">Inhalte laden…</p>
+          <div class="cardActions">
+            <a class="btn btnGhost" id="aboutCta" href="#kontakt">Kontakt aufnehmen</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:18px;">
+        <h3 style="margin:0 0 10px;font-weight:900;text-transform:uppercase;letter-spacing:-.01em;font-size:var(--card-title);" id="coachTitle">
+          COACHES
+        </h3>
+        <div class="peopleGrid" id="coachGrid">
+          <div class="person">
+            <div class="ph">Coach</div>
+            <div class="personBody">
+              <b>Vorname Nachname</b>
+              <p>Kurzprofil / Schwerpunkt (Platzhalter).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WOFÜR WIR STEHEN / WERTE -->
+  <section id="werte" class="usp">
+    <div class="wrap">
+      <div class="uspHead">
+        <div class="uspGhost" id="uspGhost">WERTE</div>
+        <p class="uspKicker" id="uspKicker">Wofür wir stehen</p>
+        <h2 class="uspTitle" id="uspTitle">SPAß · MUT · EINSATZ</h2>
+      </div>
+
+      <div class="cards" id="valuesGrid" aria-label="Werte">
+        <div class="card">
+          <div class="valueTop">
+            <span class="valueIcon"><span style="font-weight:900;letter-spacing:.18em;font-size:11px;color:rgba(11,16,32,.55)">ICON</span></span>
+            <h3>MUT</h3>
+          </div>
+          <p>Wir stärken Kinder, Entscheidungen zu treffen, Verantwortung zu übernehmen und sich etwas zuzutrauen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANGEBOTE -->
+  <section id="angebote" class="section">
+    <div class="wrap">
+      <h2 class="sectionTitle" id="offersSectionTitle">ANGEBOTE</h2>
+
+      <div class="offerGrid" id="offersGrid">
+
+        <details class="offerAcc" id="accCamps">
+          <summary>
+            <span class="offerAccTitle" id="offersCampsTitle">Camps</span>
+            <i class="offerAccIcon">+</i>
+          </summary>
+          <div class="offerAccBody">
+            <!-- NEW: optional image from CMS -->
+            <div class="offerMedia" id="offersCampsMedia" aria-hidden="true"></div>
+
+            <p id="offersCampsText">Feriencamps und Elitecamps – strukturierte Tage, Bewegung, Spiele und Teamgefühl.</p>
+            <div class="subOffers" id="offersCampsSubs">
+              <div class="subCard">
+                <b id="offersCampsSub1Title">Feriencamps</b>
+                <small id="offersCampsSub1Text">Abwechslungsreiche Einheiten, warmes Mittagessen, viel Spaß.</small>
+              </div>
+              <div class="subCard">
+                <b id="offersCampsSub2Title">Elitecamps</b>
+                <small id="offersCampsSub2Text">Intensiver, fokussierter, leistungsorientierter – für Kids, die mehr wollen.</small>
+              </div>
+            </div>
+            <div class="cardActions" style="margin-top:12px;">
+              <a class="btn btnRed" id="btnCamps" href="#" target="_blank" rel="noreferrer">Camps buchen</a>
+            </div>
+          </div>
+        </details>
+
+        <details class="offerAcc" id="accKurse">
+          <summary>
+            <span class="offerAccTitle" id="offersKurseTitle">Kurse</span>
+            <i class="offerAccIcon">+</i>
+          </summary>
+          <div class="offerAccBody">
+            <!-- NEW: optional image from CMS -->
+            <div class="offerMedia" id="offersKurseMedia" aria-hidden="true"></div>
+
+            <p id="offersKurseText">Powerkurse in kleinen Gruppen – Technik, Athletik, Spielintelligenz.</p>
+
+            <div class="subOffers">
+              <div class="subCard" id="powerBox">
+                <b id="offersKursePowerBoxLabel">Powerkurse</b>
+                <small id="offersKursePowerBoxText">Termine & Gruppen (Beispiele):</small>
+                <div class="dates" aria-label="Termine" id="offersPowerPills">
+                  <span class="datePill">12/13</span>
+                  <span class="datePill">14/15</span>
+                  <span class="datePill">16/17</span>
+                  <span class="datePill">18/19</span>
+                </div>
+              </div>
+
+              <div class="subCard" id="eliteBox">
+                <b id="offersKurseEliteBoxLabel">Elitekurse</b>
+                <small id="offersEliteKurseText">Zusatzkurse (Erklärungstext aus CMS).</small>
+              </div>
+            </div>
+
+            <div class="cardActions" style="margin-top:12px;" id="offersKurseButtons">
+              <a class="btn btnGhost" id="btnPower1819" href="#" target="_blank" rel="noreferrer">Power 18/19</a>
+              <a class="btn btnGhost" id="btnPower1617" href="#" target="_blank" rel="noreferrer">Power 16/17</a>
+            </div>
+          </div>
+        </details>
+
+        <details class="offerAcc" id="accBalls">
+          <summary>
+            <span class="offerAccTitle" id="offersBallsTitle">Ballschule</span>
+            <i class="offerAccIcon">+</i>
+          </summary>
+          <div class="offerAccBody">
+            <!-- NEW: optional image from CMS -->
+            <div class="offerMedia" id="offersBallsMedia" aria-hidden="true"></div>
+
+            <p id="offersBallsText">Motorik, Ballgefühl, Koordination – ideal als Fundament (z. B. für Einsteiger).</p>
+          </div>
+        </details>
+
+        <details class="offerAcc" id="accKiga">
+          <summary>
+            <span class="offerAccTitle" id="offersKigaTitle">Fußballkindergarten</span>
+            <i class="offerAccIcon">+</i>
+          </summary>
+          <div class="offerAccBody">
+            <!-- NEW: optional image from CMS -->
+            <div class="offerMedia" id="offersKigaMedia" aria-hidden="true"></div>
+
+            <p id="offersKigaText">Spielerisches Training für die Kleineren – Bewegung, Spaß und erste Fußball-Basics.</p>
+          </div>
+        </details>
+
+        <details class="offerAcc offerAccWide" id="accBeratung">
+          <summary>
+            <span class="offerAccTitle" id="offersBeratungTitle">Beratung</span>
+            <i class="offerAccIcon">+</i>
+          </summary>
+          <div class="offerAccBody">
+            <!-- NEW: optional image from CMS -->
+            <div class="offerMedia" id="offersBeratungMedia" aria-hidden="true"></div>
+
+            <p id="offersBeratungText">Unterstützung für Vereine, Trainer und Teams – von Konzept bis Fortbildung.</p>
+            <div class="subOffers" id="offersBeratungSubs" style="grid-template-columns: repeat(5, 1fr);">
+              <div class="subCard"><b>Vereinsberatung</b><small>+ Text</small></div>
+              <div class="subCard"><b>Rent a Coach</b><small>+ Text</small></div>
+              <div class="subCard"><b>Trainerfortbildung</b><small>+ Text</small></div>
+              <div class="subCard"><b>Trainer</b><small>+ Text</small></div>
+              <div class="subCard"><b>Spiele</b><small>+ Text</small></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="offerAcc offerAccWide" id="accEvents">
+          <summary>
+            <span class="offerAccTitle" id="eventsTitle">Events</span>
+            <i class="offerAccIcon">+</i>
+          </summary>
+          <div class="offerAccBody">
+            <div class="cards" id="eventsGrid">
+              <div class="card">
+                <h3>Event 1</h3>
+                <p>Platzhalter – Events können später aus dem CMS kommen (Titel, Datum, Beschreibung, Link).</p>
+              </div>
+              <div class="card">
+                <h3>Event 2</h3>
+                <p>Platzhalter – Events können später aus dem CMS kommen (Titel, Datum, Beschreibung, Link).</p>
+              </div>
+              <div class="card">
+                <h3>Event 3</h3>
+                <p>Platzhalter – Events können später aus dem CMS kommen (Titel, Datum, Beschreibung, Link).</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKT -->
+  <section id="kontakt" class="section">
+    <div class="wrap">
+      <h2 class="sectionTitle">KONTAKT</h2>
+
+      <div class="kontaktGrid">
+        <a class="kontaktCard" id="kMail" href="#" rel="noreferrer">
+          <div>
+            <b>E-Mail</b>
+            <small id="kMailText">Direkt schreiben</small>
+          </div>
+          <div class="kontaktIcon" id="kMailIcon"><span id="kMailIconFallback">MAIL</span></div>
+        </a>
+
+        <a class="kontaktCard" id="kIG" href="#" target="_blank" rel="noreferrer">
+          <div>
+            <b>Instagram</b>
+            <small id="kIGText">Updates & Einblicke</small>
+          </div>
+          <div class="kontaktIcon" id="kIGIcon"><span id="kIGIconFallback">IG</span></div>
+        </a>
+
+        <a class="kontaktCard" id="kWA" href="#" target="_blank" rel="noreferrer">
+          <div>
+            <b>WhatsApp</b>
+            <small id="kWAText">Community / Infos</small>
+          </div>
+          <div class="kontaktIcon" id="kWAIcon"><span id="kWAIconFallback">WA</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEEDBACK -->
+  <section id="feedback" class="section">
+    <div class="wrap">
+      <h2 class="sectionTitle" id="feedbackTitle">FEEDBACK</h2>
+      <p class="sectionKicker" id="feedbackKicker">Stimmen von Eltern & Kindern</p>
+
+      <div class="cards" id="feedbackGrid" aria-label="Feedback">
+        <div class="card">
+          <h3>Feedback (Platzhalter)</h3>
+          <p>Hier können später Videos, Bilder und Texte aus dem CMS / JSON geladen werden.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQS -->
+  <section id="faqs" class="section">
+    <div class="wrap">
+      <h2 class="sectionTitle" id="faqTitle">FAQs</h2>
+
+      <div class="faq" id="faqBox">
+        <div class="faqItem">
+          <button class="faqQ" type="button"><span>1. Frage (Platzhalter)</span><i>+</i></button>
+          <div class="faqA">Antworttext (Platzhalter). Kann später aus dem CMS geladen werden.</div>
+        </div>
+      </div>
+
+      <p style="margin:14px 0 0;color:rgba(11,16,32,.55);font-size:12px;line-height:1.7;" id="faqHint">
+        Hast du weitere Fragen? Dann nimm Kontakt per E-Mail auf.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <b style="color:var(--ink)">Movemania FS</b><br>
+    Fußballschule mit Haltung &amp; Herz
+
+    <div style="margin-top:12px; display:flex; gap:12px; flex-wrap:wrap;">
+      <a class="btn btnGhost" href="/impressum.html">Impressum</a>
+      <a class="btn btnGhost" href="/datenschutz.html">Datenschutz</a>
+      <a class="btn btnGhost" href="/agbs.html">AGBs</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Minimaler Cookie-Hinweis (global) -->
+<div class="cc" id="cc">
+  <h4>Hinweis</h4>
+  <p>Diese Website nutzt keine Tracking-Cookies. Technisch notwendige Speicherungen (z. B. diese Bestätigung) erfolgen lokal im Browser.</p>
+  <div class="ccActions">
+    <button class="btn btnBlue" id="ccOk" type="button">OK</button>
+  </div>
+  <small>Du kannst den Hinweis ausblenden. Es ist keine Tracking-Einwilligung.</small>
+</div>
+
+<script>
+  async function loadJSON(path){
+    const res = await fetch(path, { cache: "no-store" });
+    if (!res.ok) throw new Error("Failed to load " + path + " (" + res.status + ")");
+    return await res.json();
+  }
+
+  function setHref(id, url){
+    const el = document.getElementById(id);
+    if (el && url) el.href = url;
+  }
+
+  function setText(id, value){
+    const el = document.getElementById(id);
+    if (!el || value === undefined || value === null) return;
+    const v = String(value).trim();
+    if (!v) return;
+    el.textContent = v;
+  }
+
+  function setHtml(id, value){
+    const el = document.getElementById(id);
+    if (!el || value === undefined || value === null) return;
+    const v = String(value).trim();
+    if (!v) return;
+    el.innerHTML = v;
+  }
+
+  function normalizeMailto(input){
+    if (!input) return "";
+    const raw = String(input).trim();
+    if (!raw) return "";
+    if (/^mailto:/i.test(raw)) return raw;
+    if (raw.includes("@")) return "mailto:" + raw;
+    return raw;
+  }
+
+  // NEW: helper for optional images (offers/contact icons)
+  function mountOptionalImage(containerId, src, alt){
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    const s = (src || "").toString().trim();
+    if (!s) return;
+    el.innerHTML = `<img src="${s}" alt="${(alt || "").toString().trim() || "Bild"}" loading="lazy">`;
+    el.style.display = "block";
+  }
+
+  function mountContactIcon(containerId, src, alt){
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    const s = (src || "").toString().trim();
+    if (!s) return; // keep fallback text
+    el.innerHTML = `<img src="${s}" alt="${(alt || "").toString().trim() || "Icon"}" loading="lazy">`;
+  }
+
+  function applyTheme(theme){
+    const root = document.documentElement;
+    const setVar = (k, v) => {
+      if (v === undefined || v === null || v === "") return;
+      root.style.setProperty(k, v);
+    };
+
+    const colors = theme?.colors || {};
+    const type = theme?.type || {};
+    const layout = theme?.layout || {};
+    const pattern = theme?.pattern || {};
+
+    // Colors
+    setVar("--bg", colors.bg);
+    setVar("--ink", colors.ink);
+    setVar("--muted", colors.muted);
+    setVar("--line", colors.line);
+
+    setVar("--navy", colors.primary);
+    setVar("--red", colors.accent);
+
+    setVar("--card-bg", colors.card_bg);
+    setVar("--card-border", colors.card_border);
+
+    // Typography
+    if (typeof type.body_size === "number") setVar("--base", type.body_size + "px");
+    if (typeof type.hero_title_size === "number") setVar("--hero-title-max", type.hero_title_size + "px");
+    if (typeof type.section_title_size === "number") setVar("--section-title", type.section_title_size + "px");
+    if (typeof type.card_title_size === "number") setVar("--card-title", type.card_title_size + "px");
+
+    // Layout
+    if (typeof layout.content_width === "number") setVar("--max", layout.content_width + "px");
+    if (typeof layout.radius === "number") setVar("--radius", layout.radius + "px");
+    if (typeof layout.shadow_strength === "number") {
+      const s = Math.max(0, Math.min(0.3, layout.shadow_strength));
+      setVar("--shadow", `0 14px 40px rgba(11,16,32,${s})`);
+    }
+
+    // Pattern
+    if (pattern.enabled === false) {
+      setVar("--patternOpacity", "0");
+    } else {
+      if (typeof pattern.opacity === "number") setVar("--patternOpacity", String(pattern.opacity));
+      if (pattern.dot) setVar("--patternDot", pattern.dot);
+      if (typeof pattern.size === "number") setVar("--patternSize", pattern.size + "px");
+    }
+  }
+
+  /* HERO Slider: expects array of slides:
+     [{type:"video"|"image", src:"...", poster:"...", title:"...", text:"..."}] */
+  function mountHeroSlider(slides){
+    const heroMedia = document.getElementById("heroMedia");
+    if (!heroMedia) return;
+
+    const safeSlides = Array.isArray(slides) && slides.length ? slides : [
+      {
+        type: "video",
+        src: "assets/video/hero.mp4",
+        poster: "assets/img/hero.jpg",
+        title: "Vorstellung",
+        text: "Hier steht später die Vorstellung / kurze Einordnung (aus dem CMS)."
+      },
+      { type: "image", src: "assets/img/placeholder-1.jpg", title: "Wofür wir stehen", text: "Werte, Haltung, Herz – kurz und klar." },
+      { type: "image", src: "assets/img/placeholder-2.jpg", title: "Was wir machen", text: "Camps, Kurse, Ballschule – Überblick." }
+    ];
+
+    let idx = 0;
+    let timer = null;
+    let soundOn = false;
+
+    const stop = () => { if (timer) clearTimeout(timer); timer = null; };
+
+    const slideDelayMs = () => {
+      const s = safeSlides[idx] || {};
+      if (s.type === "video") return 66000; // 66 Sekunden für Videos
+      return 6500; // Bilder: 6.5 Sekunden
+    };
+
+    const restart = () => {
+      stop();
+      timer = setTimeout(() => {
+        idx = (idx + 1) % safeSlides.length;
+        render();
+        restart();
+      }, slideDelayMs());
+    };
+
+    const applySoundToActiveVideo = () => {
+      const activeSlide = heroMedia.querySelector(".slide.isActive");
+      if (!activeSlide) return;
+
+      heroMedia.querySelectorAll("video").forEach((v) => {
+        const isInActive = v.closest(".slide") === activeSlide;
+        if (!isInActive) {
+          try { v.pause(); } catch (e) {}
+          v.muted = true;
+          v.volume = 1.0;
+          try { v.currentTime = 0; } catch (e) {}
+        }
+      });
+
+      const v = activeSlide.querySelector("video");
+      if (!v) return;
+      v.muted = !soundOn;
+      v.volume = 1.0;
+      v.play().catch(() => {});
+    };
+
+    const toggleSound = () => {
+      soundOn = !soundOn;
+      applySoundToActiveVideo();
+      const btn = heroMedia.querySelector("#sSound");
+      if (btn) btn.textContent = soundOn ? "Sound: An" : "Sound: Aus";
+    };
+
+    const render = () => {
+      heroMedia.innerHTML = "";
+
+      safeSlides.forEach((s, i) => {
+        const slide = document.createElement("div");
+        slide.className = "slide" + (i === idx ? " isActive" : "");
+
+        if (s.type === "video") {
+          const isActive = i === idx;
+          const mutedAttr = (!soundOn || !isActive) ? "muted" : "";
+          slide.innerHTML = `
+            <video autoplay ${mutedAttr} loop playsinline preload="metadata" poster="${s.poster || ""}">
+              <source src="${s.src}" type="video/mp4">
+            </video>
+            <div class="slideOverlay">
+              <b>${(s.title || "").toUpperCase()}</b>
+              <p>${s.text || ""}</p>
+            </div>
+          `;
+        } else {
+          slide.innerHTML = `
+            <img src="${s.src}" alt="${s.title || "Slide"}" />
+            <div class="slideOverlay">
+              <b>${(s.title || "").toUpperCase()}</b>
+              <p>${s.text || ""}</p>
+            </div>
+          `;
+        }
+        heroMedia.appendChild(slide);
+      });
+
+      const ui = document.createElement("div");
+      ui.className = "sliderUi";
+      ui.innerHTML = `
+        <button class="vBtn" id="sPrev" type="button">Zurück</button>
+        <button class="soundBtn" id="sSound" type="button">${soundOn ? "Sound: An" : "Sound: Aus"}</button>
+        <button class="vBtn" id="sNext" type="button">Weiter</button>
+      `;
+      heroMedia.appendChild(ui);
+
+      const dots = document.createElement("div");
+      dots.className = "dots";
+      safeSlides.forEach((_, i) => {
+        const d = document.createElement("button");
+        d.type = "button";
+        d.className = "dot" + (i === idx ? " isActive" : "");
+        d.setAttribute("aria-label", "Slide " + (i+1));
+        d.addEventListener("click", () => { idx = i; render(); restart(); });
+        dots.appendChild(d);
+      });
+      heroMedia.appendChild(dots);
+
+      heroMedia.querySelector("#sPrev").addEventListener("click", () => { idx = (idx - 1 + safeSlides.length) % safeSlides.length; render(); restart(); });
+      heroMedia.querySelector("#sNext").addEventListener("click", () => { idx = (idx + 1) % safeSlides.length; render(); restart(); });
+      heroMedia.querySelector("#sSound").addEventListener("click", () => { toggleSound(); });
+
+      applySoundToActiveVideo();
+    };
+
+    heroMedia.addEventListener("mouseenter", stop);
+    heroMedia.addEventListener("mouseleave", restart);
+
+    render();
+    restart();
+  }
+
+  function initFaq(){
+    const box = document.getElementById("faqBox");
+    if (!box) return;
+    box.querySelectorAll(".faqItem").forEach((item) => {
+      const btn = item.querySelector(".faqQ");
+      const icon = btn ? btn.querySelector("i") : null;
+      if (!btn) return;
+
+      btn.addEventListener("click", () => {
+        const isOpen = item.classList.toggle("isOpen");
+        if (icon) icon.textContent = isOpen ? "–" : "+";
+      });
+    });
+  }
+
+  function mountHeadcoachMedia(data){
+    const el = document.getElementById("aboutMedia");
+    if (!el) return;
+
+    const img = data?.image ? String(data.image).trim() : "";
+    const vid = data?.video ? String(data.video).trim() : "";
+    const poster = data?.poster ? String(data.poster).trim() : "";
+
+    if (vid){
+      el.innerHTML = `<video controls playsinline preload="metadata" ${poster ? `poster="${poster}"` : ""} style="width:100%;height:100%;object-fit:cover;display:block;">
+        <source src="${vid}" type="video/mp4">
+      </video>`;
+      return;
+    }
+    if (img){
+      el.innerHTML = `<img src="${img}" alt="Headcoach" loading="lazy" />`;
+      return;
+    }
+
+    el.innerHTML = `<div style="height:100%;display:grid;place-items:center;color:rgba(11,16,32,.45);font-weight:900;letter-spacing:.18em;text-transform:uppercase;font-size:11px;">
+      Bild/Video (Headcoach)
+    </div>`;
+  }
+
+  function mountCoaches(data){
+    const grid = document.getElementById("coachGrid");
+    if (!grid) return;
+
+    const items = Array.isArray(data?.coaches) ? data.coaches : [];
+    if (!items.length) return;
+
+    grid.innerHTML = "";
+    items.slice(0, 12).forEach((c) => {
+      const name = c?.name || "Coach";
+      const role = c?.role || "";
+      const bio = c?.bio || "";
+      const image = c?.image || "";
+
+      const card = document.createElement("div");
+      card.className = "person";
+      card.innerHTML = `
+        ${image
+          ? `<img src="${image}" alt="${name}" loading="lazy" />`
+          : `<div class="ph">Coach</div>`
+        }
+        <div class="personBody">
+          <b>${String(name).toUpperCase()}</b>
+          ${role ? `<small>${role}</small>` : ``}
+          ${bio ? `<p>${bio}</p>` : ``}
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  function mountSponsors(data){
+    const bar = document.getElementById("sponsorsBar");
+    const label = document.getElementById("sponsorsLabel");
+    const itemsEl = document.getElementById("sponsorsItems");
+    if (!bar || !itemsEl) return;
+
+    const title = data && (data.title || data.label);
+    if (label && title) label.textContent = title;
+
+    const items = Array.isArray(data?.items) ? data.items
+                : Array.isArray(data?.sponsors) ? data.sponsors
+                : Array.isArray(data) ? data
+                : [];
+
+    if (!items.length) return;
+
+    itemsEl.innerHTML = "";
+    items.slice(0, 12).forEach((it) => {
+      const name = it?.name || "";
+      const url = it?.url || "";
+      const logo = it?.logo || "";
+
+      const a = document.createElement(url ? "a" : "span");
+      a.className = "sponsorLink";
+      if (url){
+        a.href = url;
+        a.target = "_blank";
+        a.rel = "noreferrer";
+      }
+      if (logo){
+        const img = document.createElement("img");
+        img.src = logo;
+        img.alt = name || "Partner";
+        img.loading = "lazy";
+        a.appendChild(img);
+      } else {
+        const t = document.createElement("span");
+        t.className = "sponsorFallback";
+        t.textContent = (name || "Partner").toUpperCase();
+        a.appendChild(t);
+      }
+      itemsEl.appendChild(a);
+    });
+  }
+
+  function mountValues(valuesData){
+    const defaultValues = [
+      { title: "Mut", text: "Wir stärken Kinder, Entscheidungen zu treffen, Verantwortung zu übernehmen und sich etwas zuzutrauen.", icon: "assets/img/icons/mut.svg" },
+      { title: "Einsatz", text: "Leistung entsteht durch Freude am Training, Dranbleiben und gemeinsames Arbeiten an Zielen.", icon: "assets/img/icons/einsatz.svg" },
+      { title: "Respekt", text: "Respekt, Fairness und ein positives Miteinander sind bei uns nicht verhandelbar.", icon: "assets/img/icons/respekt.svg" }
+    ];
+
+    const values =
+      (Array.isArray(valuesData?.items) && valuesData.items.length ? valuesData.items :
+      (Array.isArray(valuesData?.values) && valuesData.values.length ? valuesData.values :
+      defaultValues));
+
+    const grid = document.getElementById("valuesGrid");
+    if (!grid) return;
+
+    grid.innerHTML = "";
+    values.slice(0, 6).forEach((v) => {
+      const card = document.createElement("div");
+      card.className = "card";
+      const iconHtml = v.icon
+        ? `<span class="valueIcon"><img src="${v.icon}" alt="${(v.icon_alt || v.title || "Icon")}" loading="lazy"></span>`
+        : `<span class="valueIcon"></span>`;
+      card.innerHTML = `
+        <div class="valueTop">
+          ${iconHtml}
+          <h3>${(v.title || "").toUpperCase()}</h3>
+        </div>
+        <p>${v.text || ""}</p>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  function mountOffers(offersData, links){
+    const offers = offersData?.offers || offersData || {};
+
+    const addOptionalLinkButton = (containerEl, link, label, cssClass) => {
+      if (!containerEl) return;
+      const href = (link || "").trim();
+      if (!href) return;
+      const a = document.createElement("a");
+      a.className = cssClass || "btn btnGhost";
+      a.href = href;
+      a.target = "_blank";
+      a.rel = "noreferrer";
+      a.textContent = (label || "Mehr").toUpperCase();
+      const wrap = document.createElement("div");
+      wrap.className = "cardActions";
+      wrap.appendChild(a);
+      containerEl.appendChild(wrap);
+    };
+
+    // Camps
+    if (offers?.camps){
+      setText("offersCampsTitle", offers.camps.title || "Camps");
+      setText("offersCampsText", offers.camps.text);
+      setText("btnCamps", offers.camps.button_label || "Camps buchen");
+      if (offers.camps.button_link) setHref("btnCamps", offers.camps.button_link);
+      else setHref("btnCamps", links?.camps);
+
+      // NEW: image support
+      mountOptionalImage("offersCampsMedia", offers.camps.image, offers.camps.title || "Camps");
+
+      const campsBody = document.querySelector("#accCamps .offerAccBody");
+      addOptionalLinkButton(campsBody, offers.camps.link, offers.camps.link_label, "btn btnGhost");
+
+      const subs = Array.isArray(offers.camps.sub) ? offers.camps.sub : [];
+      if (subs[0]){
+        setText("offersCampsSub1Title", subs[0].title);
+        setText("offersCampsSub1Text", subs[0].text);
+        const sub1 = document.querySelector("#offersCampsSubs .subCard:nth-child(1)");
+        addOptionalLinkButton(sub1, subs[0].link, subs[0].link_label, "btn btnGhost");
+      }
+      if (subs[1]){
+        setText("offersCampsSub2Title", subs[1].title);
+        setText("offersCampsSub2Text", subs[1].text);
+        const sub2 = document.querySelector("#offersCampsSubs .subCard:nth-child(2)");
+        addOptionalLinkButton(sub2, subs[1].link, subs[1].link_label, "btn btnGhost");
+      }
+    }
+
+    // Kurse
+    if (offers?.kurse){
+      setText("offersKurseTitle", offers.kurse.title || "Kurse");
+      setText("offersKurseText", offers.kurse.text);
+
+      // NEW: image support
+      mountOptionalImage("offersKurseMedia", offers.kurse.image, offers.kurse.title || "Kurse");
+
+      const kurseBody = document.querySelector("#accKurse .offerAccBody");
+      addOptionalLinkButton(kurseBody, offers.kurse.link, offers.kurse.link_label, "btn btnGhost");
+
+      setText("offersKursePowerBoxLabel", offers.kurse.power_box_label || "Powerkurse");
+      setText("offersKursePowerBoxText", offers.kurse.power_box_text || "Termine & Gruppen (Beispiele):");
+
+      const pillsEl = document.getElementById("offersPowerPills");
+      if (pillsEl){
+        pillsEl.innerHTML = "";
+        if (Array.isArray(offers.kurse.power_pills) && offers.kurse.power_pills.length){
+          offers.kurse.power_pills.slice(0, 10).forEach((p) => {
+            const span = document.createElement("span");
+            span.className = "datePill";
+            span.textContent = String(p);
+            pillsEl.appendChild(span);
+          });
+        }
+      }
+
+      const powerBox = document.getElementById("powerBox");
+      addOptionalLinkButton(powerBox, offers.kurse.power_link, offers.kurse.power_link_label, "btn btnGhost");
+
+      setText("offersKurseEliteBoxLabel", offers.kurse.elite_box_label || "Elitekurse");
+      setText("offersEliteKurseText", offers.kurse.elite_box_text);
+
+      const eliteBox = document.getElementById("eliteBox");
+      addOptionalLinkButton(eliteBox, offers.kurse.elite_link, offers.kurse.elite_link_label, "btn btnGhost");
+
+      const btnWrap = document.getElementById("offersKurseButtons");
+
+      // IMPORTANT: Buttons (z.B. Power 12/13, 14/15, 16/17, 18/19) are fully CMS-driven via offers.kurse.buttons
+      if (btnWrap && Array.isArray(offers.kurse.buttons) && offers.kurse.buttons.length){
+        btnWrap.innerHTML = "";
+        offers.kurse.buttons.slice(0, 8).forEach((b) => {
+          const href = (b.link || "").trim();
+          if (!href) return;
+          const a = document.createElement("a");
+          a.className = "btn btnGhost";
+          a.textContent = b.label || "Button";
+          a.href = href;
+          a.target = "_blank";
+          a.rel = "noreferrer";
+          btnWrap.appendChild(a);
+        });
+      } else if (btnWrap) {
+        // Fallback: existing links.json keys (supports 12/13 and 14/15 if present there later)
+        btnWrap.innerHTML = "";
+
+        const fallbackButtons = [
+          { label: "POWERKURS 2012/13", link: links?.power1213 },
+          { label: "POWERKURS 2014/15", link: links?.power1415 },
+          { label: "POWERKURS 2016/17", link: links?.power1617 },
+          { label: "POWERKURS 2018/19", link: links?.power1819 }
+        ].filter(b => (b.link || "").trim());
+
+        fallbackButtons.forEach((b) => {
+          const a = document.createElement("a");
+          a.className = "btn btnGhost";
+          a.textContent = b.label;
+          a.href = b.link;
+          a.target = "_blank";
+          a.rel = "noreferrer";
+          btnWrap.appendChild(a);
+        });
+      }
+    }
+
+    // Ballschule
+    if (offers?.ballschule){
+      setText("offersBallsTitle", offers.ballschule.title || "Ballschule");
+      setText("offersBallsText", offers.ballschule.text);
+
+      // NEW: image support
+      mountOptionalImage("offersBallsMedia", offers.ballschule.image, offers.ballschule.title || "Ballschule");
+
+      const ballsBody = document.querySelector("#accBalls .offerAccBody");
+      addOptionalLinkButton(ballsBody, offers.ballschule.link, offers.ballschule.link_label || "Zur Anmeldung", "btn btnGhost");
+    }
+
+    // Kiga
+    if (offers?.kiga){
+      setText("offersKigaTitle", offers.kiga.title || "Fußballkindergarten");
+      setText("offersKigaText", offers.kiga.text);
+
+      // NEW: image support
+      mountOptionalImage("offersKigaMedia", offers.kiga.image, offers.kiga.title || "Fußballkindergarten");
+
+      const kigaBody = document.querySelector("#accKiga .offerAccBody");
+      addOptionalLinkButton(kigaBody, offers.kiga.link, offers.kiga.link_label || "Zur Anmeldung", "btn btnGhost");
+    }
+
+    // Beratung
+    if (offers?.beratung){
+      setText("offersBeratungTitle", offers.beratung.title || "Beratung");
+      setText("offersBeratungText", offers.beratung.text);
+
+      // NEW: image support
+      mountOptionalImage("offersBeratungMedia", offers.beratung.image, offers.beratung.title || "Beratung");
+
+      const subs = Array.isArray(offers.beratung.sub) ? offers.beratung.sub : [];
+      const subsEl = document.getElementById("offersBeratungSubs");
+      if (subsEl && subs.length){
+        subsEl.innerHTML = "";
+        subs.slice(0, 5).forEach((s) => {
+          const div = document.createElement("div");
+          div.className = "subCard";
+          const title = s.title || "";
+          const text = s.text || "";
+          const link = (s.link || "").trim();
+          const linkLabel = (s.link_label || "Mehr").toUpperCase();
+          div.innerHTML = `
+            <b>${title}</b>
+            <small>${text || ""}</small>
+            ${link ? `<div style="margin-top:8px;"><a class="btn btnGhost" href="${link}" target="_blank" rel="noreferrer">${linkLabel}</a></div>` : ``}
+          `;
+          subsEl.appendChild(div);
+        });
+      }
+    }
+
+    document.querySelectorAll("details.offerAcc").forEach((d) => {
+      const icon = d.querySelector(".offerAccIcon");
+      const sync = () => { if (icon) icon.textContent = d.open ? "–" : "+"; };
+      sync();
+      d.addEventListener("toggle", sync);
+    });
+  }
+
+  function mountEvents(eventsData){
+    const title = eventsData?.title;
+    if (title) setText("eventsTitle", title);
+
+    const items = Array.isArray(eventsData?.items) ? eventsData.items : [];
+    const grid = document.getElementById("eventsGrid");
+    if (!grid || !items.length) return;
+
+    grid.innerHTML = "";
+    items.slice(0, 9).forEach((ev) => {
+      const card = document.createElement("div");
+      card.className = "card";
+      const h = (ev.title || "Event").toUpperCase();
+      const date = ev.date ? `<div style="color:rgba(11,16,32,.55);font-size:12px;line-height:1.6;margin:8px 0 0;">${ev.date}</div>` : "";
+      const img = ev.image ? `<img src="${ev.image}" alt="${ev.title || "Event"}" style="width:100%;height:150px;object-fit:cover;border:1px solid var(--card-border);margin-bottom:12px;" loading="lazy">` : "";
+      const link = ev.link ? `<div class="cardActions"><a class="btn btnGhost" href="${ev.link}" target="_blank" rel="noreferrer">${(ev.link_label || "Mehr Infos").toUpperCase()}</a></div>` : "";
+      card.innerHTML = `
+        ${img}
+        <h3>${h}</h3>
+        ${date}
+        <p>${ev.text || ""}</p>
+        ${link}
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  function mountFeedback(feedbackData){
+    if (feedbackData?.title) setText("feedbackTitle", feedbackData.title);
+    if (feedbackData?.kicker) setText("feedbackKicker", feedbackData.kicker);
+
+    const items = Array.isArray(feedbackData?.items) ? feedbackData.items : [];
+    const grid = document.getElementById("feedbackGrid");
+    if (!grid || !items.length) return;
+
+    grid.innerHTML = "";
+    items.slice(0, 12).forEach((fb) => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      const title = (fb.title || "Feedback").toUpperCase();
+      const text = fb.text || "";
+      const name = fb.name ? `<div style="color:rgba(11,16,32,.55);font-size:12px;line-height:1.6;margin-top:8px;">${fb.name}</div>` : "";
+
+      let media = "";
+      if (fb.video){
+        const poster = fb.poster ? `poster="${fb.poster}"` : "";
+        media = `
+          <video controls playsinline preload="metadata" ${poster}
+                 style="width:100%;height:180px;object-fit:cover;border:1px solid var(--card-border);margin-bottom:12px;">
+            <source src="${fb.video}" type="video/mp4">
+          </video>
+        `;
+      } else if (fb.image){
+        media = `
+          <img src="${fb.image}" alt="${fb.title || "Feedback"}"
+               style="width:100%;height:180px;object-fit:cover;border:1px solid var(--card-border);margin-bottom:12px;"
+               loading="lazy">
+        `;
+      }
+
+      card.innerHTML = `
+        ${media}
+        <h3>${title}</h3>
+        ${name}
+        <p>${text}</p>
+      `;
+
+      grid.appendChild(card);
+    });
+  }
+
+  function mountFaq(faqData, fallbackHint){
+    if (faqData?.title) setText("faqTitle", faqData.title);
+    if (faqData?.hint) setText("faqHint", faqData.hint || fallbackHint);
+
+    const items = Array.isArray(faqData?.items) ? faqData.items : [];
+    const box = document.getElementById("faqBox");
+    if (!box || !items.length) return;
+
+    box.innerHTML = "";
+    items.slice(0, 12).forEach((it, idx) => {
+      const wrap = document.createElement("div");
+      wrap.className = "faqItem";
+      wrap.innerHTML = `
+        <button class="faqQ" type="button"><span>${it.q || ("Frage " + (idx+1))}</span><i>+</i></button>
+        <div class="faqA">${it.a || ""}</div>
+      `;
+      box.appendChild(wrap);
+    });
+
+    initFaq();
+  }
+
+  (async () => {
+    const cc = document.getElementById("cc");
+    const ccOk = document.getElementById("ccOk");
+    const CC_KEY = "movemania_cookie_notice_ok";
+    if (cc && !localStorage.getItem(CC_KEY)) cc.style.display = "block";
+    if (ccOk) ccOk.addEventListener("click", () => {
+      localStorage.setItem(CC_KEY, "1");
+      if (cc) cc.style.display = "none";
+    });
+
+    // FIX: use relative paths (no leading slash) so subfolder hosting works
+    try {
+      const theme = await loadJSON("assets/content/theme.json");
+      applyTheme(theme);
+    } catch (e) {}
+
+    const logo = document.getElementById("logoImg");
+    if (logo) logo.style.display = "block";
+
+    let links = {};
+    try { links = await loadJSON("assets/content/links.json"); } catch (e) {}
+
+    let texts = {};
+    try { texts = await loadJSON("assets/content/texts.json"); } catch (e) {}
+
+    setText("heroBrand", (texts.hero_brand || "MOVEMANIA").toUpperCase());
+    let claim = (texts.hero_title || "KINDER STÄRKEN.<br>SPIELER ENTWICKELN.").toUpperCase();
+    claim = claim.replace(/^[\s\"“”„‚'«»]+|[\s\"“”„‚'«»]+$/g, "");
+    setHtml("heroClaim", claim);
+    setText("heroText", texts.hero_text || "In unseren Camps und Kursen entwickeln Kinder Freude an Bewegung – mit Struktur, Haltung und Herz.");
+
+    setHref("ctaBooking", links.booking);
+    setHref("btnBooking", links.booking);
+    setHref("btnCamps", links.camps);
+
+    setHref("navShop", links.shop);
+
+    setHref("kIG", links.instagram);
+    setHref("kWA", links.whatsapp);
+
+    const mailHref = normalizeMailto(links.mailto || links.email);
+    if (mailHref) setHref("kMail", mailHref);
+
+    setText("kIGText", links.instagram_text || texts.contact_ig_label || "Updates & Einblicke");
+    setText("kWAText", links.whatsapp_text || texts.contact_wa_label || "Community / Infos");
+
+    const mailVisible =
+      (links.mail_text && String(links.mail_text).trim()) ||
+      (links.mailto && String(links.mailto).replace(/^mailto:/i, "").trim()) ||
+      (links.email && String(links.email).trim()) ||
+      (texts.contact_mail_label || "Direkt schreiben");
+
+    setText("kMailText", mailVisible);
+
+    // NEW: optional contact icons (if later added to CMS/links.json)
+    // Supports: mail_icon / instagram_icon / whatsapp_icon
+    // (and legacy fallbacks contact_icon_* if you ever used those)
+    mountContactIcon("kMailIcon", links.mail_icon || links.contact_icon_mail, "Mail");
+    mountContactIcon("kIGIcon", links.instagram_icon || links.contact_icon_instagram, "Instagram");
+    mountContactIcon("kWAIcon", links.whatsapp_icon || links.contact_icon_whatsapp, "WhatsApp");
+
+    setText("aboutKicker", texts.about_kicker || "Über uns");
+    setText("aboutTitle", (texts.about_title || "Wer wir sind").toUpperCase());
+    setText("aboutHeadTitle", (texts.about_head_title || "Vorstellung Headcoach").toUpperCase());
+    setText("aboutHeadText", texts.about_head_text || "Hier kommt eure Vorstellung (Headcoach) rein – kurz, klar, authentisch.");
+
+    setText("uspKicker", (texts.usp_kicker || "Wofür wir stehen"));
+    setText("uspTitle", (texts.usp_title || "Spaß · Mut · Einsatz").toUpperCase());
+    setText("uspGhost", (texts.usp_ghost || "WERTE").toUpperCase());
+
+    try {
+      const sponsorsData = await loadJSON("assets/content/sponsors.json");
+      mountSponsors(sponsorsData);
+    } catch (e) {}
+
+    try {
+      const headcoachData = await loadJSON("assets/content/headcoach.json");
+      mountHeadcoachMedia(headcoachData);
+    } catch (e) {}
+
+    try {
+      const coachesData = await loadJSON("assets/content/coaches.json");
+      mountCoaches(coachesData);
+    } catch (e) {}
+
+    try {
+      const valuesData = await loadJSON("assets/content/values.json");
+      mountValues(valuesData);
+    } catch (e) {}
+
+    try {
+      const offersData = await loadJSON("assets/content/offers.json");
+      mountOffers(offersData, links);
+    } catch (e) {}
+
+    try {
+      const eventsData = await loadJSON("assets/content/events.json");
+      mountEvents(eventsData);
+    } catch (e) {}
+
+    try {
+      const feedbackData = await loadJSON("assets/content/feedback.json");
+      mountFeedback(feedbackData);
+    } catch (e) {}
+
+    try {
+      const faqData = await loadJSON("assets/content/faq.json");
+      mountFaq(faqData, texts.faq_hint || "");
+    } catch (e) {
+      initFaq();
+    }
+
+    let heroSlides = null;
+    try {
+      heroSlides = await loadJSON("assets/content/hero.json");
+    } catch (e) {}
+
+    if (heroSlides && heroSlides.slides) heroSlides = heroSlides.slides;
+
+    if (!heroSlides) {
+      heroSlides = [
+        {
+          type: "video",
+          src: links.hero_video_mp4 || "assets/video/hero.mp4",
+          poster: links.hero_video_poster || "assets/img/hero.jpg",
+          title: texts.hero_slide1_title || "Vorstellung",
+          text: texts.hero_slide1_text || "Hier steht später die Vorstellung / kurze Einordnung."
+        },
+        {
+          type: "image",
+          src: texts.hero_slide2_img || "assets/img/placeholder-1.jpg",
+          title: texts.hero_slide2_title || "Wofür wir stehen",
+          text: texts.hero_slide2_text || "Werte, Haltung, Herz – kurz und klar."
+        },
+        {
+          type: "image",
+          src: texts.hero_slide3_img || "assets/img/placeholder-2.jpg",
+          title: texts.hero_slide3_title || "Was wir machen",
+          text: texts.hero_slide3_text || "Camps, Kurse, Ballschule – Überblick."
+        }
+      ];
+    }
+
+    mountHeroSlider(heroSlides);
+  })();
+</script>
+
+<!-- Netlify Identity Token Catcher -->
+<script>
+(function () {
+  const hash = window.location.hash || "";
+  if (
+    hash.includes("confirmation_token=") ||
+    hash.includes("invite_token=") ||
+    hash.includes("recovery_token=")
+  ) {
+    window.location.replace("/admin/" + hash);
+  }
+})();
+</script>
+
+</body>
+</html>
