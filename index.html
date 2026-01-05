@@ -1869,13 +1869,28 @@
 
   (async () => {
     const cc = document.getElementById("cc");
-    const ccOk = document.getElementById("ccOk");
-    const CC_KEY = "movemania_cookie_notice_ok";
-    if (cc && !localStorage.getItem(CC_KEY)) cc.style.display = "block";
-    if (ccOk) ccOk.addEventListener("click", () => {
-      localStorage.setItem(CC_KEY, "1");
-      if (cc) cc.style.display = "none";
-    });
+    const ccAccept = document.getElementById("ccAccept");
+    const ccDecline = document.getElementById("ccDecline");
+    const CC_KEY = "movemania_cookie_consent"; // accepted | declined
+    
+    if (cc && !localStorage.getItem(CC_KEY)) {
+      cc.style.display = "block";
+    }
+    
+    if (ccAccept) {
+      ccAccept.addEventListener("click", () => {
+        localStorage.setItem(CC_KEY, "accepted");
+        cc.style.display = "none";
+      });
+    }
+    
+    if (ccDecline) {
+      ccDecline.addEventListener("click", () => {
+        localStorage.setItem(CC_KEY, "declined");
+        cc.style.display = "none";
+      });
+    }
+
 
     // FIX: use relative paths (no leading slash) so subfolder hosting works
     try {
