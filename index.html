@@ -1181,15 +1181,29 @@
   </div>
 </footer>
 
-<!-- Minimaler Cookie-Hinweis (global) -->
+<!-- Cookie Opt-in -->
 <div class="cc" id="cc">
-  <h4>Hinweis</h4>
-  <p>Diese Website nutzt keine Tracking-Cookies. Technisch notwendige Speicherungen (z. B. diese Bestätigung) erfolgen lokal im Browser.</p>
+  <h4>Cookie-Einstellungen</h4>
+  <p>
+    Wir verwenden keine Tracking- oder Marketing-Cookies.
+    Technisch notwendige Speicherungen erfolgen nur mit Ihrer Zustimmung.
+  </p>
+
   <div class="ccActions">
-    <button class="btn btnBlue" id="ccOk" type="button">OK</button>
+    <button class="btn btnBlue" id="ccAccept" type="button">
+      Akzeptieren
+    </button>
+    <button class="btn btnGhost" id="ccDecline" type="button">
+      Ablehnen
+    </button>
   </div>
-  <small>Du kannst den Hinweis ausblenden. Es ist keine Tracking-Einwilligung.</small>
+
+  <small>
+    Weitere Informationen finden Sie in der
+    <a href="/datenschutz.html">Datenschutzerklärung</a>.
+  </small>
 </div>
+
 
 <script>
   async function loadJSON(path){
