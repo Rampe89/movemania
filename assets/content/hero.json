@@ -10,8 +10,18 @@
     {
       "type": "image",
       "src": "/assets/img/uploads/bild0.png",
-      "title": "",
-      "text": "Movemania sponsert den Youngsters vom FC Pfeil Broistedt neue Allwetterjacken."
+      "title": "Movemania sponsert den Youngsters vom FC Pfeil Broistedt neue Allwetterjacken.",
+      "text": ""
+    },
+    {
+      "type": "image",
+      "src": "/assets/img/uploads/bild1.png",
+      "title": "Partnerschaft mit der Aloha"
+    },
+    {
+      "type": "image",
+      "src": "/assets/img/uploads/bild2.png",
+      "title": "Partnerschaft mit dem Ausrüster. Fußball Spezialist Braunschweig."
     }
   ]
 }
