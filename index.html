@@ -1203,7 +1203,7 @@
     </div>
   </section>
 
-  <!-- FEEDBACK (videos fixed in HTML; additional text/images loaded from feedback.json) -->
+  <!-- FEEDBACK (YouTube fixed in HTML, content loaded from feedback.json) -->
   <section id="feedback" class="section">
     <div class="wrap">
       <h2 class="sectionTitle" id="feedbackTitle">FEEDBACK</h2>
@@ -1225,10 +1225,14 @@
             </div>
           </div>
 
-          <!-- optional image from feedback.json -->
-          <div class="fbMedia" id="fb1Media" aria-hidden="true"></div>
+          <!-- optional media from feedback.json -->
+          <div class="fbMedia" id="fb1Poster" aria-hidden="true"></div>
+          <div class="fbMedia" id="fb1Image" aria-hidden="true"></div>
 
           <h3 id="fb1Title">FEEDBACK 1</h3>
+          <p id="fb1Name" style="margin:-4px 0 10px;color:rgba(11,16,32,.55);font-weight:900;letter-spacing:.10em;text-transform:uppercase;font-size:11px;">
+            —
+          </p>
           <p id="fb1Text">Kurzer Text/Einordnung (optional). Zum Beispiel: „Tolles Training, super Stimmung.“</p>
         </div>
 
@@ -1246,10 +1250,14 @@
             </div>
           </div>
 
-          <!-- optional image from feedback.json -->
-          <div class="fbMedia" id="fb2Media" aria-hidden="true"></div>
+          <!-- optional media from feedback.json -->
+          <div class="fbMedia" id="fb2Poster" aria-hidden="true"></div>
+          <div class="fbMedia" id="fb2Image" aria-hidden="true"></div>
 
           <h3 id="fb2Title">FEEDBACK 2</h3>
+          <p id="fb2Name" style="margin:-4px 0 10px;color:rgba(11,16,32,.55);font-weight:900;letter-spacing:.10em;text-transform:uppercase;font-size:11px;">
+            —
+          </p>
           <p id="fb2Text">Kurzer Text/Einordnung (optional). Zum Beispiel: „Unser Kind kommt begeistert nach Hause.“</p>
         </div>
 
@@ -1267,10 +1275,14 @@
             </div>
           </div>
 
-          <!-- optional image from feedback.json -->
-          <div class="fbMedia" id="fb3Media" aria-hidden="true"></div>
+          <!-- optional media from feedback.json -->
+          <div class="fbMedia" id="fb3Poster" aria-hidden="true"></div>
+          <div class="fbMedia" id="fb3Image" aria-hidden="true"></div>
 
           <h3 id="fb3Title">FEEDBACK 3</h3>
+          <p id="fb3Name" style="margin:-4px 0 10px;color:rgba(11,16,32,.55);font-weight:900;letter-spacing:.10em;text-transform:uppercase;font-size:11px;">
+            —
+          </p>
           <p id="fb3Text">Kurzer Text/Einordnung (optional). Zum Beispiel: „Strukturiert, wertschätzend, klasse Coaches.“</p>
         </div>
 
@@ -1944,47 +1956,33 @@
     initFaq();
   }
 
-  /* ===== Feedback JSON (texts + optional images; videos remain fixed in HTML) =====
-     Expected flexible shapes:
-       - { items: [{title,text,image,image_alt}, ...] }
-       - { feedback: [...] } or { testimonials: [...] } or direct array [...]
-       - { fb1:{...}, fb2:{...}, fb3:{...} } */
+  /* ===== NEW: Feedback from feedback.json (ignore video field, YouTube is fixed in HTML) ===== */
   function mountFeedbackFromJson(feedbackData){
     if (!feedbackData) return;
 
-    const getItemsArray = () => {
-      if (Array.isArray(feedbackData)) return feedbackData;
-      if (Array.isArray(feedbackData?.items)) return feedbackData.items;
-      if (Array.isArray(feedbackData?.feedback)) return feedbackData.feedback;
-      if (Array.isArray(feedbackData?.testimonials)) return feedbackData.testimonials;
-      return null;
-    };
+    // Section title/kicker
+    if (feedbackData.title) setText("feedbackTitle", String(feedbackData.title).toUpperCase());
+    if (feedbackData.kicker) setText("feedbackKicker", feedbackData.kicker);
 
-    const arr = getItemsArray();
+    const items = Array.isArray(feedbackData.items) ? feedbackData.items : [];
+    if (!items.length) return;
 
-    const getItem = (i) => {
-      if (arr && arr[i-1]) return arr[i-1];
-      const key1 = "fb" + i;
-      const key2 = "feedback_" + i;
-      return feedbackData?.[key1] || feedbackData?.[key2] || null;
-    };
-
-    // Optional: allow feedback.json to override section title/kicker too
-    if (feedbackData?.section_title) setText("feedbackTitle", String(feedbackData.section_title).toUpperCase());
-    if (feedbackData?.section_kicker) setText("feedbackKicker", feedbackData.section_kicker);
-
+    // Map first 3 items onto the 3 fixed YouTube cards
     [1,2,3].forEach((i) => {
-      const it = getItem(i);
+      const it = items[i-1];
       if (!it) return;
 
-      const title = it.title || it.headline || it.name || "";
-      const text = it.text || it.quote || it.body || "";
-      const image = it.image || it.img || "";
-      const imageAlt = it.image_alt || it.alt || title || "Feedback";
+      if (it.title) setText("fb" + i + "Title", String(it.title).toUpperCase());
+      if (it.name) setText("fb" + i + "Name", it.name);
+      if (it.text) setText("fb" + i + "Text", it.text);
 
-      if (title) setText("fb" + i + "Title", String(title).toUpperCase());
-      if (text) setText("fb" + i + "Text", text);
-      if (image) mountOptionalImage("fb" + i + "Media", image, imageAlt);
+      // optional poster/image inside the card (if empty: nothing)
+      if (it.poster && String(it.poster).trim()){
+        mountOptionalImage("fb" + i + "Poster", String(it.poster).trim(), (it.title || "Feedback") + " Poster");
+      }
+      if (it.image && String(it.image).trim()){
+        mountOptionalImage("fb" + i + "Image", String(it.image).trim(), (it.title || "Feedback") + " Bild");
+      }
     });
   }
 
@@ -2145,19 +2143,11 @@
     setText("uspTitle", (texts.usp_title || "Spaß · Mut · Einsatz").toUpperCase());
     setText("uspGhost", (texts.usp_ghost || "WERTE").toUpperCase());
 
-    // FEEDBACK (section title/kicker still CMS-driven, unless feedback.json overrides)
+    // FEEDBACK fallback from texts.json (optional)
     setText("feedbackTitle", (texts.feedback_title || "FEEDBACK").toUpperCase());
     setText("feedbackKicker", texts.feedback_kicker || "Stimmen von Eltern & Kindern");
 
-    // Default fallback: allow the three card texts/titles from texts.json too
-    setText("fb1Title", (texts.feedback_1_title || "FEEDBACK 1").toUpperCase());
-    setText("fb1Text", texts.feedback_1_text || document.getElementById("fb1Text")?.textContent || "");
-    setText("fb2Title", (texts.feedback_2_title || "FEEDBACK 2").toUpperCase());
-    setText("fb2Text", texts.feedback_2_text || document.getElementById("fb2Text")?.textContent || "");
-    setText("fb3Title", (texts.feedback_3_title || "FEEDBACK 3").toUpperCase());
-    setText("fb3Text", texts.feedback_3_text || document.getElementById("fb3Text")?.textContent || "");
-
-    // NEW: additionally load feedback.json (texts + optional images), without touching the fixed YouTube embeds
+    // Try feedback.json (overrides texts + fills card content; ignores video)
     try {
       const feedbackData = await loadJSON("assets/content/feedback.json");
       mountFeedbackFromJson(feedbackData);
