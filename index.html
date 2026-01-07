@@ -592,6 +592,24 @@
       display:block;
     }
 
+    /* optional media in feedback (from feedback.json) */
+    .fbMedia{
+      width:100%;
+      height:170px;
+      border:1px solid var(--card-border);
+      border-radius: var(--radius);
+      overflow:hidden;
+      background:var(--card-bg);
+      margin:0 0 12px;
+      display:none;
+    }
+    .fbMedia img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
     .subOffers{
       margin-top:14px;
       display:grid;
@@ -1185,7 +1203,7 @@
     </div>
   </section>
 
-  <!-- FEEDBACK (videos fixed, titles/kicker still CMS-driven via texts.json) -->
+  <!-- FEEDBACK (videos fixed in HTML; additional text/images loaded from feedback.json) -->
   <section id="feedback" class="section">
     <div class="wrap">
       <h2 class="sectionTitle" id="feedbackTitle">FEEDBACK</h2>
@@ -1206,6 +1224,10 @@
               </div>
             </div>
           </div>
+
+          <!-- optional image from feedback.json -->
+          <div class="fbMedia" id="fb1Media" aria-hidden="true"></div>
+
           <h3 id="fb1Title">FEEDBACK 1</h3>
           <p id="fb1Text">Kurzer Text/Einordnung (optional). Zum Beispiel: „Tolles Training, super Stimmung.“</p>
         </div>
@@ -1223,6 +1245,10 @@
               </div>
             </div>
           </div>
+
+          <!-- optional image from feedback.json -->
+          <div class="fbMedia" id="fb2Media" aria-hidden="true"></div>
+
           <h3 id="fb2Title">FEEDBACK 2</h3>
           <p id="fb2Text">Kurzer Text/Einordnung (optional). Zum Beispiel: „Unser Kind kommt begeistert nach Hause.“</p>
         </div>
@@ -1240,6 +1266,10 @@
               </div>
             </div>
           </div>
+
+          <!-- optional image from feedback.json -->
+          <div class="fbMedia" id="fb3Media" aria-hidden="true"></div>
+
           <h3 id="fb3Title">FEEDBACK 3</h3>
           <p id="fb3Text">Kurzer Text/Einordnung (optional). Zum Beispiel: „Strukturiert, wertschätzend, klasse Coaches.“</p>
         </div>
@@ -1914,6 +1944,50 @@
     initFaq();
   }
 
+  /* ===== Feedback JSON (texts + optional images; videos remain fixed in HTML) =====
+     Expected flexible shapes:
+       - { items: [{title,text,image,image_alt}, ...] }
+       - { feedback: [...] } or { testimonials: [...] } or direct array [...]
+       - { fb1:{...}, fb2:{...}, fb3:{...} } */
+  function mountFeedbackFromJson(feedbackData){
+    if (!feedbackData) return;
+
+    const getItemsArray = () => {
+      if (Array.isArray(feedbackData)) return feedbackData;
+      if (Array.isArray(feedbackData?.items)) return feedbackData.items;
+      if (Array.isArray(feedbackData?.feedback)) return feedbackData.feedback;
+      if (Array.isArray(feedbackData?.testimonials)) return feedbackData.testimonials;
+      return null;
+    };
+
+    const arr = getItemsArray();
+
+    const getItem = (i) => {
+      if (arr && arr[i-1]) return arr[i-1];
+      const key1 = "fb" + i;
+      const key2 = "feedback_" + i;
+      return feedbackData?.[key1] || feedbackData?.[key2] || null;
+    };
+
+    // Optional: allow feedback.json to override section title/kicker too
+    if (feedbackData?.section_title) setText("feedbackTitle", String(feedbackData.section_title).toUpperCase());
+    if (feedbackData?.section_kicker) setText("feedbackKicker", feedbackData.section_kicker);
+
+    [1,2,3].forEach((i) => {
+      const it = getItem(i);
+      if (!it) return;
+
+      const title = it.title || it.headline || it.name || "";
+      const text = it.text || it.quote || it.body || "";
+      const image = it.image || it.img || "";
+      const imageAlt = it.image_alt || it.alt || title || "Feedback";
+
+      if (title) setText("fb" + i + "Title", String(title).toUpperCase());
+      if (text) setText("fb" + i + "Text", text);
+      if (image) mountOptionalImage("fb" + i + "Media", image, imageAlt);
+    });
+  }
+
   /* ===== YouTube Feedback embeds (Consent + Click-to-load) ===== */
   function initYouTubeFeedbackEmbeds(consent){
     const boxes = document.querySelectorAll(".ytBox");
@@ -2071,17 +2145,23 @@
     setText("uspTitle", (texts.usp_title || "Spaß · Mut · Einsatz").toUpperCase());
     setText("uspGhost", (texts.usp_ghost || "WERTE").toUpperCase());
 
-    // ===== FIX YOU ASKED FOR: feedback title/kicker still CMS-driven =====
+    // FEEDBACK (section title/kicker still CMS-driven, unless feedback.json overrides)
     setText("feedbackTitle", (texts.feedback_title || "FEEDBACK").toUpperCase());
     setText("feedbackKicker", texts.feedback_kicker || "Stimmen von Eltern & Kindern");
 
-    // Optional: also allow the three card texts/titles from CMS (if you add these keys later)
+    // Default fallback: allow the three card texts/titles from texts.json too
     setText("fb1Title", (texts.feedback_1_title || "FEEDBACK 1").toUpperCase());
     setText("fb1Text", texts.feedback_1_text || document.getElementById("fb1Text")?.textContent || "");
     setText("fb2Title", (texts.feedback_2_title || "FEEDBACK 2").toUpperCase());
     setText("fb2Text", texts.feedback_2_text || document.getElementById("fb2Text")?.textContent || "");
     setText("fb3Title", (texts.feedback_3_title || "FEEDBACK 3").toUpperCase());
     setText("fb3Text", texts.feedback_3_text || document.getElementById("fb3Text")?.textContent || "");
+
+    // NEW: additionally load feedback.json (texts + optional images), without touching the fixed YouTube embeds
+    try {
+      const feedbackData = await loadJSON("assets/content/feedback.json");
+      mountFeedbackFromJson(feedbackData);
+    } catch (e) {}
 
     try {
       const sponsorsData = await loadJSON("assets/content/sponsors.json");
@@ -2171,4 +2251,5 @@
 
 </body>
 </html>
+
 
