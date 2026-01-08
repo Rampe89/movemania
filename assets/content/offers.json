@@ -24,20 +24,15 @@
       ]
     },
     "kurse": {
-      "power_pills": [
-        "Powerkurs 2018/19",
-        "Powerkurs 2016(17",
-        "2014/15",
-        "2012/13"
-      ],
+      "power_pills": [],
       "buttons": [
         {
           "label": "Powerkurs 2018/19",
-          "link": "www.test.de"
+          "link": "https://widgets.yolawo.de/w/0/offers/6908f10cabba3fff5c25d596?t=1767866024508"
         },
         {
           "label": "Powerkurs 2016/17",
-          "link": ""
+          "link": "https://widgets.yolawo.de/w/0/offers/6908ee50abba3fff5c25c004?t=1767866047424"
         },
         {
           "label": "Powerkurs 2012/13",
