@@ -3,37 +3,37 @@
     {
       "title": "Mut",
       "text": "Wir wollen, dass sich Kinder trauen - auf und neben dem Platz. Fehler sind erlaubt und gehören zum Prozess. ",
-      "icon": "/assets/img/uploads/text.svg",
+      "icon": "/assets/img/uploads/mut.png",
       "icon_alt": "Mut"
     },
     {
       "title": "Einsatz",
       "text": "Der Charakter zählt mehr als das Torverhältnis. Wer verliert und trotzdem aufrecht bleibt, hat gewonnen. ",
-      "icon": "/assets/img/uploads/icon-einsatz.png",
+      "icon": "/assets/img/uploads/einsatz.png",
       "icon_alt": "Einsatz"
     },
     {
       "title": "Respekt",
       "text": "Gegenüber Mitspielern, Gegnern, Trainern und sich selbst. Wir sagen Danke, Entschuldigung und feiern andere genauso wie uns selbst. ",
-      "icon": "/assets/img/uploads/icon-respekt.png",
+      "icon": "/assets/img/uploads/respekt.png",
       "icon_alt": "Respekt"
     },
     {
       "title": "Entwicklung",
       "text": "Jeder bringt etwas mit - und geht ein Stück weiter. Wir messen nicht mit dem Lineal, sondern mit offenen Augen und Herz. ",
-      "icon": "/assets/img/uploads/icon-entwicklung.png",
+      "icon": "/assets/img/uploads/entwicklung.png",
       "icon_alt": "Entwicklung"
     },
     {
       "title": "Zusammenhalt",
       "text": "Erfolg kommt nur gemeinsam. Alle gehören dazu - egal ob laut, leise, stark oder schüchtern.",
-      "icon": "/assets/img/uploads/icon-zusammenhalt.png",
+      "icon": "/assets/img/uploads/zusammenhalt.png",
       "icon_alt": "Teamgeist"
     },
     {
       "title": "Spaß",
       "text": "Freude ist der Motor zur Entwicklung. Bei uns geht es um die Freunde am Spiel. ",
-      "icon": "/assets/img/uploads/icon-spaß.png",
+      "icon": "/assets/img/uploads/spaß.png",
       "icon_alt": "Spaß"
     }
   ]
