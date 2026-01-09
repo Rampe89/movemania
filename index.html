@@ -49,6 +49,13 @@
     a{color:inherit; text-decoration:none}
     .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
 
+    /* ===== CHANGE: push partner logos further right (topbar only) ===== */
+    .topbar .wrap{ padding-right:10px; }
+    @media (max-width: 980px){
+      .topbar .wrap{ padding-right:22px; }
+    }
+    /* ===== /CHANGE ===== */
+
     /* Subtle dot pattern layer */
     .pattern{ position:relative; isolation:isolate; }
     .pattern::before{
@@ -94,9 +101,9 @@
 
     .brand{display:flex; align-items:flex-start; gap:14px;}
     .logo{
-      height:58px; /* bigger than partner logos */
+      height:76px; /* was 58px */
       width:auto;
-      max-width:200px;
+      max-width:260px; /* was 200px */
       object-fit:contain;
       background:transparent;
       border:none;
@@ -125,7 +132,8 @@
     .navCtas{
       justify-self:end;
       display:flex; gap:10px; align-items:center;
-      margin-right: -22px; /* push to viewport edge */
+      justify-content:flex-end;
+      margin-right:0; /* was -22px */
     }
 
     @media (max-width: 980px){
@@ -906,6 +914,9 @@
           <div class="sponsorsItems" id="sponsorsItems">
             <span class="sponsorsEmpty">Partner-Logos folgen</span>
           </div>
+          <!-- ===== CHANGE: label under partner logos ===== -->
+          <div class="sponsorsLabel" id="sponsorsLabel">Partner</div>
+          <!-- ===== /CHANGE ===== -->
         </div>
       </div>
     </div>
@@ -1214,10 +1225,12 @@
             <div class="fbMedia" id="fb4Poster" aria-hidden="true"></div>
             <div class="fbMedia" id="fb4Image" aria-hidden="true"></div>
 
-            <h3 id="fb3Title">FEEDBACK 4</h3>
-            <p id="fb3Name" style="margin:-4px 0 10px;color:rgba(11,16,32,.55);font-weight:900;letter-spacing:.10em;text-transform:uppercase;font-size:11px;">
+            <!-- ===== MINI FIX: unique IDs for Feedback 4 (were duplicated fb3Title/fb3Name) ===== -->
+            <h3 id="fb4Title">FEEDBACK 4</h3>
+            <p id="fb4Name" style="margin:-4px 0 10px;color:rgba(11,16,32,.55);font-weight:900;letter-spacing:.10em;text-transform:uppercase;font-size:11px;">
               —
             </p>
+            <!-- ===== /MINI FIX ===== -->
             <p id="fb4Text">Kurzer Text/Einordnung (optional). Zum Beispiel: „Strukturiert, wertschätzend, klasse Coaches.“</p>
           </div>
 
@@ -1870,7 +1883,8 @@
     const items = Array.isArray(feedbackData.items) ? feedbackData.items : [];
     if (!items.length) return;
 
-    [1,2,3].forEach((i) => {
+    // ===== CHANGE: support 4 items (was only 1..3) =====
+    [1,2,3,4].forEach((i) => {
       const it = items[i-1];
       if (!it) return;
 
@@ -1885,6 +1899,7 @@
         mountOptionalImage("fb" + i + "Image", String(it.image).trim(), (it.title || "Feedback") + " Bild");
       }
     });
+    // ===== /CHANGE =====
   }
 
   /* ===== YouTube Feedback embeds (Consent + Click-to-load) ===== */
@@ -2137,6 +2152,7 @@
 
 </body>
 </html>
+
 
 
 
