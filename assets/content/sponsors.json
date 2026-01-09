@@ -13,7 +13,8 @@
     },
     {
       "url": "https://www.fussballspezi.de",
-      "name": "Fußball Spezialist"
+      "name": "Fußball Spezialist",
+      "logo": "/assets/img/uploads/einsatz.png"
     }
   ]
 }
