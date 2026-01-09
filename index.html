@@ -375,7 +375,7 @@
       font-size:11px;
     }
 
-    /* Centered head (used for Angebote, Feedback, FAQs, Kontakt) */
+    /* Centered head (used for Über uns, Angebote, Feedback, FAQs, Kontakt) */
     .sectionHeadCenter{
       text-align:center;
       margin:0 0 18px;
@@ -418,13 +418,61 @@
       display:flex; gap:10px; flex-wrap:wrap;
     }
 
-    /* Stacked layout helper (for Feedback and Kontakt to be "untereinander") */
-    .stackWrap{
-      max-width: 820px;
-      margin: 0 auto;
+    /* Offers layout — must be under each other */
+    .offerGrid{
+      display:grid;
+      grid-template-columns: 1fr; /* stacked */
+      gap:18px;
+      align-items:stretch;
     }
-    .cardsStack{
-      grid-template-columns: 1fr !important;
+
+    /* optional media in offers */
+    .offerMedia{
+      width:100%;
+      height:170px;
+      border:1px solid var(--card-border);
+      border-radius: var(--radius);
+      overflow:hidden;
+      background:var(--card-bg);
+      margin:0 0 12px;
+      display:none;
+    }
+    .offerMedia img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .subOffers{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    @media (max-width: 640px){
+      .subOffers{grid-template-columns:1fr}
+    }
+    .subCard{
+      border:1px solid var(--card-border);
+      background:#fff;
+      padding:12px 12px 10px;
+      border-radius:var(--radius);
+      min-height:72px;
+    }
+    .subCard b{
+      display:block;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.02em;
+      font-size:12px;
+      margin-bottom:6px;
+    }
+    .subCard small{
+      display:block;
+      color:rgba(11,16,32,.55);
+      line-height:1.6;
+      font-size:12px;
     }
 
     /* Values / USP headline */
@@ -483,7 +531,6 @@
       gap: 10px;
       margin-bottom: 10px;
     }
-
     /* remove visible frame around value icons */
     .valueIcon {
       width: 56px;
@@ -538,63 +585,6 @@
       border-top:1px solid var(--card-border);
     }
     .offerAccBody p{ margin-top:0; }
-
-    /* Offers layout — must be under each other */
-    .offerGrid{
-      display:grid;
-      grid-template-columns: 1fr; /* stacked */
-      gap:18px;
-      align-items:stretch;
-    }
-
-    /* optional media in offers */
-    .offerMedia{
-      width:100%;
-      height:170px;
-      border:1px solid var(--card-border);
-      border-radius: var(--radius);
-      overflow:hidden;
-      background:var(--card-bg);
-      margin:0 0 12px;
-      display:none;
-    }
-    .offerMedia img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-
-    .subOffers{
-      margin-top:14px;
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px;
-    }
-    @media (max-width: 640px){
-      .subOffers{grid-template-columns:1fr}
-    }
-    .subCard{
-      border:1px solid var(--card-border);
-      background:#fff;
-      padding:12px 12px 10px;
-      border-radius:var(--radius);
-      min-height:72px;
-    }
-    .subCard b{
-      display:block;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.02em;
-      font-size:12px;
-      margin-bottom:6px;
-    }
-    .subCard small{
-      display:block;
-      color:rgba(11,16,32,.55);
-      line-height:1.6;
-      font-size:12px;
-    }
 
     /* About */
     .aboutGrid{
@@ -706,12 +696,30 @@
     }
     .faqItem.isOpen .faqA{ display:block; }
 
-    /* Contact (stacked cards) */
-    .kontaktGrid{
+    /* Feedback: 2 columns (desktop), 1 column (mobile) */
+    .stackWrap{
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .feedbackGrid{
       display:grid;
-      grid-template-columns: 1fr; /* under each other */
+      grid-template-columns: 1fr 1fr;
       gap:18px;
     }
+    @media (max-width: 980px){
+      .feedbackGrid{ grid-template-columns: 1fr; }
+    }
+
+    /* Contact: 3 side-by-side (desktop), stacked (mobile) */
+    .kontaktGrid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:18px;
+    }
+    @media (max-width: 980px){
+      .kontaktGrid{ grid-template-columns: 1fr; }
+    }
+
     .kontaktCard{
       border:1px solid var(--card-border);
       background:var(--card-bg);
@@ -931,8 +939,10 @@
   <!-- ÜBER UNS -->
   <section id="ueber-uns" class="section">
     <div class="wrap">
-      <p class="sectionKicker" id="aboutKicker">Über uns</p>
-      <h2 class="sectionTitle" id="aboutTitle">WER WIR SIND</h2>
+      <div class="sectionHeadCenter">
+        <p class="sectionKicker" id="aboutKicker">Über uns</p>
+        <h2 class="sectionTitle" id="aboutTitle">WER WIR SIND</h2>
+      </div>
 
       <div class="aboutGrid">
         <div class="aboutMedia" id="aboutMedia">
@@ -951,9 +961,12 @@
       </div>
 
       <div style="margin-top:18px;">
-        <h3 style="margin:0 0 10px;font-weight:900;text-transform:uppercase;letter-spacing:-.01em;font-size:var(--card-title);" id="coachTitle">
-          COACHES
-        </h3>
+        <div class="sectionHeadCenter" style="margin-bottom:10px;">
+          <h3 style="margin:0;font-weight:900;text-transform:uppercase;letter-spacing:-.01em;font-size:var(--card-title);" id="coachTitle">
+            COACHES
+          </h3>
+        </div>
+
         <div class="peopleGrid" id="coachGrid">
           <div class="person">
             <div class="ph">Coach</div>
@@ -1098,7 +1111,7 @@
     </div>
   </section>
 
-  <!-- FEEDBACK (stacked + centered head) -->
+  <!-- FEEDBACK (2-up) -->
   <section id="feedback" class="section">
     <div class="wrap">
       <div class="sectionHeadCenter">
@@ -1107,7 +1120,7 @@
       </div>
 
       <div class="stackWrap">
-        <div class="cards cardsStack" id="feedbackGrid" aria-label="Feedback">
+        <div class="feedbackGrid" id="feedbackGrid" aria-label="Feedback">
 
           <div class="card">
             <div class="ytBox"
@@ -1208,39 +1221,37 @@
     </div>
   </section>
 
-  <!-- KONTAKT (stacked + centered head) -->
+  <!-- KONTAKT (3-up) -->
   <section id="kontakt" class="section">
     <div class="wrap">
       <div class="sectionHeadCenter">
         <h2 class="sectionTitle">KONTAKT</h2>
       </div>
 
-      <div class="stackWrap">
-        <div class="kontaktGrid">
-          <a class="kontaktCard" id="kMail" href="#" rel="noreferrer">
-            <div>
-              <b>E-Mail</b>
-              <small id="kMailText">Direkt schreiben</small>
-            </div>
-            <div class="kontaktIcon" id="kMailIcon"><span id="kMailIconFallback">MAIL</span></div>
-          </a>
+      <div class="kontaktGrid">
+        <a class="kontaktCard" id="kMail" href="#" rel="noreferrer">
+          <div>
+            <b>E-Mail</b>
+            <small id="kMailText">Direkt schreiben</small>
+          </div>
+          <div class="kontaktIcon" id="kMailIcon"><span id="kMailIconFallback">MAIL</span></div>
+        </a>
 
-          <a class="kontaktCard" id="kIG" href="#" target="_blank" rel="noreferrer">
-            <div>
-              <b>Instagram</b>
-              <small id="kIGText">Updates & Einblicke</small>
-            </div>
-            <div class="kontaktIcon" id="kIGIcon"><span id="kIGIconFallback">IG</span></div>
-          </a>
+        <a class="kontaktCard" id="kIG" href="#" target="_blank" rel="noreferrer">
+          <div>
+            <b>Instagram</b>
+            <small id="kIGText">Updates & Einblicke</small>
+          </div>
+          <div class="kontaktIcon" id="kIGIcon"><span id="kIGIconFallback">IG</span></div>
+        </a>
 
-          <a class="kontaktCard" id="kWA" href="#" target="_blank" rel="noreferrer">
-            <div>
-              <b>WhatsApp</b>
-              <small id="kWAText">Community / Infos</small>
-            </div>
-            <div class="kontaktIcon" id="kWAIcon"><span id="kWAIconFallback">WA</span></div>
-          </a>
-        </div>
+        <a class="kontaktCard" id="kWA" href="#" target="_blank" rel="noreferrer">
+          <div>
+            <b>WhatsApp</b>
+            <small id="kWAText">Community / Infos</small>
+          </div>
+          <div class="kontaktIcon" id="kWAIcon"><span id="kWAIconFallback">WA</span></div>
+        </a>
       </div>
     </div>
   </section>
@@ -2035,6 +2046,7 @@
       mountOffers(offersData);
     } catch (e) {}
 
+    // FAQ
     try {
       const faqData = await loadJSON("assets/content/faq.json");
       mountFaq(faqData, texts.faq_hint || "");
