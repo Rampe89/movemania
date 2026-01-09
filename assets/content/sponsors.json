@@ -1,14 +1,15 @@
 {
-  "title": "Partner",
+  "title": "",
   "items": [
     {
-      "name": "EDEKA Rickel",
+      "name": "Edeka",
       "url": "https://www.edeka.de/eh/minden-hannover/edeka-rickel-barbecker-str.-2/index.jsp",
-      "logo": ""
+      "logo": "/assets/img/uploads/text.svg"
     },
     {
       "name": "Aloha Sportclub ",
-      "url": "https://www.alohasport.de/?ved=2ahUKEwjnv5q3ydiNAxXUxgIHHfOCDgQQgU96BAgiEA4"
+      "url": "https://www.alohasport.de/?ved=2ahUKEwjnv5q3ydiNAxXUxgIHHfOCDgQQgU96BAgiEA4",
+      "logo": "/assets/img/uploads/chatgpt-image-4.-jan.-2026-15_26_25.png"
     },
     {
       "url": "https://www.fussballspezi.de",
