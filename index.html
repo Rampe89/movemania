@@ -133,46 +133,50 @@
       .navCtas{display:none}
     }
 
-    /* Sponsors / Partners (Topbar right) — grid of logos + small label under */
+    /* Sponsors / Partners (Topbar right) — ONLY logos, no frames, a bit larger */
     .sponsorsBar{
       display:flex;
-      flex-direction:column;
-      align-items:flex-end;
-      gap:6px;
+      align-items:center;
+      justify-content:flex-end;
       padding:0;
       border:none;
       background:transparent;
-      border-radius: var(--radius);
       max-width: min(520px, 40vw);
     }
     .sponsorsItems{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:8px;
-      overflow:hidden;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      flex-wrap:nowrap;
+
+      overflow-x:auto;
+      overflow-y:hidden;
+      -webkit-overflow-scrolling: touch;
+
+      scrollbar-width:none;
     }
+    .sponsorsItems::-webkit-scrollbar{ display:none; }
+
     .sponsorLink{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      height:34px;
-      width:34px;
-      padding:6px;
-      border:1px solid rgba(11,16,32,.15);
-      background:#fff;
-      border-radius: var(--radius);
-      transition: background .15s ease;
+      padding:0;
+      border:none;
+      background:transparent;
+      border-radius:0;
       flex:0 0 auto;
+      transition: opacity .15s ease;
     }
-    .sponsorLink:hover{ background: rgba(11,16,32,.03); }
+    .sponsorLink:hover{ opacity:.78; }
     .sponsorLink img{
-      height:18px;
+      height:26px; /* bigger */
       width:auto;
       display:block;
       object-fit:contain;
     }
     .sponsorFallback{
-      font-size:9px;
+      font-size:10px;
       font-weight:900;
       letter-spacing:.08em;
       text-transform:uppercase;
@@ -183,17 +187,7 @@
       font-size:11px;
       color:rgba(11,16,32,.55);
       white-space:nowrap;
-      grid-column: 1 / -1;
-      justify-self:end;
       padding:6px 0;
-    }
-    .sponsorsLabel{
-      font-size:9px;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.14em;
-      color:rgba(11,16,32,.60);
-      white-space:nowrap;
     }
 
     /* Buttons */
@@ -375,7 +369,7 @@
       font-size:11px;
     }
 
-    /* Centered head (used for Über uns, Angebote, Feedback, FAQs, Kontakt) */
+    /* Centered head */
     .sectionHeadCenter{
       text-align:center;
       margin:0 0 18px;
@@ -384,14 +378,6 @@
     .sectionHeadCenter .sectionKicker{ margin:0 0 10px; }
 
     /* Cards */
-    .cards{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:18px;
-    }
-    @media (max-width: 980px){
-      .cards{grid-template-columns:1fr}
-    }
     .card{
       border:1px solid var(--card-border);
       background:var(--card-bg);
@@ -418,10 +404,10 @@
       display:flex; gap:10px; flex-wrap:wrap;
     }
 
-    /* Offers layout — must be under each other */
+    /* Offers layout — stacked */
     .offerGrid{
       display:grid;
-      grid-template-columns: 1fr; /* stacked */
+      grid-template-columns: 1fr;
       gap:18px;
       align-items:stretch;
     }
@@ -548,6 +534,16 @@
       height: 100%;
       object-fit: contain;
       display: block;
+    }
+
+    /* "cards" grid used in values */
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:18px;
+    }
+    @media (max-width: 980px){
+      .cards{grid-template-columns:1fr}
     }
 
     /* Accordions */
@@ -696,7 +692,7 @@
     }
     .faqItem.isOpen .faqA{ display:block; }
 
-    /* Feedback: 2 columns (desktop), 1 column (mobile) */
+    /* Feedback: 2 columns (desktop), 1 (mobile) */
     .stackWrap{
       max-width: 980px;
       margin: 0 auto;
@@ -789,7 +785,7 @@
     .ccActions{display:flex; gap:10px; flex-wrap:wrap}
     .cc small{display:block; margin-top:10px; color:rgba(11,16,32,.45); font-size:11px; line-height:1.5}
 
-    /* ===== Feedback YouTube embeds (fixed HTML, consent + click-to-load) ===== */
+    /* ===== YouTube embeds (Consent + Click-to-load) ===== */
     .ytBox{
       width:100%;
       aspect-ratio: 16 / 9;
@@ -902,7 +898,6 @@
           <div class="sponsorsItems" id="sponsorsItems">
             <span class="sponsorsEmpty">Partner-Logos folgen</span>
           </div>
-          <div class="sponsorsLabel" id="sponsorsLabel">Partner</div>
         </div>
       </div>
     </div>
@@ -1002,7 +997,7 @@
     </div>
   </section>
 
-  <!-- ANGEBOTE (stacked, exactly as on the sheet) -->
+  <!-- ANGEBOTE -->
   <section id="angebote" class="section">
     <div class="wrap">
       <div class="sectionHeadCenter">
@@ -1111,7 +1106,7 @@
     </div>
   </section>
 
-  <!-- FEEDBACK (2-up) -->
+  <!-- FEEDBACK (dynamic from feedback.json, supports 4+ items) -->
   <section id="feedback" class="section">
     <div class="wrap">
       <div class="sectionHeadCenter">
@@ -1121,85 +1116,18 @@
 
       <div class="stackWrap">
         <div class="feedbackGrid" id="feedbackGrid" aria-label="Feedback">
-
+          <!-- cards are rendered by JS from assets/content/feedback.json -->
           <div class="card">
-            <div class="ytBox"
-                 data-yt-id="lnr8QyxGhWg"
-                 data-yt-title="Feedback Video 1 Test Ramon"
-                 data-yt-poster="assets/img/feedback-1.jpg">
-              <img class="ytPoster" src="assets/img/feedback-1.jpg" alt="Feedback Video 1 Poster" loading="lazy">
-              <div class="ytOverlay">
-                <div class="ytOverlayInner">
-                  <div class="ytHint">YouTube-Video<br>(lädt erst nach Klick)</div>
-                  <button class="ytBtn" type="button">Video laden</button>
-                </div>
-              </div>
+            <div style="color:rgba(11,16,32,.55);font-weight:900;letter-spacing:.10em;text-transform:uppercase;font-size:11px;">
+              Inhalte laden…
             </div>
-
-            <div class="fbMedia" id="fb1Poster" aria-hidden="true"></div>
-            <div class="fbMedia" id="fb1Image" aria-hidden="true"></div>
-
-            <h3 id="fb1Title">FEEDBACK 1</h3>
-            <p id="fb1Name" style="margin:-4px 0 10px;color:rgba(11,16,32,.55);font-weight:900;letter-spacing:.10em;text-transform:uppercase;font-size:11px;">
-              —
-            </p>
-            <p id="fb1Text">Kurzer Text/Einordnung (optional). Zum Beispiel: „Tolles Training, super Stimmung.“</p>
           </div>
-
-          <div class="card">
-            <div class="ytBox"
-                 data-yt-id="VIDEO_ID_2"
-                 data-yt-title="Feedback Video 2"
-                 data-yt-poster="assets/img/feedback-2.jpg">
-              <img class="ytPoster" src="assets/img/feedback-2.jpg" alt="Feedback Video 2 Poster" loading="lazy">
-              <div class="ytOverlay">
-                <div class="ytOverlayInner">
-                  <div class="ytHint">YouTube-Video<br>(lädt erst nach Klick)</div>
-                  <button class="ytBtn" type="button">Video laden</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="fbMedia" id="fb2Poster" aria-hidden="true"></div>
-            <div class="fbMedia" id="fb2Image" aria-hidden="true"></div>
-
-            <h3 id="fb2Title">FEEDBACK 2</h3>
-            <p id="fb2Name" style="margin:-4px 0 10px;color:rgba(11,16,32,.55);font-weight:900;letter-spacing:.10em;text-transform:uppercase;font-size:11px;">
-              —
-            </p>
-            <p id="fb2Text">Kurzer Text/Einordnung (optional). Zum Beispiel: „Unser Kind kommt begeistert nach Hause.“</p>
-          </div>
-
-          <div class="card">
-            <div class="ytBox"
-                 data-yt-id="VIDEO_ID_3"
-                 data-yt-title="Feedback Video 3"
-                 data-yt-poster="assets/img/feedback-3.jpg">
-              <img class="ytPoster" src="assets/img/feedback-3.jpg" alt="Feedback Video 3 Poster" loading="lazy">
-              <div class="ytOverlay">
-                <div class="ytOverlayInner">
-                  <div class="ytHint">YouTube-Video<br>(lädt erst nach Klick)</div>
-                  <button class="ytBtn" type="button">Video laden</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="fbMedia" id="fb3Poster" aria-hidden="true"></div>
-            <div class="fbMedia" id="fb3Image" aria-hidden="true"></div>
-
-            <h3 id="fb3Title">FEEDBACK 3</h3>
-            <p id="fb3Name" style="margin:-4px 0 10px;color:rgba(11,16,32,.55);font-weight:900;letter-spacing:.10em;text-transform:uppercase;font-size:11px;">
-              —
-            </p>
-            <p id="fb3Text">Kurzer Text/Einordnung (optional). Zum Beispiel: „Strukturiert, wertschätzend, klasse Coaches.“</p>
-          </div>
-
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FAQS (centered head) -->
+  <!-- FAQS -->
   <section id="faqs" class="section">
     <div class="wrap">
       <div class="sectionHeadCenter">
@@ -1221,7 +1149,7 @@
     </div>
   </section>
 
-  <!-- KONTAKT (3-up) -->
+  <!-- KONTAKT -->
   <section id="kontakt" class="section">
     <div class="wrap">
       <div class="sectionHeadCenter">
@@ -1600,12 +1528,8 @@
   }
 
   function mountSponsors(data){
-    const label = document.getElementById("sponsorsLabel");
     const itemsEl = document.getElementById("sponsorsItems");
     if (!itemsEl) return;
-
-    const title = data && (data.title || data.label);
-    if (label && title) label.textContent = title;
 
     const items = Array.isArray(data?.items) ? data.items
                 : Array.isArray(data?.sponsors) ? data.sponsors
@@ -1627,6 +1551,7 @@
         a.target = "_blank";
         a.rel = "noreferrer";
       }
+
       if (logo){
         const img = document.createElement("img");
         img.src = logo;
@@ -1639,6 +1564,7 @@
         t.textContent = (name || "Partner").toUpperCase();
         a.appendChild(t);
       }
+
       itemsEl.appendChild(a);
     });
   }
@@ -1718,85 +1644,27 @@
       });
     };
 
-    // Feriencamps
-    if (offers?.feriencamps){
-      setText("offersFeriencampsTitle", offers.feriencamps.title || "Feriencamps");
-      setText("offersFeriencampsText", offers.feriencamps.text);
-      mountOptionalImage("offersFeriencampsMedia", offers.feriencamps.image, offers.feriencamps.title || "Feriencamps");
-      const body = document.querySelector("#accFeriencamps .offerAccBody");
-      addOptionalLinkButton(body, offers.feriencamps.link, offers.feriencamps.link_label, "btn btnGhost");
-      renderSubs("offersFeriencampsSubs", offers.feriencamps.sub);
-    }
+    const bindOffer = (key, ids) => {
+      const o = offers?.[key];
+      if (!o) return;
 
-    // Elitecamps
-    if (offers?.elitecamps){
-      setText("offersElitecampsTitle", offers.elitecamps.title || "Elitecamps");
-      setText("offersElitecampsText", offers.elitecamps.text);
-      mountOptionalImage("offersElitecampsMedia", offers.elitecamps.image, offers.elitecamps.title || "Elitecamps");
-      const body = document.querySelector("#accElitecamps .offerAccBody");
-      addOptionalLinkButton(body, offers.elitecamps.link, offers.elitecamps.link_label, "btn btnGhost");
-      renderSubs("offersElitecampsSubs", offers.elitecamps.sub);
-    }
+      setText(ids.title, o.title);
+      setText(ids.text, o.text);
+      mountOptionalImage(ids.media, o.image, o.title || "Angebot");
 
-    // Powerkurse
-    if (offers?.powerkurse){
-      setText("offersPowerkurseTitle", offers.powerkurse.title || "Powerkurse");
-      setText("offersPowerkurseText", offers.powerkurse.text);
-      mountOptionalImage("offersPowerkurseMedia", offers.powerkurse.image, offers.powerkurse.title || "Powerkurse");
-      const body = document.querySelector("#accPowerkurse .offerAccBody");
-      addOptionalLinkButton(body, offers.powerkurse.link, offers.powerkurse.link_label, "btn btnGhost");
-      renderSubs("offersPowerkurseSubs", offers.powerkurse.sub);
-    }
+      const body = document.querySelector(ids.bodySel);
+      addOptionalLinkButton(body, o.link, o.link_label || "Mehr", "btn btnGhost");
+      renderSubs(ids.subs, o.sub);
+    };
 
-    // Elitekurse
-    if (offers?.elitekurse){
-      setText("offersElitekursTitle", offers.elitekurse.title || "Elitekurse");
-      setText("offersElitekursText", offers.elitekurse.text);
-      mountOptionalImage("offersElitekursMedia", offers.elitekurse.image, offers.elitekurse.title || "Elitekurse");
-      const body = document.querySelector("#accElitekurs .offerAccBody");
-      addOptionalLinkButton(body, offers.elitekurse.link, offers.elitekurse.link_label, "btn btnGhost");
-      renderSubs("offersElitekursSubs", offers.elitekurse.sub);
-    }
-
-    // Ballschule
-    if (offers?.ballschule){
-      setText("offersBallsTitle", offers.ballschule.title || "Ballschule");
-      setText("offersBallsText", offers.ballschule.text);
-      mountOptionalImage("offersBallsMedia", offers.ballschule.image, offers.ballschule.title || "Ballschule");
-      const body = document.querySelector("#accBalls .offerAccBody");
-      addOptionalLinkButton(body, offers.ballschule.link, offers.ballschule.link_label || "Zur Anmeldung", "btn btnGhost");
-      renderSubs("offersBallsSubs", offers.ballschule.sub);
-    }
-
-    // Fußballkindergarten
-    if (offers?.kiga){
-      setText("offersKigaTitle", offers.kiga.title || "Fußballkindergarten");
-      setText("offersKigaText", offers.kiga.text);
-      mountOptionalImage("offersKigaMedia", offers.kiga.image, offers.kiga.title || "Fußballkindergarten");
-      const body = document.querySelector("#accKiga .offerAccBody");
-      addOptionalLinkButton(body, offers.kiga.link, offers.kiga.link_label || "Zur Anmeldung", "btn btnGhost");
-      renderSubs("offersKigaSubs", offers.kiga.sub);
-    }
-
-    // Kindergeburtstage
-    if (offers?.geburtstage){
-      setText("offersBdayTitle", offers.geburtstage.title || "Kindergeburtstage");
-      setText("offersBdayText", offers.geburtstage.text);
-      mountOptionalImage("offersBdayMedia", offers.geburtstage.image, offers.geburtstage.title || "Kindergeburtstage");
-      const body = document.querySelector("#accGeburtstage .offerAccBody");
-      addOptionalLinkButton(body, offers.geburtstage.link, offers.geburtstage.link_label || "Zur Anfrage", "btn btnGhost");
-      renderSubs("offersBdaySubs", offers.geburtstage.sub);
-    }
-
-    // Beratung
-    if (offers?.beratung){
-      setText("offersBeratungTitle", offers.beratung.title || "Beratung");
-      setText("offersBeratungText", offers.beratung.text);
-      mountOptionalImage("offersBeratungMedia", offers.beratung.image, offers.beratung.title || "Beratung");
-      const body = document.querySelector("#accBeratung .offerAccBody");
-      addOptionalLinkButton(body, offers.beratung.link, offers.beratung.link_label || "Mehr", "btn btnGhost");
-      renderSubs("offersBeratungSubs", offers.beratung.sub);
-    }
+    bindOffer("feriencamps",   { title:"offersFeriencampsTitle", text:"offersFeriencampsText", media:"offersFeriencampsMedia", subs:"offersFeriencampsSubs", bodySel:"#accFeriencamps .offerAccBody" });
+    bindOffer("elitecamps",    { title:"offersElitecampsTitle",  text:"offersElitecampsText",  media:"offersElitecampsMedia",  subs:"offersElitecampsSubs",  bodySel:"#accElitecamps .offerAccBody" });
+    bindOffer("powerkurse",    { title:"offersPowerkurseTitle",  text:"offersPowerkurseText",  media:"offersPowerkurseMedia",  subs:"offersPowerkurseSubs",  bodySel:"#accPowerkurse .offerAccBody" });
+    bindOffer("elitekurse",    { title:"offersElitekursTitle",   text:"offersElitekursText",   media:"offersElitekursMedia",   subs:"offersElitekursSubs",   bodySel:"#accElitekurs .offerAccBody" });
+    bindOffer("ballschule",    { title:"offersBallsTitle",       text:"offersBallsText",       media:"offersBallsMedia",       subs:"offersBallsSubs",       bodySel:"#accBalls .offerAccBody" });
+    bindOffer("kiga",          { title:"offersKigaTitle",        text:"offersKigaText",        media:"offersKigaMedia",        subs:"offersKigaSubs",        bodySel:"#accKiga .offerAccBody" });
+    bindOffer("geburtstage",   { title:"offersBdayTitle",        text:"offersBdayText",        media:"offersBdayMedia",        subs:"offersBdaySubs",        bodySel:"#accGeburtstage .offerAccBody" });
+    bindOffer("beratung",      { title:"offersBeratungTitle",    text:"offersBeratungText",    media:"offersBeratungMedia",    subs:"offersBeratungSubs",    bodySel:"#accBeratung .offerAccBody" });
 
     // Plus/Minus Sync
     document.querySelectorAll("details.offerAcc").forEach((d) => {
@@ -1829,34 +1697,77 @@
     initFaq();
   }
 
-  /* ===== Feedback from feedback.json (ignore video field, YouTube is fixed in HTML) ===== */
+  /* ===== Feedback: render ALL items from feedback.json (so the 4th works) ===== */
   function mountFeedbackFromJson(feedbackData){
     if (!feedbackData) return;
 
     if (feedbackData.title) setText("feedbackTitle", String(feedbackData.title).toUpperCase());
     if (feedbackData.kicker) setText("feedbackKicker", feedbackData.kicker);
 
+    const grid = document.getElementById("feedbackGrid");
+    if (!grid) return;
+
     const items = Array.isArray(feedbackData.items) ? feedbackData.items : [];
     if (!items.length) return;
 
-    [1,2,3].forEach((i) => {
-      const it = items[i-1];
-      if (!it) return;
+    grid.innerHTML = "";
 
-      if (it.title) setText("fb" + i + "Title", String(it.title).toUpperCase());
-      if (it.name) setText("fb" + i + "Name", it.name);
-      if (it.text) setText("fb" + i + "Text", it.text);
+    items.slice(0, 12).forEach((it, idx) => {
+      const title = (it.title || ("Feedback " + (idx + 1))).toString();
+      const name = (it.name || "—").toString();
+      const text = (it.text || "").toString();
 
-      if (it.poster && String(it.poster).trim()){
-        mountOptionalImage("fb" + i + "Poster", String(it.poster).trim(), (it.title || "Feedback") + " Poster");
-      }
-      if (it.image && String(it.image).trim()){
-        mountOptionalImage("fb" + i + "Image", String(it.image).trim(), (it.title || "Feedback") + " Bild");
-      }
+      // Accept multiple possible field names (to be robust to CMS)
+      const ytId = (it.yt_id || it.youtube_id || it.video_id || it.video || "").toString().trim();
+      const ytPoster = (it.yt_poster || it.poster || it.youtube_poster || "").toString().trim();
+      const ytTitle = (it.yt_title || it.youtube_title || title || "YouTube Video").toString().trim();
+
+      const card = document.createElement("div");
+      card.className = "card";
+
+      // YouTube box only if we have an id
+      const ytBoxHtml = ytId ? `
+        <div class="ytBox"
+             data-yt-id="${ytId}"
+             data-yt-title="${escapeHtmlAttr(ytTitle)}"
+             data-yt-poster="${escapeHtmlAttr(ytPoster)}">
+          <img class="ytPoster" src="${ytPoster || ""}" alt="${escapeHtmlAttr(ytTitle)} Poster" loading="lazy">
+          <div class="ytOverlay">
+            <div class="ytOverlayInner">
+              <div class="ytHint">YouTube-Video<br>(lädt erst nach Klick)</div>
+              <button class="ytBtn" type="button">Video laden</button>
+            </div>
+          </div>
+        </div>
+      ` : "";
+
+      card.innerHTML = `
+        ${ytBoxHtml}
+        <h3>${escapeHtml(title).toUpperCase()}</h3>
+        <p style="margin:-4px 0 10px;color:rgba(11,16,32,.55);font-weight:900;letter-spacing:.10em;text-transform:uppercase;font-size:11px;">
+          ${escapeHtml(name)}
+        </p>
+        <p>${escapeHtml(text)}</p>
+      `;
+
+      grid.appendChild(card);
     });
   }
 
-  /* ===== YouTube Feedback embeds (Consent + Click-to-load) ===== */
+  function escapeHtml(s){
+    return String(s ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+  function escapeHtmlAttr(s){
+    // same as escapeHtml; kept separate for readability
+    return escapeHtml(s);
+  }
+
+  /* ===== YouTube embeds (Consent + Click-to-load) ===== */
   function initYouTubeFeedbackEmbeds(consent){
     const boxes = document.querySelectorAll(".ytBox");
     if (!boxes.length) return;
@@ -1925,16 +1836,15 @@
     const ccDecline = document.getElementById("ccDecline");
     const CC_KEY = "movemania_cookie_consent"; // accepted | declined
 
-    const currentConsent = localStorage.getItem(CC_KEY);
+    const applyConsentState = () => {
+      const consent = localStorage.getItem(CC_KEY) === "accepted";
+      initYouTubeFeedbackEmbeds(consent); // (re)bind after potential re-render
+    };
 
+    const currentConsent = localStorage.getItem(CC_KEY);
     if (cc && !currentConsent) {
       cc.style.display = "block";
     }
-
-    const applyConsentState = () => {
-      const consent = localStorage.getItem(CC_KEY) === "accepted";
-      initYouTubeFeedbackEmbeds(consent);
-    };
 
     if (ccAccept) {
       ccAccept.addEventListener("click", () => {
@@ -1952,8 +1862,7 @@
       });
     }
 
-    applyConsentState();
-
+    // Theme
     try {
       const theme = await loadJSON("assets/content/theme.json");
       applyTheme(theme);
@@ -2011,40 +1920,44 @@
     setText("uspTitle", (texts.usp_title || "Spaß · Mut · Einsatz").toUpperCase());
     setText("uspGhost", (texts.usp_ghost || "WERTE").toUpperCase());
 
-    // FEEDBACK fallback from texts.json (optional)
-    setText("feedbackTitle", (texts.feedback_title || "FEEDBACK").toUpperCase());
-    setText("feedbackKicker", texts.feedback_kicker || "Stimmen von Eltern & Kindern");
-
-    try {
-      const feedbackData = await loadJSON("assets/content/feedback.json");
-      mountFeedbackFromJson(feedbackData);
-    } catch (e) {}
-
+    // Sponsors
     try {
       const sponsorsData = await loadJSON("assets/content/sponsors.json");
       mountSponsors(sponsorsData);
     } catch (e) {}
 
+    // Headcoach
     try {
       const headcoachData = await loadJSON("assets/content/headcoach.json");
       mountHeadcoachMedia(headcoachData);
     } catch (e) {}
 
+    // Coaches
     try {
       const coachesData = await loadJSON("assets/content/coaches.json");
       mountCoaches(coachesData);
     } catch (e) {}
 
+    // Values
     try {
       const valuesData = await loadJSON("assets/content/values.json");
       mountValues(valuesData);
     } catch (e) {}
 
-    // OFFERS
+    // Offers
     try {
       const offersData = await loadJSON("assets/content/offers.json");
       mountOffers(offersData);
     } catch (e) {}
+
+    // Feedback (IMPORTANT: now renders 4+ items)
+    try {
+      const feedbackData = await loadJSON("assets/content/feedback.json");
+      mountFeedbackFromJson(feedbackData);
+    } catch (e) {}
+
+    // After feedback render: bind youtube click-to-load based on current consent
+    applyConsentState();
 
     // FAQ
     try {
@@ -2106,3 +2019,4 @@
 
 </body>
 </html>
+
