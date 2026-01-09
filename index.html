@@ -151,13 +151,15 @@
       gap:8px;
       overflow:hidden;
     }
+
+    /* ===== FIX: Logos größer ===== */
     .sponsorLink{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      height:34px;
-      width:34px;
-      padding:6px;
+      height:44px;              /* was 34px */
+      width:88px;               /* was 34px */
+      padding:6px 10px;         /* was 6px */
       border:1px solid rgba(11,16,32,.15);
       background:#fff;
       border-radius: var(--radius);
@@ -166,11 +168,13 @@
     }
     .sponsorLink:hover{ background: rgba(11,16,32,.03); }
     .sponsorLink img{
-      height:18px;
+      max-height:30px;          /* was 18px */
       width:auto;
       display:block;
       object-fit:contain;
     }
+    /* ===== /FIX ===== */
+
     .sponsorFallback{
       font-size:9px;
       font-weight:900;
@@ -1639,10 +1643,18 @@
     if (!items.length) return;
 
     itemsEl.innerHTML = "";
-    items.slice(0, 12).forEach((it) => {
-      const name = it?.name || "";
+
+    /* ===== FIX: Nur Logos rendern (keine Namen/Fallbacks). Items ohne Logo skippen. ===== */
+    const withLogo = items.filter((it) => it && it.logo && String(it.logo).trim());
+    if (!withLogo.length) {
+      itemsEl.innerHTML = `<span class="sponsorsEmpty">Partner-Logos folgen</span>`;
+      return;
+    }
+
+    withLogo.slice(0, 12).forEach((it) => {
+      const name = it?.name || "Partner";
       const url = it?.url || "";
-      const logo = it?.logo || "";
+      const logo = String(it.logo).trim();
 
       const a = document.createElement(url ? "a" : "span");
       a.className = "sponsorLink";
@@ -1651,20 +1663,16 @@
         a.target = "_blank";
         a.rel = "noreferrer";
       }
-      if (logo){
-        const img = document.createElement("img");
-        img.src = logo;
-        img.alt = name || "Partner";
-        img.loading = "lazy";
-        a.appendChild(img);
-      } else {
-        const t = document.createElement("span");
-        t.className = "sponsorFallback";
-        t.textContent = (name || "Partner").toUpperCase();
-        a.appendChild(t);
-      }
+
+      const img = document.createElement("img");
+      img.src = logo;
+      img.alt = name || "Partner";
+      img.loading = "lazy";
+      a.appendChild(img);
+
       itemsEl.appendChild(a);
     });
+    /* ===== /FIX ===== */
   }
 
   function mountValues(valuesData){
@@ -2130,5 +2138,6 @@
 
 </body>
 </html>
+
 
 
