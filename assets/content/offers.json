@@ -4,15 +4,24 @@
       "title": "Feriencamps",
       "text": "Die Movemania-Feriencamps verbinden hochwertiges Fußballtraining mit Spaß, Gemeinschaft und persönlicher Entwicklung.\nIn kleinen Gruppen fördern wir Kinder spielnah, altersgerecht und individuell – mit klarer Struktur und viel Herz.\nUnsere Camps stehen für Bewegung, Begeisterung und unvergessliche Ferienerlebnisse auf und neben dem Platz.\n",
       "link": "https://widgets.yolawo.de/w/0/offers/6824441ce0e26f6acca6fd4c?t=1768060051940",
-      "link_label": "Zur Anmeldung"
+      "link_label": "Zur Anmeldung",
+      "image": "/assets/img/uploads/cartoon-camp..png"
     },
     "elitecamps": {
       "title": "Elitecamps",
-      "text": "Die Elitecamps von Movemania richten sich an besonders leistungsstarke und motivierte Kinder, die den nächsten Entwicklungsschritt gehen möchten.\nDie Teilnahme erfolgt ausschließlich über eine Qualifikation und eine separate Einladung durch das Trainerteam.\nIn kleinen Gruppen arbeiten wir anspruchsvoll, spielnah und intensiv an Technik, Spielverständnis und mentaler Stärke – mit klaren Leistungsstandards und individueller Förderung.\n"
+      "text": "Die Elitecamps von Movemania richten sich an besonders leistungsstarke und motivierte Kinder, die den nächsten Entwicklungsschritt gehen möchten.\nDie Teilnahme erfolgt ausschließlich über eine Qualifikation und eine separate Einladung durch das Trainerteam.\nIn kleinen Gruppen arbeiten wir anspruchsvoll, spielnah und intensiv an Technik, Spielverständnis und mentaler Stärke – mit klaren Leistungsstandards und individueller Förderung.\n",
+      "link_label": "Die Teilnahme ist nur nach Einladung möglich."
     },
     "powerkurse": {
       "title": "Powerkurse",
-      "text": "Die Powerkurse sind intensive, regelmäßige Trainingseinheiten für Kinder, die sich gezielt weiterentwickeln möchten.\nIn kleinen Gruppen fördern wir Technik, Handlungsschnelligkeit und Spielintelligenz – spielnah, fordernd und motivierend.\nUnsere Powerkurse verbinden Qualität, klare Coachingprinzipien und echte Begeisterung für den Fußball.\nIdeal für Kinder, die mehr wollen als gewöhnliches Vereinstraining."
+      "text": "Die Powerkurse sind intensive, regelmäßige Trainingseinheiten für Kinder, die sich gezielt weiterentwickeln möchten.\nIn kleinen Gruppen fördern wir Technik, Handlungsschnelligkeit und Spielintelligenz – spielnah, fordernd und motivierend.\nUnsere Powerkurse verbinden Qualität, klare Coachingprinzipien und echte Begeisterung für den Fußball.\nIdeal für Kinder, die mehr wollen als gewöhnliches Vereinstraining.",
+      "sub": [
+        {
+          "title": "Powerkurse 2018/19",
+          "link": "https://widgets.yolawo.de/w/0/offers/6908f10cabba3fff5c25d596?t=1768060336873",
+          "link_label": "Zur Anmeldung"
+        }
+      ]
     },
     "elitekurse": {
       "title": "Elitekurse",
