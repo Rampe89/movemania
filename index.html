@@ -882,6 +882,33 @@
       object-fit:cover;
       display:block;
     }
+    footer{
+  position:relative;
+    }
+    
+    footer::after{
+      content:"0x63157";
+      position:absolute;
+      right:20px;
+      bottom:16px;
+    
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                   "Liberation Mono", "Courier New", monospace;
+    
+      font-weight:700;
+      font-size:18px;
+      letter-spacing:.24em;
+      text-transform:uppercase;
+    
+      color:rgba(11,16,32,.03);
+      opacity:.9;
+    
+      pointer-events:none;
+      user-select:none;
+    
+      filter: blur(.25px);
+    }
+
   </style>
 </head>
 
