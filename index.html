@@ -1,0 +1,2207 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Movemania FS – Fußballschule mit Haltung & Herz</title>
+  <meta name="description" content="Movemania FS: Fußballschule (6–12) in der Region BS. Feriencamps, Trainingskurse, Ballschule. Jetzt anmelden." />
+
+  <link rel="stylesheet" href="assets/css/fonts.css">
+
+  <style>
+    :root{
+      /* Base */
+      --bg:#ffffff;
+      --ink:#0b1020;
+      --muted:#5e6880;
+      --line:#e6e8ee;
+
+      --navy:#1e3366;
+      --red:#d2182d;
+
+      --max: 1120px;
+      --radius: 0px;
+
+      /* Theme-driven extras */
+      --card-bg:#ffffff;
+      --card-border: var(--line);
+      --shadow: 0 14px 40px rgba(11,16,32,.12);
+
+      --base: 14px;
+      --hero-title-max: 68px; /* clamp max */
+      --section-title: 24px;
+      --card-title: 14px;
+
+      --patternOpacity:.9;
+      --patternDot: rgba(11,16,32,.075);
+      --patternSize: 22px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      font-size: var(--base);
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
+
+    /* ===== CHANGE: push partner logos further right (topbar only) ===== */
+    .topbar .wrap{ padding-right:10px; }
+    @media (max-width: 980px){
+      .topbar .wrap{ padding-right:22px; }
+    }
+    /* ===== /CHANGE ===== */
+
+    /* Subtle dot pattern layer */
+    .pattern{ position:relative; isolation:isolate; }
+    .pattern::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      background-image: radial-gradient(var(--patternDot) 1px, transparent 1px);
+      background-size: var(--patternSize) var(--patternSize);
+      background-position: 0 0;
+      opacity: var(--patternOpacity);
+      pointer-events:none;
+      -webkit-mask-image: linear-gradient(to bottom,
+        transparent 0%,
+        rgba(0,0,0,.9) 12%,
+        rgba(0,0,0,1) 50%,
+        rgba(0,0,0,.9) 88%,
+        transparent 100%);
+      mask-image: linear-gradient(to bottom,
+        transparent 0%,
+        rgba(0,0,0,.9) 12%,
+        rgba(0,0,0,1) 50%,
+        rgba(0,0,0,.9) 88%,
+        transparent 100%);
+    }
+
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      background:rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+
+    /* 3-column grid so menu stays centered, sponsors remain right */
+    .nav{
+      display:grid;
+      grid-template-columns: auto 1fr auto;
+      align-items:center;
+      padding:16px 0;
+      gap:18px;
+    }
+
+    /* ===== TOPBAR FIX: Logo größer, Text ohne "FS", Logo & Text exakt gleich hoch ===== */
+    .brand{
+      display:flex;
+      align-items:center; /* ensures same vertical baseline */
+      gap:14px;
+    }
+    .logo{
+      height:44px;       /* bigger but not taller than the text block */
+      width:auto;
+      max-width:280px;   /* allow more visual presence without increasing height */
+      object-fit:contain;
+      background:transparent;
+      border:none;
+      display:block;
+    }
+    .brandText{
+      display:flex;
+      flex-direction:column;
+      justify-content:center; /* keeps it vertically aligned with logo */
+      line-height:1.05;
+    }
+    .brandText b{
+      display:block;
+      font-weight:900;
+      font-size:18px;
+      letter-spacing:.02em;
+      line-height:1.05;
+    }
+    .brandText span{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      margin-top:4px;
+      line-height:1.05;
+    }
+    /* ===== /TOPBAR FIX ===== */
+
+    .menu{
+      display:flex; gap:22px; align-items:center;
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:11px;
+      white-space:nowrap;
+      justify-self:center;
+    }
+    .menu a{
+      color:rgba(11,16,32,.70);
+      padding:10px 0;
+      border-bottom:2px solid transparent;
+    }
+    .menu a:hover{color:var(--ink)}
+    .menu a.active{color:var(--ink); border-bottom-color:var(--red);}
+
+    .navCtas{
+      justify-self:end;
+      display:flex; gap:10px; align-items:center;
+      justify-content:flex-end;
+      margin-right:0; /* was -22px */
+    }
+
+    @media (max-width: 980px){
+      .menu{display:none}
+      .navCtas{display:none}
+    }
+
+    /* ===== Partner-Bereich Optimierung (zentrierter "Partner"-Label, Logos größer, cleaner) ===== */
+    .sponsorsBar{
+      display:flex;
+      flex-direction:column;
+      align-items:center;                 /* center label + grid within the block */
+      gap:8px;
+      padding:0;
+      border:none;
+      background:transparent;
+      border-radius: var(--radius);
+      max-width: min(560px, 42vw);
+    }
+
+    .sponsorsItems{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(92px, 1fr)); /* stable, bigger cells */
+      gap:10px;
+      overflow:hidden;
+      justify-items:center;
+      align-items:center;
+      width:100%;
+    }
+
+    .sponsorLink{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      height:50px;              /* bigger */
+      width:104px;              /* bigger */
+      padding:6px 10px;
+      border:none;
+      background:transparent;
+      border-radius: var(--radius);
+      transition: background .15s ease;
+      flex:0 0 auto;
+    }
+    .sponsorLink:hover{ background: rgba(11,16,32,.03); }
+
+    .sponsorLink img{
+      max-height:36px;          /* bigger */
+      width:auto;
+      display:block;
+      object-fit:contain;
+    }
+
+    .sponsorFallback{
+      font-size:9px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:rgba(11,16,32,.70);
+      white-space: nowrap;
+    }
+    .sponsorsEmpty{
+      font-size:11px;
+      color:rgba(11,16,32,.55);
+      white-space:nowrap;
+      grid-column: 1 / -1;
+      justify-self:center;
+      padding:6px 0;
+      text-align:center;
+      width:100%;
+    }
+    .sponsorsLabel{
+      font-size:9px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:rgba(11,16,32,.60);
+      white-space:nowrap;
+      text-align:center;        /* explicit center */
+      width:100%;
+    }
+    /* ===== /Partner-Bereich Optimierung ===== */
+
+    /* Buttons */
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      min-height:44px;
+      padding:0 18px;
+      font-size:11px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      border:1px solid var(--ink);
+      background:transparent;
+      border-radius:var(--radius);
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .btnRed{border-color:var(--red); color:var(--red);}
+    .btnRed:hover{background:rgba(210,24,45,.06)}
+    .btnBlue{border-color:var(--navy); background:var(--navy); color:#fff;}
+    .btnBlue:hover{filter:brightness(.97)}
+    .btnGhost{border-color:rgba(11,16,32,.35); color:var(--ink); background:#fff;}
+    .btnGhost:hover{background:rgba(11,16,32,.03)}
+
+    /* HERO */
+    .hero{ padding:56px 0 30px; border-bottom:1px solid var(--line); }
+    .heroInner{
+      display:grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap:34px;
+      align-items:center;
+    }
+    @media (max-width: 980px){
+      .heroInner{grid-template-columns:1fr}
+    }
+
+    .heroTitle{
+      line-height: 1.02;
+      max-width: 16ch;
+      margin:0;
+    }
+    .heroBrand{
+      display:block;
+      font-weight:900;
+      letter-spacing:-.02em;
+      font-size: clamp(44px, 5.2vw, var(--hero-title-max));
+      line-height:1.00;
+    }
+    .heroClaim{
+      display:block;
+      margin-top: 12px;
+      font-weight:900;
+      letter-spacing:-.01em;
+      font-size: clamp(26px, 2.9vw, 40px);
+      line-height:1.08;
+      text-transform:uppercase;
+    }
+    .heroText{
+      font-size:13px;
+      line-height:1.7;
+      color: rgba(11,16,32,.65);
+      max-width: 56ch;
+      margin-top: 14px;
+    }
+
+    /* HERO SLIDER */
+    .mediaFrame{
+      border:1px solid var(--line);
+      background:#000;
+      position:relative;
+      overflow:hidden;
+      aspect-ratio: 16 / 9;
+      min-height: 420px;
+      border-radius: var(--radius);
+    }
+    @media (max-width: 980px){
+      .mediaFrame{ min-height: 260px; }
+    }
+    .slide{
+      position:absolute;
+      inset:0;
+      opacity:0;
+      transition: opacity .28s ease;
+    }
+    .slide.isActive{ opacity:1; }
+    .slide video,
+    .slide img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .slideOverlay{
+      position:absolute;
+      left:0; right:0; bottom:0;
+      padding:16px 16px 14px;
+      background: linear-gradient(to top, rgba(0,0,0,.60), rgba(0,0,0,0));
+      color:#fff;
+    }
+    .slideOverlay b{
+      display:block;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      margin-bottom:6px;
+    }
+    .slideOverlay p{
+      margin:0;
+      font-size:13px;
+      line-height:1.5;
+      color:rgba(255,255,255,.88);
+      max-width: 62ch;
+    }
+
+    .sliderUi{
+      position:absolute;
+      left:12px; right:12px;
+      top:12px;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      pointer-events:none;
+    }
+    .sliderUi .vBtn,
+    .soundBtn{
+      pointer-events:auto;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      height:38px;
+      padding:0 14px;
+      border:1px solid rgba(255,255,255,.55);
+      background: rgba(0,0,0,.35);
+      color:#fff;
+      font-size:11px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      user-select:none;
+      cursor:pointer;
+    }
+    .sliderUi .vBtn:hover,
+    .soundBtn:hover{ background: rgba(0,0,0,.45); }
+
+    .dots{
+      position:absolute;
+      left:12px;
+      bottom:12px;
+      display:flex;
+      gap:8px;
+      pointer-events:auto;
+    }
+    .dot{
+      width:9px; height:9px;
+      border-radius:99px;
+      border:1px solid rgba(255,255,255,.65);
+      background: rgba(0,0,0,.25);
+      cursor:pointer;
+    }
+    .dot.isActive{ background: rgba(255,255,255,.90); }
+
+    /* Sections */
+    .section{ padding:30px 0; border-bottom:1px solid var(--line); }
+    .section:last-of-type{border-bottom:none}
+    .sectionTitle{
+      margin:0 0 14px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:-.01em;
+      font-size: var(--section-title);
+    }
+    .sectionKicker{
+      margin:0 0 10px;
+      color:rgba(11,16,32,.55);
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.22em;
+      font-size:11px;
+    }
+
+    /* Centered head (used for Über uns, Angebote, Feedback, FAQs, Kontakt) */
+    .sectionHeadCenter{
+      text-align:center;
+      margin:0 0 18px;
+    }
+    .sectionHeadCenter .sectionTitle{ margin:0; }
+    .sectionHeadCenter .sectionKicker{ margin:0 0 10px; }
+
+    /* Cards */
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:18px;
+    }
+    @media (max-width: 980px){
+      .cards{grid-template-columns:1fr}
+    }
+    .card{
+      border:1px solid var(--card-border);
+      background:var(--card-bg);
+      padding:18px 18px 16px;
+      border-radius: var(--radius);
+      box-shadow:none;
+    }
+    .card h3{
+      margin:0 0 10px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:-.01em;
+      font-size: var(--card-title);
+    }
+    .card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.85;
+      font-size:13px;
+      max-width:60ch;
+    }
+    .cardActions{
+      margin-top:14px;
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+
+    /* Offers layout — must be under each other */
+    .offerGrid{
+      display:grid;
+      grid-template-columns: 1fr; /* stacked */
+      gap:18px;
+      align-items:stretch;
+    }
+
+    /* optional media in offers */
+    .offerMedia{
+      width:100%;
+      height:170px;
+      border:1px solid var(--card-border);
+      border-radius: var(--radius);
+      overflow:hidden;
+      background:var(--card-bg);
+      margin:0 0 12px;
+      display:none;
+    }
+    .offerMedia img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .subOffers{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    @media (max-width: 640px){
+      .subOffers{grid-template-columns:1fr}
+    }
+    .subCard{
+      border:1px solid var(--card-border);
+      background:#fff;
+      padding:12px 12px 10px;
+      border-radius:var(--radius);
+      min-height:72px;
+    }
+    .subCard b{
+      display:block;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.02em;
+      font-size:12px;
+      margin-bottom:6px;
+    }
+    .subCard small{
+      display:block;
+      color:rgba(11,16,32,.55);
+      line-height:1.6;
+      font-size:12px;
+    }
+
+    /* Values / USP headline */
+    .usp{
+      padding:54px 0 50px;
+      border-bottom:1px solid var(--line);
+      position:relative;
+      overflow:hidden;
+    }
+    .uspHead{
+      text-align:center;
+      position:relative;
+      padding:8px 0 24px;
+    }
+    .uspGhost{
+      position:absolute;
+      left:50%;
+      top:24px;
+      transform:translateX(-50%);
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      font-size: clamp(92px, 11vw, 168px);
+      color:rgba(11,16,32,.04);
+      user-select:none;
+      pointer-events:none;
+      white-space:nowrap;
+      z-index:1;
+      line-height:1;
+    }
+    .uspKicker{
+      margin:0 0 10px;
+      color:rgba(11,16,32,.55);
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.22em;
+      font-size:11px;
+      position:relative;
+      z-index:2;
+    }
+    .uspTitle{
+      margin:0;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:-.01em;
+      font-size: clamp(34px, 4.5vw, 48px);
+      line-height:1.05;
+      position:relative;
+      z-index:2;
+    }
+
+    /* Value cards (icons) */
+    .valueTop {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    /* remove visible frame around value icons */
+    .valueIcon {
+      width: 56px;
+      height: 56px;
+      border: none;
+      border-radius: var(--radius);
+      background: transparent;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      padding: 10px;
+    }
+    .valueIcon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* Accordions */
+    details.offerAcc{
+      border:1px solid var(--card-border);
+      background:var(--card-bg);
+      border-radius: var(--radius);
+      overflow:hidden;
+    }
+    details.offerAcc > summary{
+      list-style:none;
+      cursor:pointer;
+      padding:14px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      user-select:none;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.10em;
+      font-size:11px;
+      background:#fff;
+    }
+    details.offerAcc > summary::-webkit-details-marker{ display:none; }
+    .offerAccTitle{ color:rgba(11,16,32,.8); }
+    .offerAccIcon{
+      font-style:normal;
+      color:rgba(11,16,32,.55);
+      font-weight:900;
+      letter-spacing:.18em;
+    }
+    .offerAccBody{
+      padding:16px 14px 14px;
+      border-top:1px solid var(--card-border);
+    }
+    .offerAccBody p{ margin-top:0; }
+
+    /* About */
+    .aboutGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){
+      .aboutGrid{grid-template-columns:1fr}
+    }
+    .aboutMedia{
+      border:1px solid var(--card-border);
+      background:var(--card-bg);
+      overflow:hidden;
+      border-radius:var(--radius);
+      min-height:280px;
+    }
+    .aboutMedia img,
+    .aboutMedia video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .peopleGrid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:18px;
+      margin-top:18px;
+    }
+    @media (max-width: 1120px){
+      .peopleGrid{grid-template-columns: repeat(2, 1fr)}
+    }
+    @media (max-width: 980px){
+      .peopleGrid{grid-template-columns:1fr}
+    }
+    .person{
+      border:1px solid var(--card-border);
+      background:var(--card-bg);
+      border-radius:var(--radius);
+      overflow:hidden;
+    }
+    .person img{
+      width:100%;
+      height:170px;
+      object-fit:contain;
+      object-position:center;
+      background:#f5f6fa;
+      display:block;
+      border-bottom:1px solid var(--card-border);
+    }
+    .person .ph{
+      height:170px;
+      display:grid;
+      place-items:center;
+      color:rgba(11,16,32,.45);
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:11px;
+      border-bottom:1px solid var(--card-border);
+    }
+    .personBody{ padding:14px 14px 12px; }
+    .personBody b{ display:block; font-weight:900; text-transform:uppercase; letter-spacing:.02em; font-size:12px; }
+    .personBody small{ display:block; margin-top:6px; color:rgba(11,16,32,.55); font-size:12px; line-height:1.5; }
+    .personBody p{ margin:8px 0 0; color:var(--muted); line-height:1.8; font-size:13px; }
+
+    /* FAQ */
+    .faq{
+      border:1px solid var(--card-border);
+      background:var(--card-bg);
+      border-radius: var(--radius);
+      overflow:hidden;
+    }
+    .faqItem{ border-top:1px solid var(--card-border); }
+    .faqItem:first-child{ border-top:none; }
+    .faqQ{
+      width:100%;
+      text-align:left;
+      background:#fff;
+      border:none;
+      padding:14px 14px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.10em;
+      font-size:11px;
+      cursor:pointer;
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      align-items:center;
+    }
+    .faqQ span{ color:rgba(11,16,32,.8); }
+    .faqQ i{
+      font-style:normal;
+      color:rgba(11,16,32,.55);
+      font-weight:900;
+      letter-spacing:.18em;
+    }
+    .faqA{
+      display:none;
+      padding:0 14px 14px;
+      color:var(--muted);
+      line-height:1.8;
+      font-size:13px;
+      max-width: 80ch;
+    }
+    .faqItem.isOpen .faqA{ display:block; }
+
+    /* Feedback: 2 columns (desktop), 1 column (mobile) */
+    .stackWrap{
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .feedbackGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+    }
+    @media (max-width: 980px){
+      .feedbackGrid{ grid-template-columns: 1fr; }
+    }
+
+    /* Contact: 3 side-by-side (desktop), stacked (mobile) */
+    .kontaktGrid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:18px;
+    }
+    @media (max-width: 980px){
+      .kontaktGrid{ grid-template-columns: 1fr; }
+    }
+
+    .kontaktCard{
+      border:1px solid var(--card-border);
+      background:var(--card-bg);
+      border-radius:var(--radius);
+      padding:16px 16px 14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      min-height:76px;
+    }
+    .kontaktCard b{
+      display:block;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.02em;
+      font-size:12px;
+      margin-bottom:4px;
+    }
+    .kontaktCard small{ color:rgba(11,16,32,.55); font-size:12px; line-height:1.6; }
+
+    /* remove visible frame around contact icons */
+    .kontaktIcon{
+      width:56px; height:56px;
+      border:none;
+      border-radius: 99px;
+      display:grid; place-items:center;
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:11px;
+      color:rgba(11,16,32,.55);
+      background:transparent;
+      flex:0 0 auto;
+      overflow:hidden;
+    }
+    .kontaktIcon img{
+      width:36px;
+      height:36px;
+      object-fit:contain;
+      display:block;
+    }
+
+    footer{
+      padding:28px 0 44px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    /* Cookie Banner */
+    .cc{
+      position:fixed;
+      left:18px;
+      bottom:18px;
+      z-index:9999;
+      width:min(420px, calc(100vw - 36px));
+      border:1px solid var(--line);
+      background:var(--card-bg);
+      padding:14px 14px 12px;
+      box-shadow: var(--shadow);
+      display:none;
+      border-radius: var(--radius);
+    }
+    .cc h4{ margin:0 0 8px; font-size:14px; font-weight:900; }
+    .cc p{ margin:0 0 12px; color:var(--muted); font-size:12px; line-height:1.6; }
+    .ccActions{display:flex; gap:10px; flex-wrap:wrap}
+    .cc small{display:block; margin-top:10px; color:rgba(11,16,32,.45); font-size:11px; line-height:1.5}
+
+    /* ===== Feedback YouTube embeds (fixed HTML, consent + click-to-load) ===== */
+    .ytBox{
+      width:100%;
+      aspect-ratio: 16 / 9;
+      border:1px solid var(--card-border);
+      background:#000;
+      margin-bottom:12px;
+      position:relative;
+      overflow:hidden;
+    }
+    .ytPoster{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      object-fit:cover;
+      display:block;
+      opacity:.9;
+      transform: scale(1.02);
+    }
+    .ytOverlay{
+      position:absolute; inset:0;
+      display:flex;
+      align-items:flex-end;
+      padding:14px;
+      background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,0));
+    }
+    .ytOverlayInner{
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .ytHint{
+      color:rgba(255,255,255,.9);
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      line-height:1.3;
+    }
+    .ytBtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      height:40px;
+      padding:0 14px;
+      border:1px solid rgba(255,255,255,.70);
+      background: rgba(0,0,0,.35);
+      color:#fff;
+      font-size:11px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .ytBtn:hover{ background: rgba(0,0,0,.45); }
+    .ytFrame{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      border:0;
+      display:block;
+    }
+
+    /* optional media in feedback (from feedback.json) */
+    .fbMedia{
+      width:100%;
+      height:170px;
+      border:1px solid var(--card-border);
+      border-radius: var(--radius);
+      overflow:hidden;
+      background:var(--card-bg);
+      margin:0 0 12px;
+      display:none;
+    }
+    .fbMedia img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    footer{
+      position:relative;
+    }
+
+    footer::after{
+      content:"by 63157";
+      position:absolute;
+      right:20px;
+      bottom:16px;
+
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+                   "Liberation Mono", "Courier New", monospace;
+
+      font-weight:700;
+      font-size:18px;
+      letter-spacing:.24em;
+      text-transform:uppercase;
+
+      color:rgba(11,16,32,.03);
+      opacity:.9;
+
+      pointer-events:none;
+      user-select:none;
+
+      filter: blur(.25px);
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="nav">
+      <div class="brand">
+        <img class="logo" id="logoImg" src="assets/img/logo.png" alt="Movemania Logo"
+             onerror="this.style.display='none';" />
+        <div class="brandText">
+          <b>Movemania</b>
+          <span>Spaß. Mut. Einsatz.</span>
+        </div>
+      </div>
+
+      <nav class="menu" aria-label="Hauptnavigation">
+        <a href="#home" class="active">Home</a>
+        <a href="#ueber-uns">Über uns</a>
+        <a href="#angebote">Angebote</a>
+        <a href="#feedback">Feedback</a>
+        <a href="#faqs">FAQs</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#" id="navShop" target="_blank" rel="noreferrer">Shop</a>
+      </nav>
+
+      <div class="navCtas" aria-label="Partner & Sponsoren">
+        <div class="sponsorsBar" id="sponsorsBar">
+          <div class="sponsorsItems" id="sponsorsItems">
+            <span class="sponsorsEmpty">Partner-Logos folgen</span>
+          </div>
+          <div class="sponsorsLabel" id="sponsorsLabel">Partner</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="home" class="pattern">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap heroInner">
+      <div>
+        <h1 class="heroTitle" id="heroTitle">
+          <span class="heroBrand" id="heroBrand">MOVEMANIA</span>
+          <span class="heroClaim" id="heroClaim">KINDER STÄRKEN.<br>SPIELER ENTWICKELN.</span>
+        </h1>
+
+        <p class="heroText" id="heroText">
+          Inhalte laden…
+        </p>
+      </div>
+
+      <!-- HERO SLIDER -->
+      <div class="mediaFrame" id="heroMedia" aria-label="Hero Slider">
+        <div class="slide isActive">
+          <div style="height:100%;display:grid;place-items:center;color:rgba(255,255,255,.85);font-weight:800;font-size:13px;padding:18px;text-align:center;">
+            Inhalte laden…
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÜBER UNS -->
+  <section id="ueber-uns" class="section">
+    <div class="wrap">
+      <div class="sectionHeadCenter">
+        <p class="sectionKicker" id="aboutKicker">Über uns</p>
+        <h2 class="sectionTitle" id="aboutTitle">WER WIR SIND</h2>
+      </div>
+
+      <div class="aboutGrid">
+        <div class="aboutMedia" id="aboutMedia">
+          <div style="height:100%;display:grid;place-items:center;color:rgba(11,16,32,.45);font-weight:900;letter-spacing:.18em;text-transform:uppercase;font-size:11px;">
+            Bild/Video (Headcoach)
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 id="aboutHeadTitle">VORSTELLUNG HEADCOACH</h3>
+          <p id="aboutHeadText">Inhalte laden…</p>
+          <div class="cardActions">
+            <a class="btn btnGhost" id="aboutCta" href="#kontakt">Kontakt aufnehmen</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:18px;">
+        <div class="sectionHeadCenter" style="margin-bottom:10px;">
+          <h3 style="margin:0;font-weight:900;text-transform:uppercase;letter-spacing:-.01em;font-size:var(--card-title);" id="coachTitle">
+            COACHES
+          </h3>
+        </div>
+
+        <div class="peopleGrid" id="coachGrid">
+          <div class="person">
+            <div class="ph">Coach</div>
+            <div class="personBody">
+              <b>Vorname Nachname</b>
+              <p>Kurzprofil / Schwerpunkt (Platzhalter).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WOFÜR WIR STEHEN / WERTE -->
+  <section id="werte" class="usp">
+    <div class="wrap">
+      <div class="uspHead">
+        <div class="uspGhost" id="uspGhost">WERTE</div>
+        <p class="uspKicker" id="uspKicker">Wofür wir stehen</p>
+        <h2 class="uspTitle" id="uspTitle">SPAß · MUT · EINSATZ</h2>
+      </div>
+
+      <div class="cards" id="valuesGrid" aria-label="Werte">
+        <div class="card">
+          <div class="valueTop">
+            <span class="valueIcon"><span style="font-weight:900;letter-spacing:.18em;font-size:11px;color:rgba(11,16,32,.55)">ICON</span></span>
+            <h3>MUT</h3>
+          </div>
+          <p>Wir stärken Kinder, Entscheidungen zu treffen, Verantwortung zu übernehmen und sich etwas zuzutrauen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANGEBOTE (stacked, exactly as on the sheet) -->
+  <section id="angebote" class="section">
+    <div class="wrap">
+      <div class="sectionHeadCenter">
+        <h2 class="sectionTitle" id="offersSectionTitle">ANGEBOTE</h2>
+      </div>
+
+      <div class="offerGrid" id="offersGrid">
+
+        <details class="offerAcc" id="accFeriencamps">
+          <summary>
+            <span class="offerAccTitle" id="offersFeriencampsTitle">Feriencamps</span>
+            <i class="offerAccIcon">+</i>
+          </summary>
+          <div class="offerAccBody">
+            <div class="offerMedia" id="offersFeriencampsMedia" aria-hidden="true"></div>
+            <p id="offersFeriencampsText">Inhalte folgen (CMS). Optional: Bild, Text, Link und Unterpunkte.</p>
+            <div class="subOffers" id="offersFeriencampsSubs"></div>
+          </div>
+        </details>
+
+        <details class="offerAcc" id="accElitecamps">
+          <summary>
+            <span class="offerAccTitle" id="offersElitecampsTitle">Elitecamps</span>
+            <i class="offerAccIcon">+</i>
+          </summary>
+          <div class="offerAccBody">
+            <div class="offerMedia" id="offersElitecampsMedia" aria-hidden="true"></div>
+            <p id="offersElitecampsText">Inhalte folgen (CMS). Optional: Bild, Text, Link und Unterpunkte.</p>
+            <div class="subOffers" id="offersElitecampsSubs"></div>
+          </div>
+        </details>
+
+        <details class="offerAcc" id="accPowerkurse">
+          <summary>
+            <span class="offerAccTitle" id="offersPowerkurseTitle">Powerkurse</span>
+            <i class="offerAccIcon">+</i>
+          </summary>
+          <div class="offerAccBody">
+            <div class="offerMedia" id="offersPowerkurseMedia" aria-hidden="true"></div>
+            <p id="offersPowerkurseText">Inhalte folgen (CMS). Optional: Bild, Text, Link und Unterpunkte.</p>
+            <div class="subOffers" id="offersPowerkurseSubs"></div>
+          </div>
+        </details>
+
+        <details class="offerAcc" id="accElitekurs">
+          <summary>
+            <span class="offerAccTitle" id="offersElitekursTitle">Elitekurse</span>
+            <i class="offerAccIcon">+</i>
+          </summary>
+          <div class="offerAccBody">
+            <div class="offerMedia" id="offersElitekursMedia" aria-hidden="true"></div>
+            <p id="offersElitekursText">Inhalte folgen (CMS). Optional: Bild, Text, Link und Unterpunkte.</p>
+            <div class="subOffers" id="offersElitekursSubs"></div>
+          </div>
+        </details>
+
+        <details class="offerAcc" id="accBalls">
+          <summary>
+            <span class="offerAccTitle" id="offersBallsTitle">Ballschule</span>
+            <i class="offerAccIcon">+</i>
+          </summary>
+          <div class="offerAccBody">
+            <div class="offerMedia" id="offersBallsMedia" aria-hidden="true"></div>
+            <p id="offersBallsText">Motorik, Ballgefühl, Koordination – ideal als Fundament (z. B. für Einsteiger).</p>
+            <div class="subOffers" id="offersBallsSubs"></div>
+          </div>
+        </details>
+
+        <details class="offerAcc" id="accKiga">
+          <summary>
+            <span class="offerAccTitle" id="offersKigaTitle">Fußballkindergarten</span>
+            <i class="offerAccIcon">+</i>
+          </summary>
+          <div class="offerAccBody">
+            <div class="offerMedia" id="offersKigaMedia" aria-hidden="true"></div>
+            <p id="offersKigaText">Spielerisches Training für die Kleineren – Bewegung, Spaß und erste Fußball-Basics.</p>
+            <div class="subOffers" id="offersKigaSubs"></div>
+          </div>
+        </details>
+
+        <details class="offerAcc" id="accGeburtstage">
+          <summary>
+            <span class="offerAccTitle" id="offersBdayTitle">Kindergeburtstage</span>
+            <i class="offerAccIcon">+</i>
+          </summary>
+          <div class="offerAccBody">
+            <div class="offerMedia" id="offersBdayMedia" aria-hidden="true"></div>
+            <p id="offersBdayText">Bewegung, Spiele, Fußball-Action – ein Geburtstag, an den sich Kinder gerne erinnern.</p>
+            <div class="subOffers" id="offersBdaySubs"></div>
+          </div>
+        </details>
+
+        <details class="offerAcc" id="accBeratung">
+          <summary>
+            <span class="offerAccTitle" id="offersBeratungTitle">Beratung</span>
+            <i class="offerAccIcon">+</i>
+          </summary>
+          <div class="offerAccBody">
+            <div class="offerMedia" id="offersBeratungMedia" aria-hidden="true"></div>
+            <p id="offersBeratungText">Unterstützung für Vereine, Trainer und Teams – von Konzept bis Fortbildung.</p>
+            <div class="subOffers" id="offersBeratungSubs"></div>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FEEDBACK (2-up) -->
+  <section id="feedback" class="section">
+    <div class="wrap">
+      <div class="sectionHeadCenter">
+        <h2 class="sectionTitle" id="feedbackTitle">FEEDBACK</h2>
+        <p class="sectionKicker" id="feedbackKicker">Stimmen von Eltern & Kindern</p>
+      </div>
+
+      <div class="stackWrap">
+        <div class="feedbackGrid" id="feedbackGrid" aria-label="Feedback">
+
+          <div class="card">
+            <div class="ytBox"
+                 data-yt-id="lnr8QyxGhWg"
+                 data-yt-title="Feedback Video 1 Test Ramon"
+                 data-yt-poster="assets/img/feedback-1.jpg">
+              <img class="ytPoster" src="assets/img/feedback-1.jpg" alt="Feedback Video 1 Poster" loading="lazy">
+              <div class="ytOverlay">
+                <div class="ytOverlayInner">
+                  <div class="ytHint">YouTube-Video<br>(lädt erst nach Klick)</div>
+                  <button class="ytBtn" type="button">Video laden</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="fbMedia" id="fb1Poster" aria-hidden="true"></div>
+            <div class="fbMedia" id="fb1Image" aria-hidden="true"></div>
+
+            <h3 id="fb1Title">FEEDBACK 1</h3>
+            <p id="fb1Name" style="margin:-4px 0 10px;color:rgba(11,16,32,.55);font-weight:900;letter-spacing:.10em;text-transform:uppercase;font-size:11px;">
+              —
+            </p>
+            <p id="fb1Text">Kurzer Text/Einordnung (optional). Zum Beispiel: „Tolles Training, super Stimmung.“</p>
+          </div>
+
+          <div class="card">
+            <div class="ytBox"
+                 data-yt-id="VIDEO_ID_2"
+                 data-yt-title="Feedback Video 2"
+                 data-yt-poster="assets/img/feedback-2.jpg">
+              <img class="ytPoster" src="assets/img/feedback-2.jpg" alt="Feedback Video 2 Poster" loading="lazy">
+              <div class="ytOverlay">
+                <div class="ytOverlayInner">
+                  <div class="ytHint">YouTube-Video<br>(lädt erst nach Klick)</div>
+                  <button class="ytBtn" type="button">Video laden</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="fbMedia" id="fb2Poster" aria-hidden="true"></div>
+            <div class="fbMedia" id="fb2Image" aria-hidden="true"></div>
+
+            <h3 id="fb2Title">FEEDBACK 2</h3>
+            <p id="fb2Name" style="margin:-4px 0 10px;color:rgba(11,16,32,.55);font-weight:900;letter-spacing:.10em;text-transform:uppercase;font-size:11px;">
+              —
+            </p>
+            <p id="fb2Text">Kurzer Text/Einordnung (optional). Zum Beispiel: „Unser Kind kommt begeistert nach Hause.“</p>
+          </div>
+
+          <div class="card">
+            <div class="ytBox"
+                 data-yt-id="VIDEO_ID_3"
+                 data-yt-title="Feedback Video 3"
+                 data-yt-poster="assets/img/feedback-3.jpg">
+              <img class="ytPoster" src="assets/img/feedback-3.jpg" alt="Feedback Video 3 Poster" loading="lazy">
+              <div class="ytOverlay">
+                <div class="ytOverlayInner">
+                  <div class="ytHint">YouTube-Video<br>(lädt erst nach Klick)</div>
+                  <button class="ytBtn" type="button">Video laden</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="fbMedia" id="fb3Poster" aria-hidden="true"></div>
+            <div class="fbMedia" id="fb3Image" aria-hidden="true"></div>
+
+            <h3 id="fb3Title">FEEDBACK 3</h3>
+            <p id="fb3Name" style="margin:-4px 0 10px;color:rgba(11,16,32,.55);font-weight:900;letter-spacing:.10em;text-transform:uppercase;font-size:11px;">
+              —
+            </p>
+            <p id="fb3Text">Kurzer Text/Einordnung (optional). Zum Beispiel: „Strukturiert, wertschätzend, klasse Coaches.“</p>
+          </div>
+
+          <div class="card">
+            <div class="ytBox"
+                 data-yt-id="VIDEO_ID_4"
+                 data-yt-title="Feedback Video 4"
+                 data-yt-poster="assets/img/feedback-4.jpg">
+              <img class="ytPoster" src="assets/img/feedback-4.jpg" alt="Feedback Video 4 Poster" loading="lazy">
+              <div class="ytOverlay">
+                <div class="ytOverlayInner">
+                  <div class="ytHint">YouTube-Video<br>(lädt erst nach Klick)</div>
+                  <button class="ytBtn" type="button">Video laden</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="fbMedia" id="fb4Poster" aria-hidden="true"></div>
+            <div class="fbMedia" id="fb4Image" aria-hidden="true"></div>
+
+            <h3 id="fb4Title">FEEDBACK 4</h3>
+            <p id="fb4Name" style="margin:-4px 0 10px;color:rgba(11,16,32,.55);font-weight:900;letter-spacing:.10em;text-transform:uppercase;font-size:11px;">
+              —
+            </p>
+            <p id="fb4Text">Kurzer Text/Einordnung (optional). Zum Beispiel: „Strukturiert, wertschätzend, klasse Coaches.“</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQS (centered head) -->
+  <section id="faqs" class="section">
+    <div class="wrap">
+      <div class="sectionHeadCenter">
+        <h2 class="sectionTitle" id="faqTitle">FAQs</h2>
+      </div>
+
+      <div class="stackWrap">
+        <div class="faq" id="faqBox">
+          <div class="faqItem">
+            <button class="faqQ" type="button"><span>1. Frage (Platzhalter)</span><i>+</i></button>
+            <div class="faqA">Antworttext (Platzhalter). Kann später aus dem CMS geladen werden.</div>
+          </div>
+        </div>
+
+        <p style="margin:14px 0 0;color:rgba(11,16,32,.55);font-size:12px;line-height:1.7;text-align:center;" id="faqHint">
+          Hast du weitere Fragen? Dann nimm Kontakt per E-Mail auf.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKT (3-up) -->
+  <section id="kontakt" class="section">
+    <div class="wrap">
+      <div class="sectionHeadCenter">
+        <h2 class="sectionTitle">KONTAKT</h2>
+      </div>
+
+      <div class="kontaktGrid">
+        <a class="kontaktCard" id="kMail" href="#" rel="noreferrer">
+          <div>
+            <b>E-Mail</b>
+            <small id="kMailText">Direkt schreiben</small>
+          </div>
+          <div class="kontaktIcon" id="kMailIcon"><span id="kMailIconFallback">MAIL</span></div>
+        </a>
+
+        <a class="kontaktCard" id="kIG" href="#" target="_blank" rel="noreferrer">
+          <div>
+            <b>Instagram</b>
+            <small id="kIGText">Updates & Einblicke</small>
+          </div>
+          <div class="kontaktIcon" id="kIGIcon"><span id="kIGIconFallback">IG</span></div>
+        </a>
+
+        <a class="kontaktCard" id="kWA" href="#" target="_blank" rel="noreferrer">
+          <div>
+            <b>WhatsApp</b>
+            <small id="kWAText">Community / Infos</small>
+          </div>
+          <div class="kontaktIcon" id="kWAIcon"><span id="kWAIconFallback">WA</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <b style="color:var(--ink)">Movemania FS</b><br>
+    Fußballschule mit Haltung &amp; Herz
+
+    <div style="margin-top:12px; display:flex; gap:12px; flex-wrap:wrap;">
+      <a class="btn btnGhost" href="/impressum.html">Impressum</a>
+      <a class="btn btnGhost" href="/datenschutz.html">Datenschutz</a>
+      <a class="btn btnGhost" href="/agbs.html">AGBs</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Cookie Opt-in -->
+<div class="cc" id="cc">
+  <h4>Cookie-Einstellungen</h4>
+  <p>
+    Wir verwenden keine Tracking- oder Marketing-Cookies.
+    Technisch notwendige Speicherungen erfolgen nur mit Ihrer Zustimmung.
+    YouTube-Videos werden erst nach Zustimmung und Klick geladen.
+  </p>
+
+  <div class="ccActions">
+    <button class="btn btnBlue" id="ccAccept" type="button">
+      Akzeptieren
+    </button>
+    <button class="btn btnGhost" id="ccDecline" type="button">
+      Ablehnen
+    </button>
+  </div>
+
+  <small>
+    Weitere Informationen finden Sie in der
+    <a href="/datenschutz.html">Datenschutzerklärung</a>.
+  </small>
+</div>
+
+<script>
+  async function loadJSON(path){
+    const res = await fetch(path, { cache: "no-store" });
+    if (!res.ok) throw new Error("Failed to load " + path + " (" + res.status + ")");
+    return await res.json();
+  }
+
+  function setHref(id, url){
+    const el = document.getElementById(id);
+    if (el && url) el.href = url;
+  }
+
+  function setText(id, value){
+    const el = document.getElementById(id);
+    if (!el || value === undefined || value === null) return;
+    const v = String(value).trim();
+    if (!v) return;
+    el.textContent = v;
+  }
+
+  function setHtml(id, value){
+    const el = document.getElementById(id);
+    if (!el || value === undefined || value === null) return;
+    const v = String(value).trim();
+    if (!v) return;
+    el.innerHTML = v;
+  }
+
+  function normalizeMailto(input){
+    if (!input) return "";
+    const raw = String(input).trim();
+    if (!raw) return "";
+    if (/^mailto:/i.test(raw)) return raw;
+    if (raw.includes("@")) return "mailto:" + raw;
+    return raw;
+  }
+
+  function mountOptionalImage(containerId, src, alt){
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    const s = (src || "").toString().trim();
+    if (!s) return;
+    el.innerHTML = `<img src="${s}" alt="${(alt || "").toString().trim() || "Bild"}" loading="lazy">`;
+    el.style.display = "block";
+  }
+
+  function mountContactIcon(containerId, src, alt){
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    const s = (src || "").toString().trim();
+    if (!s) return; // keep fallback
+    el.innerHTML = `<img src="${s}" alt="${(alt || "").toString().trim() || "Icon"}" loading="lazy">`;
+  }
+
+  function applyTheme(theme){
+    const root = document.documentElement;
+    const setVar = (k, v) => {
+      if (v === undefined || v === null || v === "") return;
+      root.style.setProperty(k, v);
+    };
+
+    const colors = theme?.colors || {};
+    const type = theme?.type || {};
+    const layout = theme?.layout || {};
+    const pattern = theme?.pattern || {};
+
+    // Colors
+    setVar("--bg", colors.bg);
+    setVar("--ink", colors.ink);
+    setVar("--muted", colors.muted);
+    setVar("--line", colors.line);
+
+    setVar("--navy", colors.primary);
+    setVar("--red", colors.accent);
+
+    setVar("--card-bg", colors.card_bg);
+    setVar("--card-border", colors.card_border);
+
+    // Typography
+    if (typeof type.body_size === "number") setVar("--base", type.body_size + "px");
+    if (typeof type.hero_title_size === "number") setVar("--hero-title-max", type.hero_title_size + "px");
+    if (typeof type.section_title_size === "number") setVar("--section-title", type.section_title_size + "px");
+    if (typeof type.card_title_size === "number") setVar("--card-title", type.card_title_size + "px");
+
+    // Layout
+    if (typeof layout.content_width === "number") setVar("--max", layout.content_width + "px");
+    if (typeof layout.radius === "number") setVar("--radius", layout.radius + "px");
+    if (typeof layout.shadow_strength === "number") {
+      const s = Math.max(0, Math.min(0.3, layout.shadow_strength));
+      setVar("--shadow", `0 14px 40px rgba(11,16,32,${s})`);
+    }
+
+    // Pattern
+    if (pattern.enabled === false) {
+      setVar("--patternOpacity", "0");
+    } else {
+      if (typeof pattern.opacity === "number") setVar("--patternOpacity", String(pattern.opacity));
+      if (pattern.dot) setVar("--patternDot", pattern.dot);
+      if (typeof pattern.size === "number") setVar("--patternSize", pattern.size + "px");
+    }
+  }
+
+  /* HERO Slider */
+  function mountHeroSlider(slides){
+    const heroMedia = document.getElementById("heroMedia");
+    if (!heroMedia) return;
+
+    const safeSlides = Array.isArray(slides) && slides.length ? slides : [
+      {
+        type: "video",
+        src: "assets/video/hero.mp4",
+        poster: "assets/img/hero.jpg",
+        title: "Vorstellung",
+        text: "Hier steht später die Vorstellung / kurze Einordnung (aus dem CMS)."
+      },
+      { type: "image", src: "assets/img/placeholder-1.jpg", title: "Wofür wir stehen", text: "Werte, Haltung, Herz – kurz und klar." },
+      { type: "image", src: "assets/img/placeholder-2.jpg", title: "Was wir machen", text: "Camps, Kurse, Ballschule – Überblick." }
+    ];
+
+    let idx = 0;
+    let timer = null;
+    let soundOn = false;
+
+    const stop = () => { if (timer) clearTimeout(timer); timer = null; };
+
+    const slideDelayMs = () => {
+      const s = safeSlides[idx] || {};
+      if (s.type === "video") return 66000;
+      return 6500;
+    };
+
+    const restart = () => {
+      stop();
+      timer = setTimeout(() => {
+        idx = (idx + 1) % safeSlides.length;
+        render();
+        restart();
+      }, slideDelayMs());
+    };
+
+    const applySoundToActiveVideo = () => {
+      const activeSlide = heroMedia.querySelector(".slide.isActive");
+      if (!activeSlide) return;
+
+      heroMedia.querySelectorAll("video").forEach((v) => {
+        const isInActive = v.closest(".slide") === activeSlide;
+        if (!isInActive) {
+          try { v.pause(); } catch (e) {}
+          v.muted = true;
+          v.volume = 1.0;
+          try { v.currentTime = 0; } catch (e) {}
+        }
+      });
+
+      const v = activeSlide.querySelector("video");
+      if (!v) return;
+      v.muted = !soundOn;
+      v.volume = 1.0;
+      v.play().catch(() => {});
+    };
+
+    const toggleSound = () => {
+      soundOn = !soundOn;
+      applySoundToActiveVideo();
+      const btn = heroMedia.querySelector("#sSound");
+      if (btn) btn.textContent = soundOn ? "Sound: An" : "Sound: Aus";
+    };
+
+    const render = () => {
+      heroMedia.innerHTML = "";
+
+      safeSlides.forEach((s, i) => {
+        const slide = document.createElement("div");
+        slide.className = "slide" + (i === idx ? " isActive" : "");
+
+        if (s.type === "video") {
+          const isActive = i === idx;
+          const mutedAttr = (!soundOn || !isActive) ? "muted" : "";
+          slide.innerHTML = `
+            <video autoplay ${mutedAttr} loop playsinline preload="metadata" poster="${s.poster || ""}">
+              <source src="${s.src}" type="video/mp4">
+            </video>
+            <div class="slideOverlay">
+              <b>${(s.title || "").toUpperCase()}</b>
+              <p>${s.text || ""}</p>
+            </div>
+          `;
+        } else {
+          slide.innerHTML = `
+            <img src="${s.src}" alt="${s.title || "Slide"}" />
+            <div class="slideOverlay">
+              <b>${(s.title || "").toUpperCase()}</b>
+              <p>${s.text || ""}</p>
+            </div>
+          `;
+        }
+        heroMedia.appendChild(slide);
+      });
+
+      const ui = document.createElement("div");
+      ui.className = "sliderUi";
+      ui.innerHTML = `
+        <button class="vBtn" id="sPrev" type="button">Zurück</button>
+        <button class="soundBtn" id="sSound" type="button">${soundOn ? "Sound: An" : "Sound: Aus"}</button>
+        <button class="vBtn" id="sNext" type="button">Weiter</button>
+      `;
+      heroMedia.appendChild(ui);
+
+      const dots = document.createElement("div");
+      dots.className = "dots";
+      safeSlides.forEach((_, i) => {
+        const d = document.createElement("button");
+        d.type = "button";
+        d.className = "dot" + (i === idx ? " isActive" : "");
+        d.setAttribute("aria-label", "Slide " + (i+1));
+        d.addEventListener("click", () => { idx = i; render(); restart(); });
+        dots.appendChild(d);
+      });
+      heroMedia.appendChild(dots);
+
+      heroMedia.querySelector("#sPrev").addEventListener("click", () => { idx = (idx - 1 + safeSlides.length) % safeSlides.length; render(); restart(); });
+      heroMedia.querySelector("#sNext").addEventListener("click", () => { idx = (idx + 1) % safeSlides.length; render(); restart(); });
+      heroMedia.querySelector("#sSound").addEventListener("click", () => { toggleSound(); });
+
+      applySoundToActiveVideo();
+    };
+
+    heroMedia.addEventListener("mouseenter", stop);
+    heroMedia.addEventListener("mouseleave", restart);
+
+    render();
+    restart();
+  }
+
+  function initFaq(){
+    const box = document.getElementById("faqBox");
+    if (!box) return;
+    box.querySelectorAll(".faqItem").forEach((item) => {
+      const btn = item.querySelector(".faqQ");
+      const icon = btn ? btn.querySelector("i") : null;
+      if (!btn) return;
+
+      btn.addEventListener("click", () => {
+        const isOpen = item.classList.toggle("isOpen");
+        if (icon) icon.textContent = isOpen ? "–" : "+";
+      });
+    });
+  }
+
+  function mountHeadcoachMedia(data){
+    const el = document.getElementById("aboutMedia");
+    if (!el) return;
+
+    const img = data?.image ? String(data.image).trim() : "";
+    const vid = data?.video ? String(data.video).trim() : "";
+    const poster = data?.poster ? String(data.poster).trim() : "";
+
+    if (vid){
+      el.innerHTML = `<video controls playsinline preload="metadata" ${poster ? `poster="${poster}"` : ""} style="width:100%;height:100%;object-fit:cover;display:block;">
+        <source src="${vid}" type="video/mp4">
+      </video>`;
+      return;
+    }
+    if (img){
+      el.innerHTML = `<img src="${img}" alt="Headcoach" loading="lazy" />`;
+      return;
+    }
+
+    el.innerHTML = `<div style="height:100%;display:grid;place-items:center;color:rgba(11,16,32,.45);font-weight:900;letter-spacing:.18em;text-transform:uppercase;font-size:11px;">
+      Bild/Video (Headcoach)
+    </div>`;
+  }
+
+  function mountCoaches(data){
+    const grid = document.getElementById("coachGrid");
+    if (!grid) return;
+
+    const items = Array.isArray(data?.coaches) ? data.coaches : [];
+    if (!items.length) return;
+
+    grid.innerHTML = "";
+    items.slice(0, 12).forEach((c) => {
+      const name = c?.name || "Coach";
+      const role = c?.role || "";
+      const bio = c?.bio || "";
+      const image = c?.image || "";
+
+      const card = document.createElement("div");
+      card.className = "person";
+      card.innerHTML = `
+        ${image
+          ? `<img src="${image}" alt="${name}" loading="lazy" />`
+          : `<div class="ph">Coach</div>`
+        }
+        <div class="personBody">
+          <b>${String(name).toUpperCase()}</b>
+          ${role ? `<small>${role}</small>` : ``}
+          ${bio ? `<p>${bio}</p>` : ``}
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  function mountSponsors(data){
+    const label = document.getElementById("sponsorsLabel");
+    const itemsEl = document.getElementById("sponsorsItems");
+    if (!itemsEl) return;
+
+    const title = data && (data.title || data.label);
+    if (label && title) label.textContent = title;
+
+    const items = Array.isArray(data?.items) ? data.items
+                : Array.isArray(data?.sponsors) ? data.sponsors
+                : Array.isArray(data) ? data
+                : [];
+
+    if (!items.length) return;
+
+    itemsEl.innerHTML = "";
+
+    /* ===== FIX: Nur Logos rendern (keine Namen/Fallbacks). Items ohne Logo skippen. ===== */
+    const withLogo = items.filter((it) => it && it.logo && String(it.logo).trim());
+    if (!withLogo.length) {
+      itemsEl.innerHTML = `<span class="sponsorsEmpty">Partner-Logos folgen</span>`;
+      return;
+    }
+
+    withLogo.slice(0, 12).forEach((it) => {
+      const name = it?.name || "Partner";
+      const url = it?.url || "";
+      const logo = String(it.logo).trim();
+
+      const a = document.createElement(url ? "a" : "span");
+      a.className = "sponsorLink";
+      if (url){
+        a.href = url;
+        a.target = "_blank";
+        a.rel = "noreferrer";
+      }
+
+      const img = document.createElement("img");
+      img.src = logo;
+      img.alt = name || "Partner";
+      img.loading = "lazy";
+      a.appendChild(img);
+
+      itemsEl.appendChild(a);
+    });
+    /* ===== /FIX ===== */
+  }
+
+  function mountValues(valuesData){
+    const defaultValues = [
+      { title: "Mut", text: "Wir stärken Kinder, Entscheidungen zu treffen, Verantwortung zu übernehmen und sich etwas zuzutrauen.", icon: "assets/img/icons/mut.svg" },
+      { title: "Einsatz", text: "Leistung entsteht durch Freude am Training, Dranbleiben und gemeinsames Arbeiten an Zielen.", icon: "assets/img/icons/einsatz.svg" },
+      { title: "Respekt", text: "Respekt, Fairness und ein positives Miteinander sind bei uns nicht verhandelbar.", icon: "assets/img/icons/respekt.svg" }
+    ];
+
+    const values =
+      (Array.isArray(valuesData?.items) && valuesData.items.length ? valuesData.items :
+      (Array.isArray(valuesData?.values) && valuesData.values.length ? valuesData.values :
+      defaultValues));
+
+    const grid = document.getElementById("valuesGrid");
+    if (!grid) return;
+
+    grid.innerHTML = "";
+    values.slice(0, 6).forEach((v) => {
+      const card = document.createElement("div");
+      card.className = "card";
+      const iconHtml = v.icon
+        ? `<span class="valueIcon"><img src="${v.icon}" alt="${(v.icon_alt || v.title || "Icon")}" loading="lazy"></span>`
+        : `<span class="valueIcon"></span>`;
+      card.innerHTML = `
+        <div class="valueTop">
+          ${iconHtml}
+          <h3>${(v.title || "").toUpperCase()}</h3>
+        </div>
+        <p>${v.text || ""}</p>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  /* Offers: JSON kommt später – hier nur Platzhalter-IDs + optionale Hooks */
+  function mountOffers(offersData){
+    const offers = offersData?.offers || offersData || {};
+
+    const addOptionalLinkButton = (containerEl, link, label, cssClass) => {
+      if (!containerEl) return;
+      const href = (link || "").trim();
+      if (!href) return;
+      const a = document.createElement("a");
+      a.className = cssClass || "btn btnGhost";
+      a.href = href;
+      a.target = "_blank";
+      a.rel = "noreferrer";
+      a.textContent = (label || "Mehr").toUpperCase();
+      const wrap = document.createElement("div");
+      wrap.className = "cardActions";
+      wrap.appendChild(a);
+      containerEl.appendChild(wrap);
+    };
+
+    const renderSubs = (subsElId, subs) => {
+      const el = document.getElementById(subsElId);
+      if (!el) return;
+      const list = Array.isArray(subs) ? subs : [];
+      if (!list.length) return;
+      el.innerHTML = "";
+      list.slice(0, 6).forEach((s) => {
+        const div = document.createElement("div");
+        div.className = "subCard";
+        const title = (s.title || "").toString();
+        const text = (s.text || "").toString();
+        const link = (s.link || "").toString().trim();
+        const linkLabel = (s.link_label || "Mehr").toString();
+        div.innerHTML = `
+          <b>${title || "Unterpunkt"}</b>
+          <small>${text || ""}</small>
+          ${link ? `<div style="margin-top:8px;"><a class="btn btnGhost" href="${link}" target="_blank" rel="noreferrer">${linkLabel.toUpperCase()}</a></div>` : ``}
+        `;
+        el.appendChild(div);
+      });
+    };
+
+    // Feriencamps
+    if (offers?.feriencamps){
+      setText("offersFeriencampsTitle", offers.feriencamps.title || "Feriencamps");
+      setText("offersFeriencampsText", offers.feriencamps.text);
+      mountOptionalImage("offersFeriencampsMedia", offers.feriencamps.image, offers.feriencamps.title || "Feriencamps");
+      const body = document.querySelector("#accFeriencamps .offerAccBody");
+      addOptionalLinkButton(body, offers.feriencamps.link, offers.feriencamps.link_label, "btn btnGhost");
+      renderSubs("offersFeriencampsSubs", offers.feriencamps.sub);
+    }
+
+    // Elitecamps
+    if (offers?.elitecamps){
+      setText("offersElitecampsTitle", offers.elitecamps.title || "Elitecamps");
+      setText("offersElitecampsText", offers.elitecamps.text);
+      mountOptionalImage("offersElitecampsMedia", offers.elitecamps.image, offers.elitecamps.title || "Elitecamps");
+      const body = document.querySelector("#accElitecamps .offerAccBody");
+      addOptionalLinkButton(body, offers.elitecamps.link, offers.elitecamps.link_label, "btn btnGhost");
+      renderSubs("offersElitecampsSubs", offers.elitecamps.sub);
+    }
+
+    // Powerkurse
+    if (offers?.powerkurse){
+      setText("offersPowerkurseTitle", offers.powerkurse.title || "Powerkurse");
+      setText("offersPowerkurseText", offers.powerkurse.text);
+      mountOptionalImage("offersPowerkurseMedia", offers.powerkurse.image, offers.powerkurse.title || "Powerkurse");
+      const body = document.querySelector("#accPowerkurse .offerAccBody");
+      addOptionalLinkButton(body, offers.powerkurse.link, offers.powerkurse.link_label, "btn btnGhost");
+      renderSubs("offersPowerkurseSubs", offers.powerkurse.sub);
+    }
+
+    // Elitekurse
+    if (offers?.elitekurse){
+      setText("offersElitekursTitle", offers.elitekurse.title || "Elitekurse");
+      setText("offersElitekursText", offers.elitekurse.text);
+      mountOptionalImage("offersElitekursMedia", offers.elitekurse.image, offers.elitekurse.title || "Elitekurse");
+      const body = document.querySelector("#accElitekurs .offerAccBody");
+      addOptionalLinkButton(body, offers.elitekurse.link, offers.elitekurse.link_label, "btn btnGhost");
+      renderSubs("offersElitekursSubs", offers.elitekurse.sub);
+    }
+
+    // Ballschule
+    if (offers?.ballschule){
+      setText("offersBallsTitle", offers.ballschule.title || "Ballschule");
+      setText("offersBallsText", offers.ballschule.text);
+      mountOptionalImage("offersBallsMedia", offers.ballschule.image, offers.ballschule.title || "Ballschule");
+      const body = document.querySelector("#accBalls .offerAccBody");
+      addOptionalLinkButton(body, offers.ballschule.link, offers.ballschule.link_label || "Zur Anmeldung", "btn btnGhost");
+      renderSubs("offersBallsSubs", offers.ballschule.sub);
+    }
+
+    // Fußballkindergarten
+    if (offers?.kiga){
+      setText("offersKigaTitle", offers.kiga.title || "Fußballkindergarten");
+      setText("offersKigaText", offers.kiga.text);
+      mountOptionalImage("offersKigaMedia", offers.kiga.image, offers.kiga.title || "Fußballkindergarten");
+      const body = document.querySelector("#accKiga .offerAccBody");
+      addOptionalLinkButton(body, offers.kiga.link, offers.kiga.link_label || "Zur Anmeldung", "btn btnGhost");
+      renderSubs("offersKigaSubs", offers.kiga.sub);
+    }
+
+    // Kindergeburtstage
+    if (offers?.geburtstage){
+      setText("offersBdayTitle", offers.geburtstage.title || "Kindergeburtstage");
+      setText("offersBdayText", offers.geburtstage.text);
+      mountOptionalImage("offersBdayMedia", offers.geburtstage.image, offers.geburtstage.title || "Kindergeburtstage");
+      const body = document.querySelector("#accGeburtstage .offerAccBody");
+      addOptionalLinkButton(body, offers.geburtstage.link, offers.geburtstage.link_label || "Zur Anfrage", "btn btnGhost");
+      renderSubs("offersBdaySubs", offers.geburtstage.sub);
+    }
+
+    // Beratung
+    if (offers?.beratung){
+      setText("offersBeratungTitle", offers.beratung.title || "Beratung");
+      setText("offersBeratungText", offers.beratung.text);
+      mountOptionalImage("offersBeratungMedia", offers.beratung.image, offers.beratung.title || "Beratung");
+      const body = document.querySelector("#accBeratung .offerAccBody");
+      addOptionalLinkButton(body, offers.beratung.link, offers.beratung.link_label || "Mehr", "btn btnGhost");
+      renderSubs("offersBeratungSubs", offers.beratung.sub);
+    }
+
+    // Plus/Minus Sync
+    document.querySelectorAll("details.offerAcc").forEach((d) => {
+      const icon = d.querySelector(".offerAccIcon");
+      const sync = () => { if (icon) icon.textContent = d.open ? "–" : "+"; };
+      sync();
+      d.addEventListener("toggle", sync);
+    });
+  }
+
+  function mountFaq(faqData, fallbackHint){
+    if (faqData?.title) setText("faqTitle", faqData.title);
+    if (faqData?.hint) setText("faqHint", faqData.hint || fallbackHint);
+
+    const items = Array.isArray(faqData?.items) ? faqData.items : [];
+    const box = document.getElementById("faqBox");
+    if (!box || !items.length) return;
+
+    box.innerHTML = "";
+    items.slice(0, 12).forEach((it, idx) => {
+      const wrap = document.createElement("div");
+      wrap.className = "faqItem";
+      wrap.innerHTML = `
+        <button class="faqQ" type="button"><span>${it.q || ("Frage " + (idx+1))}</span><i>+</i></button>
+        <div class="faqA">${it.a || ""}</div>
+      `;
+      box.appendChild(wrap);
+    });
+
+    initFaq();
+  }
+
+  /* ===== Feedback from feedback.json (ignore video field, YouTube is fixed in HTML) ===== */
+  function mountFeedbackFromJson(feedbackData){
+    if (!feedbackData) return;
+
+    if (feedbackData.title) setText("feedbackTitle", String(feedbackData.title).toUpperCase());
+    if (feedbackData.kicker) setText("feedbackKicker", feedbackData.kicker);
+
+    const items = Array.isArray(feedbackData.items) ? feedbackData.items : [];
+    if (!items.length) return;
+
+    [1,2,3,4].forEach((i) => {
+      const it = items[i-1];
+      if (!it) return;
+
+      if (it.title) setText("fb" + i + "Title", String(it.title).toUpperCase());
+      if (it.name) setText("fb" + i + "Name", it.name);
+      if (it.text) setText("fb" + i + "Text", it.text);
+
+      if (it.poster && String(it.poster).trim()){
+        mountOptionalImage("fb" + i + "Poster", String(it.poster).trim(), (it.title || "Feedback") + " Poster");
+      }
+      if (it.image && String(it.image).trim()){
+        mountOptionalImage("fb" + i + "Image", String(it.image).trim(), (it.title || "Feedback") + " Bild");
+      }
+    });
+  }
+
+  /* ===== YouTube Feedback embeds (Consent + Click-to-load) ===== */
+  function initYouTubeFeedbackEmbeds(consent){
+    const boxes = document.querySelectorAll(".ytBox");
+    if (!boxes.length) return;
+
+    boxes.forEach((box) => {
+      const btn = box.querySelector(".ytBtn");
+      const posterImg = box.querySelector(".ytPoster");
+
+      const ytId = (box.getAttribute("data-yt-id") || "").trim();
+      const ytTitle = (box.getAttribute("data-yt-title") || "YouTube Video").trim();
+      const poster = (box.getAttribute("data-yt-poster") || "").trim();
+
+      if (posterImg && poster) {
+        posterImg.src = poster;
+        posterImg.alt = ytTitle + " Poster";
+      }
+
+      const showBlockedHint = () => {
+        if (!btn) return;
+        btn.textContent = "Zustimmen, dann laden";
+        btn.disabled = true;
+        btn.style.opacity = ".6";
+        btn.style.cursor = "not-allowed";
+      };
+
+      const loadIframe = () => {
+        if (!consent) return;
+        if (!ytId) return;
+
+        const iframe = document.createElement("iframe");
+        iframe.className = "ytFrame";
+        iframe.title = ytTitle;
+        iframe.loading = "lazy";
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        iframe.allowFullscreen = true;
+
+        const params = new URLSearchParams({
+          autoplay: "1",
+          rel: "0",
+          modestbranding: "1",
+          playsinline: "1"
+        });
+
+        iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(ytId)}?${params.toString()}`;
+
+        box.innerHTML = "";
+        box.appendChild(iframe);
+      };
+
+      if (!consent) {
+        showBlockedHint();
+        return;
+      }
+
+      if (btn) {
+        btn.addEventListener("click", loadIframe);
+      } else {
+        box.addEventListener("click", loadIframe);
+      }
+    });
+  }
+
+  (async () => {
+    const cc = document.getElementById("cc");
+    const ccAccept = document.getElementById("ccAccept");
+    const ccDecline = document.getElementById("ccDecline");
+    const CC_KEY = "movemania_cookie_consent"; // accepted | declined
+
+    const currentConsent = localStorage.getItem(CC_KEY);
+
+    if (cc && !currentConsent) {
+      cc.style.display = "block";
+    }
+
+    const applyConsentState = () => {
+      const consent = localStorage.getItem(CC_KEY) === "accepted";
+      initYouTubeFeedbackEmbeds(consent);
+    };
+
+    if (ccAccept) {
+      ccAccept.addEventListener("click", () => {
+        localStorage.setItem(CC_KEY, "accepted");
+        cc.style.display = "none";
+        applyConsentState();
+      });
+    }
+
+    if (ccDecline) {
+      ccDecline.addEventListener("click", () => {
+        localStorage.setItem(CC_KEY, "declined");
+        cc.style.display = "none";
+        applyConsentState();
+      });
+    }
+
+    applyConsentState();
+
+    try {
+      const theme = await loadJSON("assets/content/theme.json");
+      applyTheme(theme);
+    } catch (e) {}
+
+    const logo = document.getElementById("logoImg");
+    if (logo) logo.style.display = "block";
+
+    let links = {};
+    try { links = await loadJSON("assets/content/links.json"); } catch (e) {}
+
+    let texts = {};
+    try { texts = await loadJSON("assets/content/texts.json"); } catch (e) {}
+
+    // HERO
+    setText("heroBrand", (texts.hero_brand || "MOVEMANIA").toUpperCase());
+    let claim = (texts.hero_title || "KINDER STÄRKEN.<br>SPIELER ENTWICKELN.").toUpperCase();
+    claim = claim.replace(/^[\s\"“”„‚'«»]+|[\s\"“”„‚'«»]+$/g, "");
+    setHtml("heroClaim", claim);
+    setText("heroText", texts.hero_text || "In unseren Camps und Kursen entwickeln Kinder Freude an Bewegung – mit Struktur, Haltung und Herz.");
+
+    // NAV / LINKS
+    setHref("navShop", links.shop);
+
+    setHref("kIG", links.instagram);
+    setHref("kWA", links.whatsapp);
+
+    const mailHref = normalizeMailto(links.mailto || links.email);
+    if (mailHref) setHref("kMail", mailHref);
+
+    setText("kIGText", links.instagram_text || texts.contact_ig_label || "Updates & Einblicke");
+    setText("kWAText", links.whatsapp_text || texts.contact_wa_label || "Community / Infos");
+
+    const mailVisible =
+      (links.mail_text && String(links.mail_text).trim()) ||
+      (links.mailto && String(links.mailto).replace(/^mailto:/i, "").trim()) ||
+      (links.email && String(links.email).trim()) ||
+      (texts.contact_mail_label || "Direkt schreiben");
+
+    setText("kMailText", mailVisible);
+
+    // contact icons (optional)
+    mountContactIcon("kMailIcon", links.mail_icon || links.contact_icon_mail, "Mail");
+    mountContactIcon("kIGIcon", links.instagram_icon || links.contact_icon_instagram, "Instagram");
+    mountContactIcon("kWAIcon", links.whatsapp_icon || links.contact_icon_whatsapp, "WhatsApp");
+
+    // ABOUT
+    setText("aboutKicker", texts.about_kicker || "Über uns");
+    setText("aboutTitle", (texts.about_title || "Wer wir sind").toUpperCase());
+    setText("aboutHeadTitle", (texts.about_head_title || "Vorstellung Headcoach").toUpperCase());
+    setText("aboutHeadText", texts.about_head_text || "Hier kommt eure Vorstellung (Headcoach) rein – kurz, klar, authentisch.");
+
+    // VALUES
+    setText("uspKicker", (texts.usp_kicker || "Wofür wir stehen"));
+    setText("uspTitle", (texts.usp_title || "Spaß · Mut · Einsatz").toUpperCase());
+    setText("uspGhost", (texts.usp_ghost || "WERTE").toUpperCase());
+
+    // FEEDBACK fallback from texts.json (optional)
+    setText("feedbackTitle", (texts.feedback_title || "FEEDBACK").toUpperCase());
+    setText("feedbackKicker", texts.feedback_kicker || "Stimmen von Eltern & Kindern");
+
+    try {
+      const feedbackData = await loadJSON("assets/content/feedback.json");
+      mountFeedbackFromJson(feedbackData);
+    } catch (e) {}
+
+    try {
+      const sponsorsData = await loadJSON("assets/content/sponsors.json");
+      mountSponsors(sponsorsData);
+    } catch (e) {}
+
+    try {
+      const headcoachData = await loadJSON("assets/content/headcoach.json");
+      mountHeadcoachMedia(headcoachData);
+    } catch (e) {}
+
+    try {
+      const coachesData = await loadJSON("assets/content/coaches.json");
+      mountCoaches(coachesData);
+    } catch (e) {}
+
+    try {
+      const valuesData = await loadJSON("assets/content/values.json");
+      mountValues(valuesData);
+    } catch (e) {}
+
+    // OFFERS
+    try {
+      const offersData = await loadJSON("assets/content/offers.json");
+      mountOffers(offersData);
+    } catch (e) {}
+
+    // FAQ
+    try {
+      const faqData = await loadJSON("assets/content/faq.json");
+      mountFaq(faqData, texts.faq_hint || "");
+    } catch (e) {
+      initFaq();
+    }
+
+    // HERO SLIDES
+    let heroSlides = null;
+    try {
+      heroSlides = await loadJSON("assets/content/hero.json");
+    } catch (e) {}
+
+    if (heroSlides && heroSlides.slides) heroSlides = heroSlides.slides;
+
+    if (!heroSlides) {
+      heroSlides = [
+        {
+          type: "video",
+          src: links.hero_video_mp4 || "assets/video/hero.mp4",
+          poster: links.hero_video_poster || "assets/img/hero.jpg",
+          title: texts.hero_slide1_title || "Vorstellung",
+          text: texts.hero_slide1_text || "Hier steht später die Vorstellung / kurze Einordnung."
+        },
+        {
+          type: "image",
+          src: texts.hero_slide2_img || "assets/img/placeholder-1.jpg",
+          title: texts.hero_slide2_title || "Wofür wir stehen",
+          text: texts.hero_slide2_text || "Werte, Haltung, Herz – kurz und klar."
+        },
+        {
+          type: "image",
+          src: texts.hero_slide3_img || "assets/img/placeholder-2.jpg",
+          title: texts.hero_slide3_title || "Was wir machen",
+          text: texts.hero_slide3_text || "Camps, Kurse, Ballschule – Überblick."
+        }
+      ];
+    }
+
+    mountHeroSlider(heroSlides);
+  })();
+</script>
+
+<!-- Netlify Identity Token Catcher -->
+<script>
+(function () {
+  const hash = window.location.hash || "";
+  if (
+    hash.includes("confirmation_token=") ||
+    hash.includes("invite_token=") ||
+    hash.includes("recovery_token=")
+  ) {
+    window.location.replace("/admin/" + hash);
+  }
+})();
+</script>
+
+</body>
+</html>
