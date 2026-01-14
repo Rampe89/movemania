@@ -280,6 +280,14 @@
       .heroInner{grid-template-columns:1fr}
     }
 
+    /* ===== HERO Mobil-Optimierung (zusätzlich) ===== */
+    @media (max-width: 640px){
+      .hero{ padding:36px 0 22px; }
+      .heroInner{ gap:18px; }
+      .wrap{ padding:0 18px; }
+    }
+    /* ===== /HERO Mobil-Optimierung ===== */
+
     .heroTitle{
       line-height: 1.02;
       max-width: 16ch;
@@ -322,6 +330,45 @@
     @media (max-width: 980px){
       .mediaFrame{ min-height: 260px; }
     }
+
+    /* ===== HERO SLIDER Mobil-Optimierung (besser lesbar, kompakter UI) ===== */
+    @media (max-width: 640px){
+      .mediaFrame{
+        min-height: 220px;
+      }
+      .slideOverlay{
+        padding:12px 12px 10px;
+      }
+      .slideOverlay b{
+        font-size:10px;
+        margin-bottom:5px;
+      }
+      .slideOverlay p{
+        font-size:12px;
+        line-height:1.45;
+      }
+      .sliderUi{
+        left:10px; right:10px; top:10px;
+        gap:8px;
+      }
+      .sliderUi .vBtn,
+      .soundBtn{
+        height:34px;
+        padding:0 10px;
+        font-size:10px;
+        letter-spacing:.14em;
+      }
+      .dots{
+        left:10px;
+        bottom:10px;
+        gap:7px;
+      }
+      .dot{
+        width:8px; height:8px;
+      }
+    }
+    /* ===== /HERO SLIDER Mobil-Optimierung ===== */
+
     .slide{
       position:absolute;
       inset:0;
@@ -770,17 +817,17 @@
       .feedbackGrid{ grid-template-columns: 1fr; }
     }
 
-    /* ===== Video-Grid: 3 / 2 / 1 Spalten (mobil kompatibel) ===== */
-    #videoGrid{
-      grid-template-columns: repeat(3, 1fr);
+    /* ===== Feedback-Videos: größer darstellen (breiter Container + 2-Spalten Desktop) ===== */
+    #feedback .stackWrap{
+      max-width: var(--max); /* Videos dürfen die volle Seitenbreite nutzen (1120px) */
     }
-    @media (max-width: 1120px){
-      #videoGrid{ grid-template-columns: repeat(2, 1fr); }
+    #videoGrid{
+      grid-template-columns: repeat(2, 1fr); /* größer: 2 statt 3 Spalten */
     }
     @media (max-width: 980px){
-      #videoGrid{ grid-template-columns: 1fr; }
+      #videoGrid{ grid-template-columns: 1fr; } /* mobil: 1 Spalte */
     }
-    /* ===== /Video-Grid ===== */
+    /* ===== /Feedback-Videos ===== */
 
     /* Contact: 3 side-by-side (desktop), stacked (mobile) */
     .kontaktGrid{
@@ -1250,7 +1297,7 @@
 
           <div class="card">
             <div class="ytBox"
-                 data-yt-id="2ECsN4PJmbk"
+                 data-yt-id="VIDEO_ID_2"
                  data-yt-title="Feedback Video 2"
                  data-yt-poster="assets/img/feedback-2.jpg">
               <img class="ytPoster" src="assets/img/feedback-2.jpg" alt="Feedback Video 2 Poster" loading="lazy">
@@ -1265,7 +1312,7 @@
 
           <div class="card">
             <div class="ytBox"
-                 data-yt-id="C7KlxjqfPnM"
+                 data-yt-id="VIDEO_ID_3"
                  data-yt-title="Feedback Video 3"
                  data-yt-poster="assets/img/feedback-3.jpg">
               <img class="ytPoster" src="assets/img/feedback-3.jpg" alt="Feedback Video 3 Poster" loading="lazy">
