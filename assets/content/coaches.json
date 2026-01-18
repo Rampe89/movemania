@@ -1,8 +1,8 @@
 {
   "coaches": [
     {
-      "name": "Volkan Tanriverdi",
-      "role": "Coach für Kurse und Camps",
+      "name": "Tobias Blockhaus",
+      "role": "Coach für Athletiktraining und Powerkurse",
       "bio": "C-Lizenz",
       "image": ""
     },
@@ -23,6 +23,11 @@
       "role": "Coach im Feriencamp",
       "bio": "Fokus auf Spaß, Fairplay und positive Entwicklung jedes Kindes.",
       "image": "/assets/img/uploads/niki.jpg"
+    },
+    {
+      "name": "Volkan Tanriverdi",
+      "role": "Coach für Camps",
+      "bio": "C-Lizenz"
     }
   ]
 }
