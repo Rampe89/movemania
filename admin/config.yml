@@ -227,7 +227,7 @@ collections:
               - { label: Bio / Schwerpunkt, name: bio, widget: text, required: false }
               - { label: Bild (optional), name: image, widget: image, required: false }
 
-  # --- ANGEBOTE (FIXED: 8 EINZELNE ACCORDIONS) ---
+    # --- ANGEBOTE (FIXED: 10 EINZELNE ACCORDIONS) ---
   - name: offers
     label: Angebote
     files:
@@ -294,6 +294,19 @@ collections:
                 name: beratung
                 widget: object
                 fields: *offer_fields
+
+              # --- NEU ---
+              - label: Athletiktraining
+                name: athletik
+                widget: object
+                fields: *offer_fields
+
+              # --- NEU ---
+              - label: Spielnahes Individualtraining
+                name: spielnah_individual
+                widget: object
+                fields: *offer_fields
+
 
   # --- EVENTS ---
   - name: events
