@@ -1033,4 +1033,13 @@ footer::after{
 }
 .coachBio > summary::-webkit-details-marker{ display:none; }
 .coachBio[open] > summary{ color: var(--ink); }
+.coachBio > summary::after{
+  content:"+";
+  float:right;
+  opacity:.7;
+  font-weight:900;
+}
+.coachBio[open] > summary::after{
+  content:"–";
+}
 
