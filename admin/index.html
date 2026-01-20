@@ -3,36 +3,309 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Movemania FS – Admin</title>
+  <title>Movemania – Admin</title>
+  <meta name="robots" content="noindex,nofollow" />
 
-  <!-- Netlify Identity Widget (Login/Logout + Token handling) -->
+  <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
   <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0}
-    .debug{
-      padding:10px 14px;
-      border-bottom:1px solid #e6e8ee;
-      background:#fff;
-      font-size:12px;
-      color:#0b1020;
+    :root{
+      --bg:#ffffff;
+      --ink:#0b1020;
+      --muted:#5e6880;
+      --line:#e6e8ee;
+      --navy:#1e3366;
+      --red:#d2182d;
+      --shadow: 0 14px 40px rgba(11,16,32,.10);
+      --radius: 12px;
+      --max: 1120px;
     }
-    .debug code{background:#f6f7fb;padding:2px 6px}
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+    }
+
+    /* Header */
+    .top{
+      border-bottom:1px solid var(--line);
+      background:rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      position:sticky;
+      top:0;
+      z-index: 10;
+    }
+
+    .wrap{
+      max-width: var(--max);
+      margin:0 auto;
+      padding: 14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width: 220px;
+    }
+    .logo{
+      width:38px;
+      height:38px;
+      border-radius: 10px;
+      display:grid;
+      place-items:center;
+      background: rgba(30,51,102,.08);
+      color: var(--navy);
+      font-weight: 900;
+      letter-spacing: .06em;
+      user-select:none;
+    }
+    .brandText b{
+      display:block;
+      font-weight: 900;
+      letter-spacing: .02em;
+      line-height: 1.05;
+    }
+    .brandText span{
+      display:block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.2;
+    }
+
+    .actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .pill{
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius: 999px;
+      padding:8px 10px;
+      font-size:12px;
+      color: var(--muted);
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      white-space:nowrap;
+    }
+    .dot{
+      width:9px;height:9px;border-radius:99px;
+      background: #c9cfdd;
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.8);
+    }
+    .dot.ok{ background: #39b54a; }
+    .dot.warn{ background: #f0b429; }
+    .dot.bad{ background: #d2182d; }
+
+    .btn{
+      border:1px solid rgba(11,16,32,.25);
+      background:#fff;
+      border-radius: 999px;
+      height:36px;
+      padding:0 12px;
+      font-size:12px;
+      font-weight: 800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      cursor:pointer;
+      color: var(--ink);
+    }
+    .btn:hover{ background: rgba(11,16,32,.03); }
+    .btnPrimary{
+      border-color: var(--navy);
+      background: var(--navy);
+      color:#fff;
+    }
+    .btnPrimary:hover{ filter: brightness(.98); }
+
+    /* Hint box */
+    .hintArea{
+      max-width: var(--max);
+      margin: 18px auto 0;
+      padding: 0 18px;
+    }
+    .hintCard{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background:#fff;
+      box-shadow: var(--shadow);
+      padding: 14px 14px 12px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 12px;
+    }
+    .hintCard b{
+      display:block;
+      font-weight: 900;
+      letter-spacing:.02em;
+      margin-bottom: 6px;
+    }
+    .hintCard p{
+      margin:0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+      max-width: 80ch;
+    }
+    .hintCard code{
+      background:#f6f7fb;
+      padding: 2px 6px;
+      border-radius: 6px;
+      border: 1px solid rgba(11,16,32,.06);
+      color: var(--ink);
+    }
+    .smallNote{
+      margin: 10px 0 0;
+      color: rgba(11,16,32,.45);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    /* Sobald CMS geladen ist, Hinweis ausblenden (Header bleibt) */
+    body.cms-loaded .hintArea{ display:none; }
+
+    @media (max-width: 640px){
+      .brand{ min-width: unset; }
+      .hintCard{ flex-direction: column; }
+      .actions{ width:100%; justify-content:space-between; }
+    }
   </style>
 </head>
+
 <body>
-  <div class="debug">
-    Admin lädt… Wenn du hier hängen bleibst, prüfe: <code>/admin/config.yml</code> erreichbar?
+  <header class="top">
+    <div class="wrap">
+      <div class="brand" aria-label="Movemania Admin">
+        <div class="logo" aria-hidden="true">MM</div>
+        <div class="brandText">
+          <b>Movemania Admin</b>
+          <span>Content & Medien pflegen</span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <span class="pill" id="statusPill" title="Systemstatus">
+          <span class="dot warn" id="statusDot"></span>
+          <span id="statusText">Lade…</span>
+        </span>
+
+        <button class="btn" id="btnHome" type="button">Zur Seite</button>
+        <button class="btn btnPrimary" id="btnLogin" type="button">Login</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="hintArea">
+    <div class="hintCard">
+      <div>
+        <b>Hinweis</b>
+        <p>
+          Wenn das Backend „leer“ bleibt oder du hier hängen bleibst: Prüfe, ob
+          <code>/admin/config.yml</code> erreichbar ist und ob der Deploy aktuell ist.
+        </p>
+        <p class="smallNote" id="debugLine">Status: Initialisiere…</p>
+      </div>
+    </div>
   </div>
 
-  <!-- Decap CMS -->
-  <script src="https://unpkg.com/decap-cms@latest/dist/decap-cms.js"></script>
-
   <script>
-    // Optional: nach Login wieder sauber auf /admin bleiben
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("logout", () => location.href = "/");
-    }
+    (function () {
+      const $ = (id) => document.getElementById(id);
+
+      const statusDot = $("statusDot");
+      const statusText = $("statusText");
+      const debugLine = $("debugLine");
+      const btnLogin = $("btnLogin");
+      const btnHome = $("btnHome");
+
+      const setStatus = (kind, text, debug) => {
+        statusDot.className = "dot " + (kind || "warn");
+        statusText.textContent = text || "";
+        if (debugLine) debugLine.textContent = "Status: " + (debug || text || "");
+      };
+
+      btnHome.addEventListener("click", () => location.href = "/");
+
+      const openLogin = () => {
+        if (window.netlifyIdentity) {
+          window.netlifyIdentity.open();
+        } else {
+          alert("Netlify Identity Widget konnte nicht geladen werden.");
+        }
+      };
+
+      btnLogin.addEventListener("click", openLogin);
+
+      // Quick config check (nur zur Anzeige; blockiert nichts)
+      fetch("/admin/config.yml", { cache: "no-store" })
+        .then((res) => {
+          if (!res.ok) throw new Error("config.yml HTTP " + res.status);
+          setStatus("warn", "Bereit", "config.yml erreichbar");
+        })
+        .catch(() => {
+          setStatus("bad", "Config fehlt?", "config.yml nicht erreichbar");
+        });
+
+      // Identity events
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", (user) => {
+          setStatus("warn", "Bereit", user ? "eingeloggt" : "nicht eingeloggt");
+          btnLogin.textContent = user ? "Account" : "Login";
+        });
+
+        window.netlifyIdentity.on("login", () => {
+          setStatus("ok", "Eingeloggt", "Login erfolgreich");
+          btnLogin.textContent = "Account";
+          window.netlifyIdentity.close();
+        });
+
+        window.netlifyIdentity.on("logout", () => {
+          setStatus("warn", "Ausgeloggt", "Logout");
+          btnLogin.textContent = "Login";
+          location.href = "/";
+        });
+
+        btnLogin.addEventListener("click", () => window.netlifyIdentity.open());
+      } else {
+        setStatus("bad", "Identity fehlt", "Netlify Identity Script nicht geladen");
+      }
+
+      // Sobald Decap CMS global da ist, Hinweis ausblenden (Header bleibt)
+      const markCmsLoaded = () => {
+        if (window.CMS) {
+          document.body.classList.add("cms-loaded");
+          setStatus("ok", "CMS läuft", "Decap CMS geladen");
+          return true;
+        }
+        return false;
+      };
+
+      if (!markCmsLoaded()) {
+        const t = setInterval(() => {
+          if (markCmsLoaded()) clearInterval(t);
+        }, 250);
+        setTimeout(() => clearInterval(t), 8000);
+      }
+    })();
   </script>
+
+  <!-- Decap CMS (muss direkt in den Body, ohne Container) -->
+  <script src="https://unpkg.com/decap-cms@latest/dist/decap-cms.js"></script>
 </body>
 </html>
