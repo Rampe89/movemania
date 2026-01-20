@@ -7,11 +7,13 @@
       "link_label": "Zur Anmeldung",
       "image": ""
     },
+
     "elitecamps": {
       "title": "Elitecamps",
       "text": "Die Elitecamps von Movemania richten sich an besonders leistungsstarke und motivierte Kinder, die den nächsten Entwicklungsschritt gehen möchten.\nDie Teilnahme erfolgt ausschließlich über eine Qualifikation und eine separate Einladung durch das Trainerteam.\nIn kleinen Gruppen arbeiten wir anspruchsvoll, spielnah und intensiv an Technik, Spielverständnis und mentaler Stärke – mit klaren Leistungsstandards und individueller Förderung.\n",
       "link_label": "Die Teilnahme ist nur nach Einladung möglich."
     },
+
     "powerkurse": {
       "title": "Powerkurse",
       "text": "Die Powerkurse sind intensive, regelmäßige Trainingseinheiten für Kinder, die sich gezielt weiterentwickeln möchten.\nIn kleinen Gruppen fördern wir Technik, Handlungsschnelligkeit und Spielintelligenz – spielnah, fordernd und motivierend.\nUnsere Powerkurse verbinden Qualität, klare Coachingprinzipien und echte Begeisterung für den Fußball.\nIdeal für Kinder, die mehr wollen als gewöhnliches Vereinstraining.",
@@ -23,68 +25,81 @@
         },
         {
           "title": "Powerkurse 2016/17",
-          "link_label": "Zur Anmeldung",
-          "link": "https://widgets.yolawo.de/w/0/offers/6908ee50abba3fff5c25c004?t=1768060549721"
+          "link": "https://widgets.yolawo.de/w/0/offers/6908ee50abba3fff5c25c004?t=1768060549721",
+          "link_label": "Zur Anmeldung"
         },
         {
           "title": "Powerkurse 2014/15",
-          "link_label": "Zur Anmeldung",
-          "link": "https://widgets.yolawo.de/w/0/offers/6960dddd51c54a4e097e08b6?t=1768060593106"
+          "link": "https://widgets.yolawo.de/w/0/offers/6960dddd51c54a4e097e08b6?t=1768060593106",
+          "link_label": "Zur Anmeldung"
         },
         {
           "title": "Powerkurse 2012/13",
-          "link_label": "Zur Anmeldung",
-          "link": "https://widgets.yolawo.de/w/0/offers/6960de67ecc47cb278a83090?t=1768060635806"
+          "link": "https://widgets.yolawo.de/w/0/offers/6960de67ecc47cb278a83090?t=1768060635806",
+          "link_label": "Zur Anmeldung"
         }
       ]
     },
+
     "elitekurse": {
       "title": "Elitekurse",
       "text": "Die Elite-Kurse von Movemania richten sich an besonders leistungsstarke und hochmotivierte Kinder, die bereit sind, den nächsten Entwicklungsschritt zu gehen.\nIn kleinen Gruppen arbeiten wir mit hohem Anspruch, klarer Struktur und spielnahen Inhalten an Technik, Spielverständnis, Mentalität und Persönlichkeit.\nDie Teilnahme an den Elite-Kursen ist nicht frei buchbar: Kinder werden gezielt gesichtet, ausgewählt und persönlich eingeladen.\nSo stellen wir sicher, dass jedes Kind auf einem passenden Leistungsniveau trainiert und optimal gefördert wird.\nMovemania Elite-Kurse – für Kinder mit besonderem Potenzial, Einsatz und Entwicklungswillen."
     },
+
     "ballschule": {
       "title": "Ballschule",
       "text": "Bewegung, Spiel und Spaß – die perfekte Grundlage für alle Sportarten!\nMit der Ballschule von Movemania bieten wir ein einzigartiges Bewegungsangebot für Kinder im Alter von 3–4 Jahren.\nUnser Konzept orientiert sich an der renommierten Heidelberger Ballschule und basiert auf dem aktuellen trainings- und bewegungswissenschaftlichen Kenntnisstand sowie auf langjähriger Forschung.",
       "link": "https://widgets.yolawo.de/w/0/offers/687fe73aaee32b0902973dd9?t=1768060775656",
       "link_label": "Zur Anmeldung"
     },
+
     "kiga": {
       "title": "Fußballkindergarten",
-      "text": "Im Fußballkindergarten von Movemania entdecken die jüngsten Kinder spielerisch die Welt des Fußballs.\nIn einer sicheren, fröhlichen Umgebung stehen Spaß, Bewegung und Freude am Spiel im Mittelpunkt.\nOhne Leistungsdruck lernen die Kinder erste Ballkontakte, koordinative Grundlagen und das gemeinsame Spielen in der Gruppe.\nUnser Ziel ist es, die Liebe zum Fußball zu wecken und nachhaltig zu entwickeln – mit Geduld, Begeisterung und viel Herz.\nStart ist erst im Mai 2026. \n\nDer Anmeldelink folgt im März."
+      "text": "Im Fußballkindergarten von Movemania entdecken die jüngsten Kinder spielerisch die Welt des Fußballs.\nIn einer sicheren, fröhlichen Umgebung stehen Spaß, Bewegung und Freude am Spiel im Mittelpunkt.\nOhne Leistungsdruck lernen die Kinder erste Ballkontakte, koordinative Grundlagen und das gemeinsame Spielen in der Gruppe.\nUnser Ziel ist es, die Liebe zum Fußball zu wecken und nachhaltig zu entwickeln – mit Geduld, Begeisterung und viel Herz.\n\nStart ist erst im Mai 2026.\nDer Anmeldelink folgt im März."
     },
+
+    "athletik": {
+      "title": "Athletiktraining",
+      "text": "Das Athletiktraining von Movemania legt die körperlichen Grundlagen für langfristige Entwicklung und Leistungsfähigkeit im Fußball.\nIm Fokus stehen Koordination, Stabilität, Schnelligkeit, Beweglichkeit und eine altersgerechte Belastungssteuerung.\nDie Inhalte sind eng mit dem Fußball verknüpft und orientieren sich am biologischen Entwicklungsstand der Kinder.\nZiel ist es, Verletzungen vorzubeugen, Bewegungsqualität zu verbessern und Kinder stark für den Spielalltag zu machen.",
+      "link_label": "Weitere Infos folgen"
+    },
+
+    "spielnah_individual": {
+      "title": "Spielnahes Individualtraining",
+      "text": "Das spielnahe Individualtraining richtet sich an Kinder, die gezielt an ihren persönlichen Stärken und Entwicklungsfeldern arbeiten möchten.\nIm Gegensatz zu isolierten Technikübungen stehen Spielsituationen, Entscheidungsfindung und Handlungsschnelligkeit im Mittelpunkt.\nDas Training ist individuell abgestimmt, hochintensiv und immer nah am realen Spiel – für nachhaltige Entwicklung statt kurzfristiger Effekte.\nIdeal für Kinder, die Verantwortung für ihre Entwicklung übernehmen wollen.",
+      "link_label": "Weitere Infos folgen"
+    },
+
     "beratung": {
       "title": "Beratung",
       "text": "Unterstützung für Vereine, Trainer, Teams, Spieler und Eltern – von Beratung und Konzept bis Fortbildung.",
       "sub": [
         {
           "title": "Vereinsberatung",
-          "text": "Movemania unterstützt Vereine bei der gezielten Weiterentwicklung ihrer Trainingsarbeit und Trainerstrukturen.\nGemeinsam analysieren wir bestehende Abläufe, entwickeln eine klare, vereinseigene Philosophie und schaffen ein einheitliches Verständnis von Ausbildung, Haltung und Qualität.\nZiel ist es, Training effizienter, moderner und nachhaltiger zu gestalten – immer passend zur Identität und den Möglichkeiten des Vereins.\nBei Interesse Mail an: movemania@mail.de"
+          "text": "Movemania unterstützt Vereine bei der gezielten Weiterentwicklung ihrer Trainingsarbeit und Trainerstrukturen.\nGemeinsam analysieren wir bestehende Abläufe, entwickeln eine klare, vereinseigene Philosophie und schaffen ein einheitliches Verständnis von Ausbildung, Haltung und Qualität.\nZiel ist es, Training effizienter, moderner und nachhaltiger zu gestalten.\nInteresse Mail an: movemania@mail.de"
         },
         {
           "title": "Rent a Coach",
-          "text": "Mit „Rent a Coach“ können Vereine, Mannschaften oder Trainer mich zeitlich begrenzt als Coach buchen.\nIch arbeite direkt mit dem Team auf dem Platz – zu individuell abgestimmten Schwerpunkten wie Technik, Spielintelligenz, Mentalität, Teamstruktur oder Trainingsqualität.\nDie Inhalte richten sich immer nach den Wünschen und Zielen des Teams und werden praxisnah, klar und entwicklungsorientiert umgesetzt.\nInteresse Mail an: movemania@mail.de\n"
+          "text": "Mit „Rent a Coach“ können Vereine oder Mannschaften mich zeitlich begrenzt als Coach buchen.\nIch arbeite direkt mit dem Team auf dem Platz – zu individuell abgestimmten Schwerpunkten.\nInteresse Mail an: movemania@mail.de"
         },
         {
           "title": "Trainerfortbildung",
-          "text": "Movemania bietet praxisnahe Trainerfortbildungen zu verschiedenen Themen rund um modernes Fußballtraining.\nSchwerpunkte können unter anderem sein: Training effizienter gestalten, Spielformen sinnvoll einsetzen, Kinder individuell fördern oder Coaching klar und wirksam gestalten.\nDie Fortbildungen verbinden Theorie und Praxis und geben Trainern konkrete Werkzeuge für den Trainingsalltag an die Hand.\nInteresse Mail an: movemania@mail.de"
+          "text": "Praxisnahe Fortbildungen zu modernem Fußballtraining.\nInteresse Mail an: movemania@mail.de"
         },
         {
-          "title": "Trainer",
-          "text": "Ich begleite Trainer individuell auf ihrem persönlichen und fachlichen Entwicklungsweg.\nOb Nachwuchstrainer, ambitionierter Vereinstrainer oder angehender Leistungstrainer – gemeinsam analysieren wir den aktuellen Stand, definieren Ziele und erarbeiten konkrete nächste Schritte.\nDie Beratung ist ehrlich, realistisch und auf langfristige Entwicklung ausgelegt – fachlich, menschlich und beruflich.\nInteresse Mail an: movemania@mail.de"
+          "title": "Spielerberatung",
+          "text": "Ehrliche, realistische Begleitung junger Spieler auf ihrem sportlichen Weg.\nInteresse Mail an: movemania@mail.de"
         },
         {
-          "title": "Spieler",
-          "text": "Movemania begleitet junge Spieler auf ihrem sportlichen Weg – unabhängig von Leistungsstand oder Vereinszugehörigkeit.\nIch berate Spieler so, wie ich mich selbst und meinen Sohn beraten würde: ehrlich, schützend, realistisch und mit Blick auf das große Ganze.\nIm Fokus stehen Entwicklung, Entscheidungsfindung, Belastungssteuerung und ein gesunder Umgang mit Erwartungen und Zielen.\nInteresse Mail an: movemania@mail.de"
-        },
-        {
-          "title": "Eltern",
-          "text": "Eltern spielen eine entscheidende Rolle im Fußballalltag ihrer Kinder.\nMovemania unterstützt Eltern dabei, ihr Kind sinnvoll, ruhig und entwicklungsfördernd zu begleiten – ohne Druck, aber mit Orientierung.\nBei steigendem Interesse sind auch Eltern-Fortbildungen möglich, z. B. zu Themen wie Ernährung, mentale Begleitung oder der richtige Umgang mit Erfolg, Rückschlägen und Leistungsdruck.\nInteresse Mail an: movemania@mail.de"
+          "title": "Elternberatung",
+          "text": "Unterstützung für Eltern im Fußballalltag ihrer Kinder.\nInteresse Mail an: movemania@mail.de"
         }
       ]
     },
+
     "geburtstage": {
       "title": "Kindergeburtstage bei Movemania",
-      "text": "Das Fußball-Erlebnis, das Kinder begeistert\n\nMach den Geburtstag deines Kindes zu etwas ganz Besonderem:\nBei Movemania Kindergeburtstagen erleben Kinder einen aktiven, fröhlichen und professionell begleiteten Fußball-Tag voller Spaß, Bewegung und Teamgeist.\nUnsere Coaches sorgen mit altersgerechten Spielen, Challenges und Mini-Turnieren für echte Erfolgserlebnisse – ganz egal, ob Anfänger oder kleiner Vereinsstar.\n\nDas erwartet euch:\n✔ Professionelle Betreuung\n✔ Strukturierter Ablauf mit Spaßgarantie\n✔ Viel Bewegung statt Bildschirmzeit\n✔ Unvergessliche Erinnerungen\n\n👉 Jetzt Termin anfragen und Geburtstag sichern"
+      "text": "Das Fußball-Erlebnis, das Kinder begeistert.\n\nProfessionell begleitete Geburtstage mit Spielen, Challenges und Mini-Turnieren.\nViel Bewegung, Spaß und echte Erfolgserlebnisse – ganz egal ob Anfänger oder kleiner Vereinsstar.\n\n👉 Jetzt Termin anfragen und Geburtstag sichern"
     }
   }
 }
