@@ -1021,3 +1021,16 @@ footer::after{
   display:block;
   background:#fff;
 }
+.coachBio { margin-top:10px; }
+.coachBio > summary{
+  list-style:none;
+  cursor:pointer;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.10em;
+  font-size:11px;
+  color: rgba(11,16,32,.70);
+}
+.coachBio > summary::-webkit-details-marker{ display:none; }
+.coachBio[open] > summary{ color: var(--ink); }
+
