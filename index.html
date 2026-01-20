@@ -105,11 +105,17 @@
         </div>
 
         <div class="peopleGrid" id="coachGrid">
+          <!-- Platzhalter: wird durch CMS ersetzt -->
           <div class="person">
             <div class="ph">Coach</div>
             <div class="personBody">
               <b>Vorname Nachname</b>
-              <p>Kurzprofil / Schwerpunkt (Platzhalter).</p>
+              <small>Rolle / Schwerpunkt</small>
+
+              <details class="coachBio">
+                <summary class="coachBioSum">Mehr</summary>
+                <p>Kurzprofil / Schwerpunkt (Platzhalter).</p>
+              </details>
             </div>
           </div>
         </div>
@@ -292,7 +298,6 @@
         </div>
 
         <div class="feedbackGrid" id="videoGrid" aria-label="Video Feedback">
-
           <div class="card">
             <div class="ytBox"
                  data-yt-id="g8B38aVhbEk"
@@ -337,7 +342,6 @@
               </div>
             </div>
           </div>
-
         </div>
 
         <!-- 2) CMS-FEEDBACK (Texts/Names/etc.) -->
@@ -348,7 +352,6 @@
         </div>
 
         <div class="feedbackGrid" id="feedbackGrid" aria-label="Feedback Texte">
-
           <div class="card">
             <div class="fbMedia" id="fb1Poster" aria-hidden="true"></div>
             <div class="fbMedia" id="fb1Image" aria-hidden="true"></div>
@@ -392,7 +395,6 @@
             </p>
             <p id="fb4Text">Kurzer Text/Einordnung (optional). Zum Beispiel: „Strukturiert, wertschätzend, klasse Coaches.“</p>
           </div>
-
         </div>
 
       </div>
@@ -523,9 +525,9 @@
     if (!raw) return;
 
     const BR = "__BR__";
-    let v = raw.replace(/<\s*br\s*\/?\s*>/gi, BR);     // <br> markieren
-    v = v.replace(/<[^>]*>/g, "");                      // alle Tags entfernen
-    v = v.replace(new RegExp(BR, "g"), "<br>");         // nur <br> wiederherstellen
+    let v = raw.replace(/<\s*br\s*\/?\s*>/gi, BR);
+    v = v.replace(/<[^>]*>/g, "");
+    v = v.replace(new RegExp(BR, "g"), "<br>");
 
     el.innerHTML = v;
   }
@@ -552,7 +554,7 @@
     const el = document.getElementById(containerId);
     if (!el) return;
     const s = (src || "").toString().trim();
-    if (!s) return; // keep fallback
+    if (!s) return;
     el.innerHTML = `<img src="${s}" alt="${(alt || "").toString().trim() || "Icon"}" loading="lazy">`;
   }
 
@@ -568,7 +570,6 @@
     const layout = theme?.layout || {};
     const pattern = theme?.pattern || {};
 
-    // Colors
     setVar("--bg", colors.bg);
     setVar("--ink", colors.ink);
     setVar("--muted", colors.muted);
@@ -580,13 +581,11 @@
     setVar("--card-bg", colors.card_bg);
     setVar("--card-border", colors.card_border);
 
-    // Typography
     if (typeof type.body_size === "number") setVar("--base", type.body_size + "px");
     if (typeof type.hero_title_size === "number") setVar("--hero-title-max", type.hero_title_size + "px");
     if (typeof type.section_title_size === "number") setVar("--section-title", type.section_title_size + "px");
     if (typeof type.card_title_size === "number") setVar("--card-title", type.card_title_size + "px");
 
-    // Layout
     if (typeof layout.content_width === "number") setVar("--max", layout.content_width + "px");
     if (typeof layout.radius === "number") setVar("--radius", layout.radius + "px");
     if (typeof layout.shadow_strength === "number") {
@@ -594,7 +593,6 @@
       setVar("--shadow", `0 14px 40px rgba(11,16,32,${s})`);
     }
 
-    // Pattern
     if (pattern.enabled === false) {
       setVar("--patternOpacity", "0");
     } else {
@@ -760,9 +758,11 @@
     const poster = data?.poster ? String(data.poster).trim() : "";
 
     if (vid){
-      el.innerHTML = `<video controls playsinline preload="metadata" ${poster ? `poster="${poster}"` : ""} style="width:100%;height:100%;object-fit:contain;display:block;background:#fff;">
-        <source src="${vid}" type="video/mp4">
-      </video>`;
+      el.innerHTML = `
+        <video controls playsinline preload="metadata" ${poster ? `poster="${poster}"` : ""}>
+          <source src="${vid}" type="video/mp4">
+        </video>
+      `;
       return;
     }
     if (img){
@@ -783,11 +783,14 @@
     if (!items.length) return;
 
     grid.innerHTML = "";
-    items.slice(0, 12).forEach((c) => {
+    items.slice(0, 12).forEach((c, idx) => {
       const name = c?.name || "Coach";
       const role = c?.role || "";
       const bio = c?.bio || "";
       const image = c?.image || "";
+
+      const hasBio = Boolean(String(bio || "").trim());
+      const detailsId = `coachBio_${idx}`;
 
       const card = document.createElement("div");
       card.className = "person";
@@ -799,7 +802,13 @@
         <div class="personBody">
           <b>${String(name).toUpperCase()}</b>
           ${role ? `<small>${role}</small>` : ``}
-          ${bio ? `<p>${bio}</p>` : ``}
+
+          ${hasBio ? `
+            <details class="coachBio" id="${detailsId}">
+              <summary class="coachBioSum">Mehr</summary>
+              <p>${bio}</p>
+            </details>
+          ` : ``}
         </div>
       `;
       grid.appendChild(card);
@@ -854,7 +863,7 @@
 
   function mountValues(valuesData){
     const defaultValues = [
-            { title: "Mut", text: "Wir stärken Kinder, Entscheidungen zu treffen, Verantwortung zu übernehmen und sich etwas zuzutrauen.", icon: "assets/img/icons/mut.svg" },
+      { title: "Mut", text: "Wir stärken Kinder, Entscheidungen zu treffen, Verantwortung zu übernehmen und sich etwas zuzutrauen.", icon: "assets/img/icons/mut.svg" },
       { title: "Einsatz", text: "Leistung entsteht durch Freude am Training, Dranbleiben und gemeinsames Arbeiten an Zielen.", icon: "assets/img/icons/einsatz.svg" },
       { title: "Respekt", text: "Respekt, Fairness und ein positives Miteinander sind bei uns nicht verhandelbar.", icon: "assets/img/icons/respekt.svg" }
     ];
@@ -998,10 +1007,6 @@
       renderSubs("offersBeratungSubs", offers.beratung.sub);
     }
 
-    /* ===== NEU: Athletiktraining =====
-       Erwartet in offers.json:
-       offers.athletik = { title, text, image, link, link_label, sub: [...] }
-    */
     if (offers?.athletik){
       setText("offersAthletikTitle", offers.athletik.title || "Athletiktraining");
       setText("offersAthletikText", offers.athletik.text);
@@ -1011,10 +1016,6 @@
       renderSubs("offersAthletikSubs", offers.athletik.sub);
     }
 
-    /* ===== NEU: Spielnahes Individualtraining =====
-       Erwartet in offers.json:
-       offers.spielnah_individual = { title, text, image, link, link_label, sub: [...] }
-    */
     if (offers?.spielnah_individual){
       setText("offersSpielnahIndiTitle", offers.spielnah_individual.title || "Spielnahes Individualtraining");
       setText("offersSpielnahIndiText", offers.spielnah_individual.text);
@@ -1146,7 +1147,7 @@
     const cc = document.getElementById("cc");
     const ccAccept = document.getElementById("ccAccept");
     const ccDecline = document.getElementById("ccDecline");
-    const CC_KEY = "movemania_cookie_consent"; // accepted | declined
+    const CC_KEY = "movemania_cookie_consent";
 
     const currentConsent = localStorage.getItem(CC_KEY);
 
@@ -1199,14 +1200,12 @@
     let texts = {};
     try { texts = await loadJSON("assets/content/texts.json"); } catch (e) {}
 
-    // HERO
     setText("heroBrand", (texts.hero_brand || "MOVEMANIA").toUpperCase());
     let claim = (texts.hero_title || "KINDER STÄRKEN.<br>SPIELER ENTWICKELN.").toUpperCase();
     claim = claim.replace(/^[\s\"“”„‚'«»]+|[\s\"“”„‚'«»]+$/g, "");
     setHtml("heroClaim", claim);
     setText("heroText", texts.hero_text || "In unseren Camps und Kursen entwickeln Kinder Freude an Bewegung – mit Struktur, Haltung und Herz.");
 
-    // NAV / LINKS
     setHref("navShop", links.shop);
 
     setHref("kIG", links.instagram);
@@ -1226,23 +1225,19 @@
 
     setText("kMailText", mailVisible);
 
-    // contact icons (optional)
     mountContactIcon("kMailIcon", links.mail_icon || links.contact_icon_mail, "Mail");
     mountContactIcon("kIGIcon", links.instagram_icon || links.contact_icon_instagram, "Instagram");
     mountContactIcon("kWAIcon", links.whatsapp_icon || links.contact_icon_whatsapp, "WhatsApp");
 
-    // ABOUT
     setText("aboutKicker", texts.about_kicker || "Über uns");
     setText("aboutTitle", (texts.about_title || "Wer wir sind").toUpperCase());
     setText("aboutHeadTitle", (texts.about_head_title || "Vorstellung Headcoach").toUpperCase());
     setText("aboutHeadText", texts.about_head_text || "Hier kommt eure Vorstellung (Headcoach) rein – kurz, klar, authentisch.");
 
-    // VALUES
     setText("uspKicker", (texts.usp_kicker || "Wofür wir stehen"));
     setText("uspTitle", (texts.usp_title || "Spaß · Mut · Einsatz").toUpperCase());
     setText("uspGhost", (texts.usp_ghost || "WERTE").toUpperCase());
 
-    // FEEDBACK fallback
     setText("feedbackTitle", (texts.feedback_title || "FEEDBACK").toUpperCase());
     setText("feedbackKicker", texts.feedback_kicker || "Stimmen von Eltern & Kindern");
 
@@ -1271,13 +1266,11 @@
       mountValues(valuesData);
     } catch (e) {}
 
-    // OFFERS
     try {
       const offersData = await loadJSON("assets/content/offers.json");
       mountOffers(offersData);
     } catch (e) {}
 
-    // FAQ
     try {
       const faqData = await loadJSON("assets/content/faq.json");
       mountFaq(faqData, texts.faq_hint || "");
@@ -1285,7 +1278,6 @@
       initFaq();
     }
 
-    // HERO SLIDES
     let heroSlides = null;
     try {
       heroSlides = await loadJSON("assets/content/hero.json");
@@ -1337,4 +1329,5 @@
 
 </body>
 </html>
+
 
