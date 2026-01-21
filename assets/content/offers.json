@@ -1,75 +1,19 @@
 {
   "offers": {
-    "feriencamps": {
-      "title": "Feriencamps",
-      "text": "Die Movemania-Feriencamps verbinden hochwertiges Fußballtraining mit Spaß, Gemeinschaft und persönlicher Entwicklung.\nIn kleinen Gruppen fördern wir Kinder spielnah, altersgerecht und individuell – mit klarer Struktur und viel Herz.\nUnsere Camps stehen für Bewegung, Begeisterung und unvergessliche Ferienerlebnisse auf und neben dem Platz.\n",
-      "link": "https://widgets.yolawo.de/w/0/offers/6824441ce0e26f6acca6fd4c?t=1768060051940",
-      "link_label": "Zur Anmeldung",
-      "image": ""
-    },
-
-    "elitecamps": {
-      "title": "Elitecamps",
-      "text": "Die Elitecamps von Movemania richten sich an besonders leistungsstarke und motivierte Kinder, die den nächsten Entwicklungsschritt gehen möchten.\nDie Teilnahme erfolgt ausschließlich über eine Qualifikation und eine separate Einladung durch das Trainerteam.\nIn kleinen Gruppen arbeiten wir anspruchsvoll, spielnah und intensiv an Technik, Spielverständnis und mentaler Stärke – mit klaren Leistungsstandards und individueller Förderung.\n",
-      "link_label": "Die Teilnahme ist nur nach Einladung möglich."
-    },
-
-    "powerkurse": {
-      "title": "Powerkurse",
-      "text": "Die Powerkurse sind intensive, regelmäßige Trainingseinheiten für Kinder, die sich gezielt weiterentwickeln möchten.\nIn kleinen Gruppen fördern wir Technik, Handlungsschnelligkeit und Spielintelligenz – spielnah, fordernd und motivierend.\nUnsere Powerkurse verbinden Qualität, klare Coachingprinzipien und echte Begeisterung für den Fußball.\nIdeal für Kinder, die mehr wollen als gewöhnliches Vereinstraining.",
-      "sub": [
-        {
-          "title": "Powerkurse 2018/19",
-          "link": "https://widgets.yolawo.de/w/0/offers/6908f10cabba3fff5c25d596?t=1768060336873",
-          "link_label": "Zur Anmeldung"
-        },
-        {
-          "title": "Powerkurse 2016/17",
-          "link": "https://widgets.yolawo.de/w/0/offers/6908ee50abba3fff5c25c004?t=1768060549721",
-          "link_label": "Zur Anmeldung"
-        },
-        {
-          "title": "Powerkurse 2014/15",
-          "link": "https://widgets.yolawo.de/w/0/offers/6960dddd51c54a4e097e08b6?t=1768060593106",
-          "link_label": "Zur Anmeldung"
-        },
-        {
-          "title": "Powerkurse 2012/13",
-          "link": "https://widgets.yolawo.de/w/0/offers/6960de67ecc47cb278a83090?t=1768060635806",
-          "link_label": "Zur Anmeldung"
-        }
-      ]
-    },
-
     "elitekurse": {
       "title": "Elitekurse",
       "text": "Die Elite-Kurse von Movemania richten sich an besonders leistungsstarke und hochmotivierte Kinder, die bereit sind, den nächsten Entwicklungsschritt zu gehen.\nIn kleinen Gruppen arbeiten wir mit hohem Anspruch, klarer Struktur und spielnahen Inhalten an Technik, Spielverständnis, Mentalität und Persönlichkeit.\nDie Teilnahme an den Elite-Kursen ist nicht frei buchbar: Kinder werden gezielt gesichtet, ausgewählt und persönlich eingeladen.\nSo stellen wir sicher, dass jedes Kind auf einem passenden Leistungsniveau trainiert und optimal gefördert wird.\nMovemania Elite-Kurse – für Kinder mit besonderem Potenzial, Einsatz und Entwicklungswillen."
     },
-
-    "ballschule": {
-      "title": "Ballschule",
-      "text": "Bewegung, Spiel und Spaß – die perfekte Grundlage für alle Sportarten!\nMit der Ballschule von Movemania bieten wir ein einzigartiges Bewegungsangebot für Kinder im Alter von 3–4 Jahren.\nUnser Konzept orientiert sich an der renommierten Heidelberger Ballschule und basiert auf dem aktuellen trainings- und bewegungswissenschaftlichen Kenntnisstand sowie auf langjähriger Forschung.",
-      "link": "https://widgets.yolawo.de/w/0/offers/687fe73aaee32b0902973dd9?t=1768060775656",
-      "link_label": "Zur Anmeldung"
-    },
-
-    "kiga": {
-      "title": "Fußballkindergarten",
-      "text": "Im Fußballkindergarten von Movemania entdecken die jüngsten Kinder spielerisch die Welt des Fußballs.\nIn einer sicheren, fröhlichen Umgebung stehen Spaß, Bewegung und Freude am Spiel im Mittelpunkt.\nOhne Leistungsdruck lernen die Kinder erste Ballkontakte, koordinative Grundlagen und das gemeinsame Spielen in der Gruppe.\nUnser Ziel ist es, die Liebe zum Fußball zu wecken und nachhaltig zu entwickeln – mit Geduld, Begeisterung und viel Herz.\n\nStart ist erst im Mai 2026.\nDer Anmeldelink folgt im März."
-    },
-
     "athletik": {
       "title": "Athletiktraining",
-      "text": "Das Athletiktraining von Movemania legt die körperlichen Grundlagen für langfristige Entwicklung und Leistungsfähigkeit im Fußball.\nIm Fokus stehen Koordination, Stabilität, Schnelligkeit, Beweglichkeit und eine altersgerechte Belastungssteuerung.\nDie Inhalte sind eng mit dem Fußball verknüpft und orientieren sich am biologischen Entwicklungsstand der Kinder.\nZiel ist es, Verletzungen vorzubeugen, Bewegungsqualität zu verbessern und Kinder stark für den Spielalltag zu machen.",
-      "link_label": "Weitere Infos folgen"
+      "text": "Athletiktraining – Kleingruppe (max. 3–4 Kinder)\n\nUnser Athletiktraining richtet sich an fußballbegeisterte Kinder, die ihre körperlichen Grundlagen gezielt verbessern möchten.\nIn einer sehr kleinen Gruppe von maximal 3–4 Teilnehmenden arbeiten wir 30 Minuten lang intensiv und individuell angepasst an den wichtigsten athletischen \n\nFähigkeiten:\n✔ Schnelligkeit\n✔ Koordination\n✔ Stabilität & Körperkontrolle\n✔ Beweglichkeit\n✔ altersgerechte Kraftentwicklung\n✔ Verletzungsprävention\n\nDurch die kleine Gruppengröße kann der Coach jedes Kind gezielt beobachten, korrigieren und fördern. Die Inhalte werden an Alter, Entwicklungsstand und Bedürfnisse der Kinder angepasst – kein Training von der Stange, sondern echte individuelle Förderung.\n\nZiel: Mehr Selbstvertrauen, bessere Bewegungsqualität und eine stabile Basis für langfristige sportliche Entwicklung.",
+      "link_label": "Weitere Infos folgen",
+      "link": "https://widgets.yolawo.de/w/0/offers/6970a48dd4309f805671702d?t=1768994892028"
     },
-
-    "spielnah_individual": {
-      "title": "Spielnahes Individualtraining",
-      "text": "Das spielnahe Individualtraining richtet sich an Kinder, die gezielt an ihren persönlichen Stärken und Entwicklungsfeldern arbeiten möchten.\nIm Gegensatz zu isolierten Technikübungen stehen Spielsituationen, Entscheidungsfindung und Handlungsschnelligkeit im Mittelpunkt.\nDas Training ist individuell abgestimmt, hochintensiv und immer nah am realen Spiel – für nachhaltige Entwicklung statt kurzfristiger Effekte.\nIdeal für Kinder, die Verantwortung für ihre Entwicklung übernehmen wollen.",
-      "link_label": "Weitere Infos folgen"
+    "geburtstage": {
+      "title": "Kindergeburtstage bei Movemania",
+      "text": "Das Fußball-Erlebnis, das Kinder begeistert.\n\nProfessionell begleitete Geburtstage mit Spielen, Challenges und Mini-Turnieren.\nViel Bewegung, Spaß und echte Erfolgserlebnisse – ganz egal ob Anfänger oder kleiner Vereinsstar.\n\n👉 Jetzt Termin anfragen und Geburtstag sichern"
     },
-
     "beratung": {
       "title": "Beratung",
       "text": "Unterstützung für Vereine, Trainer, Teams, Spieler und Eltern – von Beratung und Konzept bis Fortbildung.",
@@ -96,10 +40,59 @@
         }
       ]
     },
-
-    "geburtstage": {
-      "title": "Kindergeburtstage bei Movemania",
-      "text": "Das Fußball-Erlebnis, das Kinder begeistert.\n\nProfessionell begleitete Geburtstage mit Spielen, Challenges und Mini-Turnieren.\nViel Bewegung, Spaß und echte Erfolgserlebnisse – ganz egal ob Anfänger oder kleiner Vereinsstar.\n\n👉 Jetzt Termin anfragen und Geburtstag sichern"
+    "feriencamps": {
+      "title": "Feriencamps",
+      "text": "Die Movemania-Feriencamps verbinden hochwertiges Fußballtraining mit Spaß, Gemeinschaft und persönlicher Entwicklung.\nIn kleinen Gruppen fördern wir Kinder spielnah, altersgerecht und individuell – mit klarer Struktur und viel Herz.\nUnsere Camps stehen für Bewegung, Begeisterung und unvergessliche Ferienerlebnisse auf und neben dem Platz.\n",
+      "link": "https://widgets.yolawo.de/w/0/offers/6824441ce0e26f6acca6fd4c?t=1768060051940",
+      "link_label": "Zur Anmeldung",
+      "image": ""
+    },
+    "ballschule": {
+      "title": "Ballschule",
+      "text": "Bewegung, Spiel und Spaß – die perfekte Grundlage für alle Sportarten!\nMit der Ballschule von Movemania bieten wir ein einzigartiges Bewegungsangebot für Kinder im Alter von 3–4 Jahren.\nUnser Konzept orientiert sich an der renommierten Heidelberger Ballschule und basiert auf dem aktuellen trainings- und bewegungswissenschaftlichen Kenntnisstand sowie auf langjähriger Forschung.",
+      "link": "https://widgets.yolawo.de/w/0/offers/687fe73aaee32b0902973dd9?t=1768060775656",
+      "link_label": "Zur Anmeldung"
+    },
+    "powerkurse": {
+      "title": "Powerkurse",
+      "text": "Die Powerkurse sind intensive, regelmäßige Trainingseinheiten für Kinder, die sich gezielt weiterentwickeln möchten.\nIn kleinen Gruppen fördern wir Technik, Handlungsschnelligkeit und Spielintelligenz – spielnah, fordernd und motivierend.\nUnsere Powerkurse verbinden Qualität, klare Coachingprinzipien und echte Begeisterung für den Fußball.\nIdeal für Kinder, die mehr wollen als gewöhnliches Vereinstraining.",
+      "sub": [
+        {
+          "title": "Powerkurse 2018/19",
+          "link": "https://widgets.yolawo.de/w/0/offers/6908f10cabba3fff5c25d596?t=1768060336873",
+          "link_label": "Zur Anmeldung"
+        },
+        {
+          "title": "Powerkurse 2016/17",
+          "link": "https://widgets.yolawo.de/w/0/offers/6908ee50abba3fff5c25c004?t=1768060549721",
+          "link_label": "Zur Anmeldung"
+        },
+        {
+          "title": "Powerkurse 2014/15",
+          "link": "https://widgets.yolawo.de/w/0/offers/6960dddd51c54a4e097e08b6?t=1768060593106",
+          "link_label": "Zur Anmeldung"
+        },
+        {
+          "title": "Powerkurse 2012/13",
+          "link": "https://widgets.yolawo.de/w/0/offers/6960de67ecc47cb278a83090?t=1768060635806",
+          "link_label": "Zur Anmeldung"
+        }
+      ]
+    },
+    "spielnah_individual": {
+      "title": "Spielnahes Individualtraining",
+      "text": "Spielnahes Individualtraining – Kleingruppe (max. 4 Kinder)\n\nDieses Training richtet sich an fußballbegeisterte Kinder, die sich gezielt, individuell und spielnah weiterentwickeln möchten.\n\nIn einer sehr kleinen Gruppe von maximal 4 Teilnehmenden arbeiten wir 30 Minuten lang intensiv und passgenauan den persönlichen Entwicklungsfeldern jedes Kindes – mit direktem Bezug zum Spiel.\n\nSchwerpunkte können je nach Bedarf sein:\n\n✔ Ballan- und -mitnahme (1.Kontakt)\n✔ 1vs1 (off./def.) und 2vs1\n✔ Dribbling, Finten & Richtungswechsel\n✔ Passspiel & Entscheidungsverhalten\n✔ Torabschluss\n✔ Spielintelligenz & Wahrnehmung\n✔ Spielverhalten ohne Ball (Freilaufen und Anbieten)\n\nAlle Inhalte sind spielformbasiert aufgebaut und orientieren sich an realen Spielsituationen. Dadurch lernen die Kinder nicht nur Techniken, sondern vor allem:\n\n➡️ Wann sie etwas anwenden\n➡️ Warum sie etwas tun\n➡️ Wie sie bessere Entscheidungen treffen\n\nDurch die kleine Gruppengröße kann der Coach jedes Kind individuell coachen, gezielt korrigieren und persönlich begleiten – mit maximalem Lerneffekt.\n\n🎯 Ziel: Mehr Sicherheit am Ball, bessere Entscheidungen im Spiel und echte, nachhaltige Entwicklung.",
+      "link_label": "Weitere Infos folgen",
+      "link": "https://widgets.yolawo.de/w/0/offers/6970b27ea237757bde06c28b?t=1768994924230"
+    },
+    "kiga": {
+      "title": "Fußballkindergarten",
+      "text": "Im Fußballkindergarten von Movemania entdecken die jüngsten Kinder spielerisch die Welt des Fußballs.\nIn einer sicheren, fröhlichen Umgebung stehen Spaß, Bewegung und Freude am Spiel im Mittelpunkt.\nOhne Leistungsdruck lernen die Kinder erste Ballkontakte, koordinative Grundlagen und das gemeinsame Spielen in der Gruppe.\nUnser Ziel ist es, die Liebe zum Fußball zu wecken und nachhaltig zu entwickeln – mit Geduld, Begeisterung und viel Herz.\n\nStart ist erst im Mai 2026.\nDer Anmeldelink folgt im März."
+    },
+    "elitecamps": {
+      "title": "Elitecamps",
+      "text": "Die Elitecamps von Movemania richten sich an besonders leistungsstarke und motivierte Kinder, die den nächsten Entwicklungsschritt gehen möchten.\nDie Teilnahme erfolgt ausschließlich über eine Qualifikation und eine separate Einladung durch das Trainerteam.\nIn kleinen Gruppen arbeiten wir anspruchsvoll, spielnah und intensiv an Technik, Spielverständnis und mentaler Stärke – mit klaren Leistungsstandards und individueller Förderung.\n",
+      "link_label": "Die Teilnahme ist nur nach Einladung möglich."
     }
   }
 }
