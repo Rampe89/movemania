@@ -2,8 +2,8 @@
   "slides": [
     {
       "type": "video",
-      "src": "assets/video/hero.mp4",
-      "poster": "assets/img/hero.jpg",
+      "src": "./assets/video/hero.mp4",
+      "poster": "./assets/img/hero.jpg",
       "title": "Eindrücke aus unseren Camps",
       "text": "Die Feriencamps sind voller Spaß und unvergesslichen Erlebnissen."
     },
