@@ -665,179 +665,208 @@
     }
   }
 
-  /* HERO Slider (hardened: no untrusted innerHTML) */
-  function mountHeroSlider(slides){
-    const heroMedia = document.getElementById("heroMedia");
-    if (!heroMedia) return;
+  /* HERO Slider (hardened + autoplay-robust) */
+function mountHeroSlider(slides){
+  const heroMedia = document.getElementById("heroMedia");
+  if (!heroMedia) return;
 
-    const safeSlides = Array.isArray(slides) && slides.length ? slides : [
-      {
-        type: "video",
-        src: "assets/video/hero.mp4",
-        poster: "assets/img/hero.jpg",
-        title: "Vorstellung",
-        text: "Hier steht später die Vorstellung / kurze Einordnung (aus dem CMS)."
-      },
-      { type: "image", src: "assets/img/placeholder-1.jpg", title: "Wofür wir stehen", text: "Werte, Haltung, Herz – kurz und klar." },
-      { type: "image", src: "assets/img/placeholder-2.jpg", title: "Was wir machen", text: "Camps, Kurse, Ballschule – Überblick." }
-    ];
+  const safeSlides = Array.isArray(slides) && slides.length ? slides : [
+    {
+      type: "video",
+      src: "assets/video/hero.mp4",
+      poster: "assets/img/hero.jpg",
+      title: "Vorstellung",
+      text: "Hier steht später die Vorstellung / kurze Einordnung (aus dem CMS)."
+    },
+    { type: "image", src: "assets/img/placeholder-1.jpg", title: "Wofür wir stehen", text: "Werte, Haltung, Herz – kurz und klar." },
+    { type: "image", src: "assets/img/placeholder-2.jpg", title: "Was wir machen", text: "Camps, Kurse, Ballschule – Überblick." }
+  ];
 
-    let idx = 0;
-    let timer = null;
-    let soundOn = false;
+  let idx = 0;
+  let timer = null;
+  let soundOn = false;
 
-    const stop = () => { if (timer) clearTimeout(timer); timer = null; };
+  const stop = () => { if (timer) clearTimeout(timer); timer = null; };
 
-    const slideDelayMs = () => {
-      const s = safeSlides[idx] || {};
-      if (s.type === "video") return 66000;
-      return 6500;
-    };
-
-    const restart = () => {
-      stop();
-      timer = setTimeout(() => {
-        idx = (idx + 1) % safeSlides.length;
-        render();
-        restart();
-      }, slideDelayMs());
-    };
-
-    const applySoundToActiveVideo = () => {
-      const activeSlide = heroMedia.querySelector(".slide.isActive");
-      if (!activeSlide) return;
-
-      heroMedia.querySelectorAll("video").forEach((v) => {
-        const isInActive = v.closest(".slide") === activeSlide;
-        if (!isInActive) {
-          try { v.pause(); } catch (e) {}
-          v.muted = true;
-          v.volume = 1.0;
-          try { v.currentTime = 0; } catch (e) {}
-        }
-      });
-
-      const v = activeSlide.querySelector("video");
-      if (!v) return;
-      v.muted = !soundOn;
-      v.volume = 1.0;
-      v.play().catch(() => {});
-    };
-
-    const toggleSound = () => {
-      soundOn = !soundOn;
-      applySoundToActiveVideo();
-      const btn = heroMedia.querySelector("#sSound");
-      if (btn) btn.textContent = soundOn ? "Sound: An" : "Sound: Aus";
-    };
-
-    const buildOverlay = (title, text) => {
-      const overlay = document.createElement("div");
-      overlay.className = "slideOverlay";
-
-      const b = document.createElement("b");
-      b.textContent = String(title || "").toUpperCase();
-      overlay.appendChild(b);
-
-      const p = document.createElement("p");
-      p.textContent = String(text || "");
-      overlay.appendChild(p);
-
-      return overlay;
-    };
-
-    const render = () => {
-      clearEl(heroMedia);
-
-      safeSlides.forEach((s, i) => {
-        const slide = document.createElement("div");
-        slide.className = "slide" + (i === idx ? " isActive" : "");
-
-        const type = String(s?.type || "image").toLowerCase();
-        if (type === "video") {
-          const isActive = i === idx;
-          const video = document.createElement("video");
-          video.autoplay = true;
-          video.loop = true;
-          video.playsInline = true;
-          video.preload = "metadata";
-
-          video.muted = (!soundOn || !isActive);
-          const poster = safeUrl(s?.poster || "");
-          if (poster) video.poster = poster;
-
-          const source = document.createElement("source");
-          const src = safeUrl(s?.src || "");
-          source.src = src || "";
-          source.type = "video/mp4";
-          video.appendChild(source);
-
-          slide.appendChild(video);
-          slide.appendChild(buildOverlay(s?.title, s?.text));
-        } else {
-          const img = document.createElement("img");
-          img.src = safeUrl(s?.src || "") || "";
-          img.alt = String(s?.title || "Slide");
-          slide.appendChild(img);
-          slide.appendChild(buildOverlay(s?.title, s?.text));
-        }
-
-        heroMedia.appendChild(slide);
-      });
-
-      const ui = document.createElement("div");
-      ui.className = "sliderUi";
-
-      const prev = document.createElement("button");
-      prev.className = "vBtn";
-      prev.id = "sPrev";
-      prev.type = "button";
-      prev.textContent = "Zurück";
-
-      const sound = document.createElement("button");
-      sound.className = "soundBtn";
-      sound.id = "sSound";
-      sound.type = "button";
-      sound.textContent = soundOn ? "Sound: An" : "Sound: Aus";
-
-      const next = document.createElement("button");
-      next.className = "vBtn";
-      next.id = "sNext";
-      next.type = "button";
-      next.textContent = "Weiter";
-
-      ui.appendChild(prev);
-      ui.appendChild(sound);
-      ui.appendChild(next);
-      heroMedia.appendChild(ui);
-
-      const dots = document.createElement("div");
-      dots.className = "dots";
-
-      safeSlides.forEach((_, i) => {
-        const d = document.createElement("button");
-        d.type = "button";
-        d.className = "dot" + (i === idx ? " isActive" : "");
-        d.setAttribute("aria-label", "Slide " + (i + 1));
-        d.addEventListener("click", () => { idx = i; render(); restart(); });
-        dots.appendChild(d);
-      });
-
-      heroMedia.appendChild(dots);
-
-      prev.addEventListener("click", () => { idx = (idx - 1 + safeSlides.length) % safeSlides.length; render(); restart(); });
-      next.addEventListener("click", () => { idx = (idx + 1) % safeSlides.length; render(); restart(); });
-      sound.addEventListener("click", () => { toggleSound(); });
-
-      applySoundToActiveVideo();
-    };
-
-    heroMedia.addEventListener("mouseenter", stop);
-    heroMedia.addEventListener("mouseleave", restart);
-
-    render();
-    restart();
+  const slideDelayMs = () => {
+    const s = safeSlides[idx] || {};
+    return (String(s.type).toLowerCase() === "video") ? 66000 : 6500;
   };
+
+  const restart = () => {
+    stop();
+    timer = setTimeout(() => {
+      idx = (idx + 1) % safeSlides.length;
+      render();
+      restart();
+    }, slideDelayMs());
+  };
+
+  const buildOverlay = (title, text) => {
+    const overlay = document.createElement("div");
+    overlay.className = "slideOverlay";
+
+    const b = document.createElement("b");
+    b.textContent = String(title || "").toUpperCase();
+    overlay.appendChild(b);
+
+    const p = document.createElement("p");
+    p.textContent = String(text || "");
+    overlay.appendChild(p);
+
+    return overlay;
+  };
+
+  const applySoundToActiveVideo = () => {
+    const activeSlide = heroMedia.querySelector(".slide.isActive");
+    if (!activeSlide) return;
+
+    // stop all other videos
+    heroMedia.querySelectorAll("video").forEach((v) => {
+      const isActive = v.closest(".slide") === activeSlide;
+      if (!isActive) {
+        try { v.pause(); } catch (e) {}
+        v.muted = true;
+        v.setAttribute("muted", "");
+        v.volume = 1.0;
+        try { v.currentTime = 0; } catch (e) {}
+      }
+    });
+
+    const v = activeSlide.querySelector("video");
+    if (!v) return;
+
+    if (soundOn) {
+      v.muted = false;
+      v.removeAttribute("muted");
+    } else {
+      v.muted = true;
+      v.setAttribute("muted", "");
+    }
+    v.volume = 1.0;
+
+    v.play().catch(() => {});
+  };
+
+  const toggleSound = () => {
+    soundOn = !soundOn;
+    applySoundToActiveVideo();
+    const btn = heroMedia.querySelector("#sSound");
+    if (btn) btn.textContent = soundOn ? "Sound: An" : "Sound: Aus";
+  };
+
+  const createVideo = (s, isActive) => {
+    const video = document.createElement("video");
+
+    // Autoplay-robust: Attributes (wichtig für iOS/Safari)
+    video.setAttribute("autoplay", "");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("loop", "");
+    video.setAttribute("preload", "metadata");
+
+    // initial immer muted für Autoplay
+    video.setAttribute("muted", "");
+    video.muted = true;
+
+    video.autoplay = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.preload = "metadata";
+
+    const poster = safeUrl(s?.poster || "");
+    if (poster) video.poster = poster;
+
+    const source = document.createElement("source");
+    const src = safeUrl(s?.src || "");
+    source.src = src || "";
+    source.type = "video/mp4";
+    video.appendChild(source);
+
+    // nach Metadata versuchen zu starten
+    video.addEventListener("loadedmetadata", () => {
+      if (isActive) video.play().catch(() => {});
+    }, { once: true });
+
+    return video;
+  };
+
+  const createImage = (s) => {
+    const img = document.createElement("img");
+    img.src = safeUrl(s?.src || "") || "";
+    img.alt = String(s?.title || "Slide");
+    return img;
+  };
+
+  const render = () => {
+    clearEl(heroMedia);
+
+    safeSlides.forEach((s, i) => {
+      const slide = document.createElement("div");
+      const isActive = i === idx;
+      slide.className = "slide" + (isActive ? " isActive" : "");
+
+      const type = String(s?.type || "image").toLowerCase();
+      if (type === "video") {
+        slide.appendChild(createVideo(s, isActive));
+        slide.appendChild(buildOverlay(s?.title, s?.text));
+      } else {
+        slide.appendChild(createImage(s));
+        slide.appendChild(buildOverlay(s?.title, s?.text));
+      }
+
+      heroMedia.appendChild(slide);
+    });
+
+    // UI
+    const ui = document.createElement("div");
+    ui.className = "sliderUi";
+    ui.innerHTML = `
+      <button class="vBtn" id="sPrev" type="button">Zurück</button>
+      <button class="soundBtn" id="sSound" type="button">${soundOn ? "Sound: An" : "Sound: Aus"}</button>
+      <button class="vBtn" id="sNext" type="button">Weiter</button>
+    `;
+    heroMedia.appendChild(ui);
+
+    // Dots
+    const dots = document.createElement("div");
+    dots.className = "dots";
+    safeSlides.forEach((_, i) => {
+      const d = document.createElement("button");
+      d.type = "button";
+      d.className = "dot" + (i === idx ? " isActive" : "");
+      d.setAttribute("aria-label", "Slide " + (i + 1));
+      d.addEventListener("click", () => { idx = i; render(); restart(); });
+      dots.appendChild(d);
+    });
+    heroMedia.appendChild(dots);
+
+    // Controls
+    heroMedia.querySelector("#sPrev").addEventListener("click", () => {
+      idx = (idx - 1 + safeSlides.length) % safeSlides.length;
+      render();
+      restart();
+    });
+
+    heroMedia.querySelector("#sNext").addEventListener("click", () => {
+      idx = (idx + 1) % safeSlides.length;
+      render();
+      restart();
+    });
+
+    heroMedia.querySelector("#sSound").addEventListener("click", () => {
+      toggleSound();
+    });
+
+    applySoundToActiveVideo();
+  };
+
+  heroMedia.addEventListener("mouseenter", stop);
+  heroMedia.addEventListener("mouseleave", restart);
+
+  render();
+  restart();
+}
+
 
   function initFaq(){
     const box = document.getElementById("faqBox");
