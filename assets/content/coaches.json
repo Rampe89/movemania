@@ -3,36 +3,45 @@
     {
       "name": "Tobias Blockhaus",
       "role": "Coach für Athletiktraining und Powerkurse",
-      "bio": "Name: Tobias Blockhaus\n\nPosition bei Movemania: Athletik-Coach und Powerkurs-Coach\n\nLizenz: DFB C-Lizenz\n\nErfahrung:\n- Fußballcoach seit 2023\n- ⁠Athletik seit 2010\n\nMeine Philosophie:\nFreude schafft Vertrauen, Vertrauen schafft Mut und Mut schafft Kreativität sowie Spielintelligenz \n\nDas ist mir im Training wichtig:\nMax. viel Ballkontakte, Mutig sein, voller Einsatz, Spaß am Fußball\n\nLieblingsspieler: Toni Kroos\n\nMein Leitsatz:\n„Mutig spielen, kreativ denken, mit Ehrgeiz wachsen.“",
+      "order": 1,
+      "bio": "Name: Tobias Blockhaus\n\nPosition bei Movemania: Athletik-Coach und Powerkurs-Coach\n\nLizenz: DFB C-Lizenz\n\nErfahrung:\n- Fußballcoach seit 2023\n- Athletik seit 2010\n\nMeine Philosophie:\nFreude schafft Vertrauen, Vertrauen schafft Mut und Mut schafft Kreativität sowie Spielintelligenz\n\nDas ist mir im Training wichtig:\nMax. viel Ballkontakte, mutig sein, voller Einsatz, Spaß am Fußball\n\nLieblingsspieler: Toni Kroos\n\nMein Leitsatz:\n„Mutig spielen, kreativ denken, mit Ehrgeiz wachsen.“",
       "image": ""
     },
     {
       "name": "Jannik Grabowski",
       "role": "Camptrainer",
-      "bio": "Name: Jannik Grabowski \n\nPosition bei Movemania: Camptrainer\n\nLizenz: Junior Coach \n\nTrainererfahrung: seit 2023/24\n\nMeine Philosophie: „Ich glaube daran, dass Entwicklung wichtiger ist als Perfektion. Kleine Schritte, ehrlich gearbeitet, führen zu echtem Fortschritt.“\n\nDas ist mir im Training wichtig: Spaß - dennoch Fokus, Ehrgeiz und Ehrlichkeit, viel Spielen\n\nLieblingsspieler: Toni Kroos\n\nMein Leitsatz: „Disziplin schlägt Motivation - jeden Tag.“",
+      "order": 2,
+      "bio": "Name: Jannik Grabowski\n\nPosition bei Movemania: Camptrainer\n\nLizenz: Junior Coach\n\nTrainererfahrung: seit 2023/24\n\nMeine Philosophie:\n„Ich glaube daran, dass Entwicklung wichtiger ist als Perfektion. Kleine Schritte, ehrlich gearbeitet, führen zu echtem Fortschritt.“\n\nDas ist mir im Training wichtig:\nSpaß – dennoch Fokus, Ehrgeiz und Ehrlichkeit, viel Spielen\n\nLieblingsspieler: Toni Kroos\n\nMein Leitsatz:\n„Disziplin schlägt Motivation - jeden Tag.“",
       "image": "/assets/img/uploads/jannik-kickt.jpg"
     },
     {
       "name": "Leon Kopetzki",
       "role": "Camptrainer",
-      "bio": "Name: Leon Kopetzki\n\nPosition bei Movemania: Camptrainer\n\nLizenz: Junior Coach \n\nTrainererfahrung: Seit 2024\n\nMeine Philosophie: Kinder die Spaß haben und sich anstrengen sind wichtiger fürs Team als Kinder die besser spielen, aber keinen Ehrgeiz haben.\n\nDas ist mir im Training wichtig: Viel Spielzeit, Ehrlichkeit und Ehrgeiz.\n\nLieblingsspieler: Marco Reus\n\nMein Leitsatz: \nMan sollte die Dinge im Leben tun auf die man selber Lust hat und nicht das tun was andere einem vorschreiben.",
+      "order": 3,
+      "bio": "Name: Leon Kopetzki\n\nPosition bei Movemania: Camptrainer\n\nLizenz: Junior Coach\n\nTrainererfahrung: Seit 2024\n\nMeine Philosophie:\nKinder, die Spaß haben und sich anstrengen, sind wichtiger fürs Team als Kinder, die besser spielen, aber keinen Ehrgeiz haben.\n\nDas ist mir im Training wichtig:\nViel Spielzeit, Ehrlichkeit und Ehrgeiz.\n\nLieblingsspieler: Marco Reus\n\nMein Leitsatz:\nMan sollte die Dinge im Leben tun, auf die man selber Lust hat, und nicht das tun, was andere einem vorschreiben.",
       "image": "/assets/img/uploads/leon.jpg"
     },
     {
       "name": "Niklas Prinke",
       "role": "Camptrainer",
+      "order": 4,
       "bio": "Fokus auf Spaß, Fairplay und positive Entwicklung jedes Kindes.",
       "image": "/assets/img/uploads/niki.jpg"
     },
     {
       "name": "Volkan Tanriverdi",
       "role": "Camptrainer",
-      "bio": "Name: Volkan Tanriverdi\n\nPosition bei Movemania: Camptrainer\n\nLizenz: DFB C-Lizenz\n\nTrainererfahrung: seit 2021\n\nMeine Philosophie:\nKinder sollen Fußball mit Freude erleben, mutig sein und an sich glauben. Durch Spaß am Spiel entwickeln sie sich nicht nur sportlich, sondern auch persönlich weiter.\n\nDas ist mir im Training wichtig:\nIch lege großen Wert auf viele Ballkontakte, ehrliches und kindgerechtes Feedback sowie eine positive Atmosphäre. Fehler gehören für mich dazu, denn nur wer sich traut, Fehler zu machen, kann besser werden.\n\nLieblingsspieler: Cristiano Ronaldo und Marco Reus\n\nFunfact: Ich treffe in Spielen häufiger mit links als mit rechts\n\nMein Leitsatz:\n„Fehler machen uns stärker, ohne sie gibt es keine Entwicklung.“"
+      "order": 5,
+      "bio": "Name: Volkan Tanriverdi\n\nPosition bei Movemania: Camptrainer\n\nLizenz: DFB C-Lizenz\n\nTrainererfahrung: seit 2021\n\nMeine Philosophie:\nKinder sollen Fußball mit Freude erleben, mutig sein und an sich glauben. Durch Spaß am Spiel entwickeln sie sich nicht nur sportlich, sondern auch persönlich weiter.\n\nDas ist mir im Training wichtig:\nIch lege großen Wert auf viele Ballkontakte, ehrliches und kindgerechtes Feedback sowie eine positive Atmosphäre. Fehler gehören für mich dazu, denn nur wer sich traut, Fehler zu machen, kann besser werden.\n\nLieblingsspieler: Cristiano Ronaldo und Marco Reus\n\nFunfact: Ich treffe in Spielen häufiger mit links als mit rechts\n\nMein Leitsatz:\n„Fehler machen uns stärker, ohne sie gibt es keine Entwicklung.“",
+      "image": ""
     },
     {
       "name": "Emilio Cirino",
       "role": "Camptrainer",
-      "bio": "Name: Emilio Cirino\n\nPosition bei Movemania: Camptrainer\n\nTrainerlizenz: DFB C-Lizenz\n\nTrainererfahrung: Aktiv im Trainerbereich seit 2017\n\nMeine Trainingsphilosophie:\nIch möchte, dass Kinder Fußball mit Begeisterung erleben, mutig Neues ausprobieren und Schritt für Schritt Selbstvertrauen aufbauen. Entwicklung beginnt für mich dort, wo sich Spaß und Lernen verbinden.\n\nDarauf lege ich im Training besonderen Wert:\nViele Ballaktionen für jedes Kind, und eine motivierende Trainingsatmosphäre. \n\nLieblingsspieler: Jude Bellingham \n\nFunfact über mich:\n„Rechts treffsicher – links im Training!“ ⚽\n\nMein Leitspruch:\n„Hab Spaß am Ball, glaub an dich und wachse mit jedem Training!“ ⚽"
+      "order": 6,
+      "bio": "Name: Emilio Cirino\n\nPosition bei Movemania: Camptrainer\n\nTrainerlizenz: DFB C-Lizenz\n\nTrainererfahrung: Aktiv im Trainerbereich seit 2017\n\nMeine Trainingsphilosophie:\nIch möchte, dass Kinder Fußball mit Begeisterung erleben, mutig Neues ausprobieren und Schritt für Schritt Selbstvertrauen aufbauen. Entwicklung beginnt für mich dort, wo sich Spaß und Lernen verbinden.\n\nDarauf lege ich im Training besonderen Wert:\nViele Ballaktionen für jedes Kind und eine motivierende Trainingsatmosphäre.\n\nLieblingsspieler: Jude Bellingham\n\nFunfact über mich:\n„Rechts treffsicher – links im Training!“\n\nMein Leitspruch:\n„Hab Spaß am Ball, glaub an dich und wachse mit jedem Training!“",
+      "image": ""
     }
   ]
 }
+
