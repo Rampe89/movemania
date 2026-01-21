@@ -673,13 +673,13 @@ function mountHeroSlider(slides){
   const safeSlides = Array.isArray(slides) && slides.length ? slides : [
     {
       type: "video",
-      src: "assets/video/hero.mp4",
-      poster: "assets/img/hero.jpg",
+      src: "./assets/video/hero.mp4",
+      poster: "./assets/img/hero.jpg",
       title: "Vorstellung",
       text: "Hier steht später die Vorstellung / kurze Einordnung (aus dem CMS)."
     },
-    { type: "image", src: "assets/img/placeholder-1.jpg", title: "Wofür wir stehen", text: "Werte, Haltung, Herz – kurz und klar." },
-    { type: "image", src: "assets/img/placeholder-2.jpg", title: "Was wir machen", text: "Camps, Kurse, Ballschule – Überblick." }
+    { type: "image", src: "./assets/img/placeholder-1.jpg", title: "Wofür wir stehen", text: "Werte, Haltung, Herz – kurz und klar." },
+    { type: "image", src: "./assets/img/placeholder-2.jpg", title: "Was wir machen", text: "Camps, Kurse, Ballschule – Überblick." }
   ];
 
   let idx = 0;
@@ -1593,8 +1593,8 @@ function mountHeroSlider(slides){
       heroSlides = [
         {
           type: "video",
-          src: links.hero_video_mp4 || "assets/video/hero.mp4",
-          poster: links.hero_video_poster || "assets/img/hero.jpg",
+          src: links.hero_video_mp4 || "./assets/video/hero.mp4",
+          poster: links.hero_video_poster || "./assets/img/hero.jpg",
           title: texts.hero_slide1_title || "Vorstellung",
           text: texts.hero_slide1_text || "Hier steht später die Vorstellung / kurze Einordnung."
         },
