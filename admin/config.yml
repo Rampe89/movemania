@@ -26,6 +26,9 @@ collections:
           - { label: Headcoach Titel, name: about_head_title, widget: string, required: false }
           - { label: Headcoach Text, name: about_head_text, widget: text, required: false }
 
+          # Optional: falls du den Steckbrief lieber in texts.json pflegen willst (statt headcoach.json)
+          - { label: Headcoach Steckbrief (optional), name: about_head_profile, widget: text, required: false }
+
           - { label: Werte Kicker, name: usp_kicker, widget: string, required: false }
           - { label: Werte Titel, name: usp_title, widget: string, required: false }
           - { label: Werte Ghost (Hintergrund), name: usp_ghost, widget: string, required: false }
@@ -126,7 +129,7 @@ collections:
         name: sponsors
         format: json
         fields:
-          - { label: Titel, name: title, widget: string, required: false, default: Partner }
+          - { label: Titel, name: title, widget: string, required: false, default: "Partner" }
           - label: Partner
             name: items
             widget: list
@@ -206,8 +209,11 @@ collections:
         fields:
           - { label: Name (optional), name: name, widget: string, required: false }
           - { label: Bild (optional), name: image, widget: image, required: false }
-          - { label: Video MP4 (optional, Pfad/URL), name: video, widget: string, required: false }
+          - { label: Video MP4 (optional), name: video, widget: string, required: false }
           - { label: Poster (optional), name: poster, widget: string, required: false }
+
+          # NEU: Steckbrief (aufklappbar)
+          - { label: Steckbrief (optional), name: profile, widget: text, required: false }
 
   # --- COACHES ---
   - name: coaches
@@ -221,13 +227,15 @@ collections:
           - label: Coaches
             name: coaches
             widget: list
+            summary: "{{fields.order}} — {{fields.name}}"
             fields:
+              - { label: Reihenfolge (1 = ganz oben), name: order, widget: number, value_type: int, required: false, min: 1 }
               - { label: Name, name: name, widget: string }
               - { label: Rolle (optional), name: role, widget: string, required: false }
               - { label: Bio / Schwerpunkt, name: bio, widget: text, required: false }
               - { label: Bild (optional), name: image, widget: image, required: false }
 
-    # --- ANGEBOTE (FIXED: 10 EINZELNE ACCORDIONS) ---
+  # --- ANGEBOTE (FIXED: 10 EINZELNE ACCORDIONS) ---
   - name: offers
     label: Angebote
     files:
@@ -240,7 +248,6 @@ collections:
             name: offers
             widget: object
             fields:
-              # Shared schema for each offer accordion
               - label: Feriencamps
                 name: feriencamps
                 widget: object
@@ -295,18 +302,15 @@ collections:
                 widget: object
                 fields: *offer_fields
 
-              # --- NEU ---
               - label: Athletiktraining
                 name: athletik
                 widget: object
                 fields: *offer_fields
 
-              # --- NEU ---
               - label: Spielnahes Individualtraining
                 name: spielnah_individual
                 widget: object
                 fields: *offer_fields
-
 
   # --- EVENTS ---
   - name: events
@@ -369,6 +373,7 @@ collections:
               - { label: Bild (optional), name: image, widget: image, required: false }
               - { label: Video MP4 (optional), name: video, widget: file, required: false }
               - { label: Poster (optional), name: poster, widget: image, required: false }
+
 
 
 
