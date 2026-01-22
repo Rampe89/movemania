@@ -1140,6 +1140,25 @@ body.isOverlayOpen {
   background: var(--red);
   color: #fff;
 }
+/* Details / "Mehr" / Plus Hover-Akzent */
+details summary {
+  cursor: pointer;
+  transition: color .15s ease;
+}
+
+details summary:hover,
+details summary:focus-visible {
+  color: var(--red);
+}
+
+/* Optional: Plus-Zeichen explizit mitziehen */
+details summary .fbPlus {
+  transition: color .15s ease;
+}
+
+details summary:hover .fbPlus {
+  color: var(--red);
+}
 
 .btnAccent:hover,
 .btnAccent:focus-visible {
