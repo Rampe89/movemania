@@ -211,6 +211,60 @@
     }catch(e){}
   })();
 </script>
+<script>
+  function applyTheme(theme){
+    const root = document.documentElement;
+    const setVar = (k, v) => {
+      if (v === undefined || v === null || v === "") return;
+      root.style.setProperty(k, v);
+    };
+
+    const colors = theme?.colors || {};
+    const type = theme?.type || {};
+    const layout = theme?.layout || {};
+    const pattern = theme?.pattern || {};
+
+    setVar("--bg", colors.bg);
+    setVar("--ink", colors.ink);
+    setVar("--muted", colors.muted);
+    setVar("--line", colors.line);
+
+    setVar("--navy", colors.primary);
+    setVar("--red", colors.accent);
+
+    setVar("--card-bg", colors.card_bg);
+    setVar("--card-border", colors.card_border);
+
+    if (typeof type.body_size === "number") setVar("--base", type.body_size + "px");
+    if (typeof type.hero_title_size === "number") setVar("--hero-title-max", type.hero_title_size + "px");
+    if (typeof type.section_title_size === "number") setVar("--section-title", type.section_title_size + "px");
+    if (typeof type.card_title_size === "number") setVar("--card-title", type.card_title_size + "px");
+
+    if (typeof layout.content_width === "number") setVar("--max", layout.content_width + "px");
+    if (typeof layout.radius === "number") setVar("--radius", layout.radius + "px");
+    if (typeof layout.shadow_strength === "number") {
+      const s = Math.max(0, Math.min(0.3, layout.shadow_strength));
+      setVar("--shadow", `0 14px 40px rgba(11,16,32,${s})`);
+    }
+
+    if (pattern.enabled === false) {
+      setVar("--patternOpacity", "0");
+    } else {
+      if (typeof pattern.opacity === "number") setVar("--patternOpacity", String(pattern.opacity));
+      if (pattern.dot) setVar("--patternDot", pattern.dot);
+      if (typeof pattern.size === "number") setVar("--patternSize", pattern.size + "px");
+    }
+  }
+
+  (async function(){
+    try{
+      const res = await fetch("assets/content/theme.json", { cache: "no-store" });
+      if (!res.ok) return;
+      const theme = await res.json();
+      applyTheme(theme);
+    } catch(e) {}
+  })();
+</script>
 
 </body>
 </html>
