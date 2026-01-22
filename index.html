@@ -1380,31 +1380,54 @@ function mountHeroSlider(slides){
   if (!boxes.length) return;
 
   const openVideoFocus = (iframe) => {
-    const overlay = document.createElement("div");
-    overlay.className = "videoFocus";
+  const overlay = document.createElement("div");
+  overlay.className = "videoFocus";
 
-    const inner = document.createElement("div");
-    inner.className = "videoFocusInner";
+  const inner = document.createElement("div");
+  inner.className = "videoFocusInner";
 
-    inner.appendChild(iframe);
-    overlay.appendChild(inner);
+  const closeBtn = document.createElement("button");
+  closeBtn.className = "videoFocusClose";
+  closeBtn.type = "button";
+  closeBtn.setAttribute("aria-label", "Video schließen");
+  closeBtn.innerHTML = "&times;";
 
-    const close = () => {
-      overlay.remove();
-      document.removeEventListener("keydown", onKey);
-    };
+  inner.appendChild(closeBtn);
+  inner.appendChild(iframe);
+  overlay.appendChild(inner);
 
-    const onKey = (e) => {
-      if (e.key === "Escape") close();
-    };
-
-    overlay.addEventListener("click", (e) => {
-      if (e.target === overlay) close();
-    });
-
-    document.addEventListener("keydown", onKey);
-    document.body.appendChild(overlay);
+  const cleanup = () => {
+    overlay.remove();
+    document.body.classList.remove("isOverlayOpen");
+    document.removeEventListener("keydown", onKey);
   };
+
+  const close = () => {
+    overlay.classList.remove("isOpen");
+    // Nach Fade-Out entfernen
+    overlay.addEventListener("transitionend", cleanup, { once: true });
+    // Fallback, falls transitionend nicht feuert
+    setTimeout(cleanup, 260);
+  };
+
+  const onKey = (e) => {
+    if (e.key === "Escape") close();
+  };
+
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) close();
+  });
+
+  closeBtn.addEventListener("click", close);
+
+  document.addEventListener("keydown", onKey);
+  document.body.classList.add("isOverlayOpen");
+  document.body.appendChild(overlay);
+
+  // Fade-In triggern (next frame)
+  requestAnimationFrame(() => overlay.classList.add("isOpen"));
+};
+
 
   boxes.forEach((box) => {
     const btn = box.querySelector(".ytBtn");
