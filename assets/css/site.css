@@ -1151,7 +1151,8 @@ body.isOverlayOpen {
 a:hover {
   color: var(--red);
 }
-/* Section Title Accent */
+
+/* Section Title Accent (robust: Linie am Head-Wrapper, nicht am Title) */
 .sectionHeadCenter {
   position: relative;
 }
@@ -1161,12 +1162,19 @@ a:hover {
   display: block;
   width: 34px;
   height: 3px;
-  margin: 12px auto 0; /* Abstand zur letzten Zeile im Headerblock */
+  margin: 12px auto 0; /* mehr Luft, damit Untertitel nicht kleben */
   background: var(--red);
   border-radius: 2px;
 }
 
-.hero .sectionTitle::after {
+/* Ausnahmen: keine Akzentlinie im Hero */
+.hero .sectionHeadCenter::after {
   display: none;
 }
+
+/* Ausnahmen: keine Akzentlinie bei VIDEO-FEEDBACK / TEXT-FEEDBACK Zwischenüberschriften */
+#feedback h3::after {
+  display: none;
+}
+
 
