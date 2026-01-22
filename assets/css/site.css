@@ -190,7 +190,7 @@ a{color:inherit; text-decoration:none}
 }
 .sponsorLink:hover{ background: rgba(11,16,32,.03); }
 .sponsorLink img{
-  max-height:36px;
+  max-height:56px;
   width:auto;
   display:block;
   object-fit:contain;
