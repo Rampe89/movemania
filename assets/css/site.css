@@ -1152,29 +1152,28 @@ a:hover {
   color: var(--red);
 }
 
-/* Section Title Accent (robust: Linie am Head-Wrapper, nicht am Title) */
-.sectionHeadCenter {
-  position: relative;
+/* =========================
+   Section Title Accent
+   Linie NUR bei H2.sectionTitle
+   ========================= */
+
+/* Grundzustand: KEINE Linie */
+.sectionHeadCenter::after {
+  content: none;
 }
 
-.sectionHeadCenter::after {
+/* Linie nur, wenn eine echte Section-Überschrift vorhanden ist */
+.sectionHeadCenter:has(.sectionTitle)::after {
   content: "";
   display: block;
   width: 34px;
   height: 3px;
-  margin: 12px auto 0; /* mehr Luft, damit Untertitel nicht kleben */
+  margin: 12px auto 0;
   background: var(--red);
   border-radius: 2px;
 }
 
-/* Ausnahmen: keine Akzentlinie im Hero */
+/* Hero bleibt ohne Linie */
 .hero .sectionHeadCenter::after {
   display: none;
 }
-
-/* Ausnahmen: keine Akzentlinie bei VIDEO-FEEDBACK / TEXT-FEEDBACK Zwischenüberschriften */
-#feedback h3::after {
-  display: none;
-}
-
-
