@@ -1152,27 +1152,21 @@ a:hover {
   color: var(--red);
 }
 /* Section Title Accent */
-.sectionTitle::after {
+.sectionHeadCenter {
+  position: relative;
+}
+
+.sectionHeadCenter::after {
   content: "";
   display: block;
   width: 34px;
   height: 3px;
-  margin: 10px auto 0;
+  margin: 12px auto 0; /* Abstand zur letzten Zeile im Headerblock */
   background: var(--red);
   border-radius: 2px;
 }
+
 .hero .sectionTitle::after {
   display: none;
-}
-/* Partner Logos: ruhig → aktiv */
-.sponsorLink img {
-  filter: grayscale(1);
-  opacity: .6;
-  transition: .2s ease;
-}
-
-.sponsorLink:hover img {
-  filter: grayscale(0);
-  opacity: 1;
 }
 
