@@ -1376,66 +1376,98 @@ function mountHeroSlider(slides){
   }
 
   function initYouTubeFeedbackEmbeds(consent){
-    const boxes = document.querySelectorAll(".ytBox");
-    if (!boxes.length) return;
+  const boxes = document.querySelectorAll(".ytBox");
+  if (!boxes.length) return;
 
-    boxes.forEach((box) => {
-      const btn = box.querySelector(".ytBtn");
-      const posterImg = box.querySelector(".ytPoster");
+  const openVideoFocus = (iframe) => {
+    const overlay = document.createElement("div");
+    overlay.className = "videoFocus";
 
-      const ytId = (box.getAttribute("data-yt-id") || "").trim();
-      const ytTitle = (box.getAttribute("data-yt-title") || "YouTube Video").trim();
-      const poster = safeUrl(box.getAttribute("data-yt-poster") || "");
+    const inner = document.createElement("div");
+    inner.className = "videoFocusInner";
 
-      if (posterImg && poster) {
-        posterImg.src = poster;
-        posterImg.alt = ytTitle + " Poster";
-      }
+    inner.appendChild(iframe);
+    overlay.appendChild(inner);
 
-      const showBlockedHint = () => {
-        if (!btn) return;
-        btn.textContent = "Zustimmen, dann laden";
-        btn.disabled = true;
-        btn.style.opacity = ".6";
-        btn.style.cursor = "not-allowed";
-      };
+    const close = () => {
+      overlay.remove();
+      document.removeEventListener("keydown", onKey);
+    };
 
-      const loadIframe = () => {
-        if (!consent) return;
-        if (!ytId) return;
+    const onKey = (e) => {
+      if (e.key === "Escape") close();
+    };
 
-        const iframe = document.createElement("iframe");
-        iframe.className = "ytFrame";
-        iframe.title = ytTitle;
-        iframe.loading = "lazy";
-        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-        iframe.allowFullscreen = true;
-
-        const params = new URLSearchParams({
-          autoplay: "1",
-          rel: "0",
-          modestbranding: "1",
-          playsinline: "1"
-        });
-
-        iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(ytId)}?${params.toString()}`;
-
-        clearEl(box);
-        box.appendChild(iframe);
-      };
-
-      if (!consent) {
-        showBlockedHint();
-        return;
-      }
-
-      if (btn) {
-        btn.addEventListener("click", loadIframe);
-      } else {
-        box.addEventListener("click", loadIframe);
-      }
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) close();
     });
-  }
+
+    document.addEventListener("keydown", onKey);
+    document.body.appendChild(overlay);
+  };
+
+  boxes.forEach((box) => {
+    const btn = box.querySelector(".ytBtn");
+    const posterImg = box.querySelector(".ytPoster");
+
+    const ytId = (box.getAttribute("data-yt-id") || "").trim();
+    const ytTitle = (box.getAttribute("data-yt-title") || "YouTube Video").trim();
+    const poster = safeUrl(box.getAttribute("data-yt-poster") || "");
+
+    if (posterImg && poster) {
+      posterImg.src = poster;
+      posterImg.alt = ytTitle + " Poster";
+    }
+
+    const showBlockedHint = () => {
+      if (!btn) return;
+      btn.textContent = "Zustimmen, dann laden";
+      btn.disabled = true;
+      btn.style.opacity = ".6";
+      btn.style.cursor = "not-allowed";
+    };
+
+    const buildIframe = () => {
+      if (!ytId) return null;
+
+      const iframe = document.createElement("iframe");
+      iframe.className = "ytFrame";
+      iframe.title = ytTitle;
+      iframe.loading = "lazy";
+      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      iframe.allowFullscreen = true;
+
+      const params = new URLSearchParams({
+        autoplay: "1",
+        rel: "0",
+        modestbranding: "1",
+        playsinline: "1"
+      });
+
+      iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(ytId)}?${params.toString()}`;
+      return iframe;
+    };
+
+    const open = () => {
+      if (!consent) return;
+      const iframe = buildIframe();
+      if (!iframe) return;
+      openVideoFocus(iframe);
+    };
+
+    if (!consent) {
+      showBlockedHint();
+      return;
+    }
+
+    if (btn) {
+      btn.addEventListener("click", open);
+    } else {
+      box.addEventListener("click", open);
+    }
+  });
+}
+
 
   (async () => {
     const cc = document.getElementById("cc");
