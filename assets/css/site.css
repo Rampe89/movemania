@@ -1196,3 +1196,19 @@ a:hover {
 .hero .sectionHeadCenter::after {
   display: none;
 }
+/* Accordion Plus Hover-Akzent */
+details.offerAcc summary {
+  cursor: pointer;
+}
+
+details.offerAcc summary:hover .offerAccIcon,
+details.offerAcc summary:focus-visible .offerAccIcon {
+  color: var(--red);
+}
+.offerAccIcon {
+  transition: transform .2s ease, color .15s ease;
+}
+
+details.offerAcc[open] .offerAccIcon {
+  transform: rotate(45deg);
+}
