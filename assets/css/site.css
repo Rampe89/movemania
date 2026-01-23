@@ -1212,3 +1212,18 @@ details.offerAcc summary:focus-visible .offerAccIcon {
 details.offerAcc[open] .offerAccIcon {
   transform: rotate(45deg);
 }
+/* Partner-Logos: mobil sauber umbrechen */
+.sponsorsItems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* einzelne Logos */
+.sponsorLink img {
+  max-width: 140px;
+  width: 100%;
+  height: auto;
+}
