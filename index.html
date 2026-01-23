@@ -22,6 +22,7 @@
           <b>Movemania</b>
           <span>Spaß. Mut. Einsatz.</span>
         </div>
+        
       </div>
 
       <nav class="menu" aria-label="Hauptnavigation">
@@ -591,6 +592,21 @@
     v = v.replace(new RegExp(BR, "g"), "<br>");
     el.innerHTML = v;
   }
+  
+  function setTextWithBreaks(el, value){
+  if (!el || value === undefined || value === null) return;
+  const raw = String(value).trim();
+  if (!raw) return;
+
+  const safe = raw
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\r\n|\r|\n/g, "<br>");
+
+  el.innerHTML = safe;
+}
+
 
   function normalizeMailto(input){
     if (!input) return "";
