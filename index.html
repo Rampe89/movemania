@@ -22,10 +22,9 @@
           <b>Movemania</b>
           <span>Spaß. Mut. Einsatz.</span>
         </div>
-        
       </div>
 
-      <nav class="menu" aria-label="Hauptnavigation">
+      <nav class="menu" id="mainMenu" aria-label="Hauptnavigation">
         <a href="#home">Home</a>
         <a href="#ueber-uns">Über uns</a>
         <a href="#angebote">Angebote</a>
@@ -36,11 +35,19 @@
         <a href="#" id="navShop" target="_blank" rel="noopener noreferrer">Shop</a>
       </nav>
 
+      <!-- Mobile Hamburger -->
+      <button class="navToggle" id="navToggle" type="button"
+              aria-label="Menü öffnen" aria-controls="mainMenu" aria-expanded="false">
+        <span class="navToggleBar" aria-hidden="true"></span>
+        <span class="navToggleBar" aria-hidden="true"></span>
+        <span class="navToggleBar" aria-hidden="true"></span>
+      </button>
 
       <!-- Partner-Logos bewusst NICHT mehr in der Topbar -->
     </div>
   </div>
 </header>
+
 
 <main id="home" class="pattern">
 
@@ -907,6 +914,38 @@ function mountHeroSlider(slides){
     });
   }
 
+  function initMobileMenu(){
+  const topbar = document.querySelector(".topbar");
+  const btn = document.getElementById("navToggle");
+  const menu = document.getElementById("mainMenu");
+  if (!topbar || !btn || !menu) return;
+
+  const setOpen = (open) => {
+    topbar.classList.toggle("isMenuOpen", open);
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+    btn.setAttribute("aria-label", open ? "Menü schließen" : "Menü öffnen");
+  };
+
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    setOpen(!topbar.classList.contains("isMenuOpen"));
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!topbar.classList.contains("isMenuOpen")) return;
+    if (!topbar.contains(e.target)) setOpen(false);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") setOpen(false);
+  });
+
+  menu.querySelectorAll("a").forEach((a) => {
+    a.addEventListener("click", () => setOpen(false));
+  });
+}
+
+  
   function initFeedbackDetailsPlus(){
     document.querySelectorAll("details.fbDetails").forEach((d) => {
       const plus = d.querySelector(".fbPlus");
@@ -1510,6 +1549,7 @@ function mountHeroSlider(slides){
 
 
   (async () => {
+    initMobileMenu();
     const cc = document.getElementById("cc");
     const ccAccept = document.getElementById("ccAccept");
     const ccDecline = document.getElementById("ccDecline");
