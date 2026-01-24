@@ -1227,69 +1227,103 @@ details.offerAcc[open] .offerAccIcon {
   width: 100%;
   height: auto;
 }
+/* Wichtig: Damit das Dropdown sich an der Topbar ausrichtet */
+.nav { position: relative; }
+
 /* --- Mobile Nav Toggle (Hamburger) --- */
 .navToggle {
   display: none;
-  width: 46px;
-  height: 46px;
-  border-radius: 12px;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
   border: 1px solid var(--line);
-  background: rgba(255,255,255,.65);
-  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 10px 24px rgba(11,16,32,.10);
   align-items: center;
   justify-content: center;
   gap: 5px;
   cursor: pointer;
+  transition: transform .15s ease, filter .15s ease, background .15s ease;
 }
+
+.navToggle:hover { filter: brightness(1.02); }
+.navToggle:active { transform: scale(.98); }
 
 .navToggleBar {
   display: block;
   width: 18px;
   height: 2px;
-  background: var(--ink);
+  background: var(--navy);
   border-radius: 2px;
 }
 
-/* Mobile Layout */
-@media (max-width: 860px) {
-  /* Button zeigen */
-  .navToggle {
-    display: inline-flex;
-    margin-left: auto;
-  }
+/* Wenn Menü offen: Button "aktiv" */
+.topbar.isMenuOpen .navToggle {
+  background: rgba(255,255,255,.98);
+}
 
-  /* Nav als Dropdown */
+/* Mobile Dropdown */
+@media (max-width: 860px) {
+  .navToggle { display: inline-flex; margin-left: auto; }
+
+  /* Desktop-Menü wird auf Mobile als Dropdown gerendert */
   .menu {
     position: absolute;
     top: calc(100% + 10px);
     right: 12px;
-    left: 12px;
+    left: auto;
 
-    display: none; /* default zu */
+    width: min(320px, calc(100vw - 24px));
+
+    display: none;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
 
     padding: 10px;
     border-radius: 16px;
     border: 1px solid var(--line);
-    background: rgba(255,255,255,.92);
-    backdrop-filter: blur(10px);
-    box-shadow: var(--shadow);
-    z-index: 1000;
+    background: rgba(255,255,255,.96);
+    box-shadow: 0 18px 50px rgba(11,16,32,.18);
+    z-index: 2000;
+
+    /* Animation */
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity .18s ease, transform .18s ease;
   }
 
-  /* Offener Zustand */
   .topbar.isMenuOpen .menu {
     display: flex;
+    opacity: 1;
+    transform: translateY(0);
   }
 
-  /* Links im Dropdown */
+  /* Links: nicht so riesig, sauber */
   .menu a {
-    padding: 12px 12px;
+    padding: 10px 12px;
     border-radius: 12px;
+    text-align: left;
+    color: var(--ink);
   }
 
   .menu a:hover {
     background: rgba(11,16,32,.06);
+    color: var(--red);
   }
+
+  /* Shop optional hervorheben */
+  .menu a#navShop {
+    margin-top: 6px;
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+  }
+}
+
+/* Optional: Close-Icon Animation (Hamburger -> X) */
+@media (max-width: 860px) {
+  .topbar.isMenuOpen .navToggleBar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .topbar.isMenuOpen .navToggleBar:nth-child(2) { opacity: 0; }
+  .topbar.isMenuOpen .navToggleBar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .navToggleBar { transition: transform .18s ease, opacity .18s ease; }
 }
