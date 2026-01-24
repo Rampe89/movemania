@@ -1322,12 +1322,6 @@ details.offerAcc[open] .offerAccIcon {
     color: var(--red);
   }
 
-  .menu a#navShop {
-    margin-top: 6px;
-    border-top: 1px solid var(--line);
-    padding-top: 12px;
-  }
-
   /* Hamburger -> X when open */
   .navToggle .navToggleBar {
     transition: transform .18s ease, opacity .18s ease;
