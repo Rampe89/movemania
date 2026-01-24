@@ -1231,7 +1231,7 @@ details.offerAcc[open] .offerAccIcon {
 .nav { position: relative; }
 
 /* --- Mobile Nav Toggle (Hamburger) --- */
-.navToggle {
+  .navToggle {
   display: none;
   width: 42px;
   height: 42px;
@@ -1239,10 +1239,16 @@ details.offerAcc[open] .offerAccIcon {
   border: 1px solid var(--line);
   background: rgba(255,255,255,.92);
   box-shadow: 0 10px 24px rgba(11,16,32,.10);
+
+  display: flex;
+  flex-direction: column;   /* ← DAS HAT GEFEHLT */
   align-items: center;
   justify-content: center;
   gap: 5px;
+
   cursor: pointer;
+}
+
   transition: transform .15s ease, filter .15s ease, background .15s ease;
 }
 
