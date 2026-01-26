@@ -14,14 +14,6 @@
       "title": "Kindergeburtstage bei Movemania",
       "text": "Das Fußball-Erlebnis, das Kinder begeistert.\n\nProfessionell begleitete Geburtstage mit Spielen, Challenges und Mini-Turnieren.\nViel Bewegung, Spaß und echte Erfolgserlebnisse – ganz egal ob Anfänger oder kleiner Vereinsstar.\n\n👉 Jetzt Termin anfragen und Geburtstag sichern"
     },
-    "rent_a_coach": {
-      "title": "Rent a Coach",
-      "text": "Mit „Rent a Coach“ können Vereine oder Mannschaften mich zeitlich begrenzt als Coach buchen.\nIch arbeite direkt mit dem Team auf dem Platz – zu individuell abgestimmten Schwerpunkten.\nInteresse Mail an: movemania@mail.de"
-    },
-    "trainerfortbildung": {
-      "title": "Trainerfortbildung",
-      "text": "Praxisnahe Fortbildungen zu modernem Fußballtraining.\nInteresse Mail an: movemania@mail.de"
-    },
     "beratung": {
       "title": "Beratung",
       "text": "Unterstützung für Vereine, Spieler und Eltern – von Beratung und Konzept bis zur individuellen Begleitung.",
@@ -39,6 +31,10 @@
           "text": "Unterstützung für Eltern im Fußballalltag ihrer Kinder.\nInteresse Mail an: movemania@mail.de"
         }
       ]
+    },
+    "trainerfortbildung": {
+      "title": "Trainerfortbildung",
+      "text": "Praxisnahe Fortbildungen zu modernem Fußballtraining.\nInteresse Mail an: movemania@mail.de"
     },
     "feriencamps": {
       "title": "Feriencamps",
@@ -78,6 +74,10 @@
           "link_label": "Zur Anmeldung"
         }
       ]
+    },
+    "rent_a_coach": {
+      "title": "Rent a Coach",
+      "text": "Mit „Rent a Coach“ können Vereine oder Mannschaften mich zeitlich begrenzt als Coach buchen.\nIch arbeite direkt mit dem Team auf dem Platz – zu individuell abgestimmten Schwerpunkten.\nInteresse Mail an: movemania@mail.de "
     },
     "spielnah_individual": {
       "title": "Spielnahes Individualtraining",
