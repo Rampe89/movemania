@@ -297,6 +297,17 @@ collections:
                 widget: object
                 fields: *offer_fields
 
+              # NEU: eigenständige Reiter (vor Beratung)
+              - label: Rent a Coach
+                name: rent_a_coach
+                widget: object
+                fields: *offer_fields
+
+              - label: Trainerfortbildung
+                name: trainerfortbildung
+                widget: object
+                fields: *offer_fields
+
               - label: Beratung
                 name: beratung
                 widget: object
@@ -373,6 +384,12 @@ collections:
               - { label: Bild (optional), name: image, widget: image, required: false }
               - { label: Video MP4 (optional), name: video, widget: file, required: false }
               - { label: Poster (optional), name: poster, widget: image, required: false }
+
+
+
+
+
+
 
 
 
