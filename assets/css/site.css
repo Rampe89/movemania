@@ -1347,3 +1347,22 @@ details.offerAcc[open] .offerAccIcon {
 
   .navToggleBar { transition: transform .18s ease, opacity .18s ease; }
 }
+/* ===== FIX: Offers Texte wieder linksbündig ===== */
+.offerAccBody{
+  text-align: left;
+}
+
+.offerAccBody p{
+  text-align: left;
+}
+
+/* optional: Subcards und Buttons bleiben sauber */
+.offerAccBody .subOffers,
+.offerAccBody .subCard{
+  text-align: left;
+}
+
+.offerAccBody .cardActions{
+  justify-content: flex-start; /* statt mittig */
+}
+/* ===== /FIX ===== */
