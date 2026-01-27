@@ -3,11 +3,11 @@
   "kicker": "Aktuelles & Einblicke",
   "items": [
     {
-      "title": "Titel",
-      "text": "Text",
-      "image": "assets/img/xyz.jpg",
-      "link": "https://… (optional)",
-      "link_label": "Mehr (optional)"
+      "title": "Test",
+      "text": "Das ist ein neuerText",
+      "image": "/assets/img/uploads/bild0.png",
+      "link": "www.test.de",
+      "link_label": "Testlinkbutton"
     }
   ]
 }
