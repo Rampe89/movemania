@@ -1389,7 +1389,7 @@ html, body{
 }
 /* HERO-VIDEO: wieder breit wie früher (Slider-Feeling) */
 #heroMedia {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 21 / 9;
   width: 100%;
   background: #000;        /* falls Video kurz lädt */
   overflow: hidden;
