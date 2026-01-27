@@ -1387,9 +1387,11 @@ html, body{
 .pattern::before{
   width: 100%;
 }
-@media (min-width: 1100px) {
-  .hero .wrap { max-width: 1400px; }
-  .heroInner { align-items: center; }
-  .heroInner > div:first-child { max-width: 520px; } /* Textblock */
-  #heroMedia { min-height: 520px; }                 /* Video größer */
+#heroMedia {
+  aspect-ratio: 16 / 9;
+  background: #000;
 }
+#heroMedia video {
+  object-fit: contain;
+}
+
