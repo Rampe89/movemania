@@ -927,7 +927,7 @@
         }
       }
 
-      /* HERO: nur Video (autoplay muted + Unmute-Button) */
+      /* HERO: nur Video (autoplay muted + Unmute-Button, sauber platziert) */
 function mountHeroVideo(videoSlide) {
   const heroMedia = document.getElementById("heroMedia");
   if (!heroMedia) return;
@@ -945,7 +945,7 @@ function mountHeroVideo(videoSlide) {
 
   const wrap = document.createElement("div");
   wrap.className = "slide isActive";
-  wrap.style.position = "relative"; // nötig für Button-Positionierung
+  wrap.style.position = "relative";
 
   const v = document.createElement("video");
   v.setAttribute("autoplay", "");
@@ -967,7 +967,6 @@ function mountHeroVideo(videoSlide) {
   source.type = "video/mp4";
   v.appendChild(source);
 
-  // Autoplay anstoßen (stumm sollte überall gehen)
   v.addEventListener(
     "loadedmetadata",
     () => {
@@ -978,7 +977,7 @@ function mountHeroVideo(videoSlide) {
 
   wrap.appendChild(v);
 
-  // Overlay-Text optional (wie bisher)
+  // optional Overlay-Text
   if (s?.title || s?.text) {
     const overlay = document.createElement("div");
     overlay.className = "slideOverlay";
@@ -996,15 +995,20 @@ function mountHeroVideo(videoSlide) {
     wrap.appendChild(overlay);
   }
 
-  // Unmute Button (Sound erst nach User-Click erlaubt)
+  // Unmute Button: oben rechts, kollidiert nicht mit Text
   const unmuteBtn = document.createElement("button");
   unmuteBtn.type = "button";
   unmuteBtn.className = "btn btnGhost btnAccent";
   unmuteBtn.textContent = "TON AN";
+
+  // Inline-Positionierung (robust gegen eure Overlay-Layouts)
   unmuteBtn.style.position = "absolute";
-  unmuteBtn.style.left = "16px";
-  unmuteBtn.style.bottom = "16px";
-  unmuteBtn.style.zIndex = "6";
+  unmuteBtn.style.top = "14px";
+  unmuteBtn.style.right = "14px";
+  unmuteBtn.style.zIndex = "10";
+
+  // falls euer Overlay/Poster Pointer-Events schluckt
+  unmuteBtn.style.pointerEvents = "auto";
 
   const enableSound = () => {
     v.muted = false;
@@ -1013,17 +1017,20 @@ function mountHeroVideo(videoSlide) {
     unmuteBtn.remove();
   };
 
-  unmuteBtn.addEventListener("click", enableSound);
+  unmuteBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    enableSound();
+  });
 
-  // Optional: Klick aufs Video selbst kann auch entmuten (komfortabel)
+  // optional: Klick aufs Video entmutet ebenfalls
   v.addEventListener("click", () => {
     if (v.muted) enableSound();
   });
 
   wrap.appendChild(unmuteBtn);
-
   heroMedia.appendChild(wrap);
 }
+
 
 
       /* NEWS: zeigt alle hero-slides außer Video als Karten */
