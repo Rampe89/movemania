@@ -1387,25 +1387,3 @@ html, body{
 .pattern::before{
   width: 100%;
 }
-/* =========================================================
-   EXPERIMENT: ALLES BREIT (Laptop/Desktop)
-   ========================================================= */
-
-@media (min-width: 1100px) {
-
-  /* Content-Container maximal breit */
-  .wrap {
-    max-width: none;
-    width: 100%;
-    padding-left: 48px;
-    padding-right: 48px;
-  }
-
-  /* Sections bekommen etwas mehr Luft */
-  .section {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-}
-
