@@ -1387,3 +1387,34 @@ html, body{
 .pattern::before{
   width: 100%;
 }
+/* ============================
+   HERO VIDEO: FORCE WIDE TEST
+   (überschreibt evtl. feste Höhen)
+   ============================ */
+
+#heroMedia {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+
+  /* Breite/Format erzwingen */
+  aspect-ratio: 16 / 9 !important;
+
+  overflow: hidden !important;
+  border-radius: var(--radius) !important;
+  background: #000 !important;
+}
+
+#heroMedia .slide {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+#heroMedia video {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
