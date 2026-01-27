@@ -1055,71 +1055,79 @@
         });
       }
 
-      /* NEWS: aus news.json (CMS) */
-      function mountNewsFromJson(newsData) {
-        const grid = document.getElementById("newsGrid");
-        if (!grid || !newsData) return;
+     /* NEWS: aus news.json (CMS) */
+function mountNewsFromJson(newsData) {
+  const grid = document.getElementById("newsGrid");
+  if (!grid || !newsData) return;
 
-        // Optional Headline/Kicker
-        if (newsData.title) setText("newsTitle", String(newsData.title).toUpperCase());
-        if (newsData.kicker) setText("newsKicker", String(newsData.kicker));
+  // Optional Headline / Kicker
+  if (newsData.title) setText("newsTitle", String(newsData.title).toUpperCase());
+  if (newsData.kicker) setText("newsKicker", String(newsData.kicker));
 
-        const items = Array.isArray(newsData.items) ? newsData.items : [];
-        if (!items.length) return;
+  const items = Array.isArray(newsData.items) ? newsData.items : [];
+  if (!items.length) return;
 
-        clearEl(grid);
+  clearEl(grid);
 
-        items.slice(0, 12).forEach((it) => {
-          const card = document.createElement("div");
-          card.className = "card";
+  items.slice(0, 12).forEach((it) => {
+    const card = document.createElement("div");
+    card.className = "card";
 
-          const imgUrl = safeUrl(it?.image || it?.src || "");
-          if (imgUrl) {
-            const media = document.createElement("div");
-            media.className = "offerMedia"; // Styling wiederverwenden
-            media.style.marginBottom = "12px";
-            media.style.height = "160px";
-            media.style.borderRadius = "var(--radius)";
-            media.style.overflow = "hidden";
-            media.style.border = "1px solid var(--line)";
+    /* ---------- MEDIA ---------- */
+    const imgUrl = safeUrl(it?.image || "");
+    if (imgUrl) {
+      const media = document.createElement("div");
+      media.className = "offerMedia";
+      media.style.marginBottom = "12px";
+      media.style.height = "160px";
+      media.style.borderRadius = "var(--radius)";
+      media.style.overflow = "hidden";
+      media.style.border = "1px solid var(--line)";
+      media.style.display = "block";
 
-            const img = document.createElement("img");
-            img.src = imgUrl;
-            img.alt = String(it?.title || "News");
-            img.loading = "lazy";
-            img.referrerPolicy = "no-referrer";
-            media.appendChild(img);
+      const img = document.createElement("img");
+      img.src = imgUrl;
+      img.alt = String(it?.title || "News");
+      img.loading = "lazy";
+      img.referrerPolicy = "no-referrer";
+      img.style.width = "100%";
+      img.style.height = "100%";
+      img.style.objectFit = "cover";
 
-            card.appendChild(media);
-          }
+      media.appendChild(img);
+      card.appendChild(media);
+    }
 
-          const h3 = document.createElement("h3");
-          h3.textContent = String(it?.title || "NEWS").toUpperCase();
-          card.appendChild(h3);
+    /* ---------- TITLE ---------- */
+    const h3 = document.createElement("h3");
+    h3.textContent = String(it?.title || "NEWS").toUpperCase();
+    card.appendChild(h3);
 
-          const p = document.createElement("p");
-          p.textContent = String(it?.text || it?.body || "");
-          card.appendChild(p);
+    /* ---------- TEXT ---------- */
+    const p = document.createElement("p");
+    p.textContent = String(it?.text || "");
+    card.appendChild(p);
 
-          const link = safeUrl(it?.link || "");
-          if (link) {
-            const actions = document.createElement("div");
-            actions.className = "cardActions";
+    /* ---------- LINK ---------- */
+    const link = safeUrl(it?.link || "");
+    if (link) {
+      const actions = document.createElement("div");
+      actions.className = "cardActions";
 
-            const a = document.createElement("a");
-            a.className = "btn btnGhost btnAccent";
-            a.href = link;
-            a.target = "_blank";
-            a.rel = "noopener noreferrer";
-            a.textContent = String(it?.link_label || it?.cta || "Mehr").toUpperCase();
+      const a = document.createElement("a");
+      a.className = "btn btnGhost btnAccent";
+      a.href = link;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.textContent = String(it?.link_label || "Mehr").toUpperCase();
 
-            actions.appendChild(a);
-            card.appendChild(actions);
-          }
+      actions.appendChild(a);
+      card.appendChild(actions);
+    }
 
-          grid.appendChild(card);
-        });
-      }
+    grid.appendChild(card);
+  });
+}
 
 
       function initFaq() {
