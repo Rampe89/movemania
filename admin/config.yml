@@ -42,32 +42,53 @@ collections:
           - { label: Angebote Toggle (zugeklappt), name: offers_toggle_closed, widget: string, required: false }
           - { label: Angebote Toggle (aufgeklappt), name: offers_toggle_open, widget: string, required: false }
 
-  # --- HERO SLIDER ---
+  # --- HERO (NUR VIDEO) ---
   - name: hero
-    label: Hero Slider
+    label: Hero (Video)
     files:
       - file: assets/content/hero.json
-        label: Slides
-        name: slides
+        label: Hero Video
+        name: hero_video
         format: json
         fields:
-          - label: Slides
+          - label: Slides (max. 1 Video)
             name: slides
             widget: list
+            max: 1
             fields:
-              - label: Typ
-                name: type
-                widget: select
-                options: [video, image]
+              # Typ fest auf Video (kein Select mehr)
+              - { label: Typ, name: type, widget: hidden, default: "video" }
 
-              - label: Quelle (src)
+              - label: Video Datei (MP4)
                 name: src
                 widget: file
 
-              - { label: Poster (nur Video), name: poster, widget: image, required: false }
+              - { label: Poster (optional), name: poster, widget: image, required: false }
+              - { label: Titel (optional), name: title, widget: string, required: false }
+              - { label: Text (optional), name: text, widget: text, required: false }
 
-              - { label: Titel, name: title, widget: string, required: false }
+  # --- NEWS (NEU) ---
+  - name: news
+    label: News
+    files:
+      - file: assets/content/news.json
+        label: News (Startseite)
+        name: news
+        format: json
+        fields:
+          - { label: Bereichstitel, name: title, widget: string, required: false, default: "NEWS" }
+          - { label: Kicker, name: kicker, widget: string, required: false, default: "Aktuelles & Einblicke" }
+          - label: Items
+            name: items
+            widget: list
+            required: false
+            summary: "{{fields.title}}"
+            fields:
+              - { label: Titel, name: title, widget: string }
               - { label: Text, name: text, widget: text, required: false }
+              - { label: Bild (optional), name: image, widget: image, required: false }
+              - { label: Link (optional), name: link, widget: string, required: false }
+              - { label: Link Label (optional), name: link_label, widget: string, required: false }
 
   # --- WERTE (values.json -> items) ---
   - name: values
