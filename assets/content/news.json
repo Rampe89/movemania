@@ -1,0 +1,13 @@
+{
+  "title": "NEWS",
+  "kicker": "Aktuelles & Einblicke",
+  "items": [
+    {
+      "title": "Titel",
+      "text": "Text",
+      "image": "assets/img/xyz.jpg",
+      "link": "https://… (optional)",
+      "link_label": "Mehr (optional)"
+    }
+  ]
+}
