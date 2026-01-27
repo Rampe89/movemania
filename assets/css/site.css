@@ -1387,3 +1387,24 @@ html, body{
 .pattern::before{
   width: 100%;
 }
+/* =========================================================
+   LAYOUT TUNING – Laptop-first
+   ========================================================= */
+
+/* Allgemeiner Content etwas breiter */
+:root {
+  --max: 1280px; /* falls ihr mit CSS-Variable arbeitet */
+}
+
+/* Hero darf etwas breiter sein als der Rest */
+.hero .wrap {
+  max-width: 1400px;
+}
+
+/* Auf sehr breiten Screens etwas mehr Luft */
+@media (min-width: 1600px) {
+  .section {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
