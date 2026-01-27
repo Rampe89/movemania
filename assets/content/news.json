@@ -3,11 +3,26 @@
   "kicker": "Aktuelles & Einblicke",
   "items": [
     {
-      "title": "Test",
-      "text": "Das ist ein neuerText",
+      "title": "Movemania sponsert Regenjacken.",
+      "text": "Glückliche Kinderaugen! Wir sponsern die G-Jugend des FC Pfeil Broistedt.",
       "image": "/assets/img/uploads/bild0.png",
       "link": "www.test.de",
       "link_label": "Testlinkbutton"
+    },
+    {
+      "image": "/assets/img/uploads/edeka-rickel-sponsor.jpg",
+      "title": "Hauptsponsor - Edeka Rickel",
+      "text": "Edeka Rickel sponsert die Trainerbekleidung bis 2027. Stellt jährlich 10 Stipendien zur Verfügung und versorgt die Kinder bei den Camps mit Wasser, Obst und Gemüse. Das ist Einsatz und Leidenschaft für die Kinder unserer Region. Wir sagen vielen herzlichen Dank."
+    },
+    {
+      "title": "Fußball Spezialist ist Ausrüster und Sponsor ",
+      "text": "Unser starker Partner Fußball Spezialist Braunschweig, rüstet uns mit Kleidung aus und sponsert für das Ostercamp Trikot und für jeden Teilnehmer einen 20% Gutschein. Vielen Dank! ",
+      "image": "/assets/img/uploads/bild2.png"
+    },
+    {
+      "title": "Aloha Sportclub ist Kooperationspartner",
+      "text": "Der Aloha Sportclub ist unser Partner und ermöglicht uns auch bei schlechtem Wetter Kurse und Camps anzubieten. Vielen Dank.",
+      "image": "/assets/img/uploads/bild1.png"
     }
   ]
 }
