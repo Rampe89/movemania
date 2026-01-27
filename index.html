@@ -927,7 +927,7 @@
         }
       }
 
-      /* HERO: nur Video (autoplay muted + Unmute-Button, sauber platziert) */
+      /* HERO: nur Video (autoplay muted + Unmute-Button, full-bleed cover) */
 function mountHeroVideo(videoSlide) {
   const heroMedia = document.getElementById("heroMedia");
   if (!heroMedia) return;
@@ -946,6 +946,8 @@ function mountHeroVideo(videoSlide) {
   const wrap = document.createElement("div");
   wrap.className = "slide isActive";
   wrap.style.position = "relative";
+  wrap.style.width = "100%";
+  wrap.style.height = "100%";
 
   const v = document.createElement("video");
   v.setAttribute("autoplay", "");
@@ -958,6 +960,13 @@ function mountHeroVideo(videoSlide) {
   v.muted = true;
   v.playsInline = true;
   v.preload = "metadata";
+
+  // 🔥 WICHTIG: full-bleed cover => kein schwarzer Balken
+  v.style.width = "100%";
+  v.style.height = "100%";
+  v.style.display = "block";
+  v.style.objectFit = "cover";
+  v.style.objectPosition = "center";
 
   const poster = safeUrl(s?.poster || "");
   if (poster) v.poster = poster;
@@ -995,19 +1004,15 @@ function mountHeroVideo(videoSlide) {
     wrap.appendChild(overlay);
   }
 
-  // Unmute Button: oben rechts, kollidiert nicht mit Text
+  // Unmute Button: oben rechts
   const unmuteBtn = document.createElement("button");
   unmuteBtn.type = "button";
   unmuteBtn.className = "btn btnGhost btnAccent";
   unmuteBtn.textContent = "TON AN";
-
-  // Inline-Positionierung (robust gegen eure Overlay-Layouts)
   unmuteBtn.style.position = "absolute";
   unmuteBtn.style.top = "14px";
   unmuteBtn.style.right = "14px";
   unmuteBtn.style.zIndex = "10";
-
-  // falls euer Overlay/Poster Pointer-Events schluckt
   unmuteBtn.style.pointerEvents = "auto";
 
   const enableSound = () => {
@@ -1022,7 +1027,6 @@ function mountHeroVideo(videoSlide) {
     enableSound();
   });
 
-  // optional: Klick aufs Video entmutet ebenfalls
   v.addEventListener("click", () => {
     if (v.muted) enableSound();
   });
@@ -1030,6 +1034,7 @@ function mountHeroVideo(videoSlide) {
   wrap.appendChild(unmuteBtn);
   heroMedia.appendChild(wrap);
 }
+
 
 
 
