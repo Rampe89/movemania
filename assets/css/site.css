@@ -1387,18 +1387,4 @@ html, body{
 .pattern::before{
   width: 100%;
 }
-/* =========================================================
-   HERO VIDEO – breiter als Content
-   ========================================================= */
 
-.hero .mediaFrame {
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-}
-
-@media (max-width: 1024px) {
-  .hero .mediaFrame {
-    width: 100%;
-    margin-left: 0;
-  }
-}
