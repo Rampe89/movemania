@@ -927,7 +927,7 @@
         }
       }
 
-      /* HERO: nur Video (autoplay muted + Unmute-Button, full-bleed cover) */
+     /* HERO: nur Video (autoplay muted + Sound Toggle, full-bleed cover) */
 function mountHeroVideo(videoSlide) {
   const heroMedia = document.getElementById("heroMedia");
   if (!heroMedia) return;
@@ -957,11 +957,11 @@ function mountHeroVideo(videoSlide) {
 
   v.autoplay = true;
   v.loop = true;
-  v.muted = true;
+  v.muted = true;          // startet stumm (Autoplay-safe)
   v.playsInline = true;
   v.preload = "metadata";
 
-  // 🔥 WICHTIG: full-bleed cover => kein schwarzer Balken
+  // Full-bleed cover => kein schwarzer Balken
   v.style.width = "100%";
   v.style.height = "100%";
   v.style.display = "block";
@@ -986,7 +986,7 @@ function mountHeroVideo(videoSlide) {
 
   wrap.appendChild(v);
 
-  // optional Overlay-Text
+  // Overlay-Text: unverändert wie zuvor (damit unten nix "anders" wird)
   if (s?.title || s?.text) {
     const overlay = document.createElement("div");
     overlay.className = "slideOverlay";
@@ -1004,38 +1004,43 @@ function mountHeroVideo(videoSlide) {
     wrap.appendChild(overlay);
   }
 
-  // Unmute Button: oben rechts
-  const unmuteBtn = document.createElement("button");
-  unmuteBtn.type = "button";
-  unmuteBtn.className = "btn btnGhost btnAccent";
-  unmuteBtn.textContent = "TON AN";
-  unmuteBtn.style.position = "absolute";
-  unmuteBtn.style.top = "14px";
-  unmuteBtn.style.right = "14px";
-  unmuteBtn.style.zIndex = "10";
-  unmuteBtn.style.pointerEvents = "auto";
+  // Sound Toggle Button (bleibt sichtbar)
+  const soundBtn = document.createElement("button");
+  soundBtn.type = "button";
+  soundBtn.className = "btn btnGhost btnAccent";
+  soundBtn.style.position = "absolute";
+  soundBtn.style.top = "14px";
+  soundBtn.style.right = "14px";
+  soundBtn.style.zIndex = "10";
+  soundBtn.style.pointerEvents = "auto";
 
-  const enableSound = () => {
-    v.muted = false;
-    v.volume = 1;
-    v.play().catch(() => {});
-    unmuteBtn.remove();
+  const syncSoundLabel = () => {
+    soundBtn.textContent = v.muted ? "TON AN" : "TON AUS";
+    soundBtn.setAttribute("aria-pressed", v.muted ? "false" : "true");
   };
 
-  unmuteBtn.addEventListener("click", (e) => {
+  const toggleSound = () => {
+    // Browser brauchen für Unmute oft eine User-Geste -> kommt durch Button-Klick
+    v.muted = !v.muted;
+    if (!v.muted) v.volume = 1;
+
+    // falls Browser beim Unmute pausiert/abwürgt: play nochmal anstoßen
+    v.play().catch(() => {});
+
+    syncSoundLabel();
+  };
+
+  soundBtn.addEventListener("click", (e) => {
     e.stopPropagation();
-    enableSound();
+    toggleSound();
   });
 
-  v.addEventListener("click", () => {
-    if (v.muted) enableSound();
-  });
+  // Startzustand
+  syncSoundLabel();
 
-  wrap.appendChild(unmuteBtn);
+  wrap.appendChild(soundBtn);
   heroMedia.appendChild(wrap);
 }
-
-
 
 
       /* NEWS: zeigt alle hero-slides außer Video als Karten */
