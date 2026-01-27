@@ -1387,11 +1387,24 @@ html, body{
 .pattern::before{
   width: 100%;
 }
+/* HERO-VIDEO: wieder breit wie früher (Slider-Feeling) */
 #heroMedia {
   aspect-ratio: 16 / 9;
-  background: #000;
-}
-#heroMedia video {
-  object-fit: contain;
+  width: 100%;
+  background: #000;        /* falls Video kurz lädt */
+  overflow: hidden;
+  border-radius: var(--radius);
 }
 
+#heroMedia .slide {
+  width: 100%;
+  height: 100%;
+}
+
+#heroMedia video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
