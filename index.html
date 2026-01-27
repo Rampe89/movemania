@@ -927,74 +927,104 @@
         }
       }
 
-      /* HERO: nur Video */
-      function mountHeroVideo(videoSlide) {
-        const heroMedia = document.getElementById("heroMedia");
-        if (!heroMedia) return;
+      /* HERO: nur Video (autoplay muted + Unmute-Button) */
+function mountHeroVideo(videoSlide) {
+  const heroMedia = document.getElementById("heroMedia");
+  if (!heroMedia) return;
 
-        const fallback = {
-          type: "video",
-          src: "assets/video/hero.mp4",
-          poster: "assets/img/hero.jpg",
-          title: "Vorstellung",
-          text: "",
-        };
+  const fallback = {
+    type: "video",
+    src: "assets/video/hero.mp4",
+    poster: "assets/img/hero.jpg",
+    title: "Vorstellung",
+    text: "",
+  };
 
-        const s = videoSlide || fallback;
-        clearEl(heroMedia);
+  const s = videoSlide || fallback;
+  clearEl(heroMedia);
 
-        const wrap = document.createElement("div");
-        wrap.className = "slide isActive";
+  const wrap = document.createElement("div");
+  wrap.className = "slide isActive";
+  wrap.style.position = "relative"; // nötig für Button-Positionierung
 
-        const v = document.createElement("video");
-        v.setAttribute("autoplay", "");
-        v.setAttribute("playsinline", "");
-        v.setAttribute("loop", "");
-        v.setAttribute("muted", "");
-        v.autoplay = true;
-        v.loop = true;
-        v.muted = true;
-        v.playsInline = true;
-        v.preload = "metadata";
+  const v = document.createElement("video");
+  v.setAttribute("autoplay", "");
+  v.setAttribute("playsinline", "");
+  v.setAttribute("loop", "");
+  v.setAttribute("muted", "");
 
-        const poster = safeUrl(s?.poster || "");
-        if (poster) v.poster = poster;
+  v.autoplay = true;
+  v.loop = true;
+  v.muted = true;
+  v.playsInline = true;
+  v.preload = "metadata";
 
-        const source = document.createElement("source");
-        source.src = safeUrl(s?.src || "") || "assets/video/hero.mp4";
-        source.type = "video/mp4";
-        v.appendChild(source);
+  const poster = safeUrl(s?.poster || "");
+  if (poster) v.poster = poster;
 
-        v.addEventListener(
-          "loadedmetadata",
-          () => {
-            v.play().catch(() => {});
-          },
-          { once: true }
-        );
+  const source = document.createElement("source");
+  source.src = safeUrl(s?.src || "") || "assets/video/hero.mp4";
+  source.type = "video/mp4";
+  v.appendChild(source);
 
-        wrap.appendChild(v);
+  // Autoplay anstoßen (stumm sollte überall gehen)
+  v.addEventListener(
+    "loadedmetadata",
+    () => {
+      v.play().catch(() => {});
+    },
+    { once: true }
+  );
 
-        // optional Overlay-Text (kannst du später per CSS ausblenden, wenn du willst)
-        if (s?.title || s?.text) {
-          const overlay = document.createElement("div");
-          overlay.className = "slideOverlay";
+  wrap.appendChild(v);
 
-          const b = document.createElement("b");
-          b.textContent = String(s?.title || "").toUpperCase();
-          overlay.appendChild(b);
+  // Overlay-Text optional (wie bisher)
+  if (s?.title || s?.text) {
+    const overlay = document.createElement("div");
+    overlay.className = "slideOverlay";
 
-          if (s?.text) {
-            const p = document.createElement("p");
-            p.textContent = String(s?.text || "");
-            overlay.appendChild(p);
-          }
+    const b = document.createElement("b");
+    b.textContent = String(s?.title || "").toUpperCase();
+    overlay.appendChild(b);
 
-          wrap.appendChild(overlay);
-        }
+    if (s?.text) {
+      const p = document.createElement("p");
+      p.textContent = String(s?.text || "");
+      overlay.appendChild(p);
+    }
 
-        heroMedia.appendChild(wrap);
-      }
+    wrap.appendChild(overlay);
+  }
+
+  // Unmute Button (Sound erst nach User-Click erlaubt)
+  const unmuteBtn = document.createElement("button");
+  unmuteBtn.type = "button";
+  unmuteBtn.className = "btn btnGhost btnAccent";
+  unmuteBtn.textContent = "TON AN";
+  unmuteBtn.style.position = "absolute";
+  unmuteBtn.style.left = "16px";
+  unmuteBtn.style.bottom = "16px";
+  unmuteBtn.style.zIndex = "6";
+
+  const enableSound = () => {
+    v.muted = false;
+    v.volume = 1;
+    v.play().catch(() => {});
+    unmuteBtn.remove();
+  };
+
+  unmuteBtn.addEventListener("click", enableSound);
+
+  // Optional: Klick aufs Video selbst kann auch entmuten (komfortabel)
+  v.addEventListener("click", () => {
+    if (v.muted) enableSound();
+  });
+
+  wrap.appendChild(unmuteBtn);
+
+  heroMedia.appendChild(wrap);
+}
+
 
       /* NEWS: zeigt alle hero-slides außer Video als Karten */
       function mountNewsFromSlides(slides) {
