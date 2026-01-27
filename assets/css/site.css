@@ -1366,3 +1366,54 @@ details.offerAcc[open] .offerAccIcon {
   justify-content: flex-start; /* statt mittig */
 }
 /* ===== /FIX ===== */
+/* ===== MOBILE: Horizontalen Overflow killen (gegen "Rand" & Wackeln) ===== */
+html, body{
+  width: 100%;
+  overflow-x: hidden; /* iOS/Chrome safe */
+}
+
+/* Noch robuster (falls irgendein Child minimal übersteht) */
+@supports (overflow: clip){
+  html, body{ overflow-x: clip; }
+}
+
+/* Slider/UI darf niemals rausstehen */
+.mediaFrame,
+.sliderUi,
+.dots{
+  max-width: 100%;
+}
+/* ===== /MOBILE OVERFLOW FIX ===== */
+.pattern::before{
+  width: 100%;
+}
+/* ===== HERO SLIDER: Overlay lesbarer ===== */
+.slideOverlay{
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,.78) 0%,
+    rgba(0,0,0,.45) 45%,
+    rgba(0,0,0,0) 100%
+  );
+}
+
+.slideOverlay b,
+.slideOverlay p{
+  text-shadow: 0 2px 10px rgba(0,0,0,.65);
+}
+
+/* Optional: kleines "Glas"-Panel nur hinter Text */
+.slideOverlay b,
+.slideOverlay p{
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: rgba(0,0,0,.25);
+  backdrop-filter: blur(4px);
+}
+/* ===== /HERO SLIDER ===== */
+/* Optional: Hero Bilder/Videos füllend (weniger schwarze Balken) */
+.slide video,
+.slide img{
+  object-fit: cover;
+}
