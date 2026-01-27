@@ -1418,27 +1418,16 @@ html, body{
   object-fit: cover !important;
   object-position: center !important;
 }
-/* =========================================================
-   HERO: Video größer (Laptop/Desktop)
-   ========================================================= */
 @media (min-width: 1100px) {
-
-  /* Falls heroInner ein Grid ist: Video-Spalte größer machen */
   .heroInner {
-    grid-template-columns: 0.9fr 1.6fr !important; /* Text : Video */
+    display: flex !important;
     gap: 48px !important;
     align-items: center !important;
   }
+  .heroInner > div:first-child { flex: 0 0 38% !important; }
+  .heroInner > #heroMedia       { flex: 1 1 62% !important; }
 
-  /* Video-Frame größer/hoher machen */
-  #heroMedia {
-    height: clamp(420px, 36vw, 620px) !important;
-  }
-
-  /* Video füllt den Frame vollständig */
-  #heroMedia video {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-  }
+  #heroMedia { height: clamp(420px, 36vw, 620px) !important; }
+  #heroMedia video { width: 100% !important; height: 100% !important; object-fit: cover !important; }
 }
+
