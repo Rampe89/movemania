@@ -118,13 +118,5 @@
       "accordions": []
     }
   },
-  "extras": [
-    {
-      "order": 13,
-      "title": "Das ist ein Test",
-      "text": "Test",
-      "link": "www.test.de",
-      "link_label": "testlink"
-    }
-  ]
+  "extras": []
 }
