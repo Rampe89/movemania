@@ -1219,10 +1219,18 @@ function mountHeroVideo(videoSlide) {
     render();
   };
 
-  overlay.addEventListener("click", (e) => { if (e.target === overlay) close(); });
-  btnClose.addEventListener("click", (e) => { e.stopPropagation(); close(); });
-  btnPrev.addEventListener("click", (e) => { e.stopPropagation(); prev(); });
-  btnNext.addEventListener("click", (e) => { e.stopPropagation(); next(); });
+  // Robust: Event Delegation (Buttons + Backdrop) über ein einziges Handler
+overlay.addEventListener("click", (e) => {
+  const t = e.target;
+
+  if (t.closest("#mmLbClose")) { close(); return; }
+  if (t.closest("#mmLbPrev"))  { prev();  return; }
+  if (t.closest("#mmLbNext"))  { next();  return; }
+
+  // Klick irgendwo sonst im Overlay (Bild/Stage/Backdrop) => schließen
+  close();
+});
+
 
   document.addEventListener("keydown", (e) => {
     if (!overlay.classList.contains("isOpen")) return;
