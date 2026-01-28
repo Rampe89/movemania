@@ -1451,8 +1451,9 @@ body.mmLbOpen{
   justify-content: space-between;
   align-items:center;
   gap: 10px;
-  pointer-events:none;
+  pointer-events:auto; /* <-- wichtig: Buttons klickbar */
 }
+
 
 .mmLbCap{
   pointer-events:none;
