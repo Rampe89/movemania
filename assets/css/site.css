@@ -1487,3 +1487,6 @@ body.mmLbOpen{
 .mmLbBtn:active{
   transform: translateY(1px);
 }
+.mmLbTop{ z-index: 2; }
+.mmLbStage{ z-index: 1; }
+.mmLbBtns, .mmLbBtn{ pointer-events: auto !important; }
