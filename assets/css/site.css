@@ -898,7 +898,7 @@ footer{
   position:relative;
 }
 footer::after{
-  content:"by 63157";
+  content:"made by 63157";
   position:absolute;
   right:20px;
   bottom:16px;
