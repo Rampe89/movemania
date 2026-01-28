@@ -1148,7 +1148,7 @@ function mountHeroVideo(videoSlide) {
       }
 
 /* ---------------------------
-   News Lightbox (stabil)
+   News Lightbox (stabil, robust)
    --------------------------- */
 (function initNewsLightboxOnce(){
   if (window.__mmNewsLb) return;
@@ -1161,9 +1161,9 @@ function mountHeroVideo(videoSlide) {
     <div class="mmLbTop">
       <div class="mmLbCap" id="mmLbCap"></div>
       <div class="mmLbBtns">
-        <button class="mmLbBtn" type="button" id="mmLbPrev">◀</button>
-        <button class="mmLbBtn" type="button" id="mmLbNext">▶</button>
-        <button class="mmLbBtn" type="button" id="mmLbClose">✕</button>
+        <button class="mmLbBtn" type="button" id="mmLbPrev" aria-label="Vorheriges Bild">◀</button>
+        <button class="mmLbBtn" type="button" id="mmLbNext" aria-label="Nächstes Bild">▶</button>
+        <button class="mmLbBtn" type="button" id="mmLbClose" aria-label="Schließen">✕</button>
       </div>
     </div>
     <div class="mmLbStage">
@@ -1172,11 +1172,11 @@ function mountHeroVideo(videoSlide) {
   `;
   document.body.appendChild(overlay);
 
-  const imgEl  = overlay.querySelector("#mmLbImg");
-  const capEl  = overlay.querySelector("#mmLbCap");
-  const prevEl = overlay.querySelector("#mmLbPrev");
-  const nextEl = overlay.querySelector("#mmLbNext");
-  const closeEl= overlay.querySelector("#mmLbClose");
+  const imgEl   = overlay.querySelector("#mmLbImg");
+  const capEl   = overlay.querySelector("#mmLbCap");
+  const prevEl  = overlay.querySelector("#mmLbPrev");
+  const nextEl  = overlay.querySelector("#mmLbNext");
+  const closeEl = overlay.querySelector("#mmLbClose");
 
   function render(){
     const it = state.items[state.index];
@@ -1184,6 +1184,7 @@ function mountHeroVideo(videoSlide) {
     imgEl.src = it.src;
     imgEl.alt = it.alt || "Bild";
     capEl.textContent = it.cap || "";
+
     const multi = state.items.length > 1;
     prevEl.style.display = multi ? "inline-block" : "none";
     nextEl.style.display = multi ? "inline-block" : "none";
@@ -1215,15 +1216,37 @@ function mountHeroVideo(videoSlide) {
     render();
   }
 
-  // Buttons: hart verdrahtet (kein event delegation)
-  prevEl.addEventListener("click", (e) => { e.stopPropagation(); prev(); });
-  nextEl.addEventListener("click", (e) => { e.stopPropagation(); next(); });
-  closeEl.addEventListener("click",(e) => { e.stopPropagation(); close(); });
+  // Buttons: bombensicher (verhindert Overlay-Click + andere Handler)
+  prevEl.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+    prev();
+  });
 
-  // Klick außerhalb Bild/Buttons schließt
+  nextEl.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+    next();
+  });
+
+  closeEl.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+    close();
+  });
+
+  // Overlay click: schließt NUR wenn nicht auf Buttons/Bild geklickt wurde
   overlay.addEventListener("click", (e) => {
-    if (e.target.closest(".mmLbBtns")) return;
-    if (e.target === imgEl) return;     // Klick auf Bild schließt NICHT
+    // Klick auf Buttons/Buttons-Container => NICHT schließen
+    if (e.target.closest("#mmLbPrev") || e.target.closest("#mmLbNext") || e.target.closest("#mmLbClose") || e.target.closest(".mmLbBtns")) {
+      return;
+    }
+    // Klick direkt aufs Bild => NICHT schließen
+    if (e.target === imgEl) return;
+
     close();
   });
 
@@ -1244,19 +1267,22 @@ function mountHeroVideo(videoSlide) {
   imgEl.addEventListener("touchend", (e) => {
     if (!overlay.classList.contains("isOpen")) return;
     if (state.startX === null) return;
+
     const endX = e.changedTouches?.[0]?.clientX ?? null;
     if (endX === null) return;
+
     const dx = endX - state.startX;
     state.startX = null;
+
     if (Math.abs(dx) < 40) return;
     if (dx > 0) prev(); else next();
-  });
+  }, { passive: true });
 
-  window.__mmNewsLb = { setItems: (items) => { state.items = items || []; }, openAt };
+  window.__mmNewsLb = {
+    setItems: (items) => { state.items = Array.isArray(items) ? items : []; },
+    openAt
+  };
 })();
-
-
-
       
 /* NEWS: aus news.json (CMS) */
 function mountNewsFromJson(newsData) {
