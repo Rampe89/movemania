@@ -1387,3 +1387,102 @@ html, body{
 .pattern::before{
   width: 100%;
 }
+/* =========================================================
+   NEWS Lightbox (nur für News-Bilder)
+   ========================================================= */
+
+.mmLbThumbBtn{
+  all: unset;
+  display:block;
+  width:100%;
+  height:100%;
+  cursor: zoom-in;
+}
+
+.mmLbThumbBtn:focus-visible{
+  outline: 3px solid rgba(11,16,32,.25);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+.mmLbOverlay{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  background: rgba(0,0,0,.82);
+  -webkit-tap-highlight-color: transparent;
+}
+
+body.mmLbOpen{
+  overflow: hidden;
+}
+
+.mmLbOverlay.isOpen{
+  display: block;
+}
+
+.mmLbStage{
+  position:absolute;
+  inset: 0;
+  display:grid;
+  place-items:center;
+  padding: 18px;
+}
+
+.mmLbImg{
+  max-width: min(100vw - 24px, 1200px);
+  max-height: min(100vh - 120px, 900px);
+  width:auto;
+  height:auto;
+  object-fit: contain;
+  border-radius: 16px;
+  background: rgba(255,255,255,.04);
+  box-shadow: 0 14px 40px rgba(0,0,0,.35);
+  touch-action: pan-y;
+}
+
+.mmLbTop{
+  position:absolute;
+  top: 14px;
+  left: 14px;
+  right: 14px;
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  gap: 10px;
+  pointer-events:none;
+}
+
+.mmLbCap{
+  pointer-events:none;
+  color: rgba(255,255,255,.9);
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.mmLbBtns{
+  display:flex;
+  gap: 10px;
+  pointer-events:auto;
+}
+
+.mmLbBtn{
+  appearance:none;
+  border:1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.08);
+  color:#fff;
+  padding: 10px 12px;
+  border-radius: 999px;
+  cursor:pointer;
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.mmLbBtn:active{
+  transform: translateY(1px);
+}
