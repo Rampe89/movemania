@@ -1340,22 +1340,24 @@ function mountNewsFromJson(newsData) {
   });
 
   /* ---- Lightbox wiring (nur News) ---- */
-const thumbs = Array.from(grid.querySelectorAll(".mmLbThumbBtn img"));
-const lbItems = thumbs.map((img) => ({ src: img.src, alt: img.alt, cap: img.alt }));
+  const thumbs = Array.from(grid.querySelectorAll(".mmLbThumbBtn img"));
+  const lbItems = thumbs.map((img) => ({ src: img.src, alt: img.alt, cap: img.alt }));
 
-if (window.__mmNewsLb && lbItems.length) {
-  window.__mmNewsLb.setItems(lbItems);
+  if (window.__mmNewsLb && lbItems.length) {
+    window.__mmNewsLb.setItems(lbItems);
 
-  thumbs.forEach((img, idx) => {
-    const btn = img.closest(".mmLbThumbBtn");
-    if (!btn) return;
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      window.__mmNewsLb.openAt(idx);
+    thumbs.forEach((img, idx) => {
+      const btn = img.closest(".mmLbThumbBtn");
+      if (!btn) return;
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        window.__mmNewsLb.openAt(idx);
+      });
     });
-  });
+  }
 }
+
 
 
       function initFaq() {
