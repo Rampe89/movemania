@@ -1146,6 +1146,126 @@ function mountHeroVideo(videoSlide) {
           grid.appendChild(card);
         });
       }
+      /* ---------------------------
+   NEWS Lightbox (click + swipe)
+   --------------------------- */
+(function initNewsLightboxOnce(){
+  if (window.__mmNewsLb) return;
+
+  const state = {
+    items: [],   // {src, alt, cap}
+    index: 0,
+    startX: null
+  };
+
+  const overlay = document.createElement("div");
+  overlay.className = "mmLbOverlay";
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-modal", "true");
+  overlay.setAttribute("aria-label", "Bild vergrößert");
+
+  overlay.innerHTML = `
+    <div class="mmLbTop">
+      <div class="mmLbCap" id="mmLbCap"></div>
+      <div class="mmLbBtns">
+        <button class="mmLbBtn" type="button" id="mmLbPrev" aria-label="Vorheriges Bild">◀</button>
+        <button class="mmLbBtn" type="button" id="mmLbNext" aria-label="Nächstes Bild">▶</button>
+        <button class="mmLbBtn" type="button" id="mmLbClose" aria-label="Schließen">✕</button>
+      </div>
+    </div>
+    <div class="mmLbStage">
+      <img class="mmLbImg" id="mmLbImg" alt="" />
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  const imgEl = overlay.querySelector("#mmLbImg");
+  const capEl = overlay.querySelector("#mmLbCap");
+  const btnPrev = overlay.querySelector("#mmLbPrev");
+  const btnNext = overlay.querySelector("#mmLbNext");
+  const btnClose = overlay.querySelector("#mmLbClose");
+
+  const render = () => {
+    const it = state.items[state.index];
+    if (!it) return;
+    imgEl.src = it.src;
+    imgEl.alt = it.alt || "Bild";
+    capEl.textContent = it.cap || "";
+    btnPrev.style.display = state.items.length > 1 ? "inline-block" : "none";
+    btnNext.style.display = state.items.length > 1 ? "inline-block" : "none";
+  };
+
+  const openAt = (idx) => {
+    if (!state.items.length) return;
+    state.index = Math.max(0, Math.min(state.items.length - 1, idx));
+    render();
+    overlay.classList.add("isOpen");
+    document.body.classList.add("mmLbOpen");
+  };
+
+  const close = () => {
+    overlay.classList.remove("isOpen");
+    document.body.classList.remove("mmLbOpen");
+    // optional: src leeren, damit das Bild nicht “im Hintergrund” weiter lädt
+    imgEl.src = "";
+  };
+
+  const prev = () => {
+    if (state.items.length < 2) return;
+    state.index = (state.index - 1 + state.items.length) % state.items.length;
+    render();
+  };
+
+  const next = () => {
+    if (state.items.length < 2) return;
+    state.index = (state.index + 1) % state.items.length;
+    render();
+  };
+
+  // Close: click on backdrop
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) close();
+  });
+
+  btnClose.addEventListener("click", (e) => { e.stopPropagation(); close(); });
+  btnPrev.addEventListener("click", (e) => { e.stopPropagation(); prev(); });
+  btnNext.addEventListener("click", (e) => { e.stopPropagation(); next(); });
+
+  // Keyboard
+  document.addEventListener("keydown", (e) => {
+    if (!overlay.classList.contains("isOpen")) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowLeft") prev();
+    if (e.key === "ArrowRight") next();
+  });
+
+  // Swipe (touch)
+  imgEl.addEventListener("touchstart", (e) => {
+    if (!overlay.classList.contains("isOpen")) return;
+    state.startX = e.touches?.[0]?.clientX ?? null;
+  }, { passive: true });
+
+  imgEl.addEventListener("touchend", (e) => {
+    if (!overlay.classList.contains("isOpen")) return;
+    if (state.startX === null) return;
+
+    const endX = e.changedTouches?.[0]?.clientX ?? null;
+    if (endX === null) return;
+
+    const dx = endX - state.startX;
+    state.startX = null;
+
+    // Threshold
+    if (Math.abs(dx) < 40) return;
+    if (dx > 0) prev(); else next();
+  });
+
+  // Public API for your page code
+  window.__mmNewsLb = {
+    setItems(items){ state.items = Array.isArray(items) ? items : []; },
+    openAt
+  };
+})();
 
      /* NEWS: aus news.json (CMS) */
 function mountNewsFromJson(newsData) {
@@ -1165,18 +1285,24 @@ function mountNewsFromJson(newsData) {
     const card = document.createElement("div");
     card.className = "card";
 
-    /* ---------- MEDIA ---------- */
+        /* ---------- MEDIA ---------- */
     const imgUrl = safeUrl(it?.image || "");
     if (imgUrl) {
       const media = document.createElement("div");
       media.className = "offerMedia";
       media.style.marginBottom = "12px";
-      media.style.height = "220px";            // größer + weniger Crop-Gefühl
+      media.style.height = "220px";
       media.style.borderRadius = "var(--radius)";
       media.style.overflow = "hidden";
       media.style.border = "1px solid var(--line)";
       media.style.display = "block";
       media.style.background = "rgba(11,16,32,.04)";
+
+      // Button wrapper (klickbar ohne Layout zu ändern)
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "mmLbThumbBtn";
+      btn.setAttribute("aria-label", "Bild vergrößern");
 
       const img = document.createElement("img");
       img.src = imgUrl;
@@ -1185,12 +1311,14 @@ function mountNewsFromJson(newsData) {
       img.referrerPolicy = "no-referrer";
       img.style.width = "100%";
       img.style.height = "100%";
-      img.style.objectFit = "contain";         // NICHT abschneiden
+      img.style.objectFit = "contain";
       img.style.objectPosition = "center";
 
-      media.appendChild(img);
+      btn.appendChild(img);
+      media.appendChild(btn);
       card.appendChild(media);
     }
+
 
     /* ---------- TITLE ---------- */
     const h3 = document.createElement("h3");
@@ -1473,6 +1601,26 @@ function renderOfferAccordions(targetId, accordions) {
           grid.appendChild(card);
         });
       }
+        // ---- Lightbox wiring (nur News) ----
+        const thumbs = Array.from(grid.querySelectorAll(".mmLbThumbBtn img"));
+        const lbItems = thumbs.map((img) => ({
+          src: img.src,
+          alt: img.alt,
+          cap: img.alt
+        }));
+      
+        if (window.__mmNewsLb && lbItems.length) {
+          window.__mmNewsLb.setItems(lbItems);
+      
+          thumbs.forEach((img, idx) => {
+            const btn = img.closest(".mmLbThumbBtn");
+            if (!btn) return;
+            btn.addEventListener("click", (e) => {
+              e.preventDefault();
+              window.__mmNewsLb.openAt(idx);
+            });
+          });
+        }
 
       function mountSponsors(data) {
         const label = document.getElementById("sponsorsLabel");
