@@ -18,18 +18,18 @@ collections:
         format: json
         fields:
           - { label: Hero Brand, name: hero_brand, widget: string, required: false }
-          - { label: Hero Titel (HTML erlaubt, z.B. <br>), name: hero_title, widget: string, required: false }
+          - { label: "Hero Titel (HTML erlaubt, z.B. <br>)", name: hero_title, widget: string, required: false }
           - { label: Hero Text, name: hero_text, widget: text, required: false }
 
           - { label: Über uns Kicker, name: about_kicker, widget: string, required: false }
           - { label: Über uns Titel, name: about_title, widget: string, required: false }
           - { label: Headcoach Titel, name: about_head_title, widget: string, required: false }
           - { label: Headcoach Text, name: about_head_text, widget: text, required: false }
-          - { label: Headcoach Steckbrief (optional), name: about_head_profile, widget: text, required: false }
+          - { label: "Headcoach Steckbrief (optional)", name: about_head_profile, widget: text, required: false }
 
           - { label: Werte Kicker, name: usp_kicker, widget: string, required: false }
           - { label: Werte Titel, name: usp_title, widget: string, required: false }
-          - { label: Werte Ghost (Hintergrund), name: usp_ghost, widget: string, required: false }
+          - { label: "Werte Ghost (Hintergrund)", name: usp_ghost, widget: string, required: false }
 
           - { label: Kontakt Label Mail, name: contact_mail_label, widget: string, required: false }
           - { label: Kontakt Label Instagram, name: contact_ig_label, widget: string, required: false }
@@ -37,8 +37,8 @@ collections:
 
           - { label: FAQ Hinweis, name: faq_hint, widget: string, required: false }
 
-          - { label: Angebote Toggle (zugeklappt), name: offers_toggle_closed, widget: string, required: false }
-          - { label: Angebote Toggle (aufgeklappt), name: offers_toggle_open, widget: string, required: false }
+          - { label: "Angebote Toggle (zugeklappt)", name: offers_toggle_closed, widget: string, required: false }
+          - { label: "Angebote Toggle (aufgeklappt)", name: offers_toggle_open, widget: string, required: false }
 
   # --- HERO (NUR VIDEO) ---
   - name: hero
@@ -58,9 +58,9 @@ collections:
               - label: Video Datei (MP4)
                 name: src
                 widget: file
-              - { label: Poster (optional), name: poster, widget: image, required: false }
-              - { label: Titel (optional), name: title, widget: string, required: false }
-              - { label: Text (optional), name: text, widget: text, required: false }
+              - { label: "Poster (optional)", name: poster, widget: image, required: false }
+              - { label: "Titel (optional)", name: title, widget: string, required: false }
+              - { label: "Text (optional)", name: text, widget: text, required: false }
 
   # --- NEWS ---
   - name: news
@@ -81,9 +81,9 @@ collections:
             fields:
               - { label: Titel, name: title, widget: string }
               - { label: Text, name: text, widget: text, required: false }
-              - { label: Bild (optional), name: image, widget: image, required: false }
-              - { label: Link (optional), name: link, widget: string, required: false }
-              - { label: Link Label (optional), name: link_label, widget: string, required: false }
+              - { label: "Bild (optional)", name: image, widget: image, required: false }
+              - { label: "Link (optional)", name: link, widget: string, required: false }
+              - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
 
   # --- WERTE ---
   - name: values
@@ -100,8 +100,8 @@ collections:
             fields:
               - { label: Titel, name: title, widget: string }
               - { label: Text, name: text, widget: text, required: false }
-              - { label: Icon (Upload), name: icon, widget: image, required: false }
-              - { label: Icon ALT (optional), name: icon_alt, widget: string, required: false }
+              - { label: "Icon (Upload)", name: icon, widget: image, required: false }
+              - { label: "Icon ALT (optional)", name: icon_alt, widget: string, required: false }
 
   # --- LINKS ---
   - name: links
@@ -115,21 +115,21 @@ collections:
           - { label: Booking Link, name: booking, widget: string, required: false }
           - { label: Camps Link, name: camps, widget: string, required: false }
 
-          - { label: Instagram Link (URL), name: instagram, widget: string, required: false }
-          - { label: Instagram Text (z.B. @movemania_fs), name: instagram_text, widget: string, required: false }
-          - { label: Instagram Icon (Upload), name: instagram_icon, widget: image, required: false }
+          - { label: "Instagram Link (URL)", name: instagram, widget: string, required: false }
+          - { label: "Instagram Text (z.B. @movemania_fs)", name: instagram_text, widget: string, required: false }
+          - { label: "Instagram Icon (Upload)", name: instagram_icon, widget: image, required: false }
 
-          - { label: WhatsApp Link (URL), name: whatsapp, widget: string, required: false }
-          - { label: WhatsApp Text (z.B. Community & Infos), name: whatsapp_text, widget: string, required: false }
-          - { label: WhatsApp Icon (Upload), name: whatsapp_icon, widget: image, required: false }
+          - { label: "WhatsApp Link (URL)", name: whatsapp, widget: string, required: false }
+          - { label: "WhatsApp Text (z.B. Community & Infos)", name: whatsapp_text, widget: string, required: false }
+          - { label: "WhatsApp Icon (Upload)", name: whatsapp_icon, widget: image, required: false }
 
-          - { label: E-Mail (z.B. movemania@mail.de ODER mailto:...), name: mailto, widget: string, required: false }
-          - { label: E-Mail Text (z.B. movemania@mail.de), name: mail_text, widget: string, required: false }
-          - { label: Mail Icon (Upload), name: mail_icon, widget: image, required: false }
+          - { label: "E-Mail (z.B. movemania@mail.de ODER mailto:...)", name: mailto, widget: string, required: false }
+          - { label: "E-Mail Text (z.B. movemania@mail.de)", name: mail_text, widget: string, required: false }
+          - { label: "Mail Icon (Upload)", name: mail_icon, widget: image, required: false }
 
-          - { label: Shop (extern), name: shop, widget: string, required: false }
-          - { label: Hero Video MP4 (Fallback), name: hero_video_mp4, widget: string, required: false }
-          - { label: Hero Video Poster (Fallback), name: hero_video_poster, widget: string, required: false }
+          - { label: "Shop (extern)", name: shop, widget: string, required: false }
+          - { label: "Hero Video MP4 (Fallback)", name: hero_video_mp4, widget: string, required: false }
+          - { label: "Hero Video Poster (Fallback)", name: hero_video_poster, widget: string, required: false }
 
           - { label: Power 2012/13, name: power1213, widget: string, required: false }
           - { label: Power 2014/15, name: power1415, widget: string, required: false }
@@ -185,34 +185,34 @@ collections:
               - { label: Line, name: line, widget: string, required: false }
               - { label: Primary, name: primary, widget: string, required: false }
               - { label: Accent, name: accent, widget: string, required: false }
-              - { label: Card BG, name: card_bg, widget: string, required: false }
+              - { label: Card BG, name comprising: card_bg, widget: string, required: false }
               - { label: Card Border, name: card_border, widget: string, required: false }
 
           - label: Typografie
             name: type
             widget: object
             fields:
-              - { label: Body Size (px), name: body_size, widget: number, required: false, value_type: int }
-              - { label: Hero Title Max (px), name: hero_title_size, widget: number, required: false, value_type: int }
-              - { label: Section Title (px), name: section_title_size, widget: number, required: false, value_type: int }
-              - { label: Card Title (px), name: card_title_size, widget: number, required: false, value_type: int }
+              - { label: "Body Size (px)", name: body_size, widget: number, required: false, value_type: int }
+              - { label: "Hero Title Max (px)", name: hero_title_size, widget: number, required: false, value_type: int }
+              - { label: "Section Title (px)", name: section_title_size, widget: number, required: false, value_type: int }
+              - { label: "Card Title (px)", name: card_title_size, widget: number, required: false, value_type: int }
 
           - label: Layout
             name: layout
             widget: object
             fields:
-              - { label: Content Width (px), name: content_width, widget: number, required: false, value_type: int, default: 1400 }
-              - { label: Radius (px), name: radius, widget: number, required: false, value_type: int }
-              - { label: Shadow Strength (0..0.30), name: shadow_strength, widget: number, required: false, value_type: float }
+              - { label: "Content Width (px)", name: content_width, widget: number, required: false, value_type: int, default: 1400 }
+              - { label: "Radius (px)", name: radius, widget: number, required: false, value_type: int }
+              - { label: "Shadow Strength (0..0.30)", name: shadow_strength, widget: number, required: false, value_type: float }
 
           - label: Hintergrund Pattern
             name: pattern
             widget: object
             fields:
               - { label: Pattern aktiv, name: enabled, widget: boolean, default: true, required: false }
-              - { label: Dot Color (CSS, z.B. rgba(11,16,32,.075)), name: dot, widget: string, required: false }
-              - { label: Opacity (0..1), name: opacity, widget: number, required: false, value_type: float }
-              - { label: Pattern Size (px), name: size, widget: number, required: false, value_type: int }
+              - { label: "Dot Color (CSS, z.B. rgba(11,16,32,.075))", name: dot, widget: string, required: false }
+              - { label: "Opacity (0..1)", name: opacity, widget: number, required: false, value_type: float }
+              - { label: "Pattern Size (px)", name: size, widget: number, required: false, value_type: int }
 
   # --- HEADCOACH MEDIA ---
   - name: headcoach
@@ -223,11 +223,11 @@ collections:
         name: headcoach
         format: json
         fields:
-          - { label: Name (optional), name: name, widget: string, required: false }
-          - { label: Bild (optional), name: image, widget: image, required: false }
-          - { label: Video MP4 (optional), name: video, widget: string, required: false }
-          - { label: Poster (optional), name: poster, widget: string, required: false }
-          - { label: Steckbrief (optional), name: profile, widget: text, required: false }
+          - { label: "Name (optional)", name: name, widget: string, required: false }
+          - { label: "Bild (optional)", name: image, widget: image, required: false }
+          - { label: "Video MP4 (optional)", name: video, widget: string, required: false }
+          - { label: "Poster (optional)", name: poster, widget: string, required: false }
+          - { label: "Steckbrief (optional)", name: profile, widget: text, required: false }
 
   # --- COACHES ---
   - name: coaches
@@ -243,11 +243,11 @@ collections:
             widget: list
             summary: "{{fields.order}} - {{fields.name}}"
             fields:
-              - { label: Reihenfolge (1 = ganz oben), name: order, widget: number, value_type: int, required: false, min: 1 }
+              - { label: "Reihenfolge (1 = ganz oben)", name: order, widget: number, value_type: int, required: false, min: 1 }
               - { label: Name, name: name, widget: string }
-              - { label: Rolle (optional), name: role, widget: string, required: false }
-              - { label: Bio / Schwerpunkt, name: bio, widget: text, required: false }
-              - { label: Bild (optional), name: image, widget: image, required: false }
+              - { label: "Rolle (optional)", name: role, widget: string, required: false }
+              - { label: "Bio / Schwerpunkt", name: bio, widget: text, required: false }
+              - { label: "Bild (optional)", name: image, widget: image, required: false }
 
   # --- ANGEBOTE ---
   - name: offers
@@ -268,20 +268,20 @@ collections:
                 widget: object
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
-                  - { label: Bild (optional), name: image, widget: image, required: false }
+                  - { label: "Bild (optional)", name: image, widget: image, required: false }
                   - { label: Text, name: text, widget: text, required: false }
-                  - { label: Link (optional), name: link, widget: string, required: false }
-                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Unterpunkte (optional)
+                  - { label: "Link (optional)", name: link, widget: string, required: false }
+                  - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+                  - label: "Unterpunkte (optional)"
                     name: sub
                     widget: list
                     required: false
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Accordions (optional)
+                      - { label: "Link (optional)", name: link, widget: string, required: false }
+                      - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+                  - label: "Accordions (optional)"
                     name: accordions
                     widget: list
                     required: false
@@ -289,28 +289,28 @@ collections:
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                      - { label: "Link (optional)", name: link, widget: string, required: false }
+                      - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
 
               - label: Elitecamps
                 name: elitecamps
                 widget: object
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
-                  - { label: Bild (optional), name: image, widget: image, required: false }
+                  - { label: "Bild (optional)", name: image, widget: image, required: false }
                   - { label: Text, name: text, widget: text, required: false }
-                  - { label: Link (optional), name: link, widget: string, required: false }
-                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Unterpunkte (optional)
+                  - { label: "Link (optional)", name: link, widget: string, required: false }
+                  - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+                  - label: "Unterpunkte (optional)"
                     name: sub
                     widget: list
                     required: false
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Accordions (optional)
+                      - { label: "Link (optional)", name: link, widget: string, required: false }
+                      - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+                  - label: "Accordions (optional)"
                     name: accordions
                     widget: list
                     required: false
@@ -318,28 +318,28 @@ collections:
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                      - { label: "Link (optional)", name: link, widget: string, required: false }
+                      - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
 
               - label: Powerkurse
                 name: powerkurse
                 widget: object
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
-                  - { label: Bild (optional), name: image, widget: image, required: false }
+                  - { label: "Bild (optional)", name: image, widget: image, required: false }
                   - { label: Text, name: text, widget: text, required: false }
-                  - { label: Link (optional), name: link, widget: string, required: false }
-                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Unterpunkte (optional)
+                  - { label: "Link (optional)", name: link, widget: string, required: false }
+                  - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+                  - label: "Unterpunkte (optional)"
                     name: sub
                     widget: list
                     required: false
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Accordions (optional)
+                      - { label: "Link (optional)", name: link, widget: string, required: false }
+                      - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+                  - label: "Accordions (optional)"
                     name: accordions
                     widget: list
                     required: false
@@ -347,28 +347,28 @@ collections:
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                      - { label: "Link (optional)", name: link, widget: string, required: false }
+                      - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
 
               - label: Elitekurse
                 name: elitekurse
                 widget: object
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
-                  - { label: Bild (optional), name: image, widget: image, required: false }
+                  - { label: "Bild (optional)", name: image, widget: image, required: false }
                   - { label: Text, name: text, widget: text, required: false }
-                  - { label: Link (optional), name: link, widget: string, required: false }
-                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Unterpunkte (optional)
+                  - { label: "Link (optional)", name: link, widget: string, required: false }
+                  - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+                  - label: "Unterpunkte (optional)"
                     name: sub
                     widget: list
                     required: false
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Accordions (optional)
+                      - { label: "Link (optional)", name: link, widget: string, required: false }
+                      - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+                  - label: "Accordions (optional)"
                     name: accordions
                     widget: list
                     required: false
@@ -376,28 +376,28 @@ collections:
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                      - { label: "Link (optional)", name: link, widget: string, required: false }
+                      - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
 
               - label: Ballschule
                 name: ballschule
                 widget: object
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
-                  - { label: Bild (optional), name: image, widget: image, required: false }
+                  - { label: "Bild (optional)", name: image, widget: image, required: false }
                   - { label: Text, name: text, widget: text, required: false }
-                  - { label: Link (optional), name: link, widget: string, required: false }
-                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Unterpunkte (optional)
+                  - { label: "Link (optional)", name: link, widget: string, required: false }
+                  - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+                  - label: "Unterpunkte (optional)"
                     name: sub
                     widget: list
                     required: false
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Accordions (optional)
+                      - { label: "Link (optional)", name: link, widget: string, required: false }
+                      - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+                  - label: "Accordions (optional)"
                     name: accordions
                     widget: list
                     required: false
@@ -405,28 +405,28 @@ collections:
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                      - { label: "Link (optional)", name: link, widget: string, required: false }
+                      - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
 
               - label: Fußballkindergarten
                 name: kiga
                 widget: object
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
-                  - { label: Bild (optional), name: image, widget: image, required: false }
+                  - { label: "Bild (optional)", name: image, widget: image, required: false }
                   - { label: Text, name: text, widget: text, required: false }
-                  - { label: Link (optional), name: link, widget: string, required: false }
-                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Unterpunkte (optional)
+                  - { label: "Link (optional)", name: link, widget: string, required: false }
+                  - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+                  - label: "Unterpunkte (optional)"
                     name: sub
                     widget: list
                     required: false
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Accordions (optional)
+                      - { label: "Link (optional)", name: link, widget: string, required: false }
+                      - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+                  - label: "Accordions (optional)"
                     name: accordions
                     widget: list
                     required: false
@@ -434,28 +434,28 @@ collections:
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                      - { label: "Link (optional)", name: link, widget: string, required: false }
+                      - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
 
               - label: Kindergeburtstage
                 name: geburtstage
                 widget: object
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
-                  - { label: Bild (optional), name: image, widget: image, required: false }
+                  - { label: "Bild (optional)", name: image, widget: image, required: false }
                   - { label: Text, name: text, widget: text, required: false }
-                  - { label: Link (optional), name: link, widget: string, required: false }
-                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Unterpunkte (optional)
+                  - { label: "Link (optional)", name: link, widget: string, required: false }
+                  - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+                  - label: "Unterpunkte (optional)"
                     name: sub
                     widget: list
                     required: false
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Accordions (optional)
+                      - { label: "Link (optional)", name: link, widget: string, required: false }
+                      - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+                  - label: "Accordions (optional)"
                     name: accordions
                     widget: list
                     required: false
@@ -463,28 +463,28 @@ collections:
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                      - { label: "Link (optional)", name: link, widget: string, required: false }
+                      - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
 
               - label: Rent a Coach
                 name: rent_a_coach
                 widget: object
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
-                  - { label: Bild (optional), name: image, widget: image, required: false }
+                  - { label: "Bild (optional)", name: image, widget: image, required: false }
                   - { label: Text, name: text, widget: text, required: false }
-                  - { label: Link (optional), name: link, widget: string, required: false }
-                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Unterpunkte (optional)
+                  - { label: "Link (optional)", name: link, widget: string, required: false }
+                  - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+                  - label: "Unterpunkte (optional)"
                     name: sub
                     widget: list
                     required: false
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Accordions (optional)
+                      - { label: "Link (optional)", name: link, widget: string, required: false }
+                      - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+                  - label: "Accordions (optional)"
                     name: accordions
                     widget: list
                     required: false
@@ -492,28 +492,28 @@ collections:
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                      - { label: "Link (optional)", name: link, widget: string, required: false }
+                      - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
 
               - label: Trainerfortbildung
                 name: trainerfortbildung
                 widget: object
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
-                  - { label: Bild (optional), name: image, widget: image, required: false }
+                  - { label: "Bild (optional)", name: image, widget: image, required: false }
                   - { label: Text, name: text, widget: text, required: false }
-                  - { label: Link (optional), name: link, widget: string, required: false }
-                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Unterpunkte (optional)
+                  - { label: "Link (optional)", name: link, widget: string, required: false }
+                  - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+                  - label: "Unterpunkte (optional)"
                     name: sub
                     widget: list
                     required: false
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Accordions (optional)
+                      - { label: "Link (optional)", name: link, widget: string, required: false }
+                      - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+                  - label: "Accordions (optional)"
                     name: accordions
                     widget: list
                     required: false
@@ -521,28 +521,28 @@ collections:
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                      - { label: "Link (optional)", name: link, widget: string, required: false }
+                      - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
 
               - label: Beratung
                 name: beratung
                 widget: object
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
-                  - { label: Bild (optional), name: image, widget: image, required: false }
+                  - { label: "Bild (optional)", name: image, widget: image, required: false }
                   - { label: Text, name: text, widget: text, required: false }
-                  - { label: Link (optional), name: link, widget: string, required: false }
-                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Unterpunkte (optional)
+                  - { label: "Link (optional)", name: link, widget: string, required: false }
+                  - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+                  - label: "Unterpunkte (optional)"
                     name: sub
                     widget: list
                     required: false
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Accordions (optional)
+                      - { label: "Link (optional)", name: link, widget: string, required: false }
+                      - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+                  - label: "Accordions (optional)"
                     name: accordions
                     widget: list
                     required: false
@@ -550,28 +550,28 @@ collections:
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                      - { label: "Link (optional)", name: link, widget: string, required: false }
+                      - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
 
               - label: Athletiktraining
                 name: athletik
                 widget: object
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
-                  - { label: Bild (optional), name: image, widget: image, required: false }
+                  - { label: "Bild (optional)", name: image, widget: image, required: false }
                   - { label: Text, name: text, widget: text, required: false }
-                  - { label: Link (optional), name: link, widget: string, required: false }
-                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Unterpunkte (optional)
+                  - { label: "Link (optional)", name: link, widget: string, required: false }
+                  - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+                  - label: "Unterpunkte (optional)"
                     name: sub
                     widget: list
                     required: false
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Accordions (optional)
+                      - { label: "Link (optional)", name: link, widget: string, required: false }
+                      - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+                  - label: "Accordions (optional)"
                     name: accordions
                     widget: list
                     required: false
@@ -579,28 +579,28 @@ collections:
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                      - { label: "Link (optional)", name: link, widget: string, required: false }
+                      - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
 
               - label: Spielnahes Individualtraining
                 name: spielnah_individual
                 widget: object
                 fields:
                   - { label: Titel, name: title, widget: string, required: false }
-                  - { label: Bild (optional), name: image, widget: image, required: false }
+                  - { label: "Bild (optional)", name: image, widget: image, required: false }
                   - { label: Text, name: text, widget: text, required: false }
-                  - { label: Link (optional), name: link, widget: string, required: false }
-                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Unterpunkte (optional)
+                  - { label: "Link (optional)", name: link, widget: string, required: false }
+                  - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+                  - label: "Unterpunkte (optional)"
                     name: sub
                     widget: list
                     required: false
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Accordions (optional)
+                      - { label: "Link (optional)", name: link, widget: string, required: false }
+                      - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+                  - label: "Accordions (optional)"
                     name: accordions
                     widget: list
                     required: false
@@ -608,8 +608,8 @@ collections:
                     fields:
                       - { label: Titel, name: title, widget: string }
                       - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                      - { label: "Link (optional)", name: link, widget: string, required: false }
+                      - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
 
           # 2) Zusatz-Angebote (beliebig viele)
           - label: Zusatz-Angebote (dynamisch)
@@ -618,23 +618,23 @@ collections:
             required: false
             summary: "{{fields.order}} - {{fields.title}}"
             fields:
-              - { label: Reihenfolge (optional), name: order, widget: number, value_type: int, required: false }
-              - { label: ID/Slug (optional), name: id, widget: string, required: false }
+              - { label: "Reihenfolge (optional)", name: order, widget: number, value_type: int, required: false }
+              - { label: "ID/Slug (optional)", name: id, widget: string, required: false }
               - { label: Titel, name: title, widget: string }
-              - { label: Bild (optional), name: image, widget: image, required: false }
+              - { label: "Bild (optional)", name: image, widget: image, required: false }
               - { label: Text, name: text, widget: text, required: false }
-              - { label: Link (optional), name: link, widget: string, required: false }
-              - { label: Link Label (optional), name: link_label, widget: string, required: false }
-              - label: Unterpunkte (optional)
+              - { label: "Link (optional)", name: link, widget: string, required: false }
+              - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+              - label: "Unterpunkte (optional)"
                 name: sub
                 widget: list
                 required: false
                 fields:
                   - { label: Titel, name: title, widget: string }
                   - { label: Text, name: text, widget: text, required: false }
-                  - { label: Link (optional), name: link, widget: string, required: false }
-                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
-              - label: Accordions (optional)
+                  - { label: "Link (optional)", name: link, widget: string, required: false }
+                  - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+              - label: "Accordions (optional)"
                 name: accordions
                 widget: list
                 required: false
@@ -642,23 +642,8 @@ collections:
                 fields:
                   - { label: Titel, name: title, widget: string }
                   - { label: Text, name: text, widget: text, required: false }
-                  - { label: Link (optional), name: link, widget: string, required: false }
-                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
-
-
-          # NEU: Zusatz-Angebote
-          - label: Zusatz-Angebote (dynamisch)
-            name: extras
-            widget: list
-            required: false
-            summary: "{{fields.order}} - {{fields.title}}"
-            fields:
-              - { label: Reihenfolge (optional), name: order, widget: number, value_type: int, required: false }
-              - { label: Titel, name: title, widget: string }
-              - { label: Bild (optional), name: image, widget: image, required: false }
-              - { label: Text, name: text, widget: text, required: false }
-              - { label: Link (optional), name: link, widget: string, required: false }
-              - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                  - { label: "Link (optional)", name: link, widget: string, required: false }
+                  - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
 
   # --- EVENTS ---
   - name: events
@@ -675,11 +660,11 @@ collections:
             widget: list
             fields:
               - { label: Titel, name: title, widget: string }
-              - { label: Datum (optional), name: date, widget: string, required: false }
+              - { label: "Datum (optional)", name: date, widget: string, required: false }
               - { label: Text, name: text, widget: text, required: false }
-              - { label: Link Label (optional), name: link_label, widget: string, required: false }
-              - { label: Link (optional), name: link, widget: string, required: false }
-              - { label: Bild (optional), name: image, widget: image, required: false }
+              - { label: "Link Label (optional)", name: link_label, widget: string, required: false }
+              - { label: "Link (optional)", name: link, widget: string, required: false }
+              - { label: "Bild (optional)", name: image, widget: image, required: false }
 
   # --- FAQS ---
   - name: faq
@@ -691,7 +676,7 @@ collections:
         format: json
         fields:
           - { label: Titel, name: title, widget: string, required: false, default: "FAQs" }
-          - { label: Hinweis unter FAQs, name: hint, widget: string, required: false }
+          - { label: "Hinweis unter FAQs", name: hint, widget: string, required: false }
           - label: Fragen & Antworten
             name: items
             widget: list
@@ -716,12 +701,10 @@ collections:
             required: false
             fields:
               - { label: Titel, name: title, widget: string, required: false }
-              - { label: Name (optional), name: name, widget: string, required: false }
-              - { label: Text (optional), name: text, widget: text, required: false }
-              - { label: Bild (optional), name: image, widget: image, required: false }
-              - { label: Video MP4 (optional), name: video, widget: file, required: false }
-              - { label: Poster (optional), name: poster, widget: image, required: false }
-
-
+              - { label: "Name (optional)", name: name, widget: string, required: false }
+              - { label: "Text (optional)", name: text, widget: text, required: false }
+              - { label: "Bild (optional)", name: image, widget: image, required: false }
+              - { label: "Video MP4 (optional)", name: video, widget: file, required: false }
+              - { label: "Poster (optional)", name: poster, widget: image, required: false }
 
 
