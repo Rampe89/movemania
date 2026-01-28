@@ -258,8 +258,8 @@ collections:
         name: offers
         format: json
         fields:
-          # Standards (fixe 12)
-          - label: Angebote
+          # 1) Standard-Angebote (fixe 12)
+          - label: Angebote (Standard)
             name: offers
             widget: object
             fields:
@@ -272,16 +272,6 @@ collections:
                   - { label: Text, name: text, widget: text, required: false }
                   - { label: Link (optional), name: link, widget: string, required: false }
                   - { label: Link Label (optional), name: link_label, widget: string, required: false }
-                  - label: Zusätzliche Accordions (optional)
-                    name: accordions
-                    widget: list
-                    required: false
-                    summary: "{{fields.title}}"
-                    fields:
-                      - { label: Titel, name: title, widget: string }
-                      - { label: Text, name: text, widget: text, required: false }
-                      - { label: Link (optional), name: link, widget: string, required: false }
-                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
                   - label: Unterpunkte (optional)
                     name: sub
                     widget: list
@@ -291,61 +281,370 @@ collections:
                       - { label: Text, name: text, widget: text, required: false }
                       - { label: Link (optional), name: link, widget: string, required: false }
                       - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                  - label: Accordions (optional)
+                    name: accordions
+                    widget: list
+                    required: false
+                    summary: "{{fields.title}}"
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: text, required: false }
+                      - { label: Link (optional), name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
 
               - label: Elitecamps
                 name: elitecamps
                 widget: object
-                fields: [ { label: Titel, name: title, widget: string, required: false }, { label: Bild (optional), name: image, widget: image, required: false }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false }, { label: Zusätzliche Accordions (optional), name: accordions, widget: list, required: false, fields: [ { label: Titel, name: title, widget: string }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false } ] }, { label: Unterpunkte (optional), name: sub, widget: list, required: false, fields: [ { label: Titel, name: title, widget: string }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false } ] } ]
+                fields:
+                  - { label: Titel, name: title, widget: string, required: false }
+                  - { label: Bild (optional), name: image, widget: image, required: false }
+                  - { label: Text, name: text, widget: text, required: false }
+                  - { label: Link (optional), name: link, widget: string, required: false }
+                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                  - label: Unterpunkte (optional)
+                    name: sub
+                    widget: list
+                    required: false
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: text, required: false }
+                      - { label: Link (optional), name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                  - label: Accordions (optional)
+                    name: accordions
+                    widget: list
+                    required: false
+                    summary: "{{fields.title}}"
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: text, required: false }
+                      - { label: Link (optional), name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
 
               - label: Powerkurse
                 name: powerkurse
                 widget: object
-                fields: [ { label: Titel, name: title, widget: string, required: false }, { label: Bild (optional), name: image, widget: image, required: false }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false }, { label: Zusätzliche Accordions (optional), name: accordions, widget: list, required: false, fields: [ { label: Titel, name: title, widget: string }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false } ] }, { label: Unterpunkte (optional), name: sub, widget: list, required: false, fields: [ { label: Titel, name: title, widget: string }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false } ] } ]
+                fields:
+                  - { label: Titel, name: title, widget: string, required: false }
+                  - { label: Bild (optional), name: image, widget: image, required: false }
+                  - { label: Text, name: text, widget: text, required: false }
+                  - { label: Link (optional), name: link, widget: string, required: false }
+                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                  - label: Unterpunkte (optional)
+                    name: sub
+                    widget: list
+                    required: false
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: text, required: false }
+                      - { label: Link (optional), name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                  - label: Accordions (optional)
+                    name: accordions
+                    widget: list
+                    required: false
+                    summary: "{{fields.title}}"
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: text, required: false }
+                      - { label: Link (optional), name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
 
               - label: Elitekurse
                 name: elitekurse
                 widget: object
-                fields: [ { label: Titel, name: title, widget: string, required: false }, { label: Bild (optional), name: image, widget: image, required: false }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false }, { label: Zusätzliche Accordions (optional), name: accordions, widget: list, required: false, fields: [ { label: Titel, name: title, widget: string }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false } ] }, { label: Unterpunkte (optional), name: sub, widget: list, required: false, fields: [ { label: Titel, name: title, widget: string }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false } ] } ]
+                fields:
+                  - { label: Titel, name: title, widget: string, required: false }
+                  - { label: Bild (optional), name: image, widget: image, required: false }
+                  - { label: Text, name: text, widget: text, required: false }
+                  - { label: Link (optional), name: link, widget: string, required: false }
+                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                  - label: Unterpunkte (optional)
+                    name: sub
+                    widget: list
+                    required: false
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: text, required: false }
+                      - { label: Link (optional), name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                  - label: Accordions (optional)
+                    name: accordions
+                    widget: list
+                    required: false
+                    summary: "{{fields.title}}"
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: text, required: false }
+                      - { label: Link (optional), name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
 
               - label: Ballschule
                 name: ballschule
                 widget: object
-                fields: [ { label: Titel, name: title, widget: string, required: false }, { label: Bild (optional), name: image, widget: image, required: false }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false }, { label: Zusätzliche Accordions (optional), name: accordions, widget: list, required: false, fields: [ { label: Titel, name: title, widget: string }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false } ] }, { label: Unterpunkte (optional), name: sub, widget: list, required: false, fields: [ { label: Titel, name: title, widget: string }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false } ] } ]
+                fields:
+                  - { label: Titel, name: title, widget: string, required: false }
+                  - { label: Bild (optional), name: image, widget: image, required: false }
+                  - { label: Text, name: text, widget: text, required: false }
+                  - { label: Link (optional), name: link, widget: string, required: false }
+                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                  - label: Unterpunkte (optional)
+                    name: sub
+                    widget: list
+                    required: false
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: text, required: false }
+                      - { label: Link (optional), name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                  - label: Accordions (optional)
+                    name: accordions
+                    widget: list
+                    required: false
+                    summary: "{{fields.title}}"
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: text, required: false }
+                      - { label: Link (optional), name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
 
               - label: Fußballkindergarten
                 name: kiga
                 widget: object
-                fields: [ { label: Titel, name: title, widget: string, required: false }, { label: Bild (optional), name: image, widget: image, required: false }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false }, { label: Zusätzliche Accordions (optional), name: accordions, widget: list, required: false, fields: [ { label: Titel, name: title, widget: string }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false } ] }, { label: Unterpunkte (optional), name: sub, widget: list, required: false, fields: [ { label: Titel, name: title, widget: string }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false } ] } ]
+                fields:
+                  - { label: Titel, name: title, widget: string, required: false }
+                  - { label: Bild (optional), name: image, widget: image, required: false }
+                  - { label: Text, name: text, widget: text, required: false }
+                  - { label: Link (optional), name: link, widget: string, required: false }
+                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                  - label: Unterpunkte (optional)
+                    name: sub
+                    widget: list
+                    required: false
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: text, required: false }
+                      - { label: Link (optional), name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                  - label: Accordions (optional)
+                    name: accordions
+                    widget: list
+                    required: false
+                    summary: "{{fields.title}}"
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: text, required: false }
+                      - { label: Link (optional), name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
 
               - label: Kindergeburtstage
                 name: geburtstage
                 widget: object
-                fields: [ { label: Titel, name: title, widget: string, required: false }, { label: Bild (optional), name: image, widget: image, required: false }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false }, { label: Zusätzliche Accordions (optional), name: accordions, widget: list, required: false, fields: [ { label: Titel, name: title, widget: string }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false } ] }, { label: Unterpunkte (optional), name: sub, widget: list, required: false, fields: [ { label: Titel, name: title, widget: string }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false } ] } ]
+                fields:
+                  - { label: Titel, name: title, widget: string, required: false }
+                  - { label: Bild (optional), name: image, widget: image, required: false }
+                  - { label: Text, name: text, widget: text, required: false }
+                  - { label: Link (optional), name: link, widget: string, required: false }
+                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                  - label: Unterpunkte (optional)
+                    name: sub
+                    widget: list
+                    required: false
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: text, required: false }
+                      - { label: Link (optional), name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                  - label: Accordions (optional)
+                    name: accordions
+                    widget: list
+                    required: false
+                    summary: "{{fields.title}}"
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: text, required: false }
+                      - { label: Link (optional), name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
 
               - label: Rent a Coach
                 name: rent_a_coach
                 widget: object
-                fields: [ { label: Titel, name: title, widget: string, required: false }, { label: Bild (optional), name: image, widget: image, required: false }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false }, { label: Zusätzliche Accordions (optional), name: accordions, widget: list, required: false, fields: [ { label: Titel, name: title, widget: string }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false } ] }, { label: Unterpunkte (optional), name: sub, widget: list, required: false, fields: [ { label: Titel, name: title, widget: string }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false } ] } ]
+                fields:
+                  - { label: Titel, name: title, widget: string, required: false }
+                  - { label: Bild (optional), name: image, widget: image, required: false }
+                  - { label: Text, name: text, widget: text, required: false }
+                  - { label: Link (optional), name: link, widget: string, required: false }
+                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                  - label: Unterpunkte (optional)
+                    name: sub
+                    widget: list
+                    required: false
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: text, required: false }
+                      - { label: Link (optional), name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                  - label: Accordions (optional)
+                    name: accordions
+                    widget: list
+                    required: false
+                    summary: "{{fields.title}}"
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: text, required: false }
+                      - { label: Link (optional), name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
 
               - label: Trainerfortbildung
                 name: trainerfortbildung
                 widget: object
-                fields: [ { label: Titel, name: title, widget: string, required: false }, { label: Bild (optional), name: image, widget: image, required: false }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false }, { label: Zusätzliche Accordions (optional), name: accordions, widget: list, required: false, fields: [ { label: Titel, name: title, widget: string }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false } ] }, { label: Unterpunkte (optional), name: sub, widget: list, required: false, fields: [ { label: Titel, name: title, widget: string }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false } ] } ]
+                fields:
+                  - { label: Titel, name: title, widget: string, required: false }
+                  - { label: Bild (optional), name: image, widget: image, required: false }
+                  - { label: Text, name: text, widget: text, required: false }
+                  - { label: Link (optional), name: link, widget: string, required: false }
+                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                  - label: Unterpunkte (optional)
+                    name: sub
+                    widget: list
+                    required: false
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: text, required: false }
+                      - { label: Link (optional), name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                  - label: Accordions (optional)
+                    name: accordions
+                    widget: list
+                    required: false
+                    summary: "{{fields.title}}"
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: text, required: false }
+                      - { label: Link (optional), name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
 
               - label: Beratung
                 name: beratung
                 widget: object
-                fields: [ { label: Titel, name: title, widget: string, required: false }, { label: Bild (optional), name: image, widget: image, required: false }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false }, { label: Zusätzliche Accordions (optional), name: accordions, widget: list, required: false, fields: [ { label: Titel, name: title, widget: string }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false } ] }, { label: Unterpunkte (optional), name: sub, widget: list, required: false, fields: [ { label: Titel, name: title, widget: string }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false } ] } ]
+                fields:
+                  - { label: Titel, name: title, widget: string, required: false }
+                  - { label: Bild (optional), name: image, widget: image, required: false }
+                  - { label: Text, name: text, widget: text, required: false }
+                  - { label: Link (optional), name: link, widget: string, required: false }
+                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                  - label: Unterpunkte (optional)
+                    name: sub
+                    widget: list
+                    required: false
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: text, required: false }
+                      - { label: Link (optional), name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                  - label: Accordions (optional)
+                    name: accordions
+                    widget: list
+                    required: false
+                    summary: "{{fields.title}}"
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: text, required: false }
+                      - { label: Link (optional), name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
 
               - label: Athletiktraining
                 name: athletik
                 widget: object
-                fields: [ { label: Titel, name: title, widget: string, required: false }, { label: Bild (optional), name: image, widget: image, required: false }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false }, { label: Zusätzliche Accordions (optional), name: accordions, widget: list, required: false, fields: [ { label: Titel, name: title, widget: string }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false } ] }, { label: Unterpunkte (optional), name: sub, widget: list, required: false, fields: [ { label: Titel, name: title, widget: string }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false } ] } ]
+                fields:
+                  - { label: Titel, name: title, widget: string, required: false }
+                  - { label: Bild (optional), name: image, widget: image, required: false }
+                  - { label: Text, name: text, widget: text, required: false }
+                  - { label: Link (optional), name: link, widget: string, required: false }
+                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                  - label: Unterpunkte (optional)
+                    name: sub
+                    widget: list
+                    required: false
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: text, required: false }
+                      - { label: Link (optional), name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                  - label: Accordions (optional)
+                    name: accordions
+                    widget: list
+                    required: false
+                    summary: "{{fields.title}}"
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: text, required: false }
+                      - { label: Link (optional), name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
 
               - label: Spielnahes Individualtraining
                 name: spielnah_individual
                 widget: object
-                fields: [ { label: Titel, name: title, widget: string, required: false }, { label: Bild (optional), name: image, widget: image, required: false }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false }, { label: Zusätzliche Accordions (optional), name: accordions, widget: list, required: false, fields: [ { label: Titel, name: title, widget: string }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false } ] }, { label: Unterpunkte (optional), name: sub, widget: list, required: false, fields: [ { label: Titel, name: title, widget: string }, { label: Text, name: text, widget: text, required: false }, { label: Link (optional), name: link, widget: string, required: false }, { label: Link Label (optional), name: link_label, widget: string, required: false } ] } ]
+                fields:
+                  - { label: Titel, name: title, widget: string, required: false }
+                  - { label: Bild (optional), name: image, widget: image, required: false }
+                  - { label: Text, name: text, widget: text, required: false }
+                  - { label: Link (optional), name: link, widget: string, required: false }
+                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                  - label: Unterpunkte (optional)
+                    name: sub
+                    widget: list
+                    required: false
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: text, required: false }
+                      - { label: Link (optional), name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
+                  - label: Accordions (optional)
+                    name: accordions
+                    widget: list
+                    required: false
+                    summary: "{{fields.title}}"
+                    fields:
+                      - { label: Titel, name: title, widget: string }
+                      - { label: Text, name: text, widget: text, required: false }
+                      - { label: Link (optional), name: link, widget: string, required: false }
+                      - { label: Link Label (optional), name: link_label, widget: string, required: false }
+
+          # 2) Zusatz-Angebote (beliebig viele)
+          - label: Zusatz-Angebote (dynamisch)
+            name: extras
+            widget: list
+            required: false
+            summary: "{{fields.order}} - {{fields.title}}"
+            fields:
+              - { label: Reihenfolge (optional), name: order, widget: number, value_type: int, required: false }
+              - { label: ID/Slug (optional), name: id, widget: string, required: false }
+              - { label: Titel, name: title, widget: string }
+              - { label: Bild (optional), name: image, widget: image, required: false }
+              - { label: Text, name: text, widget: text, required: false }
+              - { label: Link (optional), name: link, widget: string, required: false }
+              - { label: Link Label (optional), name: link_label, widget: string, required: false }
+              - label: Unterpunkte (optional)
+                name: sub
+                widget: list
+                required: false
+                fields:
+                  - { label: Titel, name: title, widget: string }
+                  - { label: Text, name: text, widget: text, required: false }
+                  - { label: Link (optional), name: link, widget: string, required: false }
+                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
+              - label: Accordions (optional)
+                name: accordions
+                widget: list
+                required: false
+                summary: "{{fields.title}}"
+                fields:
+                  - { label: Titel, name: title, widget: string }
+                  - { label: Text, name: text, widget: text, required: false }
+                  - { label: Link (optional), name: link, widget: string, required: false }
+                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
+
 
           # NEU: Zusatz-Angebote
           - label: Zusatz-Angebote (dynamisch)
