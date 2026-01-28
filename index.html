@@ -1165,9 +1165,9 @@ function mountHeroVideo(videoSlide) {
     <div class="mmLbTop">
       <div class="mmLbCap" id="mmLbCap"></div>
       <div class="mmLbBtns">
-        <button class="mmLbBtn" type="button" id="mmLbPrev" aria-label="Vorheriges Bild">◀</button>
-        <button class="mmLbBtn" type="button" id="mmLbNext" aria-label="Nächstes Bild">▶</button>
-        <button class="mmLbBtn" type="button" id="mmLbClose" aria-label="Schließen">✕</button>
+        <button class="mmLbBtn" type="button" data-action="prev" aria-label="Vorheriges Bild">◀</button>
+        <button class="mmLbBtn" type="button" data-action="next" aria-label="Nächstes Bild">▶</button>
+        <button class="mmLbBtn" type="button" data-action="close" aria-label="Schließen">✕</button>
       </div>
     </div>
     <div class="mmLbStage">
@@ -1221,15 +1221,19 @@ function mountHeroVideo(videoSlide) {
 
   // Robust: Event Delegation (Buttons + Backdrop) über ein einziges Handler
 overlay.addEventListener("click", (e) => {
-  const t = e.target;
+  const actionEl = e.target.closest("[data-action]");
+  if (actionEl) {
+    const action = actionEl.getAttribute("data-action");
+    if (action === "close") close();
+    if (action === "prev")  prev();
+    if (action === "next")  next();
+    return; // <-- WICHTIG: nicht schließen!
+  }
 
-  if (t.closest("#mmLbClose")) { close(); return; }
-  if (t.closest("#mmLbPrev"))  { prev();  return; }
-  if (t.closest("#mmLbNext"))  { next();  return; }
-
-  // Klick irgendwo sonst im Overlay (Bild/Stage/Backdrop) => schließen
+  // Klick irgendwo sonst: schließen
   close();
 });
+
 
 
   document.addEventListener("keydown", (e) => {
