@@ -26,7 +26,6 @@ collections:
           - { label: Headcoach Titel, name: about_head_title, widget: string, required: false }
           - { label: Headcoach Text, name: about_head_text, widget: text, required: false }
 
-          # Optional: falls du den Steckbrief lieber in texts.json pflegen willst (statt headcoach.json)
           - { label: Headcoach Steckbrief (optional), name: about_head_profile, widget: text, required: false }
 
           - { label: Werte Kicker, name: usp_kicker, widget: string, required: false }
@@ -56,18 +55,15 @@ collections:
             widget: list
             max: 1
             fields:
-              # Typ fest auf Video (kein Select mehr)
               - { label: Typ, name: type, widget: hidden, default: "video" }
-
               - label: Video Datei (MP4)
                 name: src
                 widget: file
-
               - { label: Poster (optional), name: poster, widget: image, required: false }
               - { label: Titel (optional), name: title, widget: string, required: false }
               - { label: Text (optional), name: text, widget: text, required: false }
 
-  # --- NEWS (NEU) ---
+  # --- NEWS ---
   - name: news
     label: News
     files:
@@ -90,7 +86,7 @@ collections:
               - { label: Link (optional), name: link, widget: string, required: false }
               - { label: Link Label (optional), name: link_label, widget: string, required: false }
 
-  # --- WERTE (values.json -> items) ---
+  # --- WERTE ---
   - name: values
     label: Werte & Icons
     files:
@@ -206,7 +202,7 @@ collections:
             name: layout
             widget: object
             fields:
-              - { label: Content Width (px), name: content_width, widget: number, required: false, value_type: int }
+              - { label: Content Width (px), name: content_width, widget: number, required: false, value_type: int, default: 1400 }
               - { label: Radius (px), name: radius, widget: number, required: false, value_type: int }
               - { label: Shadow Strength (0..0.30), name: shadow_strength, widget: number, required: false, value_type: float }
 
@@ -232,8 +228,6 @@ collections:
           - { label: Bild (optional), name: image, widget: image, required: false }
           - { label: Video MP4 (optional), name: video, widget: string, required: false }
           - { label: Poster (optional), name: poster, widget: string, required: false }
-
-          # NEU: Steckbrief (aufklappbar)
           - { label: Steckbrief (optional), name: profile, widget: text, required: false }
 
   # --- COACHES ---
@@ -256,7 +250,7 @@ collections:
               - { label: Bio / Schwerpunkt, name: bio, widget: text, required: false }
               - { label: Bild (optional), name: image, widget: image, required: false }
 
-  # --- ANGEBOTE (FIXED: 12 EINZELNE ACCORDIONS) ---
+  # --- ANGEBOTE ---
   - name: offers
     label: Angebote
     files:
@@ -278,8 +272,6 @@ collections:
                   - { label: Text, name: text, widget: text, required: false }
                   - { label: Link (optional), name: link, widget: string, required: false }
                   - { label: Link Label (optional), name: link_label, widget: string, required: false }
-
-                  # NEU: zusätzliche Accordions (optional)
                   - label: Zusätzliche Accordions (optional)
                     name: accordions
                     widget: list
@@ -290,8 +282,6 @@ collections:
                       - { label: Text, name: text, widget: text, required: false }
                       - { label: Link (optional), name: link, widget: string, required: false }
                       - { label: Link Label (optional), name: link_label, widget: string, required: false }
-
-                  # Bestehend: Unterpunkte (optional)
                   - label: Unterpunkte (optional)
                     name: sub
                     widget: list
@@ -332,7 +322,6 @@ collections:
                 widget: object
                 fields: *offer_fields
 
-              # NEU: eigenständige Reiter (vor Beratung)
               - label: Rent a Coach
                 name: rent_a_coach
                 widget: object
@@ -357,6 +346,40 @@ collections:
                 name: spielnah_individual
                 widget: object
                 fields: *offer_fields
+
+          # NEU: Zusatz-Angebote (dynamisch, beliebig viele)
+          - label: Zusatz-Angebote (dynamisch)
+            name: extras
+            widget: list
+            required: false
+            summary: "{{fields.order}} — {{fields.title}}"
+            fields:
+              - { label: Reihenfolge (optional, z.B. 130), name: order, widget: number, value_type: int, required: false }
+              - { label: ID/Slug (optional), name: id, widget: string, required: false }
+              - { label: Titel, name: title, widget: string }
+              - { label: Bild (optional), name: image, widget: image, required: false }
+              - { label: Text, name: text, widget: text, required: false }
+              - { label: Link (optional), name: link, widget: string, required: false }
+              - { label: Link Label (optional), name: link_label, widget: string, required: false }
+              - label: Zusätzliche Accordions (optional)
+                name: accordions
+                widget: list
+                required: false
+                summary: "{{fields.title}}"
+                fields:
+                  - { label: Titel, name: title, widget: string }
+                  - { label: Text, name: text, widget: text, required: false }
+                  - { label: Link (optional), name: link, widget: string, required: false }
+                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
+              - label: Unterpunkte (optional)
+                name: sub
+                widget: list
+                required: false
+                fields:
+                  - { label: Titel, name: title, widget: string }
+                  - { label: Text, name: text, widget: text, required: false }
+                  - { label: Link (optional), name: link, widget: string, required: false }
+                  - { label: Link Label (optional), name: link_label, widget: string, required: false }
 
   # --- EVENTS ---
   - name: events
@@ -419,7 +442,6 @@ collections:
               - { label: Bild (optional), name: image, widget: image, required: false }
               - { label: Video MP4 (optional), name: video, widget: file, required: false }
               - { label: Poster (optional), name: poster, widget: image, required: false }
-
 
 
 
