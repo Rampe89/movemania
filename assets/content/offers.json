@@ -118,5 +118,14 @@
       "accordions": []
     }
   },
-  "extras": []
+  "extras": [
+    {
+      "order": 13,
+      "id": "",
+      "title": "test",
+      "text": "test",
+      "link_label": "testlink",
+      "link": "www.test.de"
+    }
+  ]
 }
