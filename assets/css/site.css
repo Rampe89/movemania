@@ -1532,4 +1532,20 @@ body.mmLbOpen{
     transform: translateZ(0);
   }
 }
+/* =========================
+   iPad/Safari: Topbar-Menü nicht abschneiden
+   ========================= */
+@supports (-webkit-touch-callout: none) {
+  /* iPads liegen oft genau in der Breite, wo's knapp wird */
+  @media (min-width: 861px) and (max-width: 1180px) {
+    .menu{
+      gap: 14px;                 /* war 22px */
+      letter-spacing: .12em;     /* war .18em */
+      font-size: 10px;           /* war 11px */
+    }
+    .menu a{
+      padding: 8px 0;            /* etwas kompakter */
+    }
+  }
+}
 
