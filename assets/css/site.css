@@ -1490,3 +1490,46 @@ body.mmLbOpen{
 .mmLbTop{ z-index: 2; }
 .mmLbStage{ z-index: 1; }
 .mmLbBtns, .mmLbBtn{ pointer-events: auto !important; }
+
+/* =========================
+   iOS/iPad Safari: Sticky + dynamic viewport crop fix
+   ========================= */
+@supports (-webkit-touch-callout: none) {
+
+  /* 1) sichere Höhe für den sichtbaren Bereich */
+  .hero{
+    /* verhindert "cropping" durch iOS-vh-bug + sticky bar */
+    min-height: 100svh;
+    min-height: 100dvh;
+    min-height: -webkit-fill-available;
+
+    /* sorgt dafür, dass der Hero nicht unter die sticky topbar rutscht */
+    scroll-margin-top: calc(76px + env(safe-area-inset-top));
+  }
+
+  /* 2) extra Abstand unter der sticky topbar (nur iOS) */
+  main#home{
+    padding-top: env(safe-area-inset-top);
+  }
+
+  /* 3) mediaFrame: iOS kommt mit aspect-ratio + min-height manchmal ins Schleudern
+        -> erzwinge eine stabile Höhe statt "min-height" */
+  .mediaFrame{
+    /* verhindert abgeschnittene Kante auf iPad */
+    height: auto;
+    min-height: 0;
+
+    /* stabile, responsive Höhe für iPad */
+    height: clamp(240px, 42vh, 520px);
+    height: clamp(240px, 42svh, 520px);
+    height: clamp(240px, 42dvh, 520px);
+  }
+
+  /* 4) falls Safari trotzdem zoomt/verschiebt */
+  .slide,
+  .slide video,
+  .slide img{
+    transform: translateZ(0);
+  }
+}
+
