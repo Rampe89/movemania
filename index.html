@@ -1716,12 +1716,16 @@ function mountNewsFromJson(newsData) {
         });
       }
 
-      function mountOffers(offersData) {
+  function mountOffers(offersData) {
   console.log("mountOffers called with:", offersData);
 
   // Robust: akzeptiert beide Strukturen (offers / offers.offers) + Notfall flat
   const offers = offersData?.offers?.offers ?? offersData?.offers ?? offersData ?? {};
   const extras = Array.isArray(offersData?.extras) ? offersData.extras : [];
+
+  /* ---------------------------
+     Helpers (lokal)
+     --------------------------- */
 
   const addOptionalLinkButton = (containerEl, link, label, cssClass) => {
     if (!containerEl) return;
@@ -1744,8 +1748,13 @@ function mountNewsFromJson(newsData) {
   const renderSubs = (subsElId, subs) => {
     const el = document.getElementById(subsElId);
     if (!el) return;
+
     const list = Array.isArray(subs) ? subs : [];
-    if (!list.length) return;
+    if (!list.length) {
+      // wenn keine Subs: Container leeren, aber nicht entfernen
+      clearEl(el);
+      return;
+    }
 
     clearEl(el);
 
@@ -1781,9 +1790,9 @@ function mountNewsFromJson(newsData) {
     });
   };
 
-  // ✅ Fix: setzt Text zuverlässig in den sichtbaren Accordion-Body
-  // - Wenn #textId existiert UND im Body liegt -> da rein
-  // - Sonst: Body leeren (Fallback weg) und Text als neues div rein
+  // ✅ Sicheres Text-Setzen: niemals den ganzen Body löschen
+  // Erwartung: <p id="...Text"> existiert im jeweiligen .offerAccBody
+  // Falls nicht: wird ein <p> nachträglich angelegt (ohne Media/Subs zu zerstören)
   const setOfferBodyText = (accId, textId, value) => {
     const body = document.querySelector(`#${accId} .offerAccBody`);
     if (!body) return;
@@ -1791,222 +1800,251 @@ function mountNewsFromJson(newsData) {
     const v = String(value || "").trim();
     if (!v) return;
 
-    const target = document.getElementById(textId);
-    if (target && body.contains(target)) {
-      setTextWithBreaks(target, v);
-      return;
+    let target = document.getElementById(textId);
+
+    // Wenn target nicht existiert ODER nicht im body liegt, lege es an (aber ohne body zu leeren)
+    if (!target || !body.contains(target)) {
+      // versuche: erstes <p> im body, ansonsten neu
+      target = body.querySelector("p") || document.createElement("p");
+      if (!target.id) target.id = textId;
+
+      // wenn das <p> noch nicht im DOM hängt: vor Subs einfügen (falls vorhanden)
+      if (!body.contains(target)) {
+        const subs = body.querySelector(".subOffers");
+        const media = body.querySelector(".offerMedia");
+        // Reihenfolge: Media -> Text -> Subs
+        if (media && media.nextSibling) {
+          body.insertBefore(target, media.nextSibling);
+        } else if (subs) {
+          body.insertBefore(target, subs);
+        } else {
+          body.appendChild(target);
+        }
+      }
     }
 
-    // Fallback sitzt oft direkt im Body -> raus damit
-    clearEl(body);
-    const div = document.createElement("div");
-    setTextWithBreaks(div, v);
-    body.appendChild(div);
+    setTextWithBreaks(target, v);
   };
 
-  // ---------- Feriencamps ----------
-  if (offers?.feriencamps) {
-    setText("offersFeriencampsTitle", offers.feriencamps.title || "Feriencamps");
-    setOfferBodyText("accFeriencamps", "offersFeriencampsText", offers.feriencamps.text);
+  // Rendert "Extra-Accordions" innerhalb des Sub-Containers (oder am Ende)
+  const renderOfferAccordions = (hostElId, accordions) => {
+    const host = document.getElementById(hostElId);
+    if (!host) return;
 
-    mountOptionalImage(
-      "offersFeriencampsMedia",
-      offers.feriencamps.image,
-      offers.feriencamps.title || "Feriencamps"
-    );
+    const list = Array.isArray(accordions) ? accordions : [];
+    if (!list.length) return;
 
-    const body = document.querySelector("#accFeriencamps .offerAccBody");
-    addOptionalLinkButton(body, offers.feriencamps.link, offers.feriencamps.link_label, "btn btnGhost");
-    renderSubs("offersFeriencampsSubs", offers.feriencamps.sub);
-    renderOfferAccordions("offersFeriencampsSubs", offers.feriencamps.accordions);
-  }
+    // NICHT clearEl(host) hier – könnte Subs enthalten.
+    // Wir hängen Extras einfach hinten dran.
+    list.slice(0, 6).forEach((a) => {
+      const d = document.createElement("details");
+      d.className = "offerExtraAcc";
 
-  // ---------- Elitecamps ----------
-  if (offers?.elitecamps) {
-    setText("offersElitecampsTitle", offers.elitecamps.title || "Elitecamps");
-    setOfferBodyText("accElitecamps", "offersElitecampsText", offers.elitecamps.text);
+      const sum = document.createElement("summary");
+      sum.innerHTML = `
+        <span>${String(a?.title || "Mehr")}</span>
+        <span class="offerExtraIcon">+</span>
+      `;
+      d.appendChild(sum);
 
-    mountOptionalImage(
-      "offersElitecampsMedia",
-      offers.elitecamps.image,
-      offers.elitecamps.title || "Elitecamps"
-    );
+      const body = document.createElement("div");
+      body.className = "offerExtraAccBody";
+      // Text mit Breaks (keine HTML-Tags zulassen)
+      setTextWithBreaks(body, String(a?.text || ""));
+      d.appendChild(body);
 
-    const body = document.querySelector("#accElitecamps .offerAccBody");
-    addOptionalLinkButton(body, offers.elitecamps.link, offers.elitecamps.link_label, "btn btnGhost");
-    renderSubs("offersElitecampsSubs", offers.elitecamps.sub);
-    renderOfferAccordions("offersElitecampsSubs", offers.elitecamps.accordions);
-  }
+      // Optional Link in Extra
+      const link = safeUrl(a?.link || "");
+      if (link) {
+        const actions = document.createElement("div");
+        actions.className = "cardActions";
+        actions.style.marginTop = "10px";
 
-  // ---------- Powerkurse ----------
-  if (offers?.powerkurse) {
-    setText("offersPowerkurseTitle", offers.powerkurse.title || "Powerkurse");
-    setOfferBodyText("accPowerkurse", "offersPowerkurseText", offers.powerkurse.text);
+        const btn = document.createElement("a");
+        btn.className = "btn btnGhost btnAccent";
+        btn.href = link;
+        btn.target = "_blank";
+        btn.rel = "noopener noreferrer";
+        btn.textContent = String(a?.link_label || "Mehr").toUpperCase();
 
-    mountOptionalImage(
-      "offersPowerkurseMedia",
-      offers.powerkurse.image,
-      offers.powerkurse.title || "Powerkurse"
-    );
+        actions.appendChild(btn);
+        body.appendChild(actions);
+      }
 
-    const body = document.querySelector("#accPowerkurse .offerAccBody");
-    addOptionalLinkButton(body, offers.powerkurse.link, offers.powerkurse.link_label, "btn btnGhost");
-    renderSubs("offersPowerkurseSubs", offers.powerkurse.sub);
-    renderOfferAccordions("offersPowerkurseSubs", offers.powerkurse.accordions);
-  }
+      // +/- Sync
+      const icon = sum.querySelector(".offerExtraIcon");
+      const sync = () => { if (icon) icon.textContent = d.open ? "–" : "+"; };
+      sync();
+      d.addEventListener("toggle", sync);
 
-  // ---------- Elitekurse ----------
-  if (offers?.elitekurse) {
-    setText("offersElitekursTitle", offers.elitekurse.title || "Elitekurse");
-    setOfferBodyText("accElitekurs", "offersElitekursText", offers.elitekurse.text);
+      host.appendChild(d);
+    });
+  };
 
-    mountOptionalImage(
-      "offersElitekursMedia",
-      offers.elitekurse.image,
-      offers.elitekurse.title || "Elitekurse"
-    );
+  // Shortcut, um ein einzelnes Offer zu mounten (macht Code sauber)
+  const mountOne = (cfg) => {
+    const {
+      key,
+      accId,
+      titleId,
+      textId,
+      mediaId,
+      subsId
+    } = cfg;
 
-    const body = document.querySelector("#accElitekurs .offerAccBody");
-    addOptionalLinkButton(body, offers.elitekurse.link, offers.elitekurse.link_label, "btn btnGhost");
-    renderSubs("offersElitekursSubs", offers.elitekurse.sub);
-    renderOfferAccordions("offersElitekursSubs", offers.elitekurse.accordions);
-  }
+    const o = offers?.[key];
+    if (!o) return;
 
-  // ---------- Athletik ----------
-  if (offers?.athletik) {
-    setText("offersAthletikTitle", offers.athletik.title || "Athletiktraining");
-    setOfferBodyText("accAthletik", "offersAthletikText", offers.athletik.text);
+    // Title
+    setText(titleId, o.title || cfg.fallbackTitle);
 
-    mountOptionalImage(
-      "offersAthletikMedia",
-      offers.athletik.image,
-      offers.athletik.title || "Athletiktraining"
-    );
+    // Text
+    setOfferBodyText(accId, textId, o.text);
 
-    const body = document.querySelector("#accAthletik .offerAccBody");
-    addOptionalLinkButton(body, offers.athletik.link, offers.athletik.link_label || "Mehr", "btn btnGhost");
-    renderSubs("offersAthletikSubs", offers.athletik.sub);
-    renderOfferAccordions("offersAthletikSubs", offers.athletik.accordions);
-  }
+    // Media
+    mountOptionalImage(mediaId, o.image, o.title || cfg.fallbackTitle);
 
-  // ---------- Spielnah Individual ----------
-  if (offers?.spielnah_individual) {
-    setText("offersSpielnahIndiTitle", offers.spielnah_individual.title || "Spielnahes Individualtraining");
-    setOfferBodyText("accSpielnahIndi", "offersSpielnahIndiText", offers.spielnah_individual.text);
+    // Link Button (in Body)
+    const body = document.querySelector(`#${accId} .offerAccBody`);
+    addOptionalLinkButton(body, o.link, o.link_label || "Mehr", "btn btnGhost");
 
-    mountOptionalImage(
-      "offersSpielnahIndiMedia",
-      offers.spielnah_individual.image,
-      offers.spielnah_individual.title || "Spielnahes Individualtraining"
-    );
+    // Subs
+    renderSubs(subsId, o.sub);
 
-    const body = document.querySelector("#accSpielnahIndi .offerAccBody");
-    addOptionalLinkButton(
-      body,
-      offers.spielnah_individual.link,
-      offers.spielnah_individual.link_label || "Mehr",
-      "btn btnGhost"
-    );
-    renderSubs("offersSpielnahIndiSubs", offers.spielnah_individual.sub);
-    renderOfferAccordions("offersSpielnahIndiSubs", offers.spielnah_individual.accordions);
-  }
+    // Extra-Accordions
+    renderOfferAccordions(subsId, o.accordions);
+  };
 
-  // ---------- Ballschule ----------
-  if (offers?.ballschule) {
-    setText("offersBallsTitle", offers.ballschule.title || "Ballschule");
-    setOfferBodyText("accBalls", "offersBallsText", offers.ballschule.text);
+  /* ---------------------------
+     Mount all offers
+     --------------------------- */
 
-    mountOptionalImage("offersBallsMedia", offers.ballschule.image, offers.ballschule.title || "Ballschule");
+  mountOne({
+    key: "feriencamps",
+    accId: "accFeriencamps",
+    titleId: "offersFeriencampsTitle",
+    textId: "offersFeriencampsText",
+    mediaId: "offersFeriencampsMedia",
+    subsId: "offersFeriencampsSubs",
+    fallbackTitle: "Feriencamps",
+  });
 
-    const body = document.querySelector("#accBalls .offerAccBody");
-    addOptionalLinkButton(
-      body,
-      offers.ballschule.link,
-      offers.ballschule.link_label || "Zur Anmeldung",
-      "btn btnGhost"
-    );
-    renderSubs("offersBallsSubs", offers.ballschule.sub);
-    renderOfferAccordions("offersBallsSubs", offers.ballschule.accordions);
-  }
+  mountOne({
+    key: "elitecamps",
+    accId: "accElitecamps",
+    titleId: "offersElitecampsTitle",
+    textId: "offersElitecampsText",
+    mediaId: "offersElitecampsMedia",
+    subsId: "offersElitecampsSubs",
+    fallbackTitle: "Elitecamps",
+  });
 
-  // ---------- Kindergarten ----------
-  if (offers?.kiga) {
-    setText("offersKigaTitle", offers.kiga.title || "Fußballkindergarten");
-    setOfferBodyText("accKiga", "offersKigaText", offers.kiga.text);
+  mountOne({
+    key: "powerkurse",
+    accId: "accPowerkurse",
+    titleId: "offersPowerkurseTitle",
+    textId: "offersPowerkurseText",
+    mediaId: "offersPowerkurseMedia",
+    subsId: "offersPowerkurseSubs",
+    fallbackTitle: "Powerkurse",
+  });
 
-    mountOptionalImage("offersKigaMedia", offers.kiga.image, offers.kiga.title || "Fußballkindergarten");
+  // Achtung: dein HTML-ID heißt accElitekurs / offersElitekursTitle
+  // JSON-Key bei dir ist elitekurse (so steht’s im bisherigen Code)
+  mountOne({
+    key: "elitekurse",
+    accId: "accElitekurs",
+    titleId: "offersElitekursTitle",
+    textId: "offersElitekursText",
+    mediaId: "offersElitekursMedia",
+    subsId: "offersElitekursSubs",
+    fallbackTitle: "Elitekurse",
+  });
 
-    const body = document.querySelector("#accKiga .offerAccBody");
-    addOptionalLinkButton(body, offers.kiga.link, offers.kiga.link_label || "Zur Anmeldung", "btn btnGhost");
-    renderSubs("offersKigaSubs", offers.kiga.sub);
-    renderOfferAccordions("offersKigaSubs", offers.kiga.accordions);
-  }
+  mountOne({
+    key: "athletik",
+    accId: "accAthletik",
+    titleId: "offersAthletikTitle",
+    textId: "offersAthletikText",
+    mediaId: "offersAthletikMedia",
+    subsId: "offersAthletikSubs",
+    fallbackTitle: "Athletiktraining",
+  });
 
-  // ---------- Geburtstage ----------
-  if (offers?.geburtstage) {
-    setText("offersBdayTitle", offers.geburtstage.title || "Kindergeburtstage");
-    setOfferBodyText("accGeburtstage", "offersBdayText", offers.geburtstage.text);
+  // JSON-Key spielnah_individual
+  mountOne({
+    key: "spielnah_individual",
+    accId: "accSpielnahIndi",
+    titleId: "offersSpielnahIndiTitle",
+    textId: "offersSpielnahIndiText",
+    mediaId: "offersSpielnahIndiMedia",
+    subsId: "offersSpielnahIndiSubs",
+    fallbackTitle: "Spielnahes Individualtraining",
+  });
 
-    mountOptionalImage(
-      "offersBdayMedia",
-      offers.geburtstage.image,
-      offers.geburtstage.title || "Kindergeburtstage"
-    );
+  mountOne({
+    key: "ballschule",
+    accId: "accBalls",
+    titleId: "offersBallsTitle",
+    textId: "offersBallsText",
+    mediaId: "offersBallsMedia",
+    subsId: "offersBallsSubs",
+    fallbackTitle: "Ballschule",
+  });
 
-    const body = document.querySelector("#accGeburtstage .offerAccBody");
-    addOptionalLinkButton(body, offers.geburtstage.link, offers.geburtstage.link_label || "Zur Anfrage", "btn btnGhost");
-    renderSubs("offersBdaySubs", offers.geburtstage.sub);
-    renderOfferAccordions("offersBdaySubs", offers.geburtstage.accordions);
-  }
+  // JSON-Key kiga
+  mountOne({
+    key: "kiga",
+    accId: "accKiga",
+    titleId: "offersKigaTitle",
+    textId: "offersKigaText",
+    mediaId: "offersKigaMedia",
+    subsId: "offersKigaSubs",
+    fallbackTitle: "Fußballkindergarten",
+  });
 
-  // ---------- Rent a Coach ----------
-  if (offers?.rent_a_coach) {
-    setText("offersRentCoachTitle", offers.rent_a_coach.title || "Rent a Coach");
-    setOfferBodyText("accRentCoach", "offersRentCoachText", offers.rent_a_coach.text);
+  mountOne({
+    key: "geburtstage",
+    accId: "accGeburtstage",
+    titleId: "offersBdayTitle",
+    textId: "offersBdayText",
+    mediaId: "offersBdayMedia",
+    subsId: "offersBdaySubs",
+    fallbackTitle: "Kindergeburtstage",
+  });
 
-    mountOptionalImage(
-      "offersRentCoachMedia",
-      offers.rent_a_coach.image,
-      offers.rent_a_coach.title || "Rent a Coach"
-    );
+  // JSON-Key rent_a_coach
+  mountOne({
+    key: "rent_a_coach",
+    accId: "accRentCoach",
+    titleId: "offersRentCoachTitle",
+    textId: "offersRentCoachText",
+    mediaId: "offersRentCoachMedia",
+    subsId: "offersRentCoachSubs",
+    fallbackTitle: "Rent a Coach",
+  });
 
-    const body = document.querySelector("#accRentCoach .offerAccBody");
-    addOptionalLinkButton(body, offers.rent_a_coach.link, offers.rent_a_coach.link_label || "Mehr", "btn btnGhost");
-    renderSubs("offersRentCoachSubs", offers.rent_a_coach.sub);
-    renderOfferAccordions("offersRentCoachSubs", offers.rent_a_coach.accordions);
-  }
+  mountOne({
+    key: "trainerfortbildung",
+    accId: "accTrainerfortbildung",
+    titleId: "offersTrainerfortbildungTitle",
+    textId: "offersTrainerfortbildungText",
+    mediaId: "offersTrainerfortbildungMedia",
+    subsId: "offersTrainerfortbildungSubs",
+    fallbackTitle: "Trainerfortbildung",
+  });
 
-  // ---------- Trainerfortbildung ----------
-  if (offers?.trainerfortbildung) {
-    setText("offersTrainerfortbildungTitle", offers.trainerfortbildung.title || "Trainerfortbildung");
-    setOfferBodyText("accTrainerfortbildung", "offersTrainerfortbildungText", offers.trainerfortbildung.text);
+  mountOne({
+    key: "beratung",
+    accId: "accBeratung",
+    titleId: "offersBeratungTitle",
+    textId: "offersBeratungText",
+    mediaId: "offersBeratungMedia",
+    subsId: "offersBeratungSubs",
+    fallbackTitle: "Beratung",
+  });
 
-    mountOptionalImage(
-      "offersTrainerfortbildungMedia",
-      offers.trainerfortbildung.image,
-      offers.trainerfortbildung.title || "Trainerfortbildung"
-    );
-
-    const body = document.querySelector("#accTrainerfortbildung .offerAccBody");
-    addOptionalLinkButton(body, offers.trainerfortbildung.link, offers.trainerfortbildung.link_label || "Mehr", "btn btnGhost");
-    renderSubs("offersTrainerfortbildungSubs", offers.trainerfortbildung.sub);
-    renderOfferAccordions("offersTrainerfortbildungSubs", offers.trainerfortbildung.accordions);
-  }
-
-  // ---------- Beratung ----------
-  if (offers?.beratung) {
-    setText("offersBeratungTitle", offers.beratung.title || "Beratung");
-    setOfferBodyText("accBeratung", "offersBeratungText", offers.beratung.text);
-
-    mountOptionalImage("offersBeratungMedia", offers.beratung.image, offers.beratung.title || "Beratung");
-
-    const body = document.querySelector("#accBeratung .offerAccBody");
-    addOptionalLinkButton(body, offers.beratung.link, offers.beratung.link_label || "Mehr", "btn btnGhost");
-    renderSubs("offersBeratungSubs", offers.beratung.sub);
-    renderOfferAccordions("offersBeratungSubs", offers.beratung.accordions);
-  }
-
-  // Icons +/– sync
+  // Icons +/– sync (Details)
   document.querySelectorAll("details.offerAcc").forEach((d) => {
     const icon = d.querySelector(".offerAccIcon");
     const sync = () => { if (icon) icon.textContent = d.open ? "–" : "+"; };
@@ -2014,9 +2052,10 @@ function mountNewsFromJson(newsData) {
     d.addEventListener("toggle", sync);
   });
 
-  // (extras bleibt vorerst ungenutzt – Daten sind aber da)
-  // console.log("extras:", extras);
+  // Debug optional
+  // console.log("offers extras:", extras);
 }
+
 
 
   function mountFaq(faqData, fallbackHint){
