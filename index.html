@@ -1715,6 +1715,7 @@ function mountNewsFromJson(newsData) {
       }
 
       function mountOffers(offersData) {
+        console.log("mountOffers called with:", offersData);
         const offers = offersData?.offers?.offers ?? offersData?.offers ?? offersData ?? {};
         const extras = Array.isArray(offersData?.extras) ? offersData.extras : [];
 
