@@ -1715,7 +1715,9 @@ function mountNewsFromJson(newsData) {
       }
 
       function mountOffers(offersData) {
-        const offers = offersData?.offers || offersData || {};
+        const offers = offersData?.offers?.offers ?? offersData?.offers ?? offersData ?? {};
+        const extras = Array.isArray(offersData?.extras) ? offersData.extras : [];
+
 
         const addOptionalLinkButton = (containerEl, link, label, cssClass) => {
           if (!containerEl) return;
