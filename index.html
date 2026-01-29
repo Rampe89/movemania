@@ -809,10 +809,12 @@
 
     <script>
       async function loadJSON(path) {
-        const res = await fetch(path, { cache: "no-store" });
+        const url = path + (path.includes("?") ? "&" : "?") + "v=" + Date.now();
+        const res = await fetch(url, { cache: "no-store" });
         if (!res.ok) throw new Error("Failed to load " + path + " (" + res.status + ")");
         return await res.json();
       }
+
 
       /* ---------------------------
          Security/Hardening Helpers
