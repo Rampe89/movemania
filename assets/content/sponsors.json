@@ -15,6 +15,11 @@
       "url": "https://www.fussballspezi.de",
       "name": "Fußball Spezialist",
       "logo": "/assets/img/uploads/bildschirmfoto-2026-01-22-um-21.00.53.png"
+    },
+    {
+      "name": "FC Pfeil Broistedt",
+      "url": "https://fcpfeil.de",
+      "logo": "/assets/img/uploads/logo-fc-pfeil-3d.png"
     }
   ]
 }
