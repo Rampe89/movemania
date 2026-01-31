@@ -2386,29 +2386,55 @@ function mountFeedbackFromJson(feedbackData) {
     if (logo.complete && logo.naturalWidth > 0) {
       logo.style.display = "block";
     } else {
-      logo.addEventListener("load", () => { logo.style.display = "block"; }, { once: true });
-      logo.addEventListener("error", () => { logo.style.display = "none"; }, { once: true });
+      logo.addEventListener(
+        "load",
+        () => {
+          logo.style.display = "block";
+        },
+        { once: true }
+      );
+      logo.addEventListener(
+        "error",
+        () => {
+          logo.style.display = "none";
+        },
+        { once: true }
+      );
     }
   }
 
   let links = {};
-  try { links = await loadJSON("assets/content/links.json"); } catch (e) {}
+  try {
+    links = await loadJSON("assets/content/links.json");
+  } catch (e) {}
 
   let texts = {};
-  try { texts = await loadJSON("assets/content/texts.json"); } catch (e) {}
+  try {
+    texts = await loadJSON("assets/content/texts.json");
+  } catch (e) {}
 
   // Hero Text (links)
   setText("heroBrand", (texts.hero_brand || "MOVEMANIA").toUpperCase());
+
   let claim = (texts.hero_title || "KINDER STÄRKEN.<br>SPIELER ENTWICKELN.").toUpperCase();
   claim = claim.replace(/^[\s\"“”„‚'«»]+|[\s\"“”„‚'«»]+$/g, "");
   setHtmlAllowBr("heroClaim", claim);
-  setText("heroText", texts.hero_text || "In unseren Camps und Kursen entwickeln Kinder Freude an Bewegung – mit Struktur, Haltung und Herz.");
+
+  setText(
+    "heroText",
+    texts.hero_text ||
+      "In unseren Camps und Kursen entwickeln Kinder Freude an Bewegung – mit Struktur, Haltung und Herz."
+  );
 
   // Hero Headline & Subline unter dem Video
-  setHtmlAllowBr("heroUnderTitle", texts.hero_title || "");
-  const underTextEl = document.getElementById("heroUnderText");
-  if (underTextEl) {
-    setTextWithBreaks(underTextEl, texts.hero_text || "");
+  try {
+    setHtmlAllowBr("heroUnderTitle", texts.hero_title || "");
+    const underTextEl = document.getElementById("heroUnderText");
+    if (underTextEl) {
+      setTextWithBreaks(underTextEl, texts.hero_text || "");
+    }
+  } catch (e) {
+    console.warn("Hero-under-media mount failed:", e);
   }
 
   // Nav / Links
@@ -2438,14 +2464,17 @@ function mountFeedbackFromJson(feedbackData) {
   setText("aboutKicker", texts.about_kicker || "Über uns");
   setText("aboutTitle", (texts.about_title || "Wer wir sind").toUpperCase());
   setText("aboutHeadTitle", (texts.about_head_title || "Vorstellung Headcoach").toUpperCase());
-  setText("aboutHeadText", texts.about_head_text || "Hier kommt eure Vorstellung (Headcoach) rein – kurz, klar, authentisch.");
+  setText(
+    "aboutHeadText",
+    texts.about_head_text || "Hier kommt eure Vorstellung (Headcoach) rein – kurz, klar, authentisch."
+  );
 
   // Optional: Headcoach Steckbrief (texts.json fallback)
   const headProfileFallback = String(texts.about_head_profile || texts.about_head_steckbrief || "").trim();
-  if (headProfileFallback){
+  if (headProfileFallback) {
     const details = document.getElementById("headcoachProfile");
     const textEl = document.getElementById("headcoachProfileText");
-    if (details && textEl){
+    if (details && textEl) {
       details.style.display = "block";
       setTextWithBreaks(textEl, headProfileFallback);
     }
@@ -2455,7 +2484,7 @@ function mountFeedbackFromJson(feedbackData) {
   }
 
   // Werte
-  setText("uspKicker", (texts.usp_kicker || "Wofür wir stehen"));
+  setText("uspKicker", texts.usp_kicker || "Wofür wir stehen");
   setText("uspTitle", (texts.usp_title || "Spaß · Mut · Einsatz").toUpperCase());
   setText("uspGhost", (texts.usp_ghost || "WERTE").toUpperCase());
 
@@ -2505,8 +2534,6 @@ function mountFeedbackFromJson(feedbackData) {
     initFaq();
   }
 
-  // ... (dein restlicher Code bleibt unverändert)
-})();
 
 
     // HERO-Video aus hero.json (CMS)
