@@ -2097,38 +2097,118 @@ function mountNewsFromJson(newsData) {
     initFaq();
   }
 
-  function mountFeedbackFromJson(feedbackData){
-    if (!feedbackData) return;
+function mountFeedbackFromJson(feedbackData) {
+  if (!feedbackData) return;
 
-    if (feedbackData.title) setText("feedbackTitle", String(feedbackData.title).toUpperCase());
-    if (feedbackData.kicker) setText("feedbackKicker", feedbackData.kicker);
+  if (feedbackData.title) setText("feedbackTitle", String(feedbackData.title).toUpperCase());
+  if (feedbackData.kicker) setText("feedbackKicker", feedbackData.kicker);
 
-    const items = Array.isArray(feedbackData.items) ? feedbackData.items : [];
-    if (!items.length) return;
+  const grid = document.getElementById("feedbackGrid");
+  if (!grid) return;
 
-    [1,2,3,4].forEach((i) => {
-      const it = items[i-1];
-      if (!it) return;
+  const raw = Array.isArray(feedbackData.items) ? feedbackData.items : [];
+  if (!raw.length) return;
 
-      if (it.title) setText("fb" + i + "Title", String(it.title).toUpperCase());
-      if (it.name) setText("fb" + i + "Name", it.name);
-
-      // Text in Details: linebreaks erlauben
-      if (it.text){
-        const textEl = document.getElementById("fb" + i + "Text");
-        if (textEl) setTextWithBreaks(textEl, it.text);
-      }
-
-      if (it.poster && safeUrl(it.poster)){
-        mountOptionalImage("fb" + i + "Poster", it.poster, (it.title || "Feedback") + " Poster");
-      }
-      if (it.image && safeUrl(it.image)){
-        mountOptionalImage("fb" + i + "Image", it.image, (it.title || "Feedback") + " Bild");
-      }
+  // Optional: Sortierung über "order" (oder "sort") ermöglichen
+  const items = raw
+    .slice(0, 50)
+    .map((it, idx) => ({
+      ...it,
+      _idx: idx,
+      _order:
+        typeof it?.order === "number"
+          ? it.order
+          : typeof it?.sort === "number"
+          ? it.sort
+          : null,
+    }))
+    .sort((a, b) => {
+      // 1) order/sort aufsteigend
+      if (a._order !== null && b._order !== null) return a._order - b._order;
+      if (a._order !== null) return -1;
+      if (b._order !== null) return 1;
+      // 2) sonst Reihenfolge wie im JSON
+      return a._idx - b._idx;
     });
 
-    initFeedbackDetailsPlus();
-  }
+  // Grid komplett neu aufbauen
+  clearEl(grid);
+
+  items.forEach((it) => {
+    const title = String(it?.title || "FEEDBACK").trim();
+    const name = String(it?.name || "").trim();
+    const text = String(it?.text || "").trim();
+    const poster = safeUrl(it?.poster || "");
+    const image = safeUrl(it?.image || "");
+
+    const card = document.createElement("div");
+    card.className = "card";
+
+    // Media: poster zuerst, dann image (falls beide)
+    if (poster) {
+      const mediaPoster = document.createElement("div");
+      mediaPoster.className = "fbMedia";
+      const img = document.createElement("img");
+      img.src = poster;
+      img.alt = (title ? title + " " : "") + "Poster";
+      img.loading = "lazy";
+      img.referrerPolicy = "no-referrer";
+      mediaPoster.appendChild(img);
+      card.appendChild(mediaPoster);
+    }
+
+    if (image) {
+      const mediaImg = document.createElement("div");
+      mediaImg.className = "fbMedia";
+      const img = document.createElement("img");
+      img.src = image;
+      img.alt = (title ? title + " " : "") + "Bild";
+      img.loading = "lazy";
+      img.referrerPolicy = "no-referrer";
+      mediaImg.appendChild(img);
+      card.appendChild(mediaImg);
+    }
+
+    // Title
+    const h3 = document.createElement("h3");
+    h3.textContent = (title || "FEEDBACK").toUpperCase();
+    card.appendChild(h3);
+
+    // Name
+    const pName = document.createElement("p");
+    pName.style.margin = "-4px 0 10px";
+    pName.style.color = "rgba(11, 16, 32, 0.55)";
+    pName.style.fontWeight = "900";
+    pName.style.letterSpacing = "0.1em";
+    pName.style.textTransform = "uppercase";
+    pName.style.fontSize = "11px";
+    pName.textContent = name ? name : "—";
+    card.appendChild(pName);
+
+    // Text: als Details nur wenn Text vorhanden
+    if (text) {
+      const details = document.createElement("details");
+      details.className = "coachBio fbDetails";
+
+      const summary = document.createElement("summary");
+      summary.className = "coachBioSum fbSum";
+      summary.innerHTML = `Mehr <span class="fbPlus" aria-hidden="true">+</span>`;
+      details.appendChild(summary);
+
+      const p = document.createElement("p");
+      setTextWithBreaks(p, text);
+      details.appendChild(p);
+
+      card.appendChild(details);
+    }
+
+    grid.appendChild(card);
+  });
+
+  // +/– Sync für alle neu erzeugten Cards
+  initFeedbackDetailsPlus();
+}
+
 
   function initYouTubeFeedbackEmbeds(consent){
     const boxes = document.querySelectorAll(".ytBox");
