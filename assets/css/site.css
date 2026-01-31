@@ -1543,5 +1543,19 @@ body.mmLbOpen{
     }
   }
 }
+/* HERO: Wrapper darf das Grid nicht verändern */
+.heroMediaCol{
+  display: contents; /* <- Key-Fix: Wrapper verschwindet im Layout */
+}
+
+/* Subline unter dem Video: Abstand statt grid-gap */
+#heroSubline.heroSubline{
+  margin: 12px 0 0;
+  color: var(--navy);
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  font-size: 14px;
+}
 
 
