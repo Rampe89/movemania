@@ -2109,18 +2109,19 @@ function mountFeedbackFromJson(feedbackData) {
   const raw = Array.isArray(feedbackData.items) ? feedbackData.items : [];
   if (!raw.length) return;
 
+  // Netlify CMS / JSON: Numbers können als String kommen -> robust casten
+  const toNum = (v) => {
+    const n = Number(v);
+    return Number.isFinite(n) ? n : null;
+  };
+
   // Optional: Sortierung über "order" (oder "sort") ermöglichen
   const items = raw
     .slice(0, 50)
     .map((it, idx) => ({
       ...it,
       _idx: idx,
-      _order:
-        typeof it?.order === "number"
-          ? it.order
-          : typeof it?.sort === "number"
-          ? it.sort
-          : null,
+      _order: toNum(it?.order ?? it?.sort),
     }))
     .sort((a, b) => {
       // 1) order/sort aufsteigend
@@ -2148,11 +2149,13 @@ function mountFeedbackFromJson(feedbackData) {
     if (poster) {
       const mediaPoster = document.createElement("div");
       mediaPoster.className = "fbMedia";
+
       const img = document.createElement("img");
       img.src = poster;
       img.alt = (title ? title + " " : "") + "Poster";
       img.loading = "lazy";
       img.referrerPolicy = "no-referrer";
+
       mediaPoster.appendChild(img);
       card.appendChild(mediaPoster);
     }
@@ -2160,11 +2163,13 @@ function mountFeedbackFromJson(feedbackData) {
     if (image) {
       const mediaImg = document.createElement("div");
       mediaImg.className = "fbMedia";
+
       const img = document.createElement("img");
       img.src = image;
       img.alt = (title ? title + " " : "") + "Bild";
       img.loading = "lazy";
       img.referrerPolicy = "no-referrer";
+
       mediaImg.appendChild(img);
       card.appendChild(mediaImg);
     }
@@ -2208,6 +2213,7 @@ function mountFeedbackFromJson(feedbackData) {
   // +/– Sync für alle neu erzeugten Cards
   initFeedbackDetailsPlus();
 }
+
 
 
   function initYouTubeFeedbackEmbeds(consent){
