@@ -17,28 +17,64 @@ collections:
         name: home
         format: json
         fields:
+
+          # =========================
+          # HERO
+          # =========================
           - { label: Hero Brand, name: hero_brand, widget: string, required: false }
+
           - { label: "Hero Titel (HTML erlaubt, z.B. <br>)", name: hero_title, widget: string, required: false }
+
           - { label: Hero Text, name: hero_text, widget: text, required: false }
 
+          - { label: "Hero Video Headline (über dem Video)", name: hero_video_headline, widget: string, required: false }
+
+          - { label: "Hero Subline (unter dem Video)", name: hero_subline, widget: text, required: false }
+
+          # =========================
+          # ÜBER UNS
+          # =========================
           - { label: Über uns Kicker, name: about_kicker, widget: string, required: false }
+
           - { label: Über uns Titel, name: about_title, widget: string, required: false }
+
           - { label: Headcoach Titel, name: about_head_title, widget: string, required: false }
+
           - { label: Headcoach Text, name: about_head_text, widget: text, required: false }
+
           - { label: "Headcoach Steckbrief (optional)", name: about_head_profile, widget: text, required: false }
 
+          # =========================
+          # WERTE / USP
+          # =========================
           - { label: Werte Kicker, name: usp_kicker, widget: string, required: false }
+
           - { label: Werte Titel, name: usp_title, widget: string, required: false }
+
           - { label: "Werte Ghost (Hintergrund)", name: usp_ghost, widget: string, required: false }
 
+          # =========================
+          # KONTAKT
+          # =========================
           - { label: Kontakt Label Mail, name: contact_mail_label, widget: string, required: false }
+
           - { label: Kontakt Label Instagram, name: contact_ig_label, widget: string, required: false }
+
           - { label: Kontakt Label WhatsApp, name: contact_wa_label, widget: string, required: false }
 
+          # =========================
+          # FAQ
+          # =========================
           - { label: FAQ Hinweis, name: faq_hint, widget: string, required: false }
 
+          # =========================
+          # ANGEBOTE
+          # =========================
           - { label: "Angebote Toggle (zugeklappt)", name: offers_toggle_closed, widget: string, required: false }
+
           - { label: "Angebote Toggle (aufgeklappt)", name: offers_toggle_open, widget: string, required: false }
+
+          
 
   # --- HERO (NUR VIDEO) ---
   - name: hero
