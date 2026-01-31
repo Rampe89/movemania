@@ -987,8 +987,9 @@
         }
       }
 
-     /* HERO: nur Video (autoplay muted + Sound Toggle, full-bleed cover) */
-function mountHeroVideo(videoSlide) {
+     
+      /* HERO: nur Video (autoplay muted + Sound Toggle, full-bleed cover) */
+function mountHeroVideo(videoSlide, opts) {
   const heroMedia = document.getElementById("heroMedia");
   if (!heroMedia) return;
 
@@ -1001,6 +1002,17 @@ function mountHeroVideo(videoSlide) {
   };
 
   const s = videoSlide || fallback;
+
+  // NEW: Headline/Subline aus opts
+  const headlineText = String(opts?.headline || "").trim();
+  const sublineText = String(opts?.subline || "").trim();
+
+  // Optional: Subline direkt setzen (wenn Element existiert)
+  if (sublineText) {
+    const subEl = document.getElementById("heroSubline");
+    if (subEl) subEl.textContent = sublineText;
+  }
+
   clearEl(heroMedia);
 
   const wrap = document.createElement("div");
@@ -1017,11 +1029,11 @@ function mountHeroVideo(videoSlide) {
 
   v.autoplay = true;
   v.loop = true;
-  v.muted = true;          // startet stumm (Autoplay-safe)
+  v.muted = true;          // Autoplay-safe
   v.playsInline = true;
   v.preload = "metadata";
 
-  // Full-bleed cover => kein schwarzer Balken
+  // Full-bleed cover
   v.style.width = "100%";
   v.style.height = "100%";
   v.style.display = "block";
@@ -1038,15 +1050,21 @@ function mountHeroVideo(videoSlide) {
 
   v.addEventListener(
     "loadedmetadata",
-    () => {
-      v.play().catch(() => {});
-    },
+    () => { v.play().catch(() => {}); },
     { once: true }
   );
 
   wrap.appendChild(v);
 
-  // Overlay-Text: unverändert wie zuvor (damit unten nix "anders" wird)
+  // NEW: Headline über dem Video
+  if (headlineText) {
+    const h = document.createElement("div");
+    h.className = "heroVideoHeadline";
+    h.textContent = headlineText;
+    wrap.appendChild(h);
+  }
+
+  // Optional: bestehender Overlay (unten) – kannst du lassen
   if (s?.title || s?.text) {
     const overlay = document.createElement("div");
     overlay.className = "slideOverlay";
@@ -1064,7 +1082,7 @@ function mountHeroVideo(videoSlide) {
     wrap.appendChild(overlay);
   }
 
-  // Sound Toggle Button (bleibt sichtbar)
+  // Sound Toggle Button
   const soundBtn = document.createElement("button");
   soundBtn.type = "button";
   soundBtn.className = "btn btnGhost btnAccent";
@@ -1080,13 +1098,9 @@ function mountHeroVideo(videoSlide) {
   };
 
   const toggleSound = () => {
-    // Browser brauchen für Unmute oft eine User-Geste -> kommt durch Button-Klick
     v.muted = !v.muted;
     if (!v.muted) v.volume = 1;
-
-    // falls Browser beim Unmute pausiert/abwürgt: play nochmal anstoßen
     v.play().catch(() => {});
-
     syncSoundLabel();
   };
 
@@ -1095,7 +1109,6 @@ function mountHeroVideo(videoSlide) {
     toggleSound();
   });
 
-  // Startzustand
   syncSoundLabel();
 
   wrap.appendChild(soundBtn);
