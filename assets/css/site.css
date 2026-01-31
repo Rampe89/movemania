@@ -1557,5 +1557,27 @@ body.mmLbOpen{
   line-height: 1.35;
   font-size: 14px;
 }
+.heroInner{ align-items: start; }
+
+.heroCopy{ min-width: 0; }
+
+.heroMediaStack{
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.heroSubline{
+  margin: 0;
+  color: var(--navy);
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  font-size: 14px;
+}
+
+/* Hero-Video soll cover sein */
+#heroMedia video{ object-fit: cover !important; }
 
 
