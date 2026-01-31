@@ -1387,8 +1387,95 @@ function mountNewsFromJson(newsData) {
   }
 }
 
+      /* ---------------------------
+   FAQ: aus faq.json (CMS)
+   Erwartete Struktur (flexibel):
+   - { title, hint, items:[{ q|question, a|answer, order|sort }] }
+   - oder { faqs:[...] } oder direkt [...]
+   --------------------------- */
+function mountFaq(faqData, hintFallback) {
+  const box = document.getElementById("faqBox");
+  if (!box || !faqData) return;
 
+  // Optional Title / Hint
+  const title = faqData?.title || faqData?.headline;
+  if (title) setText("faqTitle", String(title).toUpperCase());
 
+  const hint = faqData?.hint || faqData?.kicker || faqData?.footer_hint || hintFallback;
+  if (hint) setText("faqHint", String(hint));
+
+  // Items aus verschiedenen möglichen Keys ziehen
+  const raw =
+    (Array.isArray(faqData?.items) && faqData.items) ||
+    (Array.isArray(faqData?.faqs) && faqData.faqs) ||
+    (Array.isArray(faqData?.questions) && faqData.questions) ||
+    (Array.isArray(faqData) && faqData) ||
+    [];
+
+  if (!raw.length) return;
+
+  // robust sort: order/sort optional, sonst JSON-Reihenfolge
+  const toNum = (v) => {
+    const n = Number(v);
+    return Number.isFinite(n) ? n : null;
+  };
+
+  const items = raw
+    .slice(0, 100)
+    .map((it, idx) => ({
+      ...it,
+      _idx: idx,
+      _order: toNum(it?.order ?? it?.sort),
+    }))
+    .sort((a, b) => {
+      if (a._order !== null && b._order !== null) return a._order - b._order;
+      if (a._order !== null) return -1;
+      if (b._order !== null) return 1;
+      return a._idx - b._idx;
+    });
+
+  // Render
+  clearEl(box);
+
+  items.slice(0, 20).forEach((it, i) => {
+    const q = String(it?.q ?? it?.question ?? it?.title ?? `Frage ${i + 1}`).trim();
+    const a = String(it?.a ?? it?.answer ?? it?.text ?? "").trim();
+
+    if (!q || !a) return;
+
+    const item = document.createElement("div");
+    item.className = "faqItem";
+
+    const btn = document.createElement("button");
+    btn.className = "faqQ";
+    btn.type = "button";
+
+    const span = document.createElement("span");
+    span.textContent = q;
+
+    const icon = document.createElement("i");
+    icon.textContent = "+";
+
+    btn.appendChild(span);
+    btn.appendChild(icon);
+
+    const ans = document.createElement("div");
+    ans.className = "faqA";
+    // Antworten dürfen Zeilenumbrüche enthalten
+    setTextWithBreaks(ans, a);
+
+    btn.addEventListener("click", () => {
+      const isOpen = item.classList.toggle("isOpen");
+      icon.textContent = isOpen ? "–" : "+";
+    });
+
+    item.appendChild(btn);
+    item.appendChild(ans);
+    box.appendChild(item);
+  });
+}
+
+  
       function initFaq() {
         const box = document.getElementById("faqBox");
         if (!box) return;
