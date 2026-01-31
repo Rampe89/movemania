@@ -124,26 +124,35 @@
           </div>
 
           <!-- HERO VIDEO -->
-          <div class="mediaFrame" id="heroMedia" aria-label="Hero Video">
-            <div class="slide isActive">
-              <div
-                style="
-                  height: 100%;
-                  display: grid;
-                  place-items: center;
-                  color: rgba(255, 255, 255, 0.85);
-                  font-weight: 800;
-                  font-size: 13px;
-                  padding: 18px;
-                  text-align: center;
-                "
-              >
-                Inhalte laden…
-              </div>
-            </div>
-          </div>
+    <div class="mediaFrame" id="heroMedia" aria-label="Hero Video">
+      <div class="slide isActive">
+        <div
+          style="
+            height: 100%;
+            display: grid;
+            place-items: center;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 800;
+            font-size: 13px;
+            padding: 18px;
+            text-align: center;
+          "
+        >
+          Inhalte laden…
         </div>
-      </section>
+      </div>
+    </div>
+
+<!-- HERO HEADLINE + SUBLINE UNTER VIDEO -->
+<div class="heroUnderMedia">
+  <h2 class="heroUnderTitle" id="heroUnderTitle">
+    HIER WACHSEN KINDER.
+  </h2>
+  <p class="heroUnderText" id="heroUnderText">
+    Sportlich und persönlich.
+  </p>
+</div>
+
 
       <!-- ÜBER UNS -->
       <section id="ueber-uns" class="section">
@@ -2329,165 +2338,176 @@ function mountFeedbackFromJson(feedbackData) {
   }
 
   (async () => {
-    initMobileMenu();
+  initMobileMenu();
 
-    const cc = document.getElementById("cc");
-    const ccAccept = document.getElementById("ccAccept");
-    const ccDecline = document.getElementById("ccDecline");
-    const CC_KEY = "movemania_cookie_consent";
+  const cc = document.getElementById("cc");
+  const ccAccept = document.getElementById("ccAccept");
+  const ccDecline = document.getElementById("ccDecline");
+  const CC_KEY = "movemania_cookie_consent";
 
-    const currentConsent = localStorage.getItem(CC_KEY);
+  const currentConsent = localStorage.getItem(CC_KEY);
 
-    if (cc && !currentConsent) {
-      cc.style.display = "block";
-    }
+  if (cc && !currentConsent) {
+    cc.style.display = "block";
+  }
 
-    const applyConsentState = () => {
-      const consent = localStorage.getItem(CC_KEY) === "accepted";
-      initYouTubeFeedbackEmbeds(consent);
-    };
+  const applyConsentState = () => {
+    const consent = localStorage.getItem(CC_KEY) === "accepted";
+    initYouTubeFeedbackEmbeds(consent);
+  };
 
-    if (ccAccept) {
-      ccAccept.addEventListener("click", () => {
-        localStorage.setItem(CC_KEY, "accepted");
-        cc.style.display = "none";
-        applyConsentState();
-      });
-    }
+  if (ccAccept) {
+    ccAccept.addEventListener("click", () => {
+      localStorage.setItem(CC_KEY, "accepted");
+      cc.style.display = "none";
+      applyConsentState();
+    });
+  }
 
-    if (ccDecline) {
-      ccDecline.addEventListener("click", () => {
-        localStorage.setItem(CC_KEY, "declined");
-        cc.style.display = "none";
-        applyConsentState();
-      });
-    }
+  if (ccDecline) {
+    ccDecline.addEventListener("click", () => {
+      localStorage.setItem(CC_KEY, "declined");
+      cc.style.display = "none";
+      applyConsentState();
+    });
+  }
 
-    applyConsentState();
-    initFeedbackDetailsPlus();
+  applyConsentState();
+  initFeedbackDetailsPlus();
 
-    try {
-      const theme = await loadJSON("assets/content/theme.json");
-      applyTheme(theme);
-    } catch (e) {}
+  try {
+    const theme = await loadJSON("assets/content/theme.json");
+    applyTheme(theme);
+  } catch (e) {}
 
-    /* Logo nur anzeigen, wenn es wirklich geladen ist */
-    const logo = document.getElementById("logoImg");
-    if (logo) {
-      if (logo.complete && logo.naturalWidth > 0) {
-        logo.style.display = "block";
-      } else {
-        logo.addEventListener("load", () => { logo.style.display = "block"; }, { once: true });
-        logo.addEventListener("error", () => { logo.style.display = "none"; }, { once: true });
-      }
-    }
-
-    let links = {};
-    try { links = await loadJSON("assets/content/links.json"); } catch (e) {}
-
-    let texts = {};
-    try { texts = await loadJSON("assets/content/texts.json"); } catch (e) {}
-
-    // Hero Text
-    setText("heroBrand", (texts.hero_brand || "MOVEMANIA").toUpperCase());
-    let claim = (texts.hero_title || "KINDER STÄRKEN.<br>SPIELER ENTWICKELN.").toUpperCase();
-    claim = claim.replace(/^[\s\"“”„‚'«»]+|[\s\"“”„‚'«»]+$/g, "");
-    setHtmlAllowBr("heroClaim", claim);
-    setText("heroText", texts.hero_text || "In unseren Camps und Kursen entwickeln Kinder Freude an Bewegung – mit Struktur, Haltung und Herz.");
-
-    // Nav / Links
-    setHref("navShop", links.shop);
-
-    setHref("kIG", links.instagram);
-    setHref("kWA", links.whatsapp);
-
-    const mailHref = normalizeMailto(links.mailto || links.email);
-    if (mailHref) setHref("kMail", mailHref);
-
-    setText("kIGText", links.instagram_text || texts.contact_ig_label || "Updates & Einblicke");
-    setText("kWAText", links.whatsapp_text || texts.contact_wa_label || "Community / Infos");
-
-    const mailVisible =
-      (links.mail_text && String(links.mail_text).trim()) ||
-      (links.mailto && String(links.mailto).replace(/^mailto:/i, "").trim()) ||
-      (links.email && String(links.email).trim()) ||
-      (texts.contact_mail_label || "Direkt schreiben");
-    setText("kMailText", mailVisible);
-
-    mountContactIcon("kMailIcon", links.mail_icon || links.contact_icon_mail, "Mail");
-    mountContactIcon("kIGIcon", links.instagram_icon || links.contact_icon_instagram, "Instagram");
-    mountContactIcon("kWAIcon", links.whatsapp_icon || links.contact_icon_whatsapp, "WhatsApp");
-
-    // Über uns
-    setText("aboutKicker", texts.about_kicker || "Über uns");
-    setText("aboutTitle", (texts.about_title || "Wer wir sind").toUpperCase());
-    setText("aboutHeadTitle", (texts.about_head_title || "Vorstellung Headcoach").toUpperCase());
-    setText("aboutHeadText", texts.about_head_text || "Hier kommt eure Vorstellung (Headcoach) rein – kurz, klar, authentisch.");
-
-    // Optional: Headcoach Steckbrief (texts.json fallback)
-    const headProfileFallback = String(texts.about_head_profile || texts.about_head_steckbrief || "").trim();
-    if (headProfileFallback){
-      const details = document.getElementById("headcoachProfile");
-      const textEl = document.getElementById("headcoachProfileText");
-      if (details && textEl){
-        details.style.display = "block";
-        setTextWithBreaks(textEl, headProfileFallback);
-      }
+  /* Logo nur anzeigen, wenn es wirklich geladen ist */
+  const logo = document.getElementById("logoImg");
+  if (logo) {
+    if (logo.complete && logo.naturalWidth > 0) {
+      logo.style.display = "block";
     } else {
-      const details = document.getElementById("headcoachProfile");
-      if (details) details.style.display = "none";
+      logo.addEventListener("load", () => { logo.style.display = "block"; }, { once: true });
+      logo.addEventListener("error", () => { logo.style.display = "none"; }, { once: true });
     }
+  }
 
-    // Werte
-    setText("uspKicker", (texts.usp_kicker || "Wofür wir stehen"));
-    setText("uspTitle", (texts.usp_title || "Spaß · Mut · Einsatz").toUpperCase());
-    setText("uspGhost", (texts.usp_ghost || "WERTE").toUpperCase());
+  let links = {};
+  try { links = await loadJSON("assets/content/links.json"); } catch (e) {}
 
-    // Feedback
-    setText("feedbackTitle", (texts.feedback_title || "FEEDBACK").toUpperCase());
-    setText("feedbackKicker", texts.feedback_kicker || "Stimmen von Eltern & Kindern");
+  let texts = {};
+  try { texts = await loadJSON("assets/content/texts.json"); } catch (e) {}
 
-    // News
-    setText("newsTitle", (texts.news_title || "NEWS").toUpperCase());
-    setText("newsKicker", texts.news_kicker || "Aktuelles & Einblicke");
+  // Hero Text (links)
+  setText("heroBrand", (texts.hero_brand || "MOVEMANIA").toUpperCase());
+  let claim = (texts.hero_title || "KINDER STÄRKEN.<br>SPIELER ENTWICKELN.").toUpperCase();
+  claim = claim.replace(/^[\s\"“”„‚'«»]+|[\s\"“”„‚'«»]+$/g, "");
+  setHtmlAllowBr("heroClaim", claim);
+  setText("heroText", texts.hero_text || "In unseren Camps und Kursen entwickeln Kinder Freude an Bewegung – mit Struktur, Haltung und Herz.");
 
-    try {
-      const feedbackData = await loadJSON("assets/content/feedback.json");
-      mountFeedbackFromJson(feedbackData);
-    } catch (e) {}
+  // Hero Headline & Subline unter dem Video
+  setHtmlAllowBr("heroUnderTitle", texts.hero_title || "");
+  const underTextEl = document.getElementById("heroUnderText");
+  if (underTextEl) {
+    setTextWithBreaks(underTextEl, texts.hero_text || "");
+  }
 
-    try {
-      const sponsorsData = await loadJSON("assets/content/sponsors.json");
-      mountSponsors(sponsorsData);
-    } catch (e) {}
+  // Nav / Links
+  setHref("navShop", links.shop);
 
-    try {
-      const headcoachData = await loadJSON("assets/content/headcoach.json");
-      mountHeadcoachMedia(headcoachData);
-      mountHeadcoachProfile(headcoachData);
-    } catch (e) {}
+  setHref("kIG", links.instagram);
+  setHref("kWA", links.whatsapp);
 
-    try {
-      const coachesData = await loadJSON("assets/content/coaches.json");
-      mountCoaches(coachesData);
-    } catch (e) {}
+  const mailHref = normalizeMailto(links.mailto || links.email);
+  if (mailHref) setHref("kMail", mailHref);
 
-    try {
-      const valuesData = await loadJSON("assets/content/values.json");
-      mountValues(valuesData);
-    } catch (e) {}
+  setText("kIGText", links.instagram_text || texts.contact_ig_label || "Updates & Einblicke");
+  setText("kWAText", links.whatsapp_text || texts.contact_wa_label || "Community / Infos");
 
-    try {
-      const offersData = await loadJSON("assets/content/offers.json");
-      mountOffers(offersData);
-    } catch (e) {}
+  const mailVisible =
+    (links.mail_text && String(links.mail_text).trim()) ||
+    (links.mailto && String(links.mailto).replace(/^mailto:/i, "").trim()) ||
+    (links.email && String(links.email).trim()) ||
+    (texts.contact_mail_label || "Direkt schreiben");
+  setText("kMailText", mailVisible);
 
-    try {
-      const faqData = await loadJSON("assets/content/faq.json");
-      mountFaq(faqData, texts.faq_hint || "");
-    } catch (e) {
-      initFaq();
+  mountContactIcon("kMailIcon", links.mail_icon || links.contact_icon_mail, "Mail");
+  mountContactIcon("kIGIcon", links.instagram_icon || links.contact_icon_instagram, "Instagram");
+  mountContactIcon("kWAIcon", links.whatsapp_icon || links.contact_icon_whatsapp, "WhatsApp");
+
+  // Über uns
+  setText("aboutKicker", texts.about_kicker || "Über uns");
+  setText("aboutTitle", (texts.about_title || "Wer wir sind").toUpperCase());
+  setText("aboutHeadTitle", (texts.about_head_title || "Vorstellung Headcoach").toUpperCase());
+  setText("aboutHeadText", texts.about_head_text || "Hier kommt eure Vorstellung (Headcoach) rein – kurz, klar, authentisch.");
+
+  // Optional: Headcoach Steckbrief (texts.json fallback)
+  const headProfileFallback = String(texts.about_head_profile || texts.about_head_steckbrief || "").trim();
+  if (headProfileFallback){
+    const details = document.getElementById("headcoachProfile");
+    const textEl = document.getElementById("headcoachProfileText");
+    if (details && textEl){
+      details.style.display = "block";
+      setTextWithBreaks(textEl, headProfileFallback);
     }
+  } else {
+    const details = document.getElementById("headcoachProfile");
+    if (details) details.style.display = "none";
+  }
+
+  // Werte
+  setText("uspKicker", (texts.usp_kicker || "Wofür wir stehen"));
+  setText("uspTitle", (texts.usp_title || "Spaß · Mut · Einsatz").toUpperCase());
+  setText("uspGhost", (texts.usp_ghost || "WERTE").toUpperCase());
+
+  // Feedback
+  setText("feedbackTitle", (texts.feedback_title || "FEEDBACK").toUpperCase());
+  setText("feedbackKicker", texts.feedback_kicker || "Stimmen von Eltern & Kindern");
+
+  // News
+  setText("newsTitle", (texts.news_title || "NEWS").toUpperCase());
+  setText("newsKicker", texts.news_kicker || "Aktuelles & Einblicke");
+
+  try {
+    const feedbackData = await loadJSON("assets/content/feedback.json");
+    mountFeedbackFromJson(feedbackData);
+  } catch (e) {}
+
+  try {
+    const sponsorsData = await loadJSON("assets/content/sponsors.json");
+    mountSponsors(sponsorsData);
+  } catch (e) {}
+
+  try {
+    const headcoachData = await loadJSON("assets/content/headcoach.json");
+    mountHeadcoachMedia(headcoachData);
+    mountHeadcoachProfile(headcoachData);
+  } catch (e) {}
+
+  try {
+    const coachesData = await loadJSON("assets/content/coaches.json");
+    mountCoaches(coachesData);
+  } catch (e) {}
+
+  try {
+    const valuesData = await loadJSON("assets/content/values.json");
+    mountValues(valuesData);
+  } catch (e) {}
+
+  try {
+    const offersData = await loadJSON("assets/content/offers.json");
+    mountOffers(offersData);
+  } catch (e) {}
+
+  try {
+    const faqData = await loadJSON("assets/content/faq.json");
+    mountFaq(faqData, texts.faq_hint || "");
+  } catch (e) {
+    initFaq();
+  }
+
+  // ... (dein restlicher Code bleibt unverändert)
+})();
+
 
     // HERO-Video aus hero.json (CMS)
     let heroData = null;
