@@ -154,34 +154,35 @@ a{color:inherit; text-decoration:none}
   .navCtas{display:none}
 }
 
-/* ===== Partner-Bereich Optimierung (zentrierter "Partner"-Label, Logos größer, cleaner) ===== */
+/* ===== Partner-Bereich Optimierung (final, ohne Grid/Flex-Widerspruch) ===== */
 .sponsorsBar{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:8px;
+  gap:12px;
   padding:0;
   border:none;
   background:transparent;
   border-radius: var(--radius);
-  max-width: min(560px, 42vw);
+  max-width: var(--max); /* FIX: nicht künstlich einengen */
 }
+
 .sponsorsItems{
-  display:grid;
-  grid-template-columns: repeat(3, minmax(92px, 1fr));
-  gap:10px;
-  overflow:hidden;
-  justify-items:center;
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  justify-content:center;
   align-items:center;
   width:100%;
 }
+
 .sponsorLink{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  height:50px;
-  width:104px;
-  padding:6px 10px;
+  width:140px;
+  height:64px;
+  padding:8px 10px;
   border:none;
   background:transparent;
   border-radius: var(--radius);
@@ -189,12 +190,16 @@ a{color:inherit; text-decoration:none}
   flex:0 0 auto;
 }
 .sponsorLink:hover{ background: rgba(11,16,32,.03); }
+
 .sponsorLink img{
+  max-width:140px;
   max-height:56px;
   width:auto;
+  height:auto;
   display:block;
   object-fit:contain;
 }
+
 .sponsorFallback{
   font-size:9px;
   font-weight:900;
@@ -207,11 +212,9 @@ a{color:inherit; text-decoration:none}
   font-size:11px;
   color:rgba(11,16,32,.55);
   white-space:nowrap;
-  grid-column: 1 / -1;
-  justify-self:center;
+  width:100%;
   padding:6px 0;
   text-align:center;
-  width:100%;
 }
 .sponsorsLabel{
   font-size:9px;
@@ -305,6 +308,52 @@ a{color:inherit; text-decoration:none}
   max-width: 56ch;
   margin-top: 14px;
 }
+
+/* ===== FIX: HERO Wrapper (Video + Subline) darf Layout nicht kippen ===== */
+.heroInner .heroMediaCol{
+  display:grid;
+  gap:12px;
+  min-width:0;
+  align-self: stretch;
+}
+.heroInner .heroMediaCol .mediaFrame{
+  width:100%;
+}
+.heroSubline{
+  margin:0;
+  color: var(--navy);
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  font-size: 14px;
+}
+
+/* Headline direkt auf dem Video */
+.heroVideoHeadline{
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  right: 86px; /* Platz für Sound-Button */
+  z-index: 9;
+  color: var(--navy);
+  font-weight: 1000;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  font-size: 22px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.78);
+  backdrop-filter: blur(6px);
+}
+@media (min-width: 1100px){
+  .heroVideoHeadline{ font-size: 26px; }
+}
+
+/* HERO Video: immer cover (CSS darf JS nicht überschreiben) */
+#heroMedia video{
+  object-fit: cover !important;
+}
+/* ===== /FIX ===== */
 
 /* HERO SLIDER */
 .mediaFrame{
@@ -684,10 +733,7 @@ details.offerAcc > summary::-webkit-details-marker{ display:none; }
 }
 /* ===== /FIX ===== */
 
-/* ===== NEU: Headcoach-Media auf Handy wirklich groß & “füllend” =====
-   Idee: Mobile bekommt mehr Höhe + cover, damit es nicht “klein” wirkt.
-   Desktop bleibt contain, damit nichts abgeschnitten wird.
-*/
+/* ===== NEU: Headcoach-Media auf Handy wirklich groß & “füllend” ===== */
 @media (max-width: 640px){
   .aboutMedia{
     min-height: 360px;
@@ -695,7 +741,7 @@ details.offerAcc > summary::-webkit-details-marker{ display:none; }
   .aboutMedia img,
   .aboutMedia video{
     object-fit: cover;
-    background:#000; /* cover wirkt mit dunklem Rand oft ruhiger als weiß */
+    background:#000;
   }
 }
 /* ===== /NEU ===== */
@@ -752,8 +798,6 @@ details.offerAcc > summary::-webkit-details-marker{ display:none; }
   color:rgba(11,16,32,.55);
   font-size:12px;
   line-height:1.5;
-
-  /* ===== NEU: Absätze/Zeilenumbrüche aus CMS übernehmen ===== */
   white-space: pre-line;
 }
 .personBody p{
@@ -761,8 +805,6 @@ details.offerAcc > summary::-webkit-details-marker{ display:none; }
   color:var(--muted);
   line-height:1.8;
   font-size:13px;
-
-  /* ===== NEU: Absätze/Zeilenumbrüche aus CMS übernehmen ===== */
   white-space: pre-line;
 }
 
@@ -1042,31 +1084,7 @@ footer::after{
 .coachBio[open] > summary::after{
   content:"–";
 }
-/* ===== Video Focus Overlay (Feedback) ===== */
-.videoFocus {
-  position: fixed;
-  inset: 0;
-  background: rgba(11,16,32,.85);
-  z-index: 9999;
-  display: grid;
-  place-items: center;
-  padding: 24px;
-}
 
-.videoFocusInner {
-  width: min(92vw, 1100px);
-  aspect-ratio: 16 / 9;
-  background: #000;
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 30px 80px rgba(0,0,0,.6);
-}
-
-.videoFocus iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
 /* ===== Video Focus Overlay (Feedback) ===== */
 .videoFocus {
   position: fixed;
@@ -1135,11 +1153,13 @@ footer::after{
 body.isOverlayOpen {
   overflow: hidden;
 }
+
 /* Interaktions-Akzent */
 .btnAccent {
   background: var(--red);
   color: #fff;
 }
+
 /* Details / "Mehr" / Plus Hover-Akzent */
 details summary {
   cursor: pointer;
@@ -1196,6 +1216,7 @@ a:hover {
 .hero .sectionHeadCenter::after {
   display: none;
 }
+
 /* Accordion Plus Hover-Akzent */
 details.offerAcc summary {
   cursor: pointer;
@@ -1212,21 +1233,7 @@ details.offerAcc summary:focus-visible .offerAccIcon {
 details.offerAcc[open] .offerAccIcon {
   transform: rotate(45deg);
 }
-/* Partner-Logos: mobil sauber umbrechen */
-.sponsorsItems {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  justify-content: center;
-  align-items: center;
-}
 
-/* einzelne Logos */
-.sponsorLink img {
-  max-width: 140px;
-  width: 100%;
-  height: auto;
-}
 /* Wichtig: Damit das Dropdown sich an der Topbar ausrichtet */
 .nav { position: relative; }
 
@@ -1338,7 +1345,6 @@ details.offerAcc[open] .offerAccIcon {
   }
 }
 
-
 /* Optional: Close-Icon Animation (Hamburger -> X) */
 @media (max-width: 860px) {
   .topbar.isMenuOpen .navToggleBar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -1347,6 +1353,7 @@ details.offerAcc[open] .offerAccIcon {
 
   .navToggleBar { transition: transform .18s ease, opacity .18s ease; }
 }
+
 /* ===== FIX: Offers Texte wieder linksbündig ===== */
 .offerAccBody{
   text-align: left;
@@ -1363,21 +1370,20 @@ details.offerAcc[open] .offerAccIcon {
 }
 
 .offerAccBody .cardActions{
-  justify-content: flex-start; /* statt mittig */
+  justify-content: flex-start;
 }
 /* ===== /FIX ===== */
+
 /* ===== MOBILE: Horizontalen Overflow killen (gegen "Rand" & Wackeln) ===== */
 html, body{
   width: 100%;
-  overflow-x: hidden; /* iOS/Chrome safe */
+  overflow-x: hidden;
 }
 
-/* Noch robuster (falls irgendein Child minimal übersteht) */
 @supports (overflow: clip){
   html, body{ overflow-x: clip; }
 }
 
-/* Slider/UI darf niemals rausstehen */
 .mediaFrame,
 .sliderUi,
 .dots{
@@ -1387,6 +1393,7 @@ html, body{
 .pattern::before{
   width: 100%;
 }
+
 /* =========================================================
    NEWS Lightbox (nur für News-Bilder)
    ========================================================= */
@@ -1451,9 +1458,8 @@ body.mmLbOpen{
   justify-content: space-between;
   align-items:center;
   gap: 10px;
-  pointer-events:auto; /* <-- wichtig: Buttons klickbar */
+  pointer-events:auto;
 }
-
 
 .mmLbCap{
   pointer-events:none;
@@ -1496,55 +1502,44 @@ body.mmLbOpen{
    ========================= */
 @supports (-webkit-touch-callout: none) {
 
-  /* 1) sichere Höhe für den sichtbaren Bereich */
   .hero{
-    /* verhindert "cropping" durch iOS-vh-bug + sticky bar */
     min-height: 100svh;
     min-height: 100dvh;
     min-height: -webkit-fill-available;
-
-    /* sorgt dafür, dass der Hero nicht unter die sticky topbar rutscht */
     scroll-margin-top: calc(76px + env(safe-area-inset-top));
   }
 
-  /* 2) extra Abstand unter der sticky topbar (nur iOS) */
   main#home{
     padding-top: env(safe-area-inset-top);
   }
 
-  /* 3) mediaFrame: iOS kommt mit aspect-ratio + min-height manchmal ins Schleudern
-        -> erzwinge eine stabile Höhe statt "min-height" */
   .mediaFrame{
-    /* verhindert abgeschnittene Kante auf iPad */
     height: auto;
     min-height: 0;
-
-    /* stabile, responsive Höhe für iPad */
     height: clamp(240px, 42vh, 520px);
     height: clamp(240px, 42svh, 520px);
     height: clamp(240px, 42dvh, 520px);
   }
 
-  /* 4) falls Safari trotzdem zoomt/verschiebt */
   .slide,
   .slide video,
   .slide img{
     transform: translateZ(0);
   }
 }
+
 /* =========================
    iPad/Safari: Topbar-Menü nicht abschneiden
    ========================= */
 @supports (-webkit-touch-callout: none) {
-  /* iPads liegen oft genau in der Breite, wo's knapp wird */
   @media (min-width: 861px) and (max-width: 1180px) {
     .menu{
-      gap: 14px;                 /* war 22px */
-      letter-spacing: .12em;     /* war .18em */
-      font-size: 10px;           /* war 11px */
+      gap: 14px;
+      letter-spacing: .12em;
+      font-size: 10px;
     }
     .menu a{
-      padding: 8px 0;            /* etwas kompakter */
+      padding: 8px 0;
     }
   }
 }
