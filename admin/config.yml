@@ -700,12 +700,14 @@ collections:
             name: items
             widget: list
             required: false
+            summary: "{{fields.order}} - {{fields.title}}"
             fields:
+              - { label: "Reihenfolge (1 = ganz oben)", name: order, widget: number, value_type: int, required: false, min: 1 }
               - { label: Titel, name: title, widget: string, required: false }
               - { label: "Name (optional)", name: name, widget: string, required: false }
               - { label: "Text (optional)", name: text, widget: text, required: false }
               - { label: "Bild (optional)", name: image, widget: image, required: false }
-              - { label: "Video MP4 (optional)", name: video, widget: file, required: false }
               - { label: "Poster (optional)", name: poster, widget: image, required: false }
+              - { label: "Video MP4 (optional)", name: video, widget: file, required: false }
 
 
