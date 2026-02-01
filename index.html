@@ -2551,6 +2551,20 @@ function mountFaq(faqData, hintFallback) {
     setText("aboutHeadTitle", (texts.about_head_title || "Vorstellung Headcoach").toUpperCase());
     setText("aboutHeadText", texts.about_head_text || "Hier kommt eure Vorstellung (Headcoach) rein – kurz, klar, authentisch.");
 
+
+    //Trust 
+    
+    const trustTitle = String(texts.about_trust_title || "").trim();
+    const trustText  = String(texts.about_trust_text || "").trim();
+    
+    const trustBox = document.getElementById("aboutTrust");
+      if (trustBox && (trustTitle || trustText)) {
+        trustBox.style.display = "block";
+        if (trustTitle) setText("aboutTrustTitle", trustTitle);
+        if (trustText) setText("aboutTrustText", trustText);
+      }
+
+
     // Optional: Headcoach Steckbrief (texts.json fallback)
     const headProfileFallback = String(texts.about_head_profile || texts.about_head_steckbrief || "").trim();
     if (headProfileFallback){
