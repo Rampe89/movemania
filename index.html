@@ -1058,14 +1058,6 @@ function mountHeroVideo(videoSlide, opts) {
 
   wrap.appendChild(v);
 
-  // NEW: Headline über dem Video
-  if (headlineText) {
-    const h = document.createElement("div");
-    h.className = "heroVideoHeadline";
-    h.textContent = headlineText;
-    wrap.appendChild(h);
-  }
-
   // Optional: bestehender Overlay (unten) – kannst du lassen
   if (s?.title || s?.text) {
     const overlay = document.createElement("div");
@@ -2595,15 +2587,15 @@ function mountFaq(faqData, hintFallback) {
 
     const firstVideo = heroSlides.find(s => String(s.type).toLowerCase() === "video") || null;
 
-    // HERO Headline/Subline aus texts.json
     const heroHeadline = String(texts?.hero_video_headline || "").trim();
     const heroSubline  = String(texts?.hero_subline || "").trim();
     
-    // Subline direkt setzen (damit "Inhalte laden..." weg ist)
+    if (heroHeadline) setText("heroVideoTopline", heroHeadline);
     if (heroSubline) setText("heroSubline", heroSubline);
     
-    // Video mounten + Headline/Subline übergeben
-    mountHeroVideo(firstVideo, { headline: heroHeadline, subline: heroSubline });
+    // Video mounten – ohne Headline-Overlay
+    mountHeroVideo(firstVideo, { subline: heroSubline });
+
 
 
     // NEWS aus news.json (CMS)
