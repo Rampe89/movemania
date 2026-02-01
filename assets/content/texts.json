@@ -1,10 +1,4 @@
 {
-  "hero_video_headline": "Hier wachsen Kinder. Sportlich und persönlich.",
-  "hero_subline": "Bei Movemania trainieren Kinder mit Freude, Mut und professioneller Begleitung. Im Training, im Camp, im Team.",
-
-  "about_trust_title": "Warum Eltern Movemania vertrauen?",
-  "about_trust_text": "Ich arbeite täglich mit Kindern. Im Klassenzimmer, auf dem Fußballplatz und als Vater.",
-
   "hero_slide3_title": "Was wir machen",
   "usp_kicker": "\"Haltung schlägt Taktik. Immer!\"",
   "offers_balls_text": "Die Ballschule legt spielerisch die Grundlagen für Koordination, Motorik und Ballgefühl.",
@@ -17,6 +11,7 @@
   "about_kicker": "Über uns",
   "offers_elite_kurse_text": "Elitekurse richten sich an leistungsorientierte Kinder mit besonderem Entwicklungsfokus.",
   "hero_slide2_text": "Respekt, Entwicklung und Freude an Bewegung sind die Basis unserer täglichen Arbeit.",
+  "about_trust_text": "\"Ich arbeite täglich mit Kindern. Im Klassenzimmer, auf dem Fußballplatz und als Vater.\"",
   "about_title": "Gründer und Headcoach",
   "hero_slide1_text": "Ich bin der Kopf hinter Movemania FS. Mein Ziel: Kinder stark machen – auf und neben dem Platz.",
   "value3_text": "Respekt, Fairness und Teamgeist sind für uns unverzichtbar – im Training wie im Alltag.",
@@ -26,6 +21,7 @@
   "contact_mail_label": "movemania@mail.de",
   "value1_text": "Wir ermutigen Kinder, Entscheidungen zu treffen, Neues auszuprobieren und an sich zu glauben.",
   "offers_kiga_text": "Im Fußballkindergarten stehen Bewegung, Spaß und erste fußballerische Erfahrungen im Vordergrund.",
+  "hero_subline": "Bei Movemania trainieren Kinder mit Freude, Mut und professioneller Begleitung. Im Training, im Camp, im Team.",
   "faq_hint": "Hast du weitere Fragen? Dann melde dich gern per E-Mail bei uns.",
   "contact_ig_label": "@movemania_fs https://www.instagram.com/movemania_fs?igsh=dHZkanJnMzdiM2Zo&utm_source=qr",
   "hero_text": "Movemania ist eine moderne Fußballschule für Kinder, die Qualität, Herz und Entwicklung verbindet. In kleinen Gruppen fördern wir junge Spieler individuell - spielnah, anspruchsvoll und mit Freude. Unser Fokus liegt nicht nur auf Technik, sondern auf Selbstvertrauen, Mut und echter Persönlichkeitsentwicklung.",
@@ -37,7 +33,9 @@
   "about_head_text": "Als studierter Sportwissenschaftler und Pädagoge arbeite ich seit über 20 Jahren als Fußballtrainer, davon 13 Jahre im Nachwuchsleistungszentrum.\nMit A-Lizenz und meiner Tätigkeit als Referent für den Niedersächsischen Fußballverband verbinde ich fachliche Qualität mit echter pädagogischer Verantwortung.\nAls Vater von zwei Kindern weiß ich, wie wichtig es ist, Kinder nicht nur sportlich, sondern auch menschlich zu stärken.",
   "value3_title": "Werte",
   "about_head_profile": "Name: Andre Kucharski\n\nPosition bei Movemania: Gründer, Geschäftsführer und Headcoach\n\nLizenz: DFB A-Lizenz\n\nErfahrung: \n- Fußballcoach seit 2007\n- Referent und Ausbilder seit 2020\n\nMeine Philosophie:\nDiese spiegelt sich in Movemania wieder. Es geht immer um Freude und Leidenschaft. Dies kombiniert mit maximaler Bewegungszeit wird zu Entwicklung führen. \n\nDas ist mir im Training wichtig: \nSei mutig, nutze Fehler als Helfer, bleib dran und gib immer 100%! \n\nLieblingsspieler: Paul Kucharski\n\nMein Leitsatz:\nHaltung schlägt Talent. Immer.",
+  "hero_video_headline": "Hier wachsen Kinder. Sportlich und persönlich.",
   "hero_slide1_title": "Vorstellung",
   "contact_wa_label": "Community & Infos:https://chat.whatsapp.com/BG6ib0qTCah6m2SvmwYc9l",
-  "hero_slide2_title": "Wofür wir stehen"
+  "hero_slide2_title": "Wofür wir stehen",
+  "about_trust_title": "Warum Eltern Movemania vertrauen?"
 }
