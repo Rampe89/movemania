@@ -1579,5 +1579,17 @@ body.mmLbOpen{
 
 /* Hero-Video soll cover sein */
 #heroMedia video{ object-fit: cover !important; }
+.heroVideoTopline{
+  margin: 0;
+  color: var(--navy);
+  font-weight: 1000;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  font-size: 22px;
+}
+
+@media (min-width: 1100px){
+  .heroVideoTopline{ font-size: 26px; }
+}
 
 
