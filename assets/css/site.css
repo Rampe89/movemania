@@ -1648,44 +1648,35 @@ body.mmLbOpen{
   gap: 12px;
   min-width: 0;
 }
-/* =========================
-   ABOUT TRUST – Zitat Look
-   ========================= */
-.aboutTrust{
-  position: relative;
-  padding: 14px 14px 14px 16px;
-  border: 1px solid var(--line);
-  background: rgba(30,51,102,.04); /* navy-tint */
-  border-radius: 14px;
-}
 
-.aboutTrust::before{
-  content: "“";
-  position: absolute;
-  top: -10px;
-  left: 10px;
-  font-size: 56px;
-  line-height: 1;
-  font-weight: 1000;
-  color: rgba(30,51,102,.25);
-  pointer-events: none;
+/* =========================
+   ABOUT TRUST – Editorial Zitat
+   ========================= */
+
+.aboutTrust{
+  margin: 6px 0 10px;
+  padding-left: 14px;
+  border-left: 3px solid rgba(30,51,102,.25); /* sehr subtil */
 }
 
 .aboutTrustTitle{
   margin: 0 0 6px;
+  font-weight: 900;
   color: var(--navy);
-  font-weight: 1000;
   letter-spacing: -0.01em;
-  line-height: 1.15;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .aboutTrustText{
   margin: 0;
-  color: rgba(11,16,32,.72);
-  line-height: 1.7;
-  font-size: 13px;
+  font-style: italic;
+  color: rgba(11,16,32,.75);
+  line-height: 1.65;
+  font-size: 14px;
 }
+
+
+
 /* =========================
    HERO CTAs – Mobile Optimierung
    ========================= */
