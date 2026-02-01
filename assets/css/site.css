@@ -1648,5 +1648,73 @@ body.mmLbOpen{
   gap: 12px;
   min-width: 0;
 }
+/* =========================
+   ABOUT TRUST – Zitat Look
+   ========================= */
+.aboutTrust{
+  position: relative;
+  padding: 14px 14px 14px 16px;
+  border: 1px solid var(--line);
+  background: rgba(30,51,102,.04); /* navy-tint */
+  border-radius: 14px;
+}
+
+.aboutTrust::before{
+  content: "“";
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  font-size: 56px;
+  line-height: 1;
+  font-weight: 1000;
+  color: rgba(30,51,102,.25);
+  pointer-events: none;
+}
+
+.aboutTrustTitle{
+  margin: 0 0 6px;
+  color: var(--navy);
+  font-weight: 1000;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  font-size: 16px;
+}
+
+.aboutTrustText{
+  margin: 0;
+  color: rgba(11,16,32,.72);
+  line-height: 1.7;
+  font-size: 13px;
+}
+/* =========================
+   HERO CTAs – Mobile Optimierung
+   ========================= */
+#heroCtas.heroCtas{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:14px;
+  align-items:center;
+}
+
+/* Buttons etwas kompakter */
+#heroCtas .btn{
+  min-height: 40px;
+  padding: 0 14px;
+}
+
+/* Mobile: nicht full-width, sondern kompakte Buttons */
+@media (max-width: 520px){
+  #heroCtas.heroCtas{
+    gap:10px;
+  }
+  #heroCtas .btn{
+    width: auto;            /* <- wichtig: nicht 100% */
+    min-width: 0;
+    padding: 0 12px;
+    letter-spacing: .14em;
+    font-size: 10px;
+  }
+}
 
 
