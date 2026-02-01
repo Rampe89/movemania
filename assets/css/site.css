@@ -1678,34 +1678,45 @@ body.mmLbOpen{
 
 
 /* =========================
-   HERO CTAs – Mobile Optimierung
+   MOBILE HERO: CTA Buttons sauber
    ========================= */
-#heroCtas.heroCtas{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  margin-top:14px;
-  align-items:center;
-}
-
-/* Buttons etwas kompakter */
-#heroCtas .btn{
-  min-height: 40px;
-  padding: 0 14px;
-}
-
-/* Mobile: nicht full-width, sondern kompakte Buttons */
-@media (max-width: 520px){
+@media (max-width: 640px){
   #heroCtas.heroCtas{
-    gap:10px;
+    display: grid;
+    grid-template-columns: 1fr;   /* untereinander */
+    gap: 10px;
+    justify-items: center;        /* zentriert */
+    margin-top: 14px;
   }
-  #heroCtas .btn{
-    width: auto;            /* <- wichtig: nicht 100% */
-    min-width: 0;
-    padding: 0 12px;
-    letter-spacing: .14em;
+
+  #heroCtas.heroCtas .btn{
+    width: auto;                 /* nicht full width */
+    max-width: 260px;            /* <- macht sie "handy-gut" */
+    min-width: 220px;            /* gleiche Optik (kein Wackeln) */
+    padding: 0 14px;
+    min-height: 44px;
     font-size: 10px;
+    letter-spacing: .14em;
   }
 }
+@media (max-width: 640px){
+  .heroVideoTopline{
+    font-size: 18px;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+
+  .heroSubline{
+    font-size: 13px;
+    line-height: 1.45;
+  }
+}
+@media (max-width: 640px){
+  .heroText{
+    font-size: 14px;
+    line-height: 1.75;
+  }
+}
+
 
 
