@@ -989,6 +989,54 @@
         }
       }
 
+function mountHeroCtas(links) {
+  const host = document.getElementById("heroCtas");
+  if (!host) return;
+
+  const raw = Array.isArray(links?.hero_ctas) ? links.hero_ctas : [];
+
+  // fallback: falls noch nichts im CMS gepflegt ist
+  const fallback = [
+    { label: "Camps anmelden", url: safeUrl(links?.signup_camps || "") },
+    { label: "Powerkurse anmelden", url: safeUrl(links?.signup_powerkurse || "") },
+    { label: "Kontakt / Anfrage", url: "#kontakt" }
+  ];
+
+  const items = (raw.length ? raw : fallback)
+    .map((it) => ({
+      label: String(it?.label || "").trim(),
+      url: safeUrl(it?.url || it?.link || ""),
+    }))
+    .filter((it) => it.label && it.url)
+    .slice(0, 8);
+
+  clearEl(host);
+
+  if (!items.length) {
+    host.style.display = "none";
+    return;
+  }
+
+  host.style.display = "flex";
+
+  items.forEach((it) => {
+    const a = document.createElement("a");
+    a.className = "btn btnGhost btnAccent";
+    a.href = it.url;
+
+    // interne Sprünge (#kontakt) nicht in neuem Tab
+    const isAnchor = it.url.startsWith("#");
+    if (!isAnchor) {
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+    }
+
+    a.textContent = it.label.toUpperCase();
+    host.appendChild(a);
+  });
+}
+
+      
      
       /* HERO: nur Video (autoplay muted + Sound Toggle, full-bleed cover) */
 function mountHeroVideo(videoSlide, opts) {
@@ -2449,6 +2497,7 @@ function mountFaq(faqData, hintFallback) {
 
     let links = {};
     try { links = await loadJSON("assets/content/links.json"); } catch (e) {}
+    mountHeroCtas(links);
 
     let texts = {};
     try { texts = await loadJSON("assets/content/texts.json"); } catch (e) {}
