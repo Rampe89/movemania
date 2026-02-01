@@ -2592,7 +2592,17 @@ function mountFaq(faqData, hintFallback) {
     })) : [];
 
     const firstVideo = heroSlides.find(s => String(s.type).toLowerCase() === "video") || null;
-    mountHeroVideo(firstVideo);
+
+    // HERO Headline/Subline aus texts.json
+    const heroHeadline = String(texts?.hero_video_headline || "").trim();
+    const heroSubline  = String(texts?.hero_subline || "").trim();
+    
+    // Subline direkt setzen (damit "Inhalte laden..." weg ist)
+    if (heroSubline) setText("heroSubline", heroSubline);
+    
+    // Video mounten + Headline/Subline übergeben
+    mountHeroVideo(firstVideo, { headline: heroHeadline, subline: heroSubline });
+
 
     // NEWS aus news.json (CMS)
     let newsData = null;
