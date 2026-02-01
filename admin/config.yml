@@ -44,6 +44,11 @@ collections:
 
           - { label: "Headcoach Steckbrief (optional)", name: about_head_profile, widget: text, required: false }
 
+          - { label: "Über dem Headcoach-Bild: Titel", name: about_trust_title, widget: string, required: false }
+          
+          - { label: "Über dem Headcoach-Bild: Text", name: about_trust_text, widget: text, required: false }
+
+
           # =========================
           # WERTE / USP
           # =========================
