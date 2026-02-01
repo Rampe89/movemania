@@ -1597,5 +1597,31 @@ body.mmLbOpen{
   flex-wrap:wrap;
   margin-top:12px;
 }
+/* HERO CTA Buttons: Abstand + nicer layout */
+#heroCtas.heroCtas{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:14px;
+  align-items:center;
+}
+
+/* Buttons im Hero: etwas kompakter, damit sie nicht wie ein Block wirken */
+#heroCtas .btn{
+  min-height: 42px;
+  padding: 0 16px;
+}
+
+/* Optional: auf schmaleren Screens untereinander statt gequetscht */
+@media (max-width: 520px){
+  #heroCtas.heroCtas{
+    flex-direction: column;
+    align-items: stretch;
+  }
+  #heroCtas .btn{
+    width: 100%;
+    justify-content: center;
+  }
+}
 
 
