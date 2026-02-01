@@ -139,59 +139,60 @@ collections:
               - { label: "Icon (Upload)", name: icon, widget: image, required: false }
               - { label: "Icon ALT (optional)", name: icon_alt, widget: string, required: false }
 
+  
+
   # --- LINKS ---
-- name: links
-  label: Links
-  files:
-    - file: assets/content/links.json
-      label: Links (Buttons / Kontakt)
-      name: links
-      format: json
-      fields:
+  - name: links
+    label: Links
+    files:
+      - file: assets/content/links.json
+        label: Links (Buttons / Kontakt)
+        name: links
+        format: json
+        fields:
 
-        # --- Allgemein ---
-        - { label: Booking Link, name: booking, widget: string, required: false }
-        - { label: Camps Link, name: camps, widget: string, required: false }
+          # --- Allgemein ---
+          - { label: Booking Link, name: booking, widget: string, required: false }
+          - { label: Camps Link, name: camps, widget: string, required: false }
 
-        # --- Instagram ---
-        - { label: "Instagram Link (URL)", name: instagram, widget: string, required: false }
-        - { label: "Instagram Text (z.B. @movemania_fs)", name: instagram_text, widget: string, required: false }
-        - { label: "Instagram Icon (Upload)", name: instagram_icon, widget: image, required: false }
+          # --- Instagram ---
+          - { label: "Instagram Link (URL)", name: instagram, widget: string, required: false }
+          - { label: "Instagram Text (z.B. @movemania_fs)", name: instagram_text, widget: string, required: false }
+          - { label: "Instagram Icon (Upload)", name: instagram_icon, widget: image, required: false }
 
-        # --- WhatsApp ---
-        - { label: "WhatsApp Link (URL)", name: whatsapp, widget: string, required: false }
-        - { label: "WhatsApp Text (z.B. Community & Infos)", name: whatsapp_text, widget: string, required: false }
-        - { label: "WhatsApp Icon (Upload)", name: whatsapp_icon, widget: image, required: false }
+          # --- WhatsApp ---
+          - { label: "WhatsApp Link (URL)", name: whatsapp, widget: string, required: false }
+          - { label: "WhatsApp Text (z.B. Community & Infos)", name: whatsapp_text, widget: string, required: false }
+          - { label: "WhatsApp Icon (Upload)", name: whatsapp_icon, widget: image, required: false }
 
-        # --- Mail ---
-        - { label: "E-Mail (z.B. movemania@mail.de oder mailto:...)", name: mailto, widget: string, required: false }
-        - { label: "E-Mail Text (z.B. movemania@mail.de)", name: mail_text, widget: string, required: false }
-        - { label: "Mail Icon (Upload)", name: mail_icon, widget: image, required: false }
+          # --- Mail ---
+          - { label: "E-Mail (z.B. movemania@mail.de oder mailto:...)", name: mailto, widget: string, required: false }
+          - { label: "E-Mail Text (z.B. movemania@mail.de)", name: mail_text, widget: string, required: false }
+          - { label: "Mail Icon (Upload)", name: mail_icon, widget: image, required: false }
 
-        # --- Extern ---
-        - { label: "Shop (extern)", name: shop, widget: string, required: false }
+          # --- Extern ---
+          - { label: "Shop (extern)", name: shop, widget: string, required: false }
 
-        # --- Hero Video Fallback ---
-        - { label: "Hero Video MP4 (Fallback)", name: hero_video_mp4, widget: string, required: false }
-        - { label: "Hero Video Poster (Fallback)", name: hero_video_poster, widget: string, required: false }
+          # --- Hero Video Fallback ---
+          - { label: "Hero Video MP4 (Fallback)", name: hero_video_mp4, widget: string, required: false }
+          - { label: "Hero Video Poster (Fallback)", name: hero_video_poster, widget: string, required: false }
 
-        # --- Powerkurse ---
-        - { label: "Power 2012/13", name: power1213, widget: string, required: false }
-        - { label: "Power 2014/15", name: power1415, widget: string, required: false }
-        - { label: "Power 2016/17", name: power1617, widget: string, required: false }
-        - { label: "Power 2018/19", name: power1819, widget: string, required: false }
+          # --- Powerkurse ---
+          - { label: "Power 2012/13", name: power1213, widget: string, required: false }
+          - { label: "Power 2014/15", name: power1415, widget: string, required: false }
+          - { label: "Power 2016/17", name: power1617, widget: string, required: false }
+          - { label: "Power 2018/19", name: power1819, widget: string, required: false }
 
-        # --- HERO CTA BUTTONS ---
-        - label: "Hero CTA Buttons"
-          name: hero_ctas
-          widget: list
-          required: false
-          summary: "{{fields.label}} → {{fields.url}}"
-          fields:
-            - { label: "Button Text", name: label, widget: string, required: true }
-            - { label: "Ziel-URL", name: url, widget: string, required: true }
+          # --- HERO CTA BUTTONS ---
+          - label: "Hero CTA Buttons"
+            name: hero_ctas
+            widget: list
+            required: false
+            summary: "{{fields.label}} → {{fields.url}}"
+            fields:
+              - { label: "Button Text", name: label, widget: string, required: true }
+              - { label: "Ziel-URL", name: url, widget: string, required: true }
 
-   
                 
 
   # --- SPONSORS ---
