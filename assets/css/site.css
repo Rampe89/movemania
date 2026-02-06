@@ -1754,6 +1754,11 @@ body.mmLbOpen{
     display: block;
   }
 }
+.inlineMail{
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 700;
+}
 
 
 
