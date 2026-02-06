@@ -1897,7 +1897,32 @@ function mountFaq(faqData, hintFallback) {
   /* ---------------------------
      Helpers (lokal)
      --------------------------- */
+  const escapeHtml = (str) =>
+  String(str || "").replace(/[&<>"']/g, (m) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;",
+  }[m]));
 
+const linkifyEmailsToMailto = (escapedText) =>
+  String(escapedText || "").replace(
+    /([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,})/gi,
+    '<a class="inlineMail" href="mailto:$1">$1</a>'
+  );
+
+// safe: erst escapen, dann mail-linkify, dann \n -> <br>
+const setTextWithBreaksAndMailto = (el, raw) => {
+  if (!el) return;
+  const v = String(raw || "").trim();
+  if (!v) return;
+
+  const safe = escapeHtml(v);
+  el.innerHTML = linkifyEmailsToMailto(safe).replace(/\n/g, "<br>");
+};
+
+    
   const addOptionalLinkButton = (containerEl, link, label, cssClass) => {
     if (!containerEl) return;
     const href = safeUrl(link);
@@ -1994,7 +2019,7 @@ function mountFaq(faqData, hintFallback) {
       }
     }
 
-    setTextWithBreaks(target, v);
+    setTextWithBreaksAndMailto(target, v);
   };
 
   // Rendert "Extra-Accordions" innerhalb des Sub-Containers (oder am Ende)
@@ -2021,7 +2046,7 @@ function mountFaq(faqData, hintFallback) {
       const body = document.createElement("div");
       body.className = "offerExtraAccBody";
       // Text mit Breaks (keine HTML-Tags zulassen)
-      setTextWithBreaks(body, String(a?.text || ""));
+      setTextWithBreaksAndMailto(body, String(a?.text || ""));
       d.appendChild(body);
 
       // Optional Link in Extra
