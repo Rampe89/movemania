@@ -1903,3 +1903,28 @@ body.mmLbOpen{
     border-radius: 14px;
   }
 }
+/* =====================================================
+   FEEDBACK: NUR 2 KARTEN ZEIGEN (robust)
+   ===================================================== */
+
+/* Falls .card irgendwo global ein display !important bekommt,
+   überschreiben wir das hier hart. */
+#feedbackGrid .card{
+  display: flex !important;
+}
+
+/* ALLE ab der 3. Karte ausblenden (egal ob direkte Kinder oder tiefer verschachtelt) */
+#feedbackGrid .card:nth-child(n+3),
+#feedbackGrid > * .card:nth-child(n+3){
+  display: none !important;
+}
+
+/* Sicherheitsnetz: wenn in deinem Grid z.B. Wrapper zwischenliegen,
+   zählen nth-child-Regeln oft anders. Alternative, die nur die ersten zwei
+   .card im Grid-Baum stehen lässt: */
+#feedbackGrid .card{
+  order: 0;
+}
+#feedbackGrid .card:nth-of-type(n+3){
+  display: none !important;
+}
