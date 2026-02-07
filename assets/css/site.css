@@ -1759,3 +1759,159 @@ body.mmLbOpen{
   text-underline-offset: 2px;
   font-weight: 700;
 }
+/* =========================
+   FEEDBACK – clean card look
+   ========================= */
+
+.feedbackGrid{
+  gap: 16px;
+}
+
+/* Karte */
+.feedbackGrid .card{
+  border: 1px solid rgba(11,16,32,.10);
+  border-radius: 16px;
+  background: rgba(255,255,255,.82);
+  box-shadow: 0 12px 26px rgba(11,16,32,.04);
+  padding: 16px;
+}
+
+/* Head: Titel + Person */
+.feedbackGrid .card h3{
+  margin: 0;
+  font-size: 15px;
+  font-weight: 950;
+  letter-spacing: .01em;
+  color: rgba(11,16,32,.92);
+}
+
+/* Inline-Style am #fbXName überstimmen */
+.feedbackGrid .card p.fbName{ ... }
+  all: unset;               /* kill inline look */
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 8px 0 10px !important;
+  font-family: inherit;
+}
+
+/* Avatar-Initialen */
+.feedbackGrid .fbAvatar{
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-weight: 950;
+  color: rgba(11,16,32,.78);
+  background: rgba(11,16,32,.05);
+  border: 1px solid rgba(11,16,32,.10);
+}
+
+/* Person-Block */
+.feedbackGrid .fbPersonLine{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  line-height: 1.1;
+}
+
+.feedbackGrid .fbPersonName{
+  font-weight: 950;
+  color: rgba(11,16,32,.85);
+  font-size: 12px;
+}
+
+.feedbackGrid .fbPersonRole{
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(11,16,32,.05);
+  border: 1px solid rgba(11,16,32,.10);
+  font-weight: 950;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: rgba(11,16,32,.62);
+}
+
+/* Details: "Mehr lesen" als Link */
+.feedbackGrid details.fbDetails > summary.fbSum{
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  margin-top: 6px;
+  border: 0;
+  background: transparent;
+
+  font-weight: 950;
+  font-size: 12px;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  color: rgba(11,16,32,.70);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+.feedbackGrid details.fbDetails > summary.fbSum::-webkit-details-marker{ display:none; }
+
+/* Plus-Icon clean */
+.feedbackGrid .fbPlus{
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(11,16,32,.12);
+  background: rgba(255,255,255,.9);
+  color: rgba(11,16,32,.70);
+  font-weight: 950;
+  line-height: 1;
+}
+
+/* Textbereich */
+.feedbackGrid details.fbDetails > :not(summary){
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(11,16,32,.10);
+  color: rgba(11,16,32,.82);
+  line-height: 1.7;
+  font-size: 13px;
+}
+
+/* =========================
+   Collapsed: only first 2 cards
+   ========================= */
+#feedback.isCollapsed #feedbackGrid > .card:nth-child(n+3){
+  display: none;
+}
+
+#feedback .fbMoreWrap{
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+#feedback .fbMoreBtn{
+  border-radius: 999px;
+  padding: 12px 16px;
+  border: 1px solid rgba(11,16,32,.14);
+  background: rgba(255,255,255,.82);
+  color: rgba(11,16,32,.84);
+  font-weight: 950;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+#feedback .fbMoreBtn:hover{
+  transform: translateY(-1px);
+}
+
+/* Mobile */
+@media (max-width: 640px){
+  .feedbackGrid .card{ padding: 14px; border-radius: 14px; }
+  .feedbackGrid .fbAvatar{ width: 34px; height: 34px; }
+}
