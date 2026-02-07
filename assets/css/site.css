@@ -1759,3 +1759,131 @@ body.mmLbOpen{
   text-underline-offset: 2px;
   font-weight: 700;
 }
+/* =========================
+   FEEDBACK – Quote Cards (clean)
+   ========================= */
+
+#feedback .grid2{
+  gap: 18px;
+}
+
+/* Kachel insgesamt */
+#feedback .card{
+  position: relative;
+  padding: 18px 18px 16px;
+  border: 1px solid rgba(11,16,32,.10);
+  border-radius: 16px;
+  background: rgba(255,255,255,.72);
+  box-shadow: 0 10px 22px rgba(11,16,32,.04);
+  overflow: hidden;
+}
+
+/* großes Quote-Zeichen als Gestaltung */
+#feedback .card::before{
+  content: "“";
+  position: absolute;
+  top: -26px;
+  right: 12px;
+  font-size: 140px;
+  line-height: 1;
+  font-weight: 900;
+  color: rgba(11,16,32,.06);
+  pointer-events: none;
+}
+
+/* Titel / Name in der Karte (falls deine IDs/Klassen anders sind, wirkt es trotzdem generell) */
+#feedback .card h3,
+#feedback .card .cardTitle{
+  margin: 0 0 6px;
+  font-size: 16px;
+  letter-spacing: .02em;
+}
+
+#feedback .card small,
+#feedback .card .muted{
+  display: block;
+  margin: 0 0 10px;
+  color: rgba(11,16,32,.55);
+  font-weight: 700;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+/* Accordion clean */
+#feedback details{
+  margin-top: 10px;
+  border: 0;
+  padding: 0;
+}
+
+/* Summary: nicht als Button – eher als Link */
+#feedback details > summary{
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 0;
+  margin: 4px 0 0;
+  border: 0;
+  background: transparent;
+
+  font-weight: 900;
+  font-size: 12px;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  color: rgba(11,16,32,.70);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+#feedback details > summary::-webkit-details-marker{ display:none; }
+
+/* ALLE vorhandenen Plus/Pill-Elemente in summary ausblenden */
+#feedback details > summary button,
+#feedback details > summary svg,
+#feedback details > summary .plus,
+#feedback details > summary .icon,
+#feedback details > summary .fbPlus,
+#feedback details > summary .offerAccIcon{
+  display: none !important;
+}
+
+/* Pfeil statt Plus */
+#feedback details > summary::after{
+  content: "→";
+  font-size: 14px;
+  transform: translateY(-1px);
+  color: rgba(11,16,32,.55);
+}
+
+/* Open: Pfeil nach oben rechts */
+#feedback details[open] > summary{
+  color: rgba(11,16,32,.85);
+}
+#feedback details[open] > summary::after{
+  content: "↗";
+}
+
+/* Body/Text */
+#feedback details > :not(summary){
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(11,16,32,.10);
+
+  color: rgba(11,16,32,.80);
+  line-height: 1.7;
+  font-size: 13px;
+}
+
+/* Mobile: enger */
+@media (max-width: 640px){
+  #feedback .grid2{ gap: 12px; }
+  #feedback .card{ padding: 16px 14px 14px; border-radius: 14px; }
+  #feedback .card::before{ font-size: 120px; top: -28px; right: 10px; }
+}
