@@ -1759,3 +1759,164 @@ body.mmLbOpen{
   text-underline-offset: 2px;
   font-weight: 700;
 }
+/* =====================================================
+   FEEDBACK – "Was Eltern sagen"
+   CSS-only (alle Karten sichtbar), klarer Kontrast zum Pattern,
+   Orange-Akzent, ruhig & hochwertig
+   Scoped auf #feedbackGrid
+   ===================================================== */
+
+/* 1) Section visuell vom Dot-Pattern lösen */
+#feedback .wrap{
+  /* Panel */
+  background: rgba(30,51,102,.035);
+  border: 1px solid var(--line);
+  padding: 28px 22px;
+  /* Pattern aus dem Panel nehmen (falls es drauf liegt) */
+  background-image: none !important;
+}
+
+/* 2) Grid: mehr Rhythmus, weniger "Wust" */
+#feedbackGrid{
+  margin-top: 18px;
+  gap: 18px; /* wirkt, wenn grid/flex gesetzt ist */
+}
+
+/* 3) Card: echter Kontrast + saubere Hierarchie */
+#feedbackGrid .card{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  background: rgba(255,255,255,.94);
+  border: 1px solid var(--card_border);
+  border-radius: 14px; /* lokal ok, global radius kann 0 bleiben */
+  padding: 22px 22px 18px;
+
+  box-shadow: 0 14px 36px rgba(11,16,32,.10);
+  overflow: hidden;
+
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+
+/* 4) Orange als subtiler "Brand-Stamp" – nicht Deko, sondern Struktur */
+#feedbackGrid .card::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--accent);
+  opacity: .9;
+}
+
+/* optional: ganz leichte innere Kante, damit Cards auf hellem Panel knacken */
+#feedbackGrid .card::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  pointer-events: none;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.9);
+}
+
+/* Hover: nur etwas "heben", sonst seriös */
+#feedbackGrid .card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 18px 46px rgba(11,16,32,.14);
+  border-color: rgba(255,146,0,.35);
+}
+
+/* 5) Typo: Titel und Name sauber trennen */
+#feedbackGrid .card h3{
+  margin: 6px 0 0;
+  color: var(--ink);
+  font-size: var(--card_title_size);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* Name/Quelle (deine fbXName IDs): ruhiger, aber präsent */
+#feedbackGrid [id^="fb"][id$="Name"]{
+  color: rgba(30,51,102,.72);
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* 6) Details-Bereich: Button und Text nicht verloren wirken lassen */
+#feedbackGrid details.fbDetails{
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+/* globales summary::after (+/–) hier ausknipsen, weil .fbPlus im Markup existiert */
+#feedbackGrid details.fbDetails > summary::after{
+  content: none !important;
+}
+
+/* Summary: wie ein echter Button – klarer Rahmen, leicht getönt */
+#feedbackGrid summary.fbSum{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: rgba(30,51,102,.03);
+
+  color: var(--ink);
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* Plus-Badge */
+#feedbackGrid .fbPlus{
+  width: 22px;
+  height: 22px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  font-weight: 900;
+  line-height: 1;
+  background: rgba(255,255,255,.9);
+}
+
+/* Open State: Orange signalisiert Zustand */
+#feedbackGrid details[open] summary.fbSum{
+  border-color: rgba(255,146,0,.55);
+  background: rgba(255,146,0,.10);
+}
+
+#feedbackGrid details[open] .fbPlus{
+  border-color: rgba(255,146,0,.55);
+  color: var(--accent);
+}
+
+/* Text im geöffneten Bereich */
+#feedbackGrid details.fbDetails p{
+  margin-top: 12px;
+  line-height: 1.75;
+  color: rgba(30,51,102,.70);
+}
+
+/* 7) optional: wenn das Pattern im Hintergrund zu busy wirkt,
+      kannst du es NUR hier soften, ohne global was zu zerstören */
+#feedback{
+  /* hilft, wenn das Pattern zu stark durchschlägt */
+  backdrop-filter: saturate(1.02);
+}
+
+/* Mobile */
+@media (max-width: 640px){
+  #feedback .wrap{
+    padding: 22px 14px;
+    border-radius: 14px;
+  }
+}
