@@ -1759,3 +1759,141 @@ body.mmLbOpen{
   text-underline-offset: 2px;
   font-weight: 700;
 }
+/* =====================================================
+   FEEDBACK – "Was Eltern sagen"
+   CSS-only, kuratiert, seriös
+   ===================================================== */
+
+/* Bereich klar vom Pattern trennen */
+#feedback .wrap{
+  background: rgba(11,16,32,.02);
+  border: 1px solid var(--line);
+  padding: 28px 20px;
+}
+
+/* Grid Grundabstand */
+#feedbackGrid{
+  margin-top: 20px;
+}
+
+/* =========================
+   KURATION: nur 2 sichtbar
+   ========================= */
+#feedbackGrid .card:nth-child(n+3){
+  display: none;
+}
+
+/* Alle Karten zeigen, wenn der Bereich bewusst betreten wird */
+#feedbackGrid:hover .card,
+#feedbackGrid:focus-within .card{
+  display: flex;
+}
+
+/* =========================
+   CARD DESIGN (ruhig)
+   ========================= */
+#feedbackGrid .card{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px 22px 18px;
+  background: var(--card_bg);
+  border: 1px solid var(--card_border);
+  border-radius: 0; /* bewusst kantig */
+  box-shadow: 0 10px 30px rgba(11,16,32,var(--shadow_strength));
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+/* subtiler Hover – kein Spielzeug */
+#feedbackGrid .card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 38px rgba(11,16,32,.16);
+}
+
+/* =========================
+   ORANGE AKZENT – sehr fein
+   ========================= */
+#feedbackGrid .card::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--accent);
+  opacity: .55;
+}
+
+/* =========================
+   TYPOGRAFIE
+   ========================= */
+#feedbackGrid .card h3{
+  margin: 0;
+  font-size: var(--card_title_size);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+#feedbackGrid .card p{
+  color: var(--muted);
+}
+
+/* Name/Quelle */
+#feedbackGrid [id^="fb"][id$="Name"]{
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* =========================
+   DETAILS / MEHR
+   ========================= */
+#feedbackGrid details.fbDetails{
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+/* globales + / – hier deaktivieren */
+#feedbackGrid details.fbDetails > summary::after{
+  content: none !important;
+}
+
+/* Summary Button */
+#feedbackGrid summary.fbSum{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  background: #fff;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+/* Plus */
+#feedbackGrid .fbPlus{
+  width: 22px;
+  height: 22px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  font-weight: 900;
+}
+
+/* Open State */
+#feedbackGrid details[open] summary.fbSum{
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* =========================
+   MOBILE
+   ========================= */
+@media (max-width: 640px){
+  #feedback .wrap{
+    padding: 22px 14px;
+  }
+}
