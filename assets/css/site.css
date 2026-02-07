@@ -1759,6 +1759,135 @@ body.mmLbOpen{
   text-underline-offset: 2px;
   font-weight: 700;
 }
+/* =========================
+   FEEDBACK – Cards aufwerten
+   ========================= */
+
+.feedbackGrid .card{
+  padding: 18px 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 140px;
+  transition: border-color .15s ease, background .15s ease, transform .15s ease;
+}
+
+.feedbackGrid .card:hover{
+  border-color: rgba(210,24,45,.22);
+  background: rgba(11,16,32,.012);
+  transform: translateY(-1px);
+}
+
+/* Titel weniger "leer": etwas weniger Letterspacing, bessere Lineheight */
+.feedbackGrid .card h3{
+  font-size: 13px;
+  letter-spacing: .06em; /* war sehr "luftig" */
+  line-height: 1.2;
+  margin: 0;
+}
+
+/* Autor/Meta */
+.feedbackGrid .card small,
+.feedbackGrid .card .meta{
+  display: block;
+  color: rgba(11,16,32,.55);
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-size: 11px;
+  margin-top: -2px;
+}
+
+/* Teasertext: sichtbar machen, aber nicht zu lang */
+.feedbackGrid .card p{
+  color: rgba(11,16,32,.72);
+  line-height: 1.7;
+  font-size: 13px;
+  margin: 0;
+  max-width: none;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;     /* 3 Zeilen Teaser */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* "Mehr" UI: nicht wie Menüpunkt, sondern wie Action */
+.feedbackGrid .cardActions{
+  margin-top: auto;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+}
+
+/* Falls du "MEHR" als Link/Button drin hast */
+.feedbackGrid .cardActions a,
+.feedbackGrid .cardActions button{
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-size: 11px;
+  color: rgba(11,16,32,.70);
+}
+
+.feedbackGrid .cardActions a:hover,
+.feedbackGrid .cardActions button:hover{
+  color: var(--red);
+}
+
+/* Plus als Badge (falls du ein Element dafür hast) */
+.feedbackGrid .fbPlus,
+.feedbackGrid .cardActions .plus{
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(11,16,32,.14);
+  display: grid;
+  place-items: center;
+  color: rgba(11,16,32,.55);
+  font-weight: 900;
+  transition: border-color .15s ease, color .15s ease, background .15s ease;
+}
+
+.feedbackGrid .card:hover .fbPlus,
+.feedbackGrid .card:hover .cardActions .plus{
+  border-color: rgba(210,24,45,.28);
+  color: var(--red);
+  background: rgba(210,24,45,.06);
+}
+/* Wenn Feedback-Einträge <details> sind */
+#feedback details{
+  border:1px solid var(--card-border);
+  background:var(--card-bg);
+  border-radius: var(--radius);
+  overflow:hidden;
+}
+
+#feedback details > summary{
+  padding: 16px 16px 12px;
+  display:flex;
+  align-items:flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  list-style:none;
+}
+
+#feedback details > summary::-webkit-details-marker{ display:none; }
+
+#feedback details > summary .fbPlus{
+  margin-top: 2px;
+}
+
+/* Body etwas kompakter */
+#feedback details > div,
+#feedback details .offerAccBody,
+#feedback details .faqA{
+  padding: 0 16px 14px;
+}
+@media (max-width: 640px){
+  .feedbackGrid{ gap: 12px; }
+  .feedbackGrid .card{ min-height: 0; }
+}
 
 
 
