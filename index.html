@@ -2254,7 +2254,7 @@ const setTextWithBreaksAndMailto = (el, raw) => {
 
 
 
-  function mountFeedbackFromJson(feedbackData) {
+ function mountFeedbackFromJson(feedbackData) {
   if (!feedbackData) return;
 
   if (feedbackData.title) setText("feedbackTitle", String(feedbackData.title).toUpperCase());
@@ -2264,7 +2264,11 @@ const setTextWithBreaksAndMailto = (el, raw) => {
   if (!grid) return;
 
   const raw = Array.isArray(feedbackData.items) ? feedbackData.items : [];
-  if (!raw.length) return;
+  if (!raw.length) {
+    // Grid leeren, falls mal nichts kommt
+    clearEl(grid);
+    return;
+  }
 
   // Netlify CMS / JSON: Numbers können als String kommen -> robust casten
   const toNum = (v) => {
@@ -2281,11 +2285,9 @@ const setTextWithBreaksAndMailto = (el, raw) => {
       _order: toNum(it?.order ?? it?.sort),
     }))
     .sort((a, b) => {
-      // 1) order/sort aufsteigend
       if (a._order !== null && b._order !== null) return a._order - b._order;
       if (a._order !== null) return -1;
       if (b._order !== null) return 1;
-      // 2) sonst Reihenfolge wie im JSON
       return a._idx - b._idx;
     });
 
@@ -2293,11 +2295,11 @@ const setTextWithBreaksAndMailto = (el, raw) => {
   clearEl(grid);
 
   items.forEach((it) => {
-    const title = String(it?.title || "FEEDBACK").trim();
-    const name = String(it?.name || "").trim();
-    const text = String(it?.text || "").trim();
+    const title  = String(it?.title || "Feedback").trim();
+    const person = String(it?.name || "").trim(); // Mama/Papa-Zeile
+    const text   = String(it?.text || "").trim();
     const poster = safeUrl(it?.poster || "");
-    const image = safeUrl(it?.image || "");
+    const image  = safeUrl(it?.image || "");
 
     const card = document.createElement("div");
     card.className = "card";
@@ -2333,28 +2335,23 @@ const setTextWithBreaksAndMailto = (el, raw) => {
 
     // Title
     const h3 = document.createElement("h3");
-    h3.textContent = (title || "FEEDBACK").toUpperCase();
+    h3.textContent = (title || "Feedback").toUpperCase();
     card.appendChild(h3);
 
-    // Name
+    // Person line (wird später von initFeedbackCards() "veredelt")
     const pName = document.createElement("p");
-    pName.style.margin = "-4px 0 10px";
-    pName.style.color = "rgba(11, 16, 32, 0.55)";
-    pName.style.fontWeight = "900";
-    pName.style.letterSpacing = "0.1em";
-    pName.style.textTransform = "uppercase";
-    pName.style.fontSize = "11px";
-    pName.textContent = name ? name : "—";
+    pName.className = "fbName"; // <<< wichtig: Hook für init + CSS
+    pName.textContent = person ? person : "—";
     card.appendChild(pName);
 
-    // Text: als Details nur wenn Text vorhanden
+    // Details nur wenn Text vorhanden
     if (text) {
       const details = document.createElement("details");
       details.className = "coachBio fbDetails";
 
       const summary = document.createElement("summary");
       summary.className = "coachBioSum fbSum";
-      summary.innerHTML = `Mehr <span class="fbPlus" aria-hidden="true">+</span>`;
+      summary.innerHTML = `Mehr lesen <span class="fbPlus" aria-hidden="true">+</span>`;
       details.appendChild(summary);
 
       const p = document.createElement("p");
@@ -2367,10 +2364,122 @@ const setTextWithBreaksAndMailto = (el, raw) => {
     grid.appendChild(card);
   });
 
-  // +/– Sync für alle neu erzeugten Cards
-  initFeedbackDetailsPlus();
+  // ✅ nach dem Rendern: UI-Enhancements + Collapse + Plus/Minus
+  initFeedbackCards();
 }
 
+/* =========================
+   UI Enhancements für Feedback
+   ========================= */
+function initFeedbackCards() {
+  const grid = document.getElementById("feedbackGrid");
+  const sec  = document.getElementById("feedback");
+  if (!grid || !sec) return;
+
+  // 1) Person line + Avatar aus .fbName bauen (NICHT ids)
+  const nameEls = grid.querySelectorAll("p.fbName");
+
+  nameEls.forEach((p) => {
+    const raw = (p.textContent || "").trim();
+    if (!raw || raw === "—") return;
+
+    const txt = raw.replace(/\s+/g, " ").trim();
+
+    let role = "";
+    let baseName = txt;
+
+    if (/mama/i.test(txt)) role = "Mama";
+    if (/papa/i.test(txt)) role = role ? role : "Papa";
+
+    // Name extrahieren (für Initialen)
+    if (txt.includes("-")) {
+      baseName = txt.split("-")[0].trim();
+    } else if (/^papa\b/i.test(txt)) {
+      baseName = txt.replace(/^papa\b/i, "").trim() || "Papa";
+    } else if (/^mama\b/i.test(txt)) {
+      baseName = txt.replace(/^mama\b/i, "").trim() || "Mama";
+    } else {
+      baseName = txt.split(" ")[0].trim();
+    }
+
+    const initials = (baseName || "—")
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map(s => s[0].toUpperCase())
+      .join("");
+
+    // p komplett neu bauen
+    p.textContent = "";
+
+    const avatar = document.createElement("span");
+    avatar.className = "fbAvatar";
+    avatar.textContent = initials || "•";
+
+    const line = document.createElement("span");
+    line.className = "fbPersonLine";
+
+    const n = document.createElement("span");
+    n.className = "fbPersonName";
+    n.textContent = txt; // volle Zeile wirkt echter als nur "Sarah"
+
+    line.appendChild(n);
+
+    if (role) {
+      const r = document.createElement("span");
+      r.className = "fbPersonRole";
+      r.textContent = role;
+      line.appendChild(r);
+    }
+
+    p.appendChild(avatar);
+    p.appendChild(line);
+  });
+
+  // 2) Plus/Minus sync für jedes Details
+  grid.querySelectorAll("details.fbDetails").forEach((d) => {
+    const plus = d.querySelector(".fbPlus");
+    if (!plus) return;
+
+    const sync = () => { plus.textContent = d.open ? "–" : "+"; };
+    sync();
+    d.addEventListener("toggle", sync);
+  });
+
+  // 3) Collapse: nur 2 zeigen (wenn mehr als 2 vorhanden)
+  const cards = Array.from(grid.querySelectorAll(".card"));
+  if (cards.length > 2) {
+    sec.classList.add("isCollapsed");
+
+    // Button nur einmal erzeugen
+    if (!sec.querySelector(".fbMoreWrap")) {
+      const wrap = document.createElement("div");
+      wrap.className = "fbMoreWrap";
+
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "fbMoreBtn";
+      btn.textContent = "Alle Feedbacks anzeigen";
+
+      btn.addEventListener("click", () => {
+        const collapsed = sec.classList.toggle("isCollapsed");
+        btn.textContent = collapsed ? "Alle Feedbacks anzeigen" : "Weniger anzeigen";
+      });
+
+      wrap.appendChild(btn);
+
+      // Wrap unter das Grid
+      grid.parentElement.appendChild(wrap);
+    }
+  } else {
+    // Wenn <=2, keine Collapse-Klasse und ggf Button entfernen
+    sec.classList.remove("isCollapsed");
+    const old = sec.querySelector(".fbMoreWrap");
+    if (old) old.remove();
+  }
+}
+
+    
 
   function initYouTubeFeedbackEmbeds(consent){
     const boxes = document.querySelectorAll(".ytBox");
