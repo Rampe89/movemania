@@ -1778,18 +1778,6 @@ body.mmLbOpen{
   overflow: hidden;
 }
 
-/* großes Quote-Zeichen als Gestaltung */
-#feedback .card::before{
-  content: "“";
-  position: absolute;
-  top: -26px;
-  right: 12px;
-  font-size: 140px;
-  line-height: 1;
-  font-weight: 900;
-  color: rgba(11,16,32,.06);
-  pointer-events: none;
-}
 
 /* Titel / Name in der Karte (falls deine IDs/Klassen anders sind, wirkt es trotzdem generell) */
 #feedback .card h3,
