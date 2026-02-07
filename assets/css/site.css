@@ -1761,130 +1761,166 @@ body.mmLbOpen{
 }
 /* =====================================================
    FEEDBACK – "Was Eltern sagen"
-   Weißer Hintergrund, editorial, mehr Brand
+   White background + echte Cards + Orange Brand
+   Scoped auf #feedbackGrid
    ===================================================== */
 
-/* Grid: klare Abstände statt Kastenoptik */
 #feedbackGrid{
-  margin-top: 24px;
-  row-gap: 34px;
+  margin-top: 22px;
+  gap: 18px;
 }
 
-/* Card: keine Fläche, sondern Statement */
+/* Echte Card */
 #feedbackGrid .card{
   position: relative;
-  padding: 0 0 22px;
-  background: transparent;
-  border: none;
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  background: var(--card_bg);
+  border: 1px solid var(--card_border);
+  border-radius: 14px;                 /* lokal ok */
+  padding: 20px 20px 16px;
+
+  /* klare Abhebung auf Weiß */
+  box-shadow: 0 12px 28px rgba(11,16,32,.10);
+  overflow: hidden;
+
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
 }
 
-/* Orange Brand-Marker links – wiederkehrendes Motiv */
+/* Brand: Orange-Stripe links (klassisch & wirkt) */
 #feedbackGrid .card::before{
   content: "";
   position: absolute;
-  left: -18px;
-  top: 4px;
+  left: 0;
+  top: 0;
   width: 6px;
-  height: 22px;
+  height: 100%;
   background: var(--accent);
+  opacity: .95;
 }
 
-/* Trennlinie unten – sorgt für Ordnung */
+/* zusätzlich: ganz leichte Tönung im Card-Header-Bereich */
 #feedbackGrid .card::after{
   content: "";
   position: absolute;
-  left: 0;
+  left: 6px;
   right: 0;
-  bottom: 0;
-  height: 1px;
-  background: var(--line);
+  top: 0;
+  height: 44px;
+  background: linear-gradient(
+    90deg,
+    rgba(255,146,0,.12),
+    rgba(255,146,0,0)
+  );
+  pointer-events: none;
 }
 
-/* Titel: stark, aber ruhig */
+/* Hover: minimal “lift” */
+#feedbackGrid .card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(11,16,32,.14);
+  border-color: rgba(255,146,0,.35);
+}
+
+/* Titel */
 #feedbackGrid .card h3{
   margin: 0;
   color: var(--ink);
   font-size: var(--card_title_size);
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: .08em;
   text-transform: uppercase;
+  padding-left: 10px; /* Abstand zum Stripe */
 }
 
-/* Name / Quelle */
+/* Name/Quelle */
 #feedbackGrid [id^="fb"][id$="Name"]{
-  margin-top: 2px;
-  color: var(--muted);
-  font-weight: 700;
+  padding-left: 10px;
+  color: rgba(30,51,102,.70);
+  font-weight: 800;
   letter-spacing: .06em;
   text-transform: uppercase;
 }
 
-/* Details-Bereich */
+/* Details unten stabilisieren */
 #feedbackGrid details.fbDetails{
-  margin-top: 12px;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
 }
 
-/* globales + / – hier abschalten */
+/* globales summary::after (+/–) hier ausknipsen */
 #feedbackGrid details.fbDetails > summary::after{
   content: none !important;
 }
 
-/* Summary = Textlink mit Haltung (kein Button-Kasten) */
+/* Summary als Button (aber clean) */
 #feedbackGrid summary.fbSum{
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 
-  padding: 6px 0;
-  border: none;
-  background: transparent;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.98);
 
-  font-weight: 800;
+  color: var(--ink);
+  font-weight: 900;
   letter-spacing: .08em;
   text-transform: uppercase;
-  color: var(--ink);
 
   cursor: pointer;
 }
 
-/* Plus: klares Brand-Signal */
+/* Plus als Brand-Pill */
 #feedbackGrid .fbPlus{
+  width: 24px;
+  height: 24px;
   display: inline-grid;
   place-items: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: var(--accent);
-  color: #fff;
+  border-radius: 999px;
+  background: rgba(255,146,0,.16);
+  border: 1px solid rgba(255,146,0,.35);
+  color: var(--accent);
   font-weight: 900;
   line-height: 1;
 }
 
-/* Open-State: Farbe kippt ins Orange */
+/* Open State */
 #feedbackGrid details[open] summary.fbSum{
-  color: var(--accent);
+  border-color: rgba(255,146,0,.55);
+  box-shadow: 0 10px 24px rgba(255,146,0,.14);
 }
 
-/* Text im offenen Bereich */
 #feedbackGrid details.fbDetails p{
-  margin-top: 10px;
+  margin-top: 12px;
   line-height: 1.75;
-  color: var(--muted);
-  max-width: 58ch; /* Editorial-Lesebreite */
+  color: rgba(30,51,102,.72);
 }
 
-/* Hover: minimal – Fokus statt Effekt */
-#feedbackGrid .card:hover h3{
-  color: var(--accent);
+/* Optional: Media-Container schöner */
+#feedbackGrid .fbMedia{
+  display: block;
+  height: 150px;
+  margin: 6px 0 8px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(11,16,32,.10);
+  background: rgba(11,16,32,.02);
 }
 
-/* Mobile: Marker etwas kleiner */
+#feedbackGrid .fbMedia img{
+  object-fit: cover;
+}
+
+/* Mobile */
 @media (max-width: 640px){
-  #feedbackGrid .card::before{
-    left: -12px;
-    height: 18px;
+  #feedbackGrid .card{
+    border-radius: 12px;
+    padding: 18px 16px 14px;
   }
+  #feedbackGrid .fbMedia{ height: 170px; }
 }
