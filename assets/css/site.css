@@ -1789,33 +1789,6 @@ body.mmLbOpen{
   transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
 }
 
-/* Brand: Orange-Stripe links (klassisch & wirkt) */
-#feedbackGrid .card::before{
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 6px;
-  height: 100%;
-  background: var(--accent);
-  opacity: .95;
-}
-
-/* zusätzlich: ganz leichte Tönung im Card-Header-Bereich */
-#feedbackGrid .card::after{
-  content: "";
-  position: absolute;
-  left: 6px;
-  right: 0;
-  top: 0;
-  height: 44px;
-  background: linear-gradient(
-    90deg,
-    rgba(255,146,0,.12),
-    rgba(255,146,0,0)
-  );
-  pointer-events: none;
-}
 
 /* Hover: minimal “lift” */
 #feedbackGrid .card:hover{
