@@ -1760,152 +1760,15 @@ body.mmLbOpen{
   font-weight: 700;
 }
 /* =====================================================
-   FEEDBACK – "Was Eltern sagen"
-   White background + echte Cards + Orange Brand
-   Scoped auf #feedbackGrid
-   ===================================================== */
-
-#feedbackGrid{
-  margin-top: 22px;
-  gap: 18px;
-}
-
-/* Echte Card */
-#feedbackGrid .card{
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-
-  background: var(--card_bg);
-  border: 1px solid var(--card_border);
-  border-radius: 14px;                 /* lokal ok */
-  padding: 20px 20px 16px;
-
-  /* klare Abhebung auf Weiß */
-  box-shadow: 0 12px 28px rgba(11,16,32,.10);
-  overflow: hidden;
-
-  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-}
-
-
-/* Hover: minimal “lift” */
-#feedbackGrid .card:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 16px 36px rgba(11,16,32,.14);
-  border-color: rgba(255,146,0,.35);
-}
-
-/* Titel */
-#feedbackGrid .card h3{
-  margin: 0;
-  color: var(--ink);
-  font-size: var(--card_title_size);
-  font-weight: 900;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  padding-left: 10px; /* Abstand zum Stripe */
-}
-
-/* Name/Quelle */
-#feedbackGrid [id^="fb"][id$="Name"]{
-  padding-left: 10px;
-  color: rgba(30,51,102,.70);
-  font-weight: 800;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-}
-
-/* Details unten stabilisieren */
-#feedbackGrid details.fbDetails{
-  margin-top: auto;
-  padding-top: 12px;
-  border-top: 1px solid var(--line);
-}
-
-/* globales summary::after (+/–) hier ausknipsen */
-#feedbackGrid details.fbDetails > summary::after{
-  content: none !important;
-}
-
-/* Summary als Button (aber clean) */
-#feedbackGrid summary.fbSum{
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 1px solid var(--line);
-  background: rgba(255,255,255,.98);
-
-  color: var(--ink);
-  font-weight: 900;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-
-  cursor: pointer;
-}
-
-/* Plus als Brand-Pill */
-#feedbackGrid .fbPlus{
-  width: 24px;
-  height: 24px;
-  display: inline-grid;
-  place-items: center;
-  border-radius: 999px;
-  background: rgba(255,146,0,.16);
-  border: 1px solid rgba(255,146,0,.35);
-  color: var(--accent);
-  font-weight: 900;
-  line-height: 1;
-}
-
-/* Open State */
-#feedbackGrid details[open] summary.fbSum{
-  border-color: rgba(255,146,0,.55);
-  box-shadow: 0 10px 24px rgba(255,146,0,.14);
-}
-
-#feedbackGrid details.fbDetails p{
-  margin-top: 12px;
-  line-height: 1.75;
-  color: rgba(30,51,102,.72);
-}
-
-/* Optional: Media-Container schöner */
-#feedbackGrid .fbMedia{
-  display: block;
-  height: 150px;
-  margin: 6px 0 8px;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(11,16,32,.10);
-  background: rgba(11,16,32,.02);
-}
-
-#feedbackGrid .fbMedia img{
-  object-fit: cover;
-}
-
-/* Mobile */
-@media (max-width: 640px){
-  #feedbackGrid .card{
-    border-radius: 12px;
-    padding: 18px 16px 14px;
-  }
-  #feedbackGrid .fbMedia{ height: 170px; }
-}
-/* =====================================================
    FEEDBACK – Single Testimonial Slider (CSS-only)
    -> 9 Cards rotieren automatisch
-   -> 1 große Card sichtbar, weißes Layout, Orange Brand
+   -> Text IMMER sichtbar (Details-Falle gefixt)
+   -> Start: nicht blass (erste Karte sofort sichtbar)
    ===================================================== */
 
 #feedbackGrid{
   position: relative;
-  min-height: 360px;                 /* Bühne */
+  min-height: 360px;
   margin-top: 22px;
 }
 
@@ -1915,7 +1778,7 @@ body.mmLbOpen{
   inset: 0;
   margin: auto;
 
-  max-width: 860px;
+  max-width: 900px;
   padding: 38px 40px 32px;
 
   background: var(--card_bg);
@@ -1932,12 +1795,13 @@ body.mmLbOpen{
   pointer-events: none;
 
   animation: fbSlide 72s infinite;
+  animation-fill-mode: both; /* wichtig: nimmt "blass beim Start" raus */
 }
 
-/* Pause auf Hover / wenn man in Details klickt */
-#feedbackGrid:hover .card,
-#feedbackGrid:focus-within .card{
-  animation-play-state: paused;
+/* Erste Karte sofort sichtbar (auch bevor Animation greift) */
+#feedbackGrid .card:first-child{
+  opacity: 1;
+  transform: none;
 }
 
 /* Brand: Orange Stripe */
@@ -1951,16 +1815,16 @@ body.mmLbOpen{
   background: var(--accent);
 }
 
-/* Subtiler “Brand glow” in der Ecke (sehr dezent) */
+/* Optional: weiches Brand-Glow sehr dezent */
 #feedbackGrid .card::after{
   content: "";
   position: absolute;
-  right: -120px;
-  top: -120px;
-  width: 260px;
-  height: 260px;
+  right: -140px;
+  top: -140px;
+  width: 280px;
+  height: 280px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,146,0,.12), rgba(255,146,0,0) 60%);
+  background: radial-gradient(circle, rgba(255,146,0,.10), rgba(255,146,0,0) 60%);
   pointer-events: none;
 }
 
@@ -1974,7 +1838,7 @@ body.mmLbOpen{
   text-transform: uppercase;
 }
 
-/* Name / Quelle */
+/* Name/Quelle */
 #feedbackGrid [id^="fb"][id$="Name"]{
   margin: 0;
   color: rgba(30,51,102,.70);
@@ -1983,28 +1847,42 @@ body.mmLbOpen{
   text-transform: uppercase;
 }
 
-/* Details: wir zeigen den Text ohne “Mehr”-Interaktion */
+/* =====================================================
+   DETAILS-FIX: Text immer anzeigen (auch ohne [open])
+   -> Wir lassen <details> stehen, aber wir zwingen den Inhalt sichtbar.
+   ===================================================== */
+
 #feedbackGrid details.fbDetails{
   margin-top: 10px;
   padding-top: 18px;
   border-top: 1px solid var(--line);
 }
 
-/* Summary ausblenden, damit es wie ein Testimonial wirkt */
+/* Summary nicht wegwerfen, sondern visuell “unsichtbar”, damit Details nicht kaputt ist */
 #feedbackGrid details.fbDetails > summary{
-  display: none;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Der wichtige Part: Inhalt IMMER anzeigen */
+#feedbackGrid details.fbDetails > :not(summary){
+  display: block !important;
 }
 
 /* Text */
 #feedbackGrid details.fbDetails p{
-  margin-top: 0;
+  margin: 0;
   font-size: 15px;
   line-height: 1.85;
   color: rgba(30,51,102,.78);
   max-width: 62ch;
 }
 
-/* Optional: Media etwas kleiner und sauber */
+/* Media optional sauber */
 #feedbackGrid .fbMedia{
   display: block;
   height: 170px;
@@ -2019,10 +1897,9 @@ body.mmLbOpen{
   object-fit: cover;
 }
 
-/* =========================
-   9 Slides: Delays
-   Gesamtzeit 72s -> 8s pro Slide
-   ========================= */
+/* =====================================================
+   9 Slides: Delays (72s Gesamt -> 8s pro Card)
+   ===================================================== */
 #feedbackGrid .card:nth-child(1){ animation-delay: 0s; }
 #feedbackGrid .card:nth-child(2){ animation-delay: 8s; }
 #feedbackGrid .card:nth-child(3){ animation-delay: 16s; }
@@ -2033,25 +1910,23 @@ body.mmLbOpen{
 #feedbackGrid .card:nth-child(8){ animation-delay: 56s; }
 #feedbackGrid .card:nth-child(9){ animation-delay: 64s; }
 
-/* =========================
-   Animation: sanfter Fade + leichtes Lift
-   Sichtbar ca. 70% der Slotzeit
-   ========================= */
+/* Animation: Fade in -> Hold -> Fade out */
 @keyframes fbSlide{
   0%   { opacity: 0; transform: translateY(10px) scale(.985); }
   6%   { opacity: 1; transform: translateY(0) scale(1); }
-  72%  { opacity: 1; transform: translateY(0) scale(1); }
-  86%  { opacity: 0; transform: translateY(-8px) scale(.985); }
+  74%  { opacity: 1; transform: translateY(0) scale(1); }
+  88%  { opacity: 0; transform: translateY(-8px) scale(.985); }
   100% { opacity: 0; }
 }
 
-/* Reduced motion: keine Animation, einfach erste Card zeigen */
+/* Reduced motion: keine Animation, einfach als Liste anzeigen */
 @media (prefers-reduced-motion: reduce){
   #feedbackGrid{
     min-height: auto;
   }
   #feedbackGrid .card{
     position: relative;
+    inset: auto;
     opacity: 1;
     transform: none;
     animation: none;
