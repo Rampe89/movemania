@@ -1759,3 +1759,183 @@ body.mmLbOpen{
   text-underline-offset: 2px;
   font-weight: 700;
 }
+/* =====================================================
+   FEEDBACK – Single Card Slider (CSS-only) – 9 Slides
+   - Kein opacity-fade (kein "blass", kein Pattern durch)
+   - Clip-path blendet Slides sauber ein/aus
+   - Details-Text IMMER sichtbar
+   ===================================================== */
+
+#feedbackGrid{
+  position: relative;
+  min-height: 360px;
+  margin-top: 22px;
+}
+
+/* Cards werden zur Bühne */
+#feedbackGrid .card{
+  position: absolute;
+  inset: 0;
+  margin: auto;
+
+  max-width: 900px;
+  padding: 38px 40px 32px;
+
+  background: var(--card_bg);
+  border: 1px solid var(--card_border);
+  border-radius: 18px;
+  box-shadow: 0 22px 64px rgba(11,16,32,.14);
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  pointer-events: none;
+
+  /* "unsichtbar" via Clip (statt opacity) */
+  clip-path: inset(0 0 100% 0);
+  transform: translateY(10px) scale(.99);
+
+  animation: fbClip 72s infinite;
+  animation-fill-mode: both;
+
+  will-change: clip-path, transform;
+}
+
+/* Brand: Orange Stripe */
+#feedbackGrid .card::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 8px;
+  height: 100%;
+  background: var(--accent);
+}
+
+/* kleiner, dezenter Orange-Glow */
+#feedbackGrid .card::after{
+  content: "";
+  position: absolute;
+  right: -140px;
+  top: -140px;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,146,0,.10), rgba(255,146,0,0) 60%);
+  pointer-events: none;
+}
+
+/* Titel */
+#feedbackGrid .card h3{
+  margin: 0;
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+/* Name/Quelle */
+#feedbackGrid [id^="fb"][id$="Name"]{
+  margin: 0;
+  color: rgba(30,51,102,.70);
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* =========================
+   DETAILS: Text immer anzeigen
+   ========================= */
+
+/* UA-Style killen: details versteckt sonst den Inhalt */
+#feedbackGrid details.fbDetails:not([open]) > *:not(summary){
+  display: block !important;
+}
+
+/* Summary optional ausblenden (wir wollen keinen "Mehr"-Klick) */
+#feedbackGrid details.fbDetails > summary{
+  display: none !important;
+}
+
+/* Details-Block als Textbereich */
+#feedbackGrid details.fbDetails{
+  margin-top: 10px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+/* Text */
+#feedbackGrid details.fbDetails p{
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.85;
+  color: rgba(30,51,102,.78);
+  max-width: 62ch;
+}
+
+/* Optional: Media */
+#feedbackGrid .fbMedia{
+  display: block;
+  height: 170px;
+  margin: 6px 0 2px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(11,16,32,.10);
+  background: rgba(11,16,32,.02);
+}
+
+#feedbackGrid .fbMedia img{
+  object-fit: cover;
+}
+
+/* =========================
+   9 Slides: Delays (72s Gesamt -> 8s pro Card)
+   ========================= */
+#feedbackGrid .card:nth-child(1){ animation-delay: 0s; }
+#feedbackGrid .card:nth-child(2){ animation-delay: 8s; }
+#feedbackGrid .card:nth-child(3){ animation-delay: 16s; }
+#feedbackGrid .card:nth-child(4){ animation-delay: 24s; }
+#feedbackGrid .card:nth-child(5){ animation-delay: 32s; }
+#feedbackGrid .card:nth-child(6){ animation-delay: 40s; }
+#feedbackGrid .card:nth-child(7){ animation-delay: 48s; }
+#feedbackGrid .card:nth-child(8){ animation-delay: 56s; }
+#feedbackGrid .card:nth-child(9){ animation-delay: 64s; }
+
+/* =========================
+   Animation: Einblenden (clip) -> Hold -> Ausblenden (clip)
+   Sichtbar ca. 80% des Slots, Übergang kurz & knackig
+   ========================= */
+@keyframes fbClip{
+  0%   { clip-path: inset(0 0 100% 0); transform: translateY(10px) scale(.99); }
+  6%   { clip-path: inset(0 0 0 0);    transform: translateY(0) scale(1); }
+  82%  { clip-path: inset(0 0 0 0);    transform: translateY(0) scale(1); }
+  92%  { clip-path: inset(100% 0 0 0); transform: translateY(-8px) scale(.99); }
+  100% { clip-path: inset(100% 0 0 0); transform: translateY(-8px) scale(.99); }
+}
+
+/* Reduced motion: keine Animation, Liste */
+@media (prefers-reduced-motion: reduce){
+  #feedbackGrid{ min-height: auto; }
+  #feedbackGrid .card{
+    position: relative;
+    inset: auto;
+    clip-path: none;
+    transform: none;
+    animation: none;
+    pointer-events: auto;
+    margin: 0 0 16px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px){
+  #feedbackGrid{ min-height: 420px; }
+  #feedbackGrid .card{
+    padding: 26px 22px 22px;
+    border-radius: 16px;
+    max-width: 100%;
+  }
+  #feedbackGrid .fbMedia{ height: 180px; }
+}
