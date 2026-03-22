@@ -1371,6 +1371,7 @@ function mountHeroVideo(videoSlide, opts) {
   };
 })();
       
+<script>
 /* NEWS: aus news.json (CMS) */
 function mountNewsFromJson(newsData) {
   const grid = document.getElementById("newsGrid");
@@ -1429,7 +1430,7 @@ function mountNewsFromJson(newsData) {
 
     /* ---------- TEXT ---------- */
     const p = document.createElement("p");
-    p.textContent = String(it?.text || "");
+    setTextWithBreaks(p, String(it?.text || ""));
     card.appendChild(p);
 
     /* ---------- LINK ---------- */
@@ -1464,12 +1465,12 @@ function mountNewsFromJson(newsData) {
       if (!btn) return;
       btn.addEventListener("click", (e) => {
         e.preventDefault();
-        e.stopPropagation();
         window.__mmNewsLb.openAt(idx);
       });
     });
   }
 }
+</script>
 
       /* ---------------------------
    FAQ: aus faq.json (CMS)
